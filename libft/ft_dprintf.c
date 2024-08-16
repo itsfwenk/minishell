@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:30:22 by fli               #+#    #+#             */
-/*   Updated: 2024/08/16 18:38:01 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/16 19:13:45 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,18 @@ int	ft_dprintf(int fd, const char *entry, ...)
 	count = 0;
 	while (entry[i] != '\0')
 	{
-		if (entry[i] == '%' && entry[++i] == 's')
+		if (entry[i] == '%' && entry[i + 1] == 's')
 		{
 			i++;
 			ft_dprintf_s(arg_ptr, &count, fd);
-			i++;
 		}
 		else
 		{
 			ft_putchar_fd(entry[i], fd);
 			count = count + 1;
-			i++;
 		}
+		i++;
 	}
+	va_end(arg_ptr);
 	return (count);
 }
