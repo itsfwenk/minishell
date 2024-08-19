@@ -6,13 +6,27 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:23:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/16 18:51:02 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:22:24 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	count_words(char const *s, char c)
+static int	in_charset(char c, char *charset)
+{
+	size_t	i;
+
+	i = 0;
+	while (charset[i])
+	{
+		if (charset[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);	
+}
+
+static size_t	count_words(char const *s, char *c)
 {
 	size_t	words;
 	size_t	i;
@@ -23,19 +37,19 @@ static size_t	count_words(char const *s, char c)
 	in = 0;
 	while (s[i])
 	{
-		if (s[i] != c && !in)
+		if (!in_charset(s[i], c) && !in)
 		{
 			words++;
 			in = 1;
 		}
-		else if (s[i] == c && in)
+		else if (in_charset(s[i], c) && in)
 			in = 0;
 		i++;
 	}
 	return (words);
 }
 
-static char	*fill_word(char const *s, char c)
+static char	*fill_word(char const *s, char *c)
 {
 	char	*result;
 	size_t	len;
@@ -43,7 +57,7 @@ static char	*fill_word(char const *s, char c)
 
 	len = 0;
 	i = 0;
-	while (s[len] && s[len] != c)
+	while (s[len] && !in_charset(s[len], c))
 		len++;
 	result = (char *)ft_calloc(len + 1, sizeof(char));
 	if (result)
@@ -71,7 +85,7 @@ char	**free_all(char **result)
 	return (NULL);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char *c)
 {
 	size_t	words;
 	size_t	i;
@@ -88,7 +102,7 @@ char	**ft_split(char const *s, char c)
 	{
 		while (i < words)
 		{
-			while (s[j] == c)
+			while (in_charset(s[j], c))
 				j++;
 			result[i] = fill_word(s + j, c);
 			if (!result[i])

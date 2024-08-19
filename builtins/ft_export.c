@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 15:54:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/19 16:34:23 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:21:08 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_export(t_env **env, char **args)
 	return_val = 0;
 	while (args[i])
 	{
-		splitted = ft_split(args[i], '=');
+		splitted = ft_split(args[i], "=");
 		if (!splitted)
 			return_val = 1;
 		else if (!check_key(splitted[0]))
