@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 14:31:17 by fli               #+#    #+#             */
-/*   Updated: 2024/08/18 17:43:05 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/19 16:52:29 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,17 @@ static void	update_dvarenv(t_env *varenv, char *old, char *new)
 	}
 	if (new_pwd == NULL)
 	{
-		// delete PWD and OLDPWD nods
+		del_env(varenv, "PWD");
+		del_env(varenv, "OLDPWD");
 	}
 	if (old_pwd != NULL)
 		ft_strlcpy(old_pwd->value, old, PATH_MAX);
 }
 
-
 int	ft_cd(char *dir_path)
 {
-	char cwd[PATH_MAX];
-	char nwd[PATH_MAX];
+	char	cwd[PATH_MAX];
+	char	nwd[PATH_MAX];
 
 	if (dir_path == NULL)
 		return (0);
@@ -62,13 +62,12 @@ int	ft_cd(char *dir_path)
 		perror("getcwd() error");
 		return (errno);
 	}
-	return(errno);
+	return (errno);
 }
 
 // int	main(int ac, char **av)
 // {
 // 	char *cwd;
-
 
 // 	cwd = getcwd(NULL, 0);
 // 	if (cwd != NULL)
