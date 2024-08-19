@@ -6,23 +6,32 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 12:30:17 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/19 12:55:40 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/19 15:37:07 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "../builtins.h"
 
-static void	apply_indexes(t_env *env)
+static t_env	*env_get_last(t_env *env)
 {
-	size_t	i;
-
-	i = 0;
 	while (env)
 	{
-		env->index = i;
-		i++;
+		if (!env->next)
+			return (env);
 		env = env->next;
 	}
+	return (env);
+}
+
+static void	env_add_back(t_env **env, t_env *val)
+{
+	t_env	*last;
+
+	last = env_get_last(*env);
+	if (last)
+		last->next = val;
+	else
+		*env = val;
 }
 
 int	check_key(char *key)
@@ -41,39 +50,51 @@ int	check_key(char *key)
 	return (1);
 }
 
-t_env	*get_env(char *key, t_env *env)
+t_env	*get_env(t_env *env, char *key)
 {
-	size_t	key_len;
-
-	key_len = ft_strlen(key);
 	while (env)
 	{
-		if (!ft_strncmp(env->key, key, key_len))
+		if (!ft_strcmp(env->key, key) && !env->deleted)
 			return (env);
 		env = env->next;
 	}
 	return (NULL);
 }
 
-t_env	*add_env(char *key, char *value, t_env *env)
+t_env	*add_env(t_env **env, char *key, char *value)
 {
 	t_env	*cur_env;
 	t_env	*new_val;
 
-	cur_env = env;
-	new_val = get_env(key, env);
+	cur_env = *env;
+	new_val = get_env(*env, key);
 	if (new_val)
-		new_val->value = value;
+	{
+		if (new_val->value)
+			free(new_val->value);
+		new_val->value = ft_strdup(value);
+	}
 	else
 	{
 		new_val = (t_env *)malloc(sizeof(t_env));
 		if (new_val)
 		{
-			new_val->key = key;
-			new_val->value = value;
-			apply_indexes(env);
+			new_val->key = ft_strdup(key);
+			new_val->value = ft_strdup(value);
+			new_val->next = NULL;
+			env_add_back(env, new_val);
 		}
 	}
+	if (new_val)
+		new_val->deleted = 0;
 	return (new_val);
 }
 
+void	del_env(t_env **env, char *key)
+{
+	t_env	*val;
+
+	val = get_env(*env, key);
+	if (val)
+		val->deleted = 1;
+}

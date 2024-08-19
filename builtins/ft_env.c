@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 12:23:56 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/19 12:37:44 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/19 15:37:53 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,13 @@ int	ft_env(t_env *env)
 {
 	while (env)
 	{
-		ft_dprintf(1, "%s=%s\n", env->key, env->value);
+		if (!env->deleted)
+		{
+			ft_dprintf(1, "%s=", env->key);
+			if (env->value)
+				ft_dprintf(1, "%s", env->value);
+			ft_dprintf(1, "\n");
+		}
 		env = env->next;
 	}
 	return (0);

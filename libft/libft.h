@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:19:29 by fli               #+#    #+#             */
-/*   Updated: 2024/08/16 18:50:43 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/19 15:01:47 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int		ft_tolower(int c);
 char	*ft_strchr(const char *s, int c);
 
 char	*ft_strrchr(const char *s, int c);
+
+int		ft_strcmp(const char *s1, const char *s2);
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
