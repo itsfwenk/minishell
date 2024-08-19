@@ -6,53 +6,51 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:23:53 by fli               #+#    #+#             */
-/*   Updated: 2024/08/16 20:07:27 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/19 12:21:17 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-static int	echo_newline(char **echo_arg)
+// suppose que les arguments sont deja parses correctement
+
+static int	only_n(char **echo_arg, int arg_i)
 {
 	int	i;
 
-	if (echo_arg[0][0] == '-')
+	i = 1;
+	while (echo_arg[arg_i][i] != '\0')
 	{
-		i = 1;
-		while (echo_arg[0][i] != '\0')
-		{
-				if (echo_arg[0][i] != 'n')
-				{
-					return (FALSE);
-				}
-				i++;
-		}
-		return (TRUE);
+		if (echo_arg[arg_i][i] != 'n')
+			return (FALSE);
+		i++;
 	}
-	return (FALSE);
+	return (TRUE);
 }
 
 int	ft_echo(char **echo_arg)
 {
-	int	i;
+	int	arg_i;
 	int	newline;
 
-	newline = echo_newline(echo_arg);
-	if (newline == FALSE)
+	arg_i = 0;
+	newline = TRUE;
+	if (echo_arg[arg_i] != NULL && echo_arg[arg_i][0] == '-')
 	{
-		printf("%s", echo_arg[0]);
-		if (echo_arg[1] != NULL)
-		{
-			printf(" ");
-		}
+		if (only_n(echo_arg, arg_i++) == TRUE)
+			newline = FALSE;
 	}
-	i = 1;
-	while (echo_arg[i] != NULL)
+	while (echo_arg[arg_i] != NULL && echo_arg[arg_i][0] == '-'
+			&& only_n(echo_arg, arg_i) == TRUE)
 	{
-		printf("%s", echo_arg[i]);
-		if (echo_arg[i + 1] != NULL)
+		arg_i++;
+	}
+	while (echo_arg[arg_i] != NULL)
+	{
+		printf("%s", echo_arg[arg_i]);
+		if (echo_arg[arg_i + 1] != NULL)
 			printf(" ");
-		i++;
+		arg_i++;
 	}
 	if (newline == TRUE)
 		printf("\n");
