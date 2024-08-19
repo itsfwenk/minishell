@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/16 18:17:55 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/19 12:46:06 by mel-habi         ###   ########.fr       */
+/*   Created: 2024/08/19 12:23:56 by mel-habi          #+#    #+#             */
+/*   Updated: 2024/08/19 12:37:44 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
-# include "../libft/libft.h"
-# include "./utils/utils.h"
+#include "builtins.h"
 
-typedef struct s_env
+int	ft_env(t_env *env)
 {
-	char			*key;
-	char			*value;
-	size_t			index;
-	struct s_env	*next;
-}	t_env;
-
-int	ft_pwd(void);
-int	ft_env(t_env *env);
-
-#endif
+	while (env)
+	{
+		ft_dprintf(1, "%s=%s\n", env->key, env->value);
+		env = env->next;
+	}
+	return (0);
+}

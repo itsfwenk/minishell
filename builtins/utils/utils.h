@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/16 18:17:55 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/19 12:46:06 by mel-habi         ###   ########.fr       */
+/*   Created: 2024/08/19 12:30:44 by mel-habi          #+#    #+#             */
+/*   Updated: 2024/08/19 12:38:16 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
-# include "../libft/libft.h"
-# include "./utils/utils.h"
+#ifndef UTILS_H
+# define UTILS_H
+# include "../builtins.h"
 
-typedef struct s_env
-{
-	char			*key;
-	char			*value;
-	size_t			index;
-	struct s_env	*next;
-}	t_env;
-
-int	ft_pwd(void);
-int	ft_env(t_env *env);
+int	check_key(char *key);
 
 #endif
