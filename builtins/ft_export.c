@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 15:54:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/19 16:11:14 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/19 16:34:23 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_export(t_env **env, char **args)
 		splitted = ft_split(args[i], '=');
 		if (!splitted)
 			return_val = 1;
-		else if (splitted[0] && !check_key(splitted[0]))
+		else if (!check_key(splitted[0]))
 		{
 			ft_dprintf(2, "minishell: export: `%s': \
 not a valid identifier\n", args[i]);
