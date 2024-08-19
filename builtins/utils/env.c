@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 12:30:17 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/19 15:45:37 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/19 16:52:00 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ t_env	*add_env(t_env **env, char *key, char *value)
 	return (new_val);
 }
 
-void	del_env(t_env **env, char *key)
+void	del_env(t_env *env, char *key)
 {
 	t_env	*val;
 
-	val = get_env(*env, key);
+	val = get_env(env, key);
 	if (val)
 		val->deleted = 1;
 }

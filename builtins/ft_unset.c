@@ -6,13 +6,13 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 15:54:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/19 15:56:46 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/19 16:51:44 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int	ft_unset(t_env **env, char **keys)
+int	ft_unset(t_env *env, char **keys)
 {
 	size_t	i;
 
