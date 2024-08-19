@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/16 18:16:56 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/19 16:22:46 by mel-habi         ###   ########.fr       */
+/*   Created: 2024/08/19 15:49:27 by mel-habi          #+#    #+#             */
+/*   Updated: 2024/08/19 15:49:57 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "builtins/builtins.h"
-#include <stdio.h>
+#include "../builtins.h"
 
-int	main(int argc, char **argv, char **envp)
+void	free_env(t_env *env)
 {
-	t_env	*env;
-	size_t	i;
+	t_env	*tmp;
 
-	env = NULL;
-	i = 0;
-	ft_export(&env, envp);
-	add_env(&env, "SHELL", "minishell");
-	ft_env(env);
-	free_env(env);
-	return (0);
+	while (env)
+	{
+		tmp = env->next;
+		if (env->key)
+			free(env->key);
+		if (env->value)
+			free(env->value);
+		free(env);
+		env = tmp;
+	}
 }

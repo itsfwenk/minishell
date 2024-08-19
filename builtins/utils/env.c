@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 12:30:17 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/19 15:37:07 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/19 15:45:37 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,6 @@ static void	env_add_back(t_env **env, t_env *val)
 		last->next = val;
 	else
 		*env = val;
-}
-
-int	check_key(char *key)
-{
-	size_t	i;
-
-	i = 0;
-	while (key[i])
-	{
-		if (!i && !ft_isalpha(key[i]) && key[i] != '_')
-			return (0);
-		if (i && !ft_isalnum(key[i]) && key[i] != '_')
-			return (0);
-		i++;
-	}
-	return (1);
 }
 
 t_env	*get_env(t_env *env, char *key)
