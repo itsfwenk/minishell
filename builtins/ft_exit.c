@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 11:12:55 by fli               #+#    #+#             */
-/*   Updated: 2024/08/19 16:41:45 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/19 17:12:22 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ static int	ex_isnumeric(const char *nptr)
 			return (FALSE);
 		i++;
 	}
-	if (ex_atoull(nptr[start]) == 9223372036854775809ULL)
+	if (ex_atoull(&nptr[start]) == 9223372036854775809ULL)
 		return (FALSE);
-	if (ex_atoull(nptr[start]) == 9223372036854775808ULL)
+	if (ex_atoull(&nptr[start]) == 9223372036854775808ULL)
 	{
 		if (sign == -1)
 			return (TRUE);
@@ -72,7 +72,7 @@ static void	one_valid_arg(char **exit_arg)
 {
 	printf("exit\n");
 	if (exit_arg[0][0] == '-')
-		exit(ex_atoull(exit_arg[1]) * -1);
+		exit(ex_atoull(++exit_arg[0]) * -1);
 	else
 		exit(ex_atoull(exit_arg[0]));
 }
@@ -102,3 +102,8 @@ int	ft_exit(char **ex_arg)
 	}
 	return (0);
 }
+
+// int	main(int ac, char **av)
+// {
+// 	ft_exit(&av[1]);
+// }
