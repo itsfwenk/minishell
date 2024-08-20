@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 15:45:00 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/20 17:18:53 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:43:43 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ void	ft_print_color(char *msg, char *color)
 
 void	ft_print_error(char *cmd, char *arg, char *error, char *seps)
 {
-	if (!arg)
+	if (!cmd)
+		ft_dprintf(2, "%sskibidishell: %s %c%s%c%s", RED, error, seps[0], \
+		arg, seps[1], END_COLOR);
+	else if (!arg)
 		ft_dprintf(2, "%sskibidishell: %s: %s%s", RED, cmd, error, \
 		END_COLOR);
 	else
