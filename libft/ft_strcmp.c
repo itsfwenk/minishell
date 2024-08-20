@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 14:36:42 by fli               #+#    #+#             */
-/*   Updated: 2024/08/19 14:52:00 by mel-habi         ###   ########.fr       */
+/*   Created: 2024/05/20 10:57:18 by fli               #+#    #+#             */
+/*   Updated: 2024/08/19 15:01:21 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	int		i;
-	char	*dup;
+	size_t	i;
 
-	if (!s)
-		return (NULL);
-	dup = malloc((ft_strlen(s) + 1) * sizeof(char));
-	if (dup == NULL)
-		return (NULL);
 	i = 0;
-	while (s[i] != '\0')
+	while ((s1[i] != '\0' || s2[i] != '\0'))
 	{
-		dup[i] = s[i];
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 		i++;
 	}
-	dup[i] = '\0';
-	return (dup);
+	return (0);
 }

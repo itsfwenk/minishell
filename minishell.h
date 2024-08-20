@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 14:36:42 by fli               #+#    #+#             */
-/*   Updated: 2024/08/19 14:52:00 by mel-habi         ###   ########.fr       */
+/*   Created: 2024/08/20 14:51:25 by mel-habi          #+#    #+#             */
+/*   Updated: 2024/08/20 15:42:44 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-char	*ft_strdup(const char *s)
-{
-	int		i;
-	char	*dup;
+# include <stdio.h>
+# include <errno.h>
+# include <stdlib.h>
+# include <dirent.h>
+# include <limits.h>
+# include <linux/limits.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <signal.h>
 
-	if (!s)
-		return (NULL);
-	dup = malloc((ft_strlen(s) + 1) * sizeof(char));
-	if (dup == NULL)
-		return (NULL);
-	i = 0;
-	while (s[i] != '\0')
-	{
-		dup[i] = s[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
-}
+# include "libft/libft.h"
+
+# include "builtins/builtins.h"
+# include "utils/ms_utils.h"
+
+# define FALSE 0
+# define TRUE 1
+
+#endif

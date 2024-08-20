@@ -3,15 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:30:22 by fli               #+#    #+#             */
-/*   Updated: 2024/08/16 18:38:01 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/20 17:28:12 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "libft.h"
+
+static void	ft_dprintf_c(va_list arg_ptr, int *count, int fd)
+{
+	char	c;
+
+	c = va_arg(arg_ptr, int);
+	ft_putchar_fd(c, fd);
+	*count = *count + 1;
+}
 
 static void	ft_dprintf_s(va_list arg_ptr, int *count, int fd)
 {
@@ -28,6 +37,15 @@ static void	ft_dprintf_s(va_list arg_ptr, int *count, int fd)
 	*count = *count + ft_strlen(s);
 }
 
+static void	ft_putformat(const char format, va_list args, int fd, int *count)
+{
+	if (format == 'c')
+		return (ft_dprintf_c(args, count, fd));
+	else if (format == 's')
+		return (ft_dprintf_s(args, count, fd));
+	return ;
+}
+
 int	ft_dprintf(int fd, const char *entry, ...)
 {
 	int		i;
@@ -41,18 +59,18 @@ int	ft_dprintf(int fd, const char *entry, ...)
 	count = 0;
 	while (entry[i] != '\0')
 	{
-		if (entry[i] == '%' && entry[++i] == 's')
+		if (entry[i] == '%')
 		{
-			i++;
-			ft_dprintf_s(arg_ptr, &count, fd);
+			ft_putformat(entry[i + 1], arg_ptr, fd, &count);
 			i++;
 		}
 		else
 		{
 			ft_putchar_fd(entry[i], fd);
 			count = count + 1;
-			i++;
 		}
+		i++;
 	}
+	va_end(arg_ptr);
 	return (count);
 }

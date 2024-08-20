@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   bi_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 14:36:42 by fli               #+#    #+#             */
-/*   Updated: 2024/08/19 14:52:00 by mel-habi         ###   ########.fr       */
+/*   Created: 2024/08/19 15:49:27 by mel-habi          #+#    #+#             */
+/*   Updated: 2024/08/20 15:32:52 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strdup(const char *s)
+void	free_env(t_env *env)
 {
-	int		i;
-	char	*dup;
+	t_env	*tmp;
 
-	if (!s)
-		return (NULL);
-	dup = malloc((ft_strlen(s) + 1) * sizeof(char));
-	if (dup == NULL)
-		return (NULL);
-	i = 0;
-	while (s[i] != '\0')
+	while (env)
 	{
-		dup[i] = s[i];
-		i++;
+		tmp = env->next;
+		if (env->key)
+			free(env->key);
+		if (env->value)
+			free(env->value);
+		free(env);
+		env = tmp;
 	}
-	dup[i] = '\0';
-	return (dup);
 }

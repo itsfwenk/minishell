@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 14:36:42 by fli               #+#    #+#             */
-/*   Updated: 2024/08/19 14:52:00 by mel-habi         ###   ########.fr       */
+/*   Created: 2024/08/16 19:35:43 by mel-habi          #+#    #+#             */
+/*   Updated: 2024/08/20 17:38:18 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strdup(const char *s)
+int	ft_pwd(void)
 {
-	int		i;
-	char	*dup;
+	char	pwd[PATH_MAX];
 
-	if (!s)
-		return (NULL);
-	dup = malloc((ft_strlen(s) + 1) * sizeof(char));
-	if (dup == NULL)
-		return (NULL);
-	i = 0;
-	while (s[i] != '\0')
+	if (!(getcwd(pwd, sizeof(pwd))))
 	{
-		dup[i] = s[i];
-		i++;
+		ft_print_error("pwd", NULL, "Cannot get current \
+working directory path", NULL);
+		return (2);
 	}
-	dup[i] = '\0';
-	return (dup);
+	printf("%s\n", pwd);
+	return (0);
 }

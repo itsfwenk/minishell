@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fli <fli@student.42.fr>                    +#+  +:+       +#+         #
+#    By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 15:06:20 by fli               #+#    #+#              #
-#    Updated: 2024/08/16 18:37:42 by fli              ###   ########.fr        #
+#    Updated: 2024/08/20 16:55:24 by mel-habi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ CFILES = ft_isalpha.c \
 	 ft_tolower.c \
 	 ft_strchr.c \
 	 ft_strrchr.c \
+	 ft_strcmp.c \
 	 ft_strncmp.c \
 	 ft_memchr.c \
 	 ft_memcmp.c \

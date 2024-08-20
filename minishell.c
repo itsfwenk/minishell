@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 14:36:42 by fli               #+#    #+#             */
-/*   Updated: 2024/08/19 14:52:00 by mel-habi         ###   ########.fr       */
+/*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
+/*   Updated: 2024/08/20 17:29:58 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strdup(const char *s)
+int	main(int argc, char **argv, char **envp)
 {
-	int		i;
-	char	*dup;
+	t_env	*env;
 
-	if (!s)
-		return (NULL);
-	dup = malloc((ft_strlen(s) + 1) * sizeof(char));
-	if (dup == NULL)
-		return (NULL);
-	i = 0;
-	while (s[i] != '\0')
-	{
-		dup[i] = s[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
+	(void)argv;
+	(void)argc;
+	env = NULL;
+	ft_export(&env, envp);
+	ft_export(&env, &argv[1]);
+	free_env(env);
+	return (0);
 }

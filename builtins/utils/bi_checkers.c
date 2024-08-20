@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   bi_checkers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 14:36:42 by fli               #+#    #+#             */
-/*   Updated: 2024/08/19 14:52:00 by mel-habi         ###   ########.fr       */
+/*   Created: 2024/08/19 15:45:49 by mel-habi          #+#    #+#             */
+/*   Updated: 2024/08/20 15:47:59 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strdup(const char *s)
+int	check_key(char *key)
 {
-	int		i;
-	char	*dup;
+	size_t	i;
 
-	if (!s)
-		return (NULL);
-	dup = malloc((ft_strlen(s) + 1) * sizeof(char));
-	if (dup == NULL)
-		return (NULL);
 	i = 0;
-	while (s[i] != '\0')
+	while (key[i])
 	{
-		dup[i] = s[i];
+		if (!i && !ft_isalpha(key[i]) && key[i] != '_')
+			return (0);
+		if (i && !ft_isalnum(key[i]) && key[i] != '_')
+			return (0);
 		i++;
 	}
-	dup[i] = '\0';
-	return (dup);
+	return (1);
 }

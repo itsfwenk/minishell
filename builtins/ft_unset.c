@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 14:36:42 by fli               #+#    #+#             */
-/*   Updated: 2024/08/19 14:52:00 by mel-habi         ###   ########.fr       */
+/*   Created: 2024/08/19 15:54:23 by mel-habi          #+#    #+#             */
+/*   Updated: 2024/08/20 17:34:26 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strdup(const char *s)
+int	ft_unset(t_env *env, char **keys)
 {
-	int		i;
-	char	*dup;
+	size_t	i;
 
-	if (!s)
-		return (NULL);
-	dup = malloc((ft_strlen(s) + 1) * sizeof(char));
-	if (dup == NULL)
-		return (NULL);
 	i = 0;
-	while (s[i] != '\0')
+	while (keys[i])
 	{
-		dup[i] = s[i];
+		unset_env(env, keys[i]);
 		i++;
 	}
-	dup[i] = '\0';
-	return (dup);
+	return (0);
 }
