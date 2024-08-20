@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 23:18:42 by fli               #+#    #+#             */
-/*   Updated: 2024/08/20 00:06:56 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/20 14:32:40 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ t_token	*lx_newtoken(char *str, int i, int j)
 	ntoken = malloc(sizeof(t_token));
 	if (ntoken == NULL)
 		return (NULL);
-	ntoken->str = ft_strdup(str);
+	ntoken->str = lx_strdup(str, i, j);
 	if (ntoken->str == NULL)
 	{
 		free (ntoken);
-		return (NULL);
+		return (NULL); // ft_exit_clean
 	}
 	ntoken->type = NULL;
 	ntoken->next = NULL;

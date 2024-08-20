@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:54:47 by fli               #+#    #+#             */
-/*   Updated: 2024/08/20 00:08:58 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/20 14:43:03 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,15 @@ t_token	*ft_lexer(char *input)
 		j = 0;
 		while (is_sep(input[j]) == FALSE)
 		{
+
 			j++;
 		}
 		lx_createadd(&tokens, input, i, j);
+		j++;
+		while (input[j] == ' ' || input[j] == '\t')
+		{
+			j++;
+		}
 	}
-
 }
+

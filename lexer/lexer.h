@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:55:26 by fli               #+#    #+#             */
-/*   Updated: 2024/08/20 00:07:29 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/20 14:24:17 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,9 @@ void	lx_addback(t_token **tokens, t_token *ntoken);
 void	lx_createadd(t_token **tokens, char *str, int i, int j);
 
 void	lx_deltokens(t_token **tokens);
+
+/////////// LIST_MANIP_UTILS ///////////
+
+char	*lx_strdup(char *str, int i, int j);
 
 #endif
