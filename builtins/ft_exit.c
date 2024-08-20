@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 11:12:55 by fli               #+#    #+#             */
-/*   Updated: 2024/08/20 17:40:23 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/20 19:09:00 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ static unsigned long long	ex_atoull(const char *nptr)
 	int					i;
 	unsigned long long	nbr;
 
-	if (ft_strlen(nptr) >= 20 && nptr[0] != '0')
+	if (nptr[0] == '\0')
+		return (0);
+	if (ft_strlen(nptr) >= 20)
 		return (9223372036854775809ULL);
 	i = 0;
 	nbr = 0;
@@ -39,6 +41,10 @@ static void	init_ex_isnumeric(const char *nptr, int *i, int *sign, int *start)
 	{
 		*start = 1;
 		*sign = -1;
+	}
+	while (nptr[*start] == '0')
+	{
+		(*start)++;
 	}
 	*i = *start;
 }
