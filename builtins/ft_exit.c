@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 11:12:55 by fli               #+#    #+#             */
-/*   Updated: 2024/08/20 19:09:00 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/20 19:20:27 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,15 @@ int	ft_exit(char **ex_arg)
 			one_valid_arg(ex_arg);
 		else
 		{
-			ft_dprintf(2, "exit\nminishell: exit: too many arguments");
+			ft_dprintf(2, "%sexit\n%s", RED, END_COLOR);
+			ft_print_error("exit", NULL, "too many arguments", "\0");
 			return (1);
 		}
 	}
 	else
 	{
-		write(2, "exit\nminishell: exit: ", 22);
-		ft_dprintf(2, "%s: numeric argument required", ex_arg[0]);
+		ft_dprintf(2, "%sexit\n%s", RED, END_COLOR);
+		ft_print_error("exit", ex_arg[0], "numeric argument required", "\0");
 		exit(2);
 	}
 	return (0);
