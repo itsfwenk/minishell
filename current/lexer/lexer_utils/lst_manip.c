@@ -6,26 +6,26 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 23:18:42 by fli               #+#    #+#             */
-/*   Updated: 2024/08/20 14:32:40 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/21 17:07:20 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "../../minishell.h"
 
-t_token	*lx_newtoken(char *str, int i, int j)
+t_token	*lx_newtoken(char *str, int i, int *j, int token_type)
 {
 	t_token	*ntoken;
 
 	ntoken = malloc(sizeof(t_token));
 	if (ntoken == NULL)
-		return (NULL);
-	ntoken->str = lx_strdup(str, i, j);
+		return (NULL); // ft_exit_clean
+	ntoken->str = lx_strdup(str, i, j); // j? *j
 	if (ntoken->str == NULL)
 	{
 		free (ntoken);
 		return (NULL); // ft_exit_clean
 	}
-	ntoken->type = NULL;
+	ntoken->type = 0; // define type
 	ntoken->next = NULL;
 	return (ntoken);
 }
@@ -53,19 +53,6 @@ void	lx_addback(t_token **tokens, t_token *ntoken)
 		*tokens = ntoken;
 	else
 		last->next = ntoken;
-}
-
-void	lx_createadd(t_token **tokens, char *str, int i, int j)
-{
-	t_token	*ntoken;
-
-	ntoken = lx_newtoken(str, i, j);
-	if (ntoken == NULL)
-	{
-		lx_deltokens(tokens);
-		return ; // exit ?
-	}
-	lx_addback(tokens, ntoken);
 }
 
 void	lx_deltokens(t_token **tokens)

@@ -6,11 +6,11 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 00:10:11 by fli               #+#    #+#             */
-/*   Updated: 2024/08/20 14:37:54 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/21 13:47:55 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "../../minishell.h"
 
 char	*lx_strdup(char *str, int i, int j)
 {
