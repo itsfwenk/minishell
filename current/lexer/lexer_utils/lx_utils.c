@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:14:00 by fli               #+#    #+#             */
-/*   Updated: 2024/08/21 17:47:03 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/22 19:42:31 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,33 +35,36 @@ int	is_sep(char *c)
 	return (FALSE);
 }
 
-static int	which_sep2(char *c)
+static int	which_token3(t_token **tokens, char *c)
 {
-	if (c[0] =='>')
-	{
-		if (c[1] == '>')
-			return (APD_OUT_REDIR);
-		else
-			return (OUT_REDIR);
-	}
-	if (c[0] == '(')
-		return (OPN_PAR);
-	if (c[0] == ')')
-		return (CLS_PAR);
-	// if (c[0] == '$')
-	// {
-	// 	if (ft_isalpha(c[1]) != FALSE || c[1] == '_')
-	// 		return (ENV_VAR);
-	// }
-	return (-1);
+	t_token	*last_token;
+
+	last_token = lx_getlast(&tokens);
+	if (last_token == NULL)
+		return (EXEC);
+	if (last_token->type == HERE_DOC)
+		return (HD_LIMITER);
+	if (last_token->type == IN_REDIR || last_token->type == OUT_REDIR
+		|| last_token->type == APD_OUT_REDIR)
+		return (FILENAME);
+	if (last_token->type == EXEC || last_token->type == ARG)
+		return (ARG);
+	return (EXEC);
 }
 
-int	which_sep(char *c)
+static int	which_token2(t_token **tokens, char *c)
 {
-	if (c[0] == '\"')
-		return (D_QUOTE);
-	if (c[0] =='\'')
-		return (S_QUOTE);
+	if (c[0] == '"')
+		return (DQ_STR);
+	if (c[0] == '\'')
+		return (SQ_STR);
+	if (c[0] == '(')
+		return (PAR_STR);
+	return (which_token3(tokens, c));
+}
+
+int	which_token(t_token **tokens, char *c)
+{
 	if (c[0] == '|')
 	{
 		if (c[1] == '|')
@@ -69,8 +72,13 @@ int	which_sep(char *c)
 		else
 			return (PIPE);
 	}
-	if (c[0] == '&' && c[1] == '&')
-		return (AND);
+	if (c[0] =='>')
+	{
+		if (c[1] == '>')
+			return (APD_OUT_REDIR);
+		else
+			return (OUT_REDIR);
+	}
 	if (c[0] == '<')
 	{
 		if (c[1] == '<')
@@ -78,5 +86,7 @@ int	which_sep(char *c)
 		else
 			return (IN_REDIR);
 	}
-	return (which_sep2(c));
+	if (c[0] == '&' && c[1] == '&')
+		return (AND);
+	return (which_token2(tokens, c));
 }
