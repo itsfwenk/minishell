@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 15:54:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/20 17:29:41 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:20:59 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_export(t_env **env, char **args)
 			return_val = 1;
 		}
 		else
-			add_env(env, splitted[0], splitted[1]);
+			add_env(env, splitted[0], ft_strchr(args[i], '=') + 1);
 		free_all(splitted);
 		i++;
 	}
