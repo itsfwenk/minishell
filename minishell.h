@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:51:25 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/20 15:42:44 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/22 14:34:31 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@
 
 # define FALSE 0
 # define TRUE 1
+
+extern int	g_signal;
 
 #endif
