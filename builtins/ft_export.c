@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 15:54:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/22 15:24:58 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/22 17:01:57 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_export(t_env **env, char **args)
 
 	i = 0;
 	return_val = 0;
-	while (args[i] && ft_strchr(args[i], '='))
+	while (args[i])
 	{
 		splitted = ft_split(args[i], "=");
 		if (!splitted)
@@ -30,7 +30,7 @@ int	ft_export(t_env **env, char **args)
 			ft_print_error("export", args[i], "not a valid identifier", "`'");
 			return_val = 1;
 		}
-		else
+		else if (ft_strchr(args[i], '='))
 			add_env(env, splitted[0], ft_strchr(args[i], '=') + 1);
 		free_all(splitted);
 		i++;
