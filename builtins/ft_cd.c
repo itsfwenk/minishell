@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 14:31:17 by fli               #+#    #+#             */
-/*   Updated: 2024/08/23 11:40:47 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/23 11:43:57 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ int	ft_cd(char **dir_path)
 	char	cwd[PATH_MAX];
 	char	nwd[PATH_MAX];
 
-	if (dir_path[1])
-		return (ft_print_error("cd", NULL, "too many arguments", NULL), 1);
-	else if (dir_path == NULL)
+	if (!dir_path[0])
 		return (0);
+	else if (dir_path[1])
+		return (ft_print_error("cd", NULL, "too many arguments", NULL), 1);
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
 	{
 		perror("getcwd() error");
