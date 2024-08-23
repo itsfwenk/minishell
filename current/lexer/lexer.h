@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:55:26 by fli               #+#    #+#             */
-/*   Updated: 2024/08/22 18:07:22 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/23 17:26:09 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ typedef enum	e_types
 	DQ_STR,			// "
 	SQ_STR,			// '
 	PAR_STR,		// between parentheses
-	EXEC,			// executable
-	ARG,			// arguments
 	FILENAME,		// filename
 	HD_LIMITER,		// here_doc limiter string
 }	t_types;
@@ -55,15 +53,19 @@ typedef enum	e_types
 
 /////////// LIST_ADD ///////////
 
-void	lx_createadd(t_token **tokens, char *str, int *i);
+int		is_word_delimiter(t_token **tokens, char *str, int i);
+
+int		lx_createadd(t_token **tokens, char *str, int *i);
 
 /////////// LIST_MANIP_UTILS ///////////
 
-char	*lx_strdup(char *str, int *i);
+char	*lx_strdup(char *str, int *i, int token_type);
 
 /////////// LIST_MANIP ///////////
 
-t_token	*lx_newtoken(t_token **tokens, char *str, int *i, int token_type);
+t_token	*lx_meta_token(char *str, int *i, int token_type);
+
+t_token	*lx_str_token(t_token **tokens, char *str, int *i, int token_type);
 
 t_token	*lx_getlast(t_token *tokens);
 

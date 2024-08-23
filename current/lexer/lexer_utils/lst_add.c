@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 13:44:09 by fli               #+#    #+#             */
-/*   Updated: 2024/08/22 18:53:44 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/23 16:45:03 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 // 	lx_addback(tokens, ntoken);
 // }
 
-static int	is_word_delimiter(t_token **tokens, char *str, int i)
+int	is_word_delimiter(t_token **tokens, char *str, int i)
 {
 	int	char_type;
 
@@ -38,7 +38,7 @@ static int	is_word_delimiter(t_token **tokens, char *str, int i)
 		return (FALSE);
 }
 
-void	lx_createadd(t_token **tokens, char *input, int *i)
+int	lx_createadd(t_token **tokens, char *input, int *i)
 {
 	t_token	*ntoken;
 	int		token_type;
@@ -48,18 +48,11 @@ void	lx_createadd(t_token **tokens, char *input, int *i)
 		ntoken = lx_meta_token(input, i, token_type);
 	else
 		ntoken = lx_str_token(input, i, token_type);
-
-	{
-		while (is_word_delimiter(tokens, input, i[1]) == FALSE)
-		{
-			i[1] = i[1] + 1;
-		}
-	}
-	ntoken = lx_newtoken(tokens, input, i, token_type);
 	if (ntoken == NULL)
 	{
 		lx_deltokens(tokens);
-		return ; // exit ?
+		return (FALSE); // exit ?
 	}
 	lx_addback(tokens, ntoken);
+	return (TRUE);
 }

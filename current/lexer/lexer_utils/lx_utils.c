@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:14:00 by fli               #+#    #+#             */
-/*   Updated: 2024/08/22 19:42:31 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/23 14:46:26 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,13 @@ static int	which_token3(t_token **tokens, char *c)
 
 	last_token = lx_getlast(&tokens);
 	if (last_token == NULL)
-		return (EXEC);
+		return (DQ_STR);
 	if (last_token->type == HERE_DOC)
 		return (HD_LIMITER);
 	if (last_token->type == IN_REDIR || last_token->type == OUT_REDIR
 		|| last_token->type == APD_OUT_REDIR)
 		return (FILENAME);
-	if (last_token->type == EXEC || last_token->type == ARG)
-		return (ARG);
-	return (EXEC);
+	return (DQ_STR);
 }
 
 static int	which_token2(t_token **tokens, char *c)
