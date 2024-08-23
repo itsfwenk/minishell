@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 12:30:17 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/20 15:32:01 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/23 12:37:29 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_env	*get_env(t_env *env, char *key)
 {
 	while (env)
 	{
-		if (!ft_strcmp(env->key, key) && !env->is_unset)
+		if (!ft_strcmp(env->key, key))
 			return (env);
 		env = env->next;
 	}
