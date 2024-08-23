@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 14:31:17 by fli               #+#    #+#             */
-/*   Updated: 2024/08/20 16:49:16 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/23 11:44:33 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,15 @@
 // 		ft_strlcpy(old_pwd->value, old, PATH_MAX);
 // }
 
-int	ft_cd(char *dir_path)
+int	ft_cd(char **dir_path)
 {
 	char	cwd[PATH_MAX];
 	char	nwd[PATH_MAX];
 
-	if (dir_path == NULL)
+	if (!dir_path[0])
 		return (0);
+	else if (dir_path[1])
+		return (ft_print_error("cd", NULL, "too many arguments", NULL), 1);
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
 	{
 		perror("getcwd() error");
