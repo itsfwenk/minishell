@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/22 17:05:38 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/23 11:40:23 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	handle_line(char *line, t_env **env)
 	else
 	{
 		if (!ft_strcmp("cd", splitted[0]))
-			g_signal = ft_cd(splitted[1]);
+			g_signal = ft_cd(&splitted[1]);
 		else if (!ft_strcmp("echo", splitted[0]))
 			g_signal = ft_echo(&splitted[1]);
 		else if (!ft_strcmp("env", splitted[0]))
@@ -67,7 +67,7 @@ int	main(int argc, char **argv, char **envp)
 		free(line);
 		line = readline(ft_get_prompt(g_signal));
 	}
-	clear_history();
+	rl_clear_history();
 	free_env(env);
 	return (0);
 }
