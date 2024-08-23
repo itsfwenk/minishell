@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 14:31:17 by fli               #+#    #+#             */
-/*   Updated: 2024/08/23 11:44:33 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/23 11:46:08 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int	ft_cd(char **dir_path)
 		perror("getcwd() error");
 		return (errno);
 	}
-	if (chdir(dir_path) != 0)
+	if (chdir(dir_path[0]) != 0)
 	{
-		ft_dprintf(2, "bash: cd: %s: ", dir_path);
+		ft_dprintf(2, "bash: cd: %s: ", dir_path[0]);
 		perror("");
 	}
 	if (getcwd(nwd, sizeof(nwd)) == NULL)
