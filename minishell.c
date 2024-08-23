@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/23 12:31:37 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/23 13:53:27 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	env = NULL;
-	if (ft_export(&env, envp))
+	if (ft_export(&env, envp) || !reset_utils_env(&env))
 		return (2);
 	line = readline(ft_get_prompt(g_signal));
 	while (line)
@@ -65,6 +65,7 @@ int	main(int argc, char **argv, char **envp)
 			handle_line(line, &env);
 		}
 		free(line);
+		reset_utils_env(&env);
 		line = readline(ft_get_prompt(g_signal));
 	}
 	rl_clear_history();
