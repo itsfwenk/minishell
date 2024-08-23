@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:23:53 by fli               #+#    #+#             */
-/*   Updated: 2024/08/20 17:35:25 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/23 12:07:29 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_echo(char **echo_arg)
 	newline = TRUE;
 	if (echo_arg[arg_i] != NULL && echo_arg[arg_i][0] == '-')
 	{
-		if (only_n(echo_arg, arg_i++) == TRUE)
+		if (only_n(echo_arg, arg_i) == TRUE)
 			newline = FALSE;
 	}
 	while (echo_arg[arg_i] != NULL && echo_arg[arg_i][0] == '-'
