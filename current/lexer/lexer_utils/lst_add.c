@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 13:44:09 by fli               #+#    #+#             */
-/*   Updated: 2024/08/23 16:45:03 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/25 13:47:44 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	lx_createadd(t_token **tokens, char *input, int *i)
 	if (token_type >= PIPE && token_type <= HERE_DOC)
 		ntoken = lx_meta_token(input, i, token_type);
 	else
-		ntoken = lx_str_token(input, i, token_type);
+		ntoken = lx_str_token(tokens, input, i, token_type);
 	if (ntoken == NULL)
 	{
 		lx_deltokens(tokens);

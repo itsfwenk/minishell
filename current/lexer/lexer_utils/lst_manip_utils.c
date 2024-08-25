@@ -6,38 +6,36 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 00:10:11 by fli               #+#    #+#             */
-/*   Updated: 2024/08/23 17:55:31 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/25 16:17:17 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-static int	get_truelen(char *str, int *i, int token_type)
+char	*lx_strdup(char *str, int *i)
 {
-	int	i_dup;
-	int	in_quote;
-
-
-	i = i[0];
-
-}
-
-char	*lx_strdup(char *str, int *i, int token_type)
-{
-	int		i_dup;
-	int		truelen;
+	int		start;
+	int		end;
 	char	*dup;
 
-	truelen = get_truelen(str, i, token_type);
-	dup = malloc(truelen * sizeof(char));
+	if (str[i[0]] == '\'' || str[i[0]] == '"')
+	{
+		start = i[0] + 1;
+		end = i[1] - 1;
+	}
+	else
+	{
+		start = i[0];
+		end = i[1];
+	}
+	dup = malloc((end - start + 2) * sizeof(char));
 	if (dup == NULL)
 		return (NULL); //ft_exit
-	i_dup = i[0];
-	while (i_dup != i[1])
+	while (start <= end)
 	{
-		dup[i_dup] = str[i_dup];
-		i_dup++;
+		dup[start] = str[start];
+		start++;
 	}
-	dup[i_dup] = '\0';
+	dup[start] = '\0';
 	return (dup);
 }

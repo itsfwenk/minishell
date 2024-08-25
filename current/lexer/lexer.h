@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:55:26 by fli               #+#    #+#             */
-/*   Updated: 2024/08/23 17:26:09 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/25 16:38:06 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,16 @@
 // # include <linux/limits.h>
 // # include "../libft/libft.h"
 
+typedef struct s_string
+{
+	t_string		*str;
+	int				to_be_expanded;
+	struct s_string	*next;
+}	t_string;
+
 typedef struct s_token
 {
-	char			*value;
-	int				to_be_expanded;
+	t_string		*tstring;
 	int				type;
 	struct s_token	*sub_shell;
 	struct s_token	*next;
@@ -41,8 +47,7 @@ typedef enum	e_types
 	APD_OUT_REDIR,	// >>
 	HERE_DOC,		// <<
 	// str
-	DQ_STR,			// "
-	SQ_STR,			// '
+	STR,			// "
 	PAR_STR,		// between parentheses
 	FILENAME,		// filename
 	HD_LIMITER,		// here_doc limiter string
@@ -59,7 +64,7 @@ int		lx_createadd(t_token **tokens, char *str, int *i);
 
 /////////// LIST_MANIP_UTILS ///////////
 
-char	*lx_strdup(char *str, int *i, int token_type);
+char	*lx_strdup(char *str, int *i);
 
 /////////// LIST_MANIP ///////////
 
@@ -78,5 +83,15 @@ void	lx_deltokens(t_token **tokens);
 int		is_sep(char *c);
 
 int		which_token(t_token **tokens, char *c);
+
+/////////// TSTRING_UTILS ///////////
+
+t_string	*tstring_getlast(t_string *tstring);
+
+void		tstring_addback(t_string **tstring, t_string *new_tstring);
+
+void		tstring_del(t_string **tstring);
+
+/////////// TSTRING ///////////
 
 #endif

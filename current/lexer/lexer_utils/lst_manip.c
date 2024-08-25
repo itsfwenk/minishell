@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 23:18:42 by fli               #+#    #+#             */
-/*   Updated: 2024/08/23 17:26:29 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/25 15:24:52 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,14 @@ t_token	*lx_meta_token(char *str, int *i, int token_type)
 		i[1] = i[0] + 1;
 	if (token_type >= OR && token_type <= HERE_DOC)
 		i[1] = i[0] + 2;
-	ntoken->value = lx_strdup(str, i, token_type);
-	if (ntoken->value == NULL)
+	ntoken->tstring = malloc(sizeof(t_string));
+	if (ntoken->tstring == NULL)
 		return (NULL); // ft_exit_clean
-	ntoken->to_be_expanded = FALSE;
+	ntoken->tstring->str = lx_strdup(str, i, token_type);
+	if (ntoken->tstring->str == NULL)
+		return (NULL); // ft_exit_clean
+	ntoken->tstring->to_be_expanded = FALSE;
+	ntoken->tstring->next = NULL;
 	ntoken->type = token_type;
 	ntoken->sub_shell = NULL;
 	ntoken->next = NULL;
@@ -43,16 +47,12 @@ t_token	*lx_str_token(t_token **tokens, char *str, int *i, int token_type)
 	{
 		i[1] = i[1] + 1;
 	}
-	ntoken->value = lx_strdup(str, i, token_type);
-	if (ntoken->value == NULL)
+	ntoken->tstring = create_tstring(tokens, str, i, token_type);
+	if (ntoken->tstring == NULL)
 		return (NULL); // ft_exit_clean
-	if (token_type == SQ_STR || token_type == HD_LIMITER)
-		ntoken->to_be_expanded = FALSE;
-	else
-		ntoken->to_be_expanded = TRUE;
 	ntoken->type = token_type;
 	if (token_type == PAR_STR)
-		ntoken->sub_shell = ft_lexer(ntoken->value); // subshell ft_lexer_subshell ? pre-process input to remove ()
+		ntoken->sub_shell = ft_lexer(); // subshell ft_lexer_subshell ? pre-process input to remove ()
 	else
 		ntoken->sub_shell = NULL;
 	ntoken->next = NULL;
