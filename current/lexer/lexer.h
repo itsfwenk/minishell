@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:55:26 by fli               #+#    #+#             */
-/*   Updated: 2024/08/26 17:30:44 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/26 18:19:19 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ typedef enum	e_types
 
 //////***** LEXER_UTILS *****///////
 
-
 /////////// LX_LIST_ADD ///////////
 
 int		is_word_delimiter(t_token **tokens, char *str, int i);
@@ -110,5 +109,8 @@ void	other_tstr(char *str, int *i, int token_type, t_string **tstring);
 
 t_string	*create_tstring(t_token **tokens, char *str, int *i, int token_type);
 
+/////////// TSTRING ///////////
+
+t_token	*ft_lexer(char *input);
 
 #endif
