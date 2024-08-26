@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:55:26 by fli               #+#    #+#             */
-/*   Updated: 2024/08/25 16:38:06 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/26 15:04:15 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_string
 {
 	t_string		*str;
 	int				to_be_expanded;
+	int				between_quote;
 	struct s_string	*next;
 }	t_string;
 

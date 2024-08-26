@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_add.c                                          :+:      :+:    :+:   */
+/*   lx_lst_add.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 13:44:09 by fli               #+#    #+#             */
-/*   Updated: 2024/08/25 13:47:44 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/26 13:44:08 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	is_word_delimiter(t_token **tokens, char *str, int i)
 {
 	int	char_type;
 
-	if (str[i] == ' ' || str[i] == '\t')
+	if (str[i] == ' ' || str[i] == '\t' || str[i] == '\0')
 		return (TRUE);
 	char_type = which_token(tokens, &str[i]);
 	if (char_type >= PIPE && char_type <= HERE_DOC)
