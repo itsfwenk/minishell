@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 15:24:36 by fli               #+#    #+#             */
-/*   Updated: 2024/08/26 16:05:44 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/26 17:20:37 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ static void	set_limits(char *str, int *limits, int *i)
 {
 	limits[0] = i[0];
 	limits[1] = i[0] + 1;
+	if (str[limits[0]] == '(')
+	{
+		limits[1] = i[1];
+		return ;
+	}
 	while (str[limits[0]] == '"' && str[limits[1]] != '"')
 	{
 		limits[1]++;

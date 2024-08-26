@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 23:18:42 by fli               #+#    #+#             */
-/*   Updated: 2024/08/26 16:45:07 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/26 17:24:43 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,22 @@ t_token	*lx_str_token(t_token **tokens, char *str, int *i, int token_type)
 	ntoken = malloc(sizeof(t_token));
 	if (ntoken == NULL)
 		return (NULL); // ft_exit_clean
-	while (is_word_delimiter(tokens, str, i[1]) == FALSE)
+	if (token_type == PAR_STR)
+		to_close_parenthesis(str, i);
+	else
 	{
-		i[1] = i[1] + 1;
+		while (is_word_delimiter(tokens, str, i[1]) == FALSE)
+		{
+			i[1] = i[1] + 1;
+		}
+		i[1] = i[1] - 1;
 	}
-	i[1] = i[1] - 1;
 	ntoken->tstring = create_tstring(tokens, str, i, token_type);
 	if (ntoken->tstring == NULL)
 		return (NULL); // ft_exit_clean
 	ntoken->type = token_type;
 	if (token_type == PAR_STR)
-	{
-		ntoken->sub_shell = ft_lexer(); // subshell ft_lexer_subshell ? pre-process input to remove ()
-	}
+		ntoken->sub_shell = ft_lexer(trim_parentheses(str, i)); // subshell ft_lexer_subshell ? pre-process input to remove ()
 	else
 		ntoken->sub_shell = NULL;
 	ntoken->next = NULL;

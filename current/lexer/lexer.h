@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:55:26 by fli               #+#    #+#             */
-/*   Updated: 2024/08/26 15:04:15 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/26 17:30:44 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,20 @@ typedef enum	e_types
 # define TRUE 1
 # define FALSE 0
 
-/////////// LIST_ADD ///////////
+//////***** LEXER_UTILS *****///////
+
+
+/////////// LX_LIST_ADD ///////////
 
 int		is_word_delimiter(t_token **tokens, char *str, int i);
 
 int		lx_createadd(t_token **tokens, char *str, int *i);
 
-/////////// LIST_MANIP_UTILS ///////////
+/////////// LX_LIST_MANIP_UTILS ///////////
 
 char	*lx_strdup(char *str, int *i);
 
-/////////// LIST_MANIP ///////////
+/////////// LX_LIST_MANIP ///////////
 
 t_token	*lx_meta_token(char *str, int *i, int token_type);
 
@@ -78,6 +81,12 @@ t_token	*lx_getlast(t_token *tokens);
 void	lx_addback(t_token **tokens, t_token *ntoken);
 
 void	lx_deltokens(t_token **tokens);
+
+/////////// LX_PARENTHESES ///////////
+
+void	to_close_parenthesis(char *str, int *i);
+
+char	*trim_parentheses(char *str, int *i);
 
 /////////// LX_UTILS ///////////
 
@@ -94,5 +103,12 @@ void		tstring_addback(t_string **tstring, t_string *new_tstring);
 void		tstring_del(t_string **tstring);
 
 /////////// TSTRING ///////////
+
+void	sq_tstr(char *str, int *i, t_string **tstring);
+
+void	other_tstr(char *str, int *i, int token_type, t_string **tstring);
+
+t_string	*create_tstring(t_token **tokens, char *str, int *i, int token_type);
+
 
 #endif
