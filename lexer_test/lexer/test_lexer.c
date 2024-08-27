@@ -39,5 +39,6 @@ int	main(int ac, char **av)
 		}
 		printf("type %d\n", current_token->type);
 	}
+	lx_deltokens(&tokens);
 	free(input);
 }

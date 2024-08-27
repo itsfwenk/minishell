@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:54:47 by fli               #+#    #+#             */
-/*   Updated: 2024/08/26 18:29:13 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/27 13:57:22 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_token	*ft_lexer(char *input)
 
 	if (input == NULL || input[0] == '\0')
 		return (NULL);
-	ft_bzero(i, 2);
+	ft_bzero(i, 2 * sizeof(int));
 	tokens = NULL;
 	while (input[i[0]] != '\0')
 	{

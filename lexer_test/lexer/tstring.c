@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 15:24:36 by fli               #+#    #+#             */
-/*   Updated: 2024/08/26 18:29:47 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/27 11:02:38 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	sq_tstr(char *str, int *i, t_string **tstring)
 
 	new_tstring = malloc(sizeof(t_string));
 	if (new_tstring == NULL)
-		return (NULL); //ft_exit_clean
+		return ; //ft_exit_clean
 	limits[0] = i[0];
 	limits[1] = limits[0] + 1;
 	while (str[limits[1]] != '\'')
@@ -62,7 +62,7 @@ void	other_tstr(char *str, int *i, int token_type, t_string **tstring)
 
 	new_tstring = malloc(sizeof(t_string));
 	if (new_tstring == NULL)
-		return (NULL); //ft_exit_clean
+		return ; //ft_exit_clean
 	set_limits(str, limits, i);
 	new_tstring->str = lx_strdup(str, limits);
 	new_tstring->to_be_expanded = TRUE;
@@ -84,9 +84,9 @@ t_string	*create_tstring(t_token **tokens, char *str, int *i, int token_type)
 	while (i[0] < i[1])
 	{
 		if (str[i[0]] == '\'')
-			sq_tstr(str, i, tstring);
+			sq_tstr(str, i, &tstring);
 		else
-			other_tstr(str, i, token_type, tstring);
+			other_tstr(str, i, token_type, &tstring);
 	}
 	return (tstring);
 }

@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 16:27:27 by fli               #+#    #+#             */
-/*   Updated: 2024/08/26 18:29:44 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/27 11:04:00 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	tstring_addback(t_string **tstring, t_string *new_tstring)
 {
 	t_string	*last;
 
-	last = lx_getlast(*tstring);
+	last = tstring_getlast(*tstring);
 	if (last == NULL)
 		*tstring = new_tstring;
 	else

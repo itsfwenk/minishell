@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 23:18:42 by fli               #+#    #+#             */
-/*   Updated: 2024/08/26 17:24:43 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/27 11:50:10 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,17 +114,19 @@ void	lx_addback(t_token **tokens, t_token *ntoken)
 		last->next = ntoken;
 }
 
-// void	lx_deltokens(t_token **tokens)
-// {
-// 	t_token	*prev;
-// 	t_token	*current;
+void	lx_deltokens(t_token **tokens)
+{
+	t_token	*prev;
+	t_token	*current;
 
-// 	current = *tokens;
-// 	while (current != NULL)
-// 	{
-// 		free(current->value);
-// 		prev = current;
-// 		current = current->next;
-// 		free(prev);
-// 	}
-// }
+	current = *tokens;
+	while (current != NULL)
+	{
+		tstring_del(current->tstring);
+		if (current->sub_shell != NULL)
+			lx_deltokens(&current->sub_shell);
+		prev = current;
+		current = current->next;
+		free(prev);
+	}
+}
