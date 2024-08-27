@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 16:27:27 by fli               #+#    #+#             */
-/*   Updated: 2024/08/27 11:04:00 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/27 17:04:20 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_string	*tstring_getlast(t_string *tstring)
 	current = tstring;
 	if (current == NULL)
 		return (NULL);
-	while (current != NULL)
+	while (current->next != NULL)
 	{
 		current = current->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 23:18:42 by fli               #+#    #+#             */
-/*   Updated: 2024/08/27 11:53:34 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/27 14:10:48 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ t_token	*lx_getlast(t_token *tokens)
 	current = tokens;
 	if (current == NULL)
 		return (NULL);
-	while (current != NULL)
+	while (current->next != NULL)
 	{
 		current = current->next;
 	}

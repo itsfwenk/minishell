@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 00:10:11 by fli               #+#    #+#             */
-/*   Updated: 2024/08/26 18:29:54 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/27 16:47:54 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 char	*lx_strdup(char *str, int *i)
 {
+	int		j;
 	int		start;
 	int		end;
 	int		truelen;
@@ -30,11 +31,13 @@ char	*lx_strdup(char *str, int *i)
 	if (str[i[0]] == '\'' || str[i[0]] == '"')
 		start = i[0] + 1;
 	end = start + truelen;
+	j = 0;
 	while (start < end)
 	{
-		dup[start] = str[start];
+		dup[j] = str[start];
+		j++;
 		start++;
 	}
-	dup[start] = '\0';
+	dup[truelen] = '\0';
 	return (dup);
 }
