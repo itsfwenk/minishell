@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:58:43 by fli               #+#    #+#             */
-/*   Updated: 2024/08/26 18:29:53 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/28 11:41:52 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	*trim_parentheses(char *str, int *i)
 	trimmed = malloc((i[1] - i[0]) * sizeof(char));
 	if (trimmed == NULL)
 		return (NULL); // ft_exit_clean
-	ft_strlcpy(trimmed, &str[i[0] + 1], (i[1] - i[0] - 1));
+	ft_strlcpy(trimmed, &str[i[0] + 1], (i[1] - i[0]));
+	printf("trim parentheses : %s\n", trimmed);
 	return (trimmed);
 }

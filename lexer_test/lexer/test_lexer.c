@@ -92,14 +92,17 @@ void	print_subshell(t_token *current_token)
 			print_subshell(in_token);
 			j = 1;
 			printf("	in subshell NODE NUMBER %d\n", i);
+			current_tstring = in_token->tstring;
 			while (current_tstring != NULL)
 			{
-				current_tstring = in_token->tstring;
 				printf("	in subshell tstring content %d : %s\n", j, current_tstring->str);
 				j++;
 				current_tstring = current_tstring->next;
 			}
 			i++;
+			print_token(in_token->type);
+			printf("\n");
+			printf("\n");
 			in_token = in_token->next;
 		}
 	}
@@ -113,7 +116,7 @@ int	main()
 	t_token		*current_token;
 	t_string	*current_tstring;
 
-	char *input = "(echo \"bonjour\"'ok'\'okokok\' | cat -e) && echo success";
+	char *input = "((ls) || (echo ok | cat -e)) && echo success";
 	printf("%s\n", input);
 	tokens = ft_lexer(input);
 	current_token = tokens;

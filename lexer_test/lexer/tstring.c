@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 15:24:36 by fli               #+#    #+#             */
-/*   Updated: 2024/08/27 11:02:38 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/28 13:09:38 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,10 @@ void	other_tstr(char *str, int *i, int token_type, t_string **tstring)
 
 t_string	*create_tstring(t_token **tokens, char *str, int *i, int token_type)
 {
+	int			start;
 	t_string	*tstring;
 
+	start = i[0];
 	tstring = NULL;
 	while (i[0] < i[1])
 	{
@@ -88,6 +90,7 @@ t_string	*create_tstring(t_token **tokens, char *str, int *i, int token_type)
 		else
 			other_tstr(str, i, token_type, &tstring);
 	}
+	i[0] = start;
 	return (tstring);
 }
 

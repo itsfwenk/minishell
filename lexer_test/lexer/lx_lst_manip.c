@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 23:18:42 by fli               #+#    #+#             */
-/*   Updated: 2024/08/27 14:10:48 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/28 13:20:09 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_token	*lx_meta_token(char *str, int *i, int token_type)
 t_token	*lx_str_token(t_token **tokens, char *str, int *i, int token_type)
 {
 	t_token	*ntoken;
+	char	*trimmed_par;
 
 	ntoken = malloc(sizeof(t_token));
 	if (ntoken == NULL)
@@ -60,10 +61,17 @@ t_token	*lx_str_token(t_token **tokens, char *str, int *i, int token_type)
 		return (NULL); // ft_exit_clean
 	ntoken->type = token_type;
 	if (token_type == PAR_STR)
-		ntoken->sub_shell = ft_lexer(trim_parentheses(str, i)); // subshell ft_lexer_subshell ? pre-process input to remove ()
+	{
+		trimmed_par = trim_parentheses(str, i);
+		if (trimmed_par == NULL)
+			return (NULL); //ft_exit_clean
+		ntoken->sub_shell = ft_lexer(trim_parentheses); // subshell ft_lexer_subshell ? pre-process input to remove ()
+		free(trimmed_par);
+	}
 	else
 		ntoken->sub_shell = NULL;
 	ntoken->next = NULL;
+	i[0] = i[1] + 1;
 	return (ntoken);
 }
 
