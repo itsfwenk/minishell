@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:57:01 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/28 15:01:41 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:00:53 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	is_sep(char *c)
 	return (FALSE);
 }
 
-static int	which_token3(t_token **tokens, char *c)
+static int	which_token3(t_token **tokens)
 {
 	t_token	*last_token;
 
@@ -58,7 +58,7 @@ static int	which_token2(t_token **tokens, char *c)
 		return (STR);
 	if (c[0] == '(')
 		return (PAR_STR);
-	return (which_token3(tokens, c));
+	return (which_token3(tokens));
 }
 
 int	which_token(t_token **tokens, char *c)

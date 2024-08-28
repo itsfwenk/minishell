@@ -6,7 +6,7 @@
 #    By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/20 14:56:45 by mel-habi          #+#    #+#              #
-#    Updated: 2024/08/20 17:38:02 by mel-habi         ###   ########.fr        #
+#    Updated: 2024/08/28 15:57:04 by mel-habi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,13 @@ LIBFT		= libft
 SOURCES		= minishell.c \
 			  builtins/utils/bi_checkers.c builtins/utils/bi_env.c builtins/utils/bi_free.c \
 			  builtins/ft_cd.c builtins/ft_echo.c builtins/ft_env.c builtins/ft_exit.c builtins/ft_export.c builtins/ft_pwd.c builtins/ft_unset.c \
-			  utils/ms_print.c
+			  lexer/utils/lx_lst_add.c lexer/utils/lx_lst_manip.c lexer/utils/lx_manip_utils.c lexer/utils/lx_parentheses.c lexer/utils/lx_utils.c lexer/utils/tstring_utils.c lexer/utils/tstring.c \
+			  lexer/ft_lexer.c \
+			  utils/ms_free.c utils/ms_print.c
 OBJECTS		= $(SOURCES:.c=.o)
 
 HEADERS		= minishell.h \
+			  lexer/lexer.h \
 			  builtins/builtins.h \
 			  utils/ms_utils.h
 FLAGS		= -Wall -Wextra -Werror

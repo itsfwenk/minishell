@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:08:07 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/28 14:20:38 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:03:01 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_token	*ft_lexer(char *input)
 		{
 			i[0] = i[0] + 1;
 		}
-		if (i[0] >= ft_strlen(input))
+		if (i[0] >= (int)ft_strlen(input))
 			break ;
 		i[1] = i[0] + 1;
 		if (lx_createadd(&tokens, input, i) == FALSE)

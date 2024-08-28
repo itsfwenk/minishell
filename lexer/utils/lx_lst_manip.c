@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:36:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/28 15:01:18 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:01:53 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	define_subshell(int token_type, char *str, int *i, t_token *ntoken)
 	{
 		trimmed_par = trim_parentheses(str, i);
 		if (trimmed_par == NULL)
-			return (NULL); //ft_exit_clean
-		ntoken->sub_shell = ft_lexer(trim_parentheses);
+			return ; //ft_exit_clean
+		ntoken->sub_shell = ft_lexer(trimmed_par);
 		free(trimmed_par);
 	}
 	else
@@ -69,7 +69,7 @@ t_token	*lx_str_token(t_token **tokens, char *str, int *i, int token_type)
 			i[1] = i[1] + 1;
 		i[1] = i[1] - 1;
 	}
-	ntoken->tstring = create_tstring(tokens, str, i, token_type);
+	ntoken->tstring = create_tstring(str, i, token_type);
 	if (ntoken->tstring == NULL)
 		return (NULL); // ft_exit_clean
 	ntoken->type = token_type;

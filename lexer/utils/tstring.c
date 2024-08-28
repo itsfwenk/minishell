@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:58:42 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/28 15:05:34 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:01:21 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	other_tstr(char *str, int *i, int token_type, t_string **tstring)
 	tstring_addback(tstring, new_tstring);
 }
 
-t_string	*create_tstring(t_token **tokens, char *str, int *i, int token_type)
+t_string	*create_tstring(char *str, int *i, int token_type)
 {
 	int			start;
 	t_string	*tstring;
