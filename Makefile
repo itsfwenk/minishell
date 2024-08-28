@@ -6,7 +6,7 @@
 #    By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/20 14:56:45 by mel-habi          #+#    #+#              #
-#    Updated: 2024/08/28 15:57:04 by mel-habi         ###   ########.fr        #
+#    Updated: 2024/08/28 16:28:23 by mel-habi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SOURCES		= minishell.c \
 			  builtins/ft_cd.c builtins/ft_echo.c builtins/ft_env.c builtins/ft_exit.c builtins/ft_export.c builtins/ft_pwd.c builtins/ft_unset.c \
 			  lexer/utils/lx_lst_add.c lexer/utils/lx_lst_manip.c lexer/utils/lx_manip_utils.c lexer/utils/lx_parentheses.c lexer/utils/lx_utils.c lexer/utils/tstring_utils.c lexer/utils/tstring.c \
 			  lexer/ft_lexer.c \
-			  utils/ms_free.c utils/ms_print.c
+			  utils/ms_checkers.c utils/ms_free.c utils/ms_print.c
 OBJECTS		= $(SOURCES:.c=.o)
 
 HEADERS		= minishell.h \

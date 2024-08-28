@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 15:39:54 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/28 15:59:58 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:28:04 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ void	ft_print_color(char *msg, char *color);
 void	ft_print_error(char *cmd, char *arg, char *error, char *seps);
 char	*ft_get_prompt(int err);
 void	ft_free_clean(t_skibidi *skibidishell);
+int		is_well_formated(char *str);
 
 #endif
