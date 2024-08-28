@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:36:42 by fli               #+#    #+#             */
-/*   Updated: 2024/08/27 15:57:08 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/28 13:52:59 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strdup(const char *s)
 	char	*dup;
 
 	if (!s)
-		return (ft_strdup(""));
+		return (NULL);
 	dup = malloc((ft_strlen(s) + 1) * sizeof(char));
 	if (dup == NULL)
 		return (NULL);
