@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tstring.c                                          :+:      :+:    :+:   */
+/*   tstring_modified.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:58:42 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/28 16:01:21 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/29 20:02:11 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_string	*create_tstring(char *str, int *i, int token_type)
 
 	start = i[0];
 	tstring = NULL;
-	while (i[0] < i[1])
+	while (i[0] <= i[1]) // to change on main
 	{
 		if (str[i[0]] == '\'')
 			sq_tstr(str, i, &tstring);

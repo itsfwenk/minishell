@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:10:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/28 16:02:09 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/29 18:38:54 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,17 @@ typedef enum e_types
 	FILENAME,
 	HD_LIMITER,
 }	t_types;
+
+typedef struct s_leaf
+{
+	int				in;
+	int				out;
+	char			*infile;
+	char			*outfile;
+	t_string		*cmd;
+	t_string		*args;
+	struct s_leaf	*next;
+}	t_leaf;
 
 // utils
 int			is_word_delimiter(t_token **tokens, char *str, int i);

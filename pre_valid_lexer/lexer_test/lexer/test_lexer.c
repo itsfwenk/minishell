@@ -116,7 +116,7 @@ int	main()
 	t_token		*current_token;
 	t_string	*current_tstring;
 
-	char *input = "((ls) || (echo ok | cat -e)) && echo success";
+	char *input = "< infile ls -l | < infile 2";
 	printf("%s\n", input);
 	tokens = ft_lexer(input);
 	current_token = tokens;

@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 15:24:36 by fli               #+#    #+#             */
-/*   Updated: 2024/08/28 13:09:38 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/29 19:54:37 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_string	*create_tstring(t_token **tokens, char *str, int *i, int token_type)
 
 	start = i[0];
 	tstring = NULL;
-	while (i[0] < i[1])
+	while (i[0] <= i[1])
 	{
 		if (str[i[0]] == '\'')
 			sq_tstr(str, i, &tstring);

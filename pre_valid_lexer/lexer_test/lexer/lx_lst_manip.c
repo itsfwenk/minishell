@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 23:18:42 by fli               #+#    #+#             */
-/*   Updated: 2024/08/28 13:20:09 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/29 18:40:18 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_token	*lx_str_token(t_token **tokens, char *str, int *i, int token_type)
 		trimmed_par = trim_parentheses(str, i);
 		if (trimmed_par == NULL)
 			return (NULL); //ft_exit_clean
-		ntoken->sub_shell = ft_lexer(trim_parentheses); // subshell ft_lexer_subshell ? pre-process input to remove ()
+		ntoken->sub_shell = ft_lexer(trimmed_par); // subshell ft_lexer_subshell ? pre-process input to remove ()
 		free(trimmed_par);
 	}
 	else
