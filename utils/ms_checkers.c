@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:27:17 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/30 17:52:00 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/30 18:11:18 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	finished_by_meta(char *str)
 	if (len >= 2 && str[len - 2] == str[len - 1]
 		&& in_charset(str[len - 1], METAS))
 		return (TRUE);
-	return (in_charset(str[len - 1], METAS));
+	return (str[len - 1] != '&' && in_charset(str[len - 1], METAS));
 }
 
 int	between_parentheses(char *str)
