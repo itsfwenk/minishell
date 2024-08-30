@@ -6,13 +6,13 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:23:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/20 15:43:17 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/30 16:28:41 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	in_charset(char c, char *charset)
+int	in_charset(char c, char *charset)
 {
 	size_t	i;
 

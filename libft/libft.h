@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:19:29 by fli               #+#    #+#             */
-/*   Updated: 2024/08/19 17:20:53 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/30 16:28:44 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 
 char	**ft_split(char const *s, char *c);
+int		in_charset(char c, char *charset);
 
 char	**free_all(char **result);
 
