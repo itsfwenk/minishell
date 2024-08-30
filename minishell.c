@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/30 17:27:38 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/30 17:48:39 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	check_line(char **line)
 
 	if (!(*line)[0])
 		return (0);
-	well_formated = is_well_formated(*line) && !finished_by_meta(*line);
+	well_formated = is_well_formated(*line) * !finished_by_meta(*line);
 	while (well_formated <= 0)
 	{
 		if (well_formated == -1)
@@ -80,7 +80,7 @@ static int	check_line(char **line)
 			if (!line)
 				return (2);
 		}
-		well_formated = is_well_formated(*line) && !finished_by_meta(*line);
+		well_formated = is_well_formated(*line) * !finished_by_meta(*line);
 	}
 	return (0);
 }

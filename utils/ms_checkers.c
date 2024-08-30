@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:27:17 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/30 17:20:33 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/30 17:52:00 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	between_parentheses(char *str)
 		{
 			p_count--;
 			if (p_count < 0)
-				return (-1);
+				return (1);
 		}
 	}
 	return (p_count);
