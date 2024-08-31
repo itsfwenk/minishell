@@ -116,9 +116,11 @@ int	main()
 	t_token		*current_token;
 	t_string	*current_tstring;
 
-	char *input = "'coucou''ok'hello";
+	char *input = "< infile (ls | cat) ";
 	printf("%s\n", input);
 	tokens = ft_lexer(input);
+	printf("tokens created\n");
+	check_syntax(tokens);
 	current_token = tokens;
 	nodenb = 1;
 	while (current_token != NULL)

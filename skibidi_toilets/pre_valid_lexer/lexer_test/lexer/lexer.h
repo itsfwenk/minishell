@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:55:26 by fli               #+#    #+#             */
-/*   Updated: 2024/08/31 14:43:38 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/31 16:14:10 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,21 @@
 # include <readline/history.h>
 # include <signal.h>
 # include "libft.h"
+
+
+# define RED "\e[31m"
+# define GREEN "\e[32m"
+# define YELLOW "\e[33m"
+# define BLUE "\e[34m"
+# define PURPLE "\e[35m"
+# define CYAN "\e[36m"
+# define WHITE "\e[0m"
+# define END_COLOR "\e[0m"
+# define BOLD "\e[1m"
+
+# define PROMPT " skibidishell > "
+# define SUCCESS_EMOJI "😸"
+# define ERROR_EMOJI "😿"
 
 typedef struct s_string
 {
@@ -120,4 +135,19 @@ t_string	*create_tstring(t_token **tokens, char *str, int *i, int token_type);
 
 t_token	*ft_lexer(char *input);
 
+
+
+
+
+
+
+
+
+
+
+
+
+int	check_syntax(t_token *tokens);
+
+void	ft_print_error(char *cmd, char *arg, char *error, char *seps);
 #endif
