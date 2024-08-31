@@ -116,7 +116,7 @@ int	main()
 	t_token		*current_token;
 	t_string	*current_tstring;
 
-	char *input = "< infile ls -l | | < filename ok <infile 2";
+	char *input = "'coucou''ok'hello";
 	printf("%s\n", input);
 	tokens = ft_lexer(input);
 	current_token = tokens;
@@ -124,6 +124,7 @@ int	main()
 	while (current_token != NULL)
 	{
 		printf("NODE NUMBER %d\n", nodenb);
+		printf("full string : %s\n", current_token->full_string);
 		current_tstring = current_token->tstring;
 		j = 1;
 		while (current_tstring != NULL)

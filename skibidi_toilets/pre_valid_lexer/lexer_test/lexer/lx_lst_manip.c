@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 23:18:42 by fli               #+#    #+#             */
-/*   Updated: 2024/08/29 18:40:18 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/31 14:53:38 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ t_token	*lx_meta_token(char *str, int *i, int token_type)
 	ntoken->tstring->to_be_expanded = FALSE;
 	ntoken->tstring->between_quote = FALSE;
 	ntoken->tstring->next = NULL;
+	ntoken->full_string = lx_strictstrdup(str, i);
+	if (ntoken->full_string == NULL)
+		return (NULL); // ft_exit_clean
 	ntoken->type = token_type;
 	ntoken->sub_shell = NULL;
 	ntoken->next = NULL;
@@ -58,6 +61,9 @@ t_token	*lx_str_token(t_token **tokens, char *str, int *i, int token_type)
 	}
 	ntoken->tstring = create_tstring(tokens, str, i, token_type);
 	if (ntoken->tstring == NULL)
+		return (NULL); // ft_exit_clean
+	ntoken->full_string = lx_strictstrdup(str, i);
+	if (ntoken->full_string == NULL)
 		return (NULL); // ft_exit_clean
 	ntoken->type = token_type;
 	if (token_type == PAR_STR)

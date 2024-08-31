@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:55:26 by fli               #+#    #+#             */
-/*   Updated: 2024/08/27 13:56:51 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/31 14:43:38 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_string
 typedef struct s_token
 {
 	t_string		*tstring;
+	char			*full_string; //
 	int				type;
 	struct s_token	*sub_shell;
 	struct s_token	*next;
@@ -72,6 +73,8 @@ int		lx_createadd(t_token **tokens, char *str, int *i);
 /////////// LX_LIST_MANIP_UTILS ///////////
 
 char	*lx_strdup(char *str, int *i);
+
+char		*lx_strictstrdup(char *str, int *i); //
 
 /////////// LX_LIST_MANIP ///////////
 

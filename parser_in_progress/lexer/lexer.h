@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_modified.h                                   :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:10:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/30 19:19:04 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/31 14:43:46 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_string
 typedef struct s_token
 {
 	t_string		*tstring;
+	char			*full_string; //
 	int				type;
 	struct s_token	*sub_shell;
 	struct s_token	*next;
@@ -59,6 +60,7 @@ typedef struct s_leaf
 int			is_word_delimiter(t_token **tokens, char *str, int i);
 int			lx_createadd(t_token **tokens, char *str, int *i);
 char		*lx_strdup(char *str, int *i);
+char		*lx_strictstrdup(char *str, int *i); //
 t_token		*lx_meta_token(char *str, int *i, int token_type);
 t_token		*lx_str_token(t_token **tokens, char *str, int *i, int token_type);
 t_token		*lx_getlast(t_token *tokens);

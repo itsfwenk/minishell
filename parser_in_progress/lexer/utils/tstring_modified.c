@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:58:42 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/29 20:02:11 by fli              ###   ########.fr       */
+/*   Updated: 2024/08/31 15:23:23 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ static void	set_limits(char *str, int *limits, int *i)
 	while (str[limits[0]] != '"' && limits[1] != i[1])
 	{
 		if (str[limits[1]] == '\'' || str[limits[1]] == '"')
+		{
+			limits[1]--;//modif
 			break ;
+		}
 		limits[1]++;
 	}
 }

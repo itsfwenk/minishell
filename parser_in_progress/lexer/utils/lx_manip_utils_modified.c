@@ -1,16 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lx_manip_utils.c                                   :+:      :+:    :+:   */
+/*   lx_manip_utils_modified.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:52:32 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/28 14:55:42 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/31 14:35:39 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*lx_strictstrdup(char *str, int *i)
+{
+	int		j;
+	int		start;
+	int		end;
+	int		truelen;
+	char	*dup;
+
+	truelen = i[1] - i[0] + 1;
+	dup = malloc((truelen + 1) * sizeof(char));
+	if (dup == NULL)
+		return (NULL); //ft_exit
+	start = i[0];
+	end = start + truelen;
+	j = 0;
+	while (start < end)
+	{
+		dup[j] = str[start];
+		j++;
+		start++;
+	}
+	dup[truelen] = '\0';
+	return (dup);
+}
 
 char	*lx_strdup(char *str, int *i)
 {

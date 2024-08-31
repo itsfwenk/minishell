@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lx_lst_manip.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:36:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/28 16:01:53 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/08/31 14:42:16 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ t_token	*lx_meta_token(char *str, int *i, int token_type)
 	ntoken->tstring->to_be_expanded = FALSE;
 	ntoken->tstring->between_quote = FALSE;
 	ntoken->tstring->next = NULL;
+	ntoken->full_string = lx_strictstrdup(str, i);
+	if (ntoken->full_string == NULL)
+		return (NULL); // ft_exit_clean
 	ntoken->type = token_type;
 	ntoken->sub_shell = NULL;
 	ntoken->next = NULL;
@@ -71,6 +74,9 @@ t_token	*lx_str_token(t_token **tokens, char *str, int *i, int token_type)
 	}
 	ntoken->tstring = create_tstring(str, i, token_type);
 	if (ntoken->tstring == NULL)
+		return (NULL); // ft_exit_clean
+	ntoken->full_string = lx_strictstrdup(str, i);
+	if (ntoken->full_string == NULL)
 		return (NULL); // ft_exit_clean
 	ntoken->type = token_type;
 	define_subshell(token_type, str, i, ntoken);
