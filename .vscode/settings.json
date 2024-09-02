@@ -1,0 +1,15 @@
+{
+	"files.associations": {
+		"minishell.h": "c",
+		"stdio.h": "c",
+		"errno.h": "c",
+		"stdlib.h": "c",
+		"dirent.h": "c",
+		"limits.h": "c",
+		"readline.h": "c",
+		"signal.h": "c",
+		"libft.h": "c",
+		"builtins.h": "c",
+		"lexer.h": "c"
+	}
+}

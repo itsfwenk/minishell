@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:55:26 by fli               #+#    #+#             */
-/*   Updated: 2024/08/27 13:49:12 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/02 16:09:19 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,34 @@ typedef struct s_string
 typedef struct s_token
 {
 	t_string		*tstring;
+	char			*full_string; //
 	int				type;
 	struct s_token	*sub_shell;
 	struct s_token	*next;
 }	t_token;
+
+typedef struct s_leaf
+{
+	int				n_tokens;
+	int				in;
+	int				out;
+	t_string		*infile;
+	t_string		*outfile;
+	t_token			*tokens;
+	struct s_leaf	*left;
+	struct s_leaf	*right;
+}	t_leaf;
+
+// typedef struct s_leaf
+// {
+// 	int				in;
+// 	int				out;
+// 	char			*infile;
+// 	char			*outfile;
+// 	t_string		*cmd;
+// 	t_string		*args;
+// 	struct s_leaf	*next;
+// }	t_leaf;
 
 typedef enum	e_types
 {

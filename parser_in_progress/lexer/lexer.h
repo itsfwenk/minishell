@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:10:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/31 14:43:46 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/02 16:08:31 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,33 @@ typedef enum e_types
 
 typedef struct s_leaf
 {
+	int				n_tokens;
 	int				in;
 	int				out;
-	char			*infile;
-	char			*outfile;
-	t_string		*cmd;
-	t_string		*args;
-	struct s_leaf	*next;
+	t_string		*infile;
+	t_string		*outfile;
+	t_token			*tokens;
+	struct s_leaf	*left;
+	struct s_leaf	*right;
 }	t_leaf;
+
+
+// typedef struct s_cmd_arg
+// {
+// 	t_string		*args;
+// 	struct s_cmd_arg	*next;
+// }	t_cmd_arg;
+
+// typedef struct s_leaf
+// {
+// 	int				in;
+// 	int				out;
+// 	t_string		*infile;
+// 	t_string		*outfile;
+// 	t_cmd_arg		*cmd_arg;
+// 	struct s_leaf	*left;
+// 	struct s_leaf	*right;
+// }	t_leaf;
 
 // utils
 int			is_word_delimiter(t_token **tokens, char *str, int i);

@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:05:41 by fli               #+#    #+#             */
-/*   Updated: 2024/09/02 13:19:47 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/02 13:36:34 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,14 @@ int	check_syntax(t_token *tokens)
 			{
 				ft_print_error(NULL, error_token->full_string, \
 				"syntax error near unexpected token", "`'");
+				// ft_clear
 				return (2);
 			}
 			else
 			{
 				ft_print_error(NULL, "(", \
 				"syntax error near unexpected token", "`'");
+				// ft_clear
 				return (2);
 			}
 		}
