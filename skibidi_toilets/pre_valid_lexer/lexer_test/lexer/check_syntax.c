@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:05:41 by fli               #+#    #+#             */
-/*   Updated: 2024/08/31 16:40:18 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/02 13:12:35 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,44 +19,34 @@ static t_token *check_syntax2(t_token *current)
 		if (current->next == NULL || current->next->type != HD_LIMITER)
 			return (current->next);
 	}
+	if (current->next == NULL)
+		return (NULL);
 	if (current->type == FILENAME || current->type == HD_LIMITER)
 	{
-		if (current->next == NULL)
-			return (NULL);
 		if (current->next->type == PAR_STR)
 			return(current->next);
 	}
 	if (current->type == STR)
 	{
-		if (current->next == NULL)
-			return (NULL);
 		if (current->next->type >= PAR_STR)
 			return (current->next);
 	}
 	if (current->type == PAR_STR)
 	{
-		if (current->next == NULL)
-			return (NULL);
 		if (current->next->type >= STR)
-		{
-			printf("in check syntax, error at token %s\n", current->next->full_string);
 			return (current->next);
-		}
 	}
 	return (NULL);
 }
 
 static t_token *check_syntax1(t_token *current)
 {
-	if (current->type == PIPE)
+	if (current->type == PIPE || current->type == OR || current->type == AND)
 	{
 		if (current->next == NULL
-			|| (current->next->type != IN_REDIR
-			&& current->next->type != OUT_REDIR
-			&& current->next->type != APD_OUT_REDIR
-			&& current->next->type != HERE_DOC
-			&& current->next->type != STR
-			&& current->next->type != PAR_STR))
+			|| (current->next->type == PIPE
+			|| current->next->type == OR
+			|| current->next->type == AND))
 			return (current->next);
 	}
 	if (current->type == IN_REDIR || current->type == OUT_REDIR
@@ -65,18 +55,74 @@ static t_token *check_syntax1(t_token *current)
 		if (current->next == NULL || current->next->type != FILENAME)
 			return (current->next);
 	}
-	if (current->type == OR || current->type == AND)
-	{
-		if (current->next == NULL
-			|| (current->next->type != STR && current->next->type != PAR_STR
-			&& current->next->type != IN_REDIR
-			&& current->next->type != OUT_REDIR
-			&& current->next->type != APD_OUT_REDIR
-			&& current->next->type != HERE_DOC))
-			return (current->next);
-	}
 	return(check_syntax2(current));
 }
+
+// static t_token *check_syntax2(t_token *current)
+// {
+// 	if (current->type == HERE_DOC)
+// 	{
+// 		if (current->next == NULL || current->next->type != HD_LIMITER)
+// 			return (current->next);
+// 	}
+// 	if (current->type == FILENAME || current->type == HD_LIMITER)
+// 	{
+// 		if (current->next == NULL)
+// 			return (NULL);
+// 		if (current->next->type == PAR_STR)
+// 			return(current->next);
+// 	}
+// 	if (current->type == STR)
+// 	{
+// 		if (current->next == NULL)
+// 			return (NULL);
+// 		if (current->next->type >= PAR_STR)
+// 			return (current->next);
+// 	}
+// 	if (current->type == PAR_STR)
+// 	{
+// 		if (current->next == NULL)
+// 			return (NULL);
+// 		if (current->next->type >= STR)
+// 		{
+// 			printf("in check syntax, error at token %s\n", current->next->full_string);
+// 			return (current->next);
+// 		}
+// 	}
+// 	return (NULL);
+// }
+
+// static t_token *check_syntax1(t_token *current)
+// {
+// 	if (current->type == PIPE)
+// 	{
+// 		if (current->next == NULL
+// 			|| (current->next->type != IN_REDIR
+// 			&& current->next->type != OUT_REDIR
+// 			&& current->next->type != APD_OUT_REDIR
+// 			&& current->next->type != HERE_DOC
+// 			&& current->next->type != STR
+// 			&& current->next->type != PAR_STR))
+// 			return (current->next);
+// 	}
+// 	if (current->type == IN_REDIR || current->type == OUT_REDIR
+// 		|| current->type == APD_OUT_REDIR)
+// 	{
+// 		if (current->next == NULL || current->next->type != FILENAME)
+// 			return (current->next);
+// 	}
+// 	if (current->type == OR || current->type == AND)
+// 	{
+// 		if (current->next == NULL
+// 			|| (current->next->type != STR && current->next->type != PAR_STR
+// 			&& current->next->type != IN_REDIR
+// 			&& current->next->type != OUT_REDIR
+// 			&& current->next->type != APD_OUT_REDIR
+// 			&& current->next->type != HERE_DOC))
+// 			return (current->next);
+// 	}
+// 	return(check_syntax2(current));
+// }
 
 int	check_syntax(t_token *tokens)
 {
