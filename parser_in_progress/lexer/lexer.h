@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:10:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/02 16:08:31 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/03 14:21:38 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,9 @@ void		other_tstr(char *str, int *i, int token_type, t_string **tstring);
 t_string	*create_tstring(char *str, int *i, int token_type);
 
 t_token		*ft_lexer(char *input);
+
+// EXPANDER FUNCTIONS
+
+void	exp_pos_param(t_string *current);
 
 #endif
