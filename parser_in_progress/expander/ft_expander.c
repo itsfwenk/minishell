@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 17:09:48 by fli               #+#    #+#             */
-/*   Updated: 2024/09/03 15:04:36 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/03 15:16:14 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,32 +28,37 @@
 // 	return (1);
 // }
 
-void	expand_env_var(t_string *current)
-{
-	int	i;
+// void	expand_env_var(t_string *current)
+// {
+// 	int	i;
 
-	i = 0;
-	if (current->to_be_expanded == TRUE)
+// 	i = 0;
+// 	if (current->to_be_expanded == TRUE)
+// 	{
+// 		while (current->str[i] != '\0')
+// 		{
+// 			if (current->str[i] == '$')
+// 			{
+// 				if (ft_isdigit(current->str[i + 1]) != FALSE)
+// 					exp_positional_param(current, &i);
+// 			}
+// 		}
+// 	}
+// }
+
+void	ft_expander(t_skibidi *skibidishell)
+{
+	t_token		*tokens;
+	t_string	*current_tstr;
+
+	tokens = skibidishell->tokens;
+	while (tokens != NULL)
 	{
-		while (current->str[i] != '\0')
+		current_tstr = tokens->tstring;
+		while (current_tstr != NULL)
 		{
-			if (current->str[i] == '$')
-			{
-				if (ft_isdigit(current->str[i + 1]) != FALSE)
-					exp_positional_param(current, &i);
-			}
+			exp_pos_param(current_tstr);
+			current_tstr = current_tstr->next;
 		}
-	}
-}
-
-void	ft_expander(t_token *token)
-{
-	t_string	*current;
-
-	current = token->tstring;
-	while (current != NULL)
-	{
-		exp_pos_param(current);
-		current = current->next;
 	}
 }
