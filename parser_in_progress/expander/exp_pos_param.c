@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:13:33 by fli               #+#    #+#             */
-/*   Updated: 2024/09/05 16:45:33 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/06 11:08:33 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,8 @@ void	exp_pos_param(t_string *current)
 	nb_pos_param = 0;
 	while (current->str[i] != '\0')
 	{
-		if (current->str[i] == '$'
-			&& (ft_isdigit(current->str[i + 1]) != FALSE
-				|| current->str[i + 1] == '*'
-				|| current->str[i + 1] == '@'))
+		if (current->str[i] == '$' && (ft_isdigit(current->str[i + 1]) != FALSE
+				|| current->str[i + 1] == '*' || current->str[i + 1] == '@'))
 		{
 			nb_pos_param++;
 			i = i + 2;
