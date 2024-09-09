@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 15:39:54 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/30 17:14:35 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:26:21 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char	*ft_get_prompt(int err);
 void	ft_free_clean(t_skibidi *skibidishell);
 int		is_well_formated(char *str);
 int		finished_by_meta(char *str);
-int		between_parentheses(char *str);
+int		is_brace_well_formated(char *str);
+int		has_semicolon(char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 15:54:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/20 17:34:26 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/04 14:58:21 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	ft_unset(t_env *env, char **keys)
 	i = 0;
 	while (keys[i])
 	{
-		unset_env(env, keys[i]);
+		if (check_key(keys[i]))
+			unset_env(env, keys[i]);
 		i++;
 	}
 	return (0);
