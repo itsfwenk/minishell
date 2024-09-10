@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 14:27:45 by fli               #+#    #+#             */
-/*   Updated: 2024/09/10 16:47:42 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/10 17:25:21 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,44 @@
 // }
 
 
-int	check_filename(char *wc, char *filename, int i, int j)
+// int	check_filename(char *wc, char *filename, int i, int j)
+// {
+// 	if (wc[i] == '\0' && filename[j] == '\0')
+// 		return (TRUE);
+// 	if (wc[i] == '*')
+// 	{
+// 		if (check_filename(wc, filename, i + 1, j) == TRUE);
+// 			return (TRUE);
+// 		return (check_filename(wc, filename, i, j + 1));
+// 	}
+// 	if (wc[i] == filename[j])
+// 		return (check_filename(wc, filename, i + 1, j + 1));
+// 	return (FALSE);
+// }
+
+int check_filename(char *wc, char *filename, int i, int j)
 {
-	if (wc[i] == '\0' && filename[j] == '\0')
-		return (TRUE);
-	if (wc[i] == '*')
+	while (wc[i] != '\0')
 	{
-		if (check_filename(wc, filename, i + 1, j) == TRUE);
-			return (TRUE);
-		return (check_filename(wc, filename, i, j + 1));
+		if (wc[i] == '*')
+		{
+			i++;
+			if (wc[i] == '\0')
+				return (TRUE);
+			while (filename[j] != '\0')
+			{
+				if (check_filename(wc, filename, i, j) == TRUE)
+					return (TRUE);
+				j++;
+			}
+			return (FALSE);
+		}
+		else if (wc[i] != filename[j])
+			return (FALSE);
+		i++;
+		j++;
 	}
-	if (wc[i] == filename[j])
-		return (check_filename(wc, filename, i + 1, j + 1));
-	return (FALSE);
+	return (filename[j] == '\0');
 }
 
 char	*get_filenames(t_string *current)
