@@ -6,11 +6,29 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:42:41 by fli               #+#    #+#             */
-/*   Updated: 2024/09/09 14:33:18 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/10 18:11:12 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	count_asterisks(t_token *current)
+{
+	int			i;
+	int			asterisk;
+	t_string	*tstring;
+
+	i = 0;
+	asterisk = 0;
+	tstring = current->tstring;
+	while (tstring != NULL)
+	{
+		while (tstring->str)
+		asterisk = asterisk + ft_strlen(tstring->str);
+		tstring = tstring->next;
+	}
+	return (asterisk);
+}
 
 int	get_full_len(t_token *current)
 {
