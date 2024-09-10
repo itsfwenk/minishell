@@ -6,47 +6,55 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 14:27:45 by fli               #+#    #+#             */
-/*   Updated: 2024/09/09 19:39:44 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/10 15:09:43 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	check_filename(t_string *current, struct dirent *read_return, int *i, int *j)
+
+
+int	check_filename(char *wc, char *filename, int i, int j)
 {
 	int	k;
 
 	k = 0;
-	while (current->str[*i] != '\0')
+	while (wc[i + k] != '\0')
 	{
-		if (current->str[*i + *j] == '*')
+		if (wc[i + k] == '*')
 		{
 			i++;
-			if (current->str[*i + *j] == '\0')
+			if (wc[i] == '\0')
 				return (TRUE);
-			while (current->str[*i] != read_return->d_name[*j])
+			while (wc[i + k] != '\0' && filename[j + k] != '\0'
+				&& wc[i] != filename[j])
 			{
-				if (current->str[*i + *j] == '*')
-					check_filename(current, read_return, i, j);
-				else
-					j++;
+				if (wc[i] == '*')
+					return (check_filename(wc, filename, i + k, j + k));
+				j++;
 			}
 		}
-		while (read_return->d_name[*j + k] != '\0' && current->str[*i + k] != '\0')
+		while (wc[i + k] != '\0' && filename[j + k] != '\0')
 		{
-			if (current->str[*i + k] == '*')
-				check_filename(current, read_return, i, j);
-			else if (current->str[*i + *j] != read_return->d_name[*j])
+			if (wc[i + k] == '*')
+			{
+				if (check_filename(wc, filename, i + k, j + k) == TRUE)
+					return (TRUE);
+				j++;
+				k = 0;
+			}
+			else if (wc[i + k] == filename[j + k])
+				k++;
+			else
 			{
 				k = 0;
-				*j++;
-				continue ;
+				j++;
 			}
-			else
-				*k++;
 		}
+		if ((wc[i + k] != '\0' || filename[j + k] != '\0') && wc[i + k] != '*')
+			return (FALSE);
 	}
-	return (FALSE);
+	return (TRUE);
 }
 
 char	*get_filenames(t_string *current)
