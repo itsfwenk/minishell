@@ -20,47 +20,44 @@
 // 	closedir(directory);
 // }
 
-int	check_filename(char *current, char *read_return, int i, int j)
-{
-	int	k;
+// int	check_filename(char *current, char *read_return, int i, int j)
+// {
+// 	if (current[i] == '\0' && read_return[j] == '\0')
+// 		return (TRUE);
+// 	if (current[i] == '*')
+// 	{
+// 		if (check_filename(current, read_return, i + 1, j) == TRUE);
+// 			return (TRUE);
+// 		return (check_filename(current, read_return, i, j + 1));
+// 	}
+// 	if (current[i] == read_return[j])
+// 		return (check_filename(current, read_return, i + 1, j + 1));
+// 	return (FALSE);
+// }
 
-	k = 0;
-	while (current[i + k] != '\0')
+int check_filename(char *wc, char *filename, int i, int j)
+{
+	while (wc[i] != '\0')
 	{
-		if (current[i + k] == '*')
+		if (wc[i] == '*')
 		{
 			i++;
-			if (current[i] == '\0')
+			if (wc[i] == '\0')
 				return (TRUE);
-			while (current[i + k] != '\0' && read_return[j + k] != '\0'
-				&& current[i] != read_return[j])
+			while (filename[j] != '\0')
 			{
-				if (current[i] == '*')
-					return (check_filename(current, read_return, i + k, j + k));
-				j++;
-			}
-		}
-		while (current[i + k] != '\0' && read_return[j + k] != '\0')
-		{
-			if (current[i + k] == '*')
-			{
-				if (check_filename(current, read_return, i + k, j + k) == TRUE)
+				if (check_filename(wc, filename, i, j) == TRUE)
 					return (TRUE);
 				j++;
-				k = 0;
 			}
-			else if (current[i + k] == read_return[j + k])
-				k++;
-			else
-			{
-				k = 0;
-				j++;
-			}
-		}
-		if ((current[i + k] != '\0' || read_return[j + k] != '\0') && current[i + k] != '*')
 			return (FALSE);
+		}
+		else if (wc[i] != filename[j])
+			return (FALSE);
+		i++;
+		j++;
 	}
-	return (TRUE);
+	return (filename[j] == '\0');
 }
 
 int	main(int argc, char **argv)

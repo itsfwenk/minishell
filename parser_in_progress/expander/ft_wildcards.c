@@ -6,55 +6,69 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 14:27:45 by fli               #+#    #+#             */
-/*   Updated: 2024/09/10 15:09:43 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/10 16:47:42 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+// int	check_filename(char *wc, char *filename, int i, int j)
+// {
+// 	int	k;
+
+// 	k = 0;
+// 	while (wc[i + k] != '\0')
+// 	{
+// 		if (wc[i + k] == '*')
+// 		{
+// 			i++;
+// 			if (wc[i] == '\0')
+// 				return (TRUE);
+// 			while (wc[i + k] != '\0' && filename[j + k] != '\0'
+// 				&& wc[i] != filename[j])
+// 			{
+// 				if (wc[i] == '*')
+// 					return (check_filename(wc, filename, i + k, j + k));
+// 				j++;
+// 			}
+// 		}
+// 		while (wc[i + k] != '\0' && filename[j + k] != '\0')
+// 		{
+// 			if (wc[i + k] == '*')
+// 			{
+// 				if (check_filename(wc, filename, i + k, j + k) == TRUE)
+// 					return (TRUE);
+// 				j++;
+// 				k = 0;
+// 			}
+// 			else if (wc[i + k] == filename[j + k])
+// 				k++;
+// 			else
+// 			{
+// 				k = 0;
+// 				j++;
+// 			}
+// 		}
+// 		if ((wc[i + k] != '\0' || filename[j + k] != '\0') && wc[i + k] != '*')
+// 			return (FALSE);
+// 	}
+// 	return (TRUE);
+// }
 
 
 int	check_filename(char *wc, char *filename, int i, int j)
 {
-	int	k;
-
-	k = 0;
-	while (wc[i + k] != '\0')
+	if (wc[i] == '\0' && filename[j] == '\0')
+		return (TRUE);
+	if (wc[i] == '*')
 	{
-		if (wc[i + k] == '*')
-		{
-			i++;
-			if (wc[i] == '\0')
-				return (TRUE);
-			while (wc[i + k] != '\0' && filename[j + k] != '\0'
-				&& wc[i] != filename[j])
-			{
-				if (wc[i] == '*')
-					return (check_filename(wc, filename, i + k, j + k));
-				j++;
-			}
-		}
-		while (wc[i + k] != '\0' && filename[j + k] != '\0')
-		{
-			if (wc[i + k] == '*')
-			{
-				if (check_filename(wc, filename, i + k, j + k) == TRUE)
-					return (TRUE);
-				j++;
-				k = 0;
-			}
-			else if (wc[i + k] == filename[j + k])
-				k++;
-			else
-			{
-				k = 0;
-				j++;
-			}
-		}
-		if ((wc[i + k] != '\0' || filename[j + k] != '\0') && wc[i + k] != '*')
-			return (FALSE);
+		if (check_filename(wc, filename, i + 1, j) == TRUE);
+			return (TRUE);
+		return (check_filename(wc, filename, i, j + 1));
 	}
-	return (TRUE);
+	if (wc[i] == filename[j])
+		return (check_filename(wc, filename, i + 1, j + 1));
+	return (FALSE);
 }
 
 char	*get_filenames(t_string *current)
