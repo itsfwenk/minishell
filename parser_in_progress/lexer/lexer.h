@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:10:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/03 14:21:38 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/11 18:18:59 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,16 @@ typedef struct s_string
 typedef struct s_token
 {
 	t_string		*tstring;
-	char			*full_string; //
+	t_string		*expanded_list; //	expanded + wildcarded	as a linked list
+	char			*full_string; //	initial input
+	char			*assembled; //		t_strings assembled			after expand (needed for wildcard)
 	int				type;
+	struct s_token	*arguments; //		arguments as tokens
+	char			**argv; //			all arguments as an array	after expand and wildcards
+	int				in; //
+	char			*in_file; //
+	int				out; //
+	char			*outfile; //
 	struct s_token	*sub_shell;
 	struct s_token	*next;
 }	t_token;

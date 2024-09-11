@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:42:41 by fli               #+#    #+#             */
-/*   Updated: 2024/09/10 18:11:12 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/11 11:40:53 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,7 @@ int	assemble_tstring(t_token *tokens)
 			return (0); //ft_clean exit
 		}
 		cat_tstring(current, assembled, &i);
-		tstring_del(current->tstring->next);
-		free(current->tstring->str);
-		current->tstring->str = assembled;
+		current->assembled = assembled;
 		current = current->next;
 	}
 }

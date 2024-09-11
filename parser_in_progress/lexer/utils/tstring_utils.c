@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tstring_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:59:35 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/28 14:59:46 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/11 17:51:18 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,19 @@ void	tstring_del(t_string **tstring)
 		current = current->next;
 		free(previous);
 	}
+}
+
+int	tstring_size(t_string **tstring)
+{
+	int	i;
+	t_string	*current;
+
+	i = 0;
+	current = *tstring;
+	while (current != NULL)
+	{
+		i++;
+		current = current->next;
+	}
+	return (i);
 }

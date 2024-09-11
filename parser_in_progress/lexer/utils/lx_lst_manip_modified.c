@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lx_lst_manip.c                                     :+:      :+:    :+:   */
+/*   lx_lst_manip_modified.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:36:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/31 14:42:16 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/11 11:43:04 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 static void	define_subshell(int token_type, char *str, int *i, t_token *ntoken)
 {
@@ -53,6 +53,7 @@ t_token	*lx_meta_token(char *str, int *i, int token_type)
 		return (NULL); // ft_exit_clean
 	ntoken->type = token_type;
 	ntoken->sub_shell = NULL;
+	ntoken->assembled = NULL; //
 	ntoken->next = NULL;
 	return (ntoken);
 }
