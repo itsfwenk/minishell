@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 17:09:48 by fli               #+#    #+#             */
-/*   Updated: 2024/09/05 16:48:01 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/11 19:09:37 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 // 	}
 // }
 
-void	ft_expander(t_skibidi *skibidishell)
+void	ft_expander(t_skibidi *skibidishell) // should expand only one token
 {
 	t_token		*tokens;
 	t_string	*current_tstr;

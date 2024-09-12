@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:10:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/11 18:18:59 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/12 16:03:06 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,8 @@ typedef struct s_token
 	int				type;
 	struct s_token	*arguments; //		arguments as tokens
 	char			**argv; //			all arguments as an array	after expand and wildcards
-	int				in; //
-	char			*in_file; //
-	int				out; //
-	char			*outfile; //
+	struct s_token	*infile; //
+	struct s_token	*outfile; //
 	struct s_token	*sub_shell;
 	struct s_token	*next;
 }	t_token;

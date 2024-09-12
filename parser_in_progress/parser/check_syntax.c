@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:05:41 by fli               #+#    #+#             */
-/*   Updated: 2024/09/02 13:36:34 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/12 15:00:39 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,28 @@ static t_token *check_syntax1(t_token *current)
 	return(check_syntax2(current));
 }
 
+static int	check_first(t_token *first_token) //
+{
+	if (first_token->type == PIPE
+		|| first_token->type == OR
+		|| first_token->type == AND)
+	{
+		ft_print_error(NULL, first_token->full_string, \
+				"syntax error near unexpected token", "`'");
+		// ft_clear
+		return (2);
+	}
+	return (TRUE);
+}
+
 int	check_syntax(t_token *tokens)
 {
 	t_token	*current;
 	t_token	*error_token;
 
 	current = tokens;
+	if (check_first(current) == 2)
+		return (2);
 	while (current != NULL)
 	{
 		error_token = check_syntax1(current);

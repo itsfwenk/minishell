@@ -116,7 +116,7 @@ int	main()
 	t_token		*current_token;
 	t_string	*current_tstring;
 
-	char *input = "(ls | cat) | echo ok";
+	char *input = "| cat -e";
 	printf("%s\n", input);
 	tokens = ft_lexer(input);
 	printf("tokens created\n");
