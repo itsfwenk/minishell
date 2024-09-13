@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:05:41 by fli               #+#    #+#             */
-/*   Updated: 2024/09/13 15:02:10 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/13 15:52:07 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int	check_first(t_token *first_token) //
 	return (TRUE);
 }
 
-static void print_syntax_error(t_token *error_token)
+static int print_syntax_error(t_token *error_token)
 {
 	if (error_token->type != PAR_STR)
 	{

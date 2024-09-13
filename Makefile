@@ -6,7 +6,7 @@
 #    By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/20 14:56:45 by mel-habi          #+#    #+#              #
-#    Updated: 2024/09/13 15:23:52 by mel-habi         ###   ########.fr        #
+#    Updated: 2024/09/13 15:53:26 by mel-habi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,10 @@ HEADERS		= minishell.h \
 FLAGS		= -Wall -Wextra -Werror
 LIBS		= -L$(LIBFT) -lft -I$(LIBFT) -lreadline
 OPTIONS		= -I$(LIBFT) -I. -Ibuiltins -Iutils
+
+ifeq ($(debug), true)
+	FLAGS += -g3
+endif
 
 #################################################################################
 

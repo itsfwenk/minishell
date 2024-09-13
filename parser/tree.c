@@ -6,33 +6,28 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 14:54:39 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/13 14:54:49 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/13 19:47:20 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_node	*create_node(t_token *token, int ignored)
+static t_node *create_node(t_token *token, int ignored)
 {
-	t_node	*node;
+	t_node *node;
 
 	if (ignored)
 		return (NULL);
-	else if (token->type == PAR_STR)
-		node = create_tree(token->sub_shell);
-	else
-	{
-		node = ft_calloc(1, sizeof(t_node));
-		if (node)
-			node->value = token;
-	}
+	node = ft_calloc(1, sizeof(t_node));
+	if (node)
+		node->value = token;
 	return (node);
 }
 
-t_node	*create_tree(t_token *token)
+t_node *create_tree(t_token *token)
 {
-	t_node	*tree;
-	t_node	*node;
+	t_node *tree;
+	t_node *node;
 
 	tree = NULL;
 	while (token)

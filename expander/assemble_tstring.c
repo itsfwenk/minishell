@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:42:41 by fli               #+#    #+#             */
-/*   Updated: 2024/09/13 15:09:54 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/13 16:49:46 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	assemble_tstring(t_token *tokens)
 	t_token	*current;
 
 	current = tokens;
-	while (tokens != NULL)
+	while (current != NULL)
 	{
 		i = 0;
 		assembled = malloc((get_full_len(current) + 1) * sizeof(char));

@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/12 14:15:33 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/13 19:26:53 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,57 @@ static char	*free_and_trim(char *str)
 	return (str);
 }
 
+static void	print_token(int token_type)
+{
+	if (token_type == PIPE)
+		dprintf(2, "PIPE");
+	if (token_type == OR)
+		dprintf(2, "OR");
+	if (token_type == APD_OUT_REDIR)
+		dprintf(2, "APD_OUT_REDIR");
+	if (token_type == OUT_REDIR)
+		dprintf(2, "OUT_REDIR");
+	if (token_type == HERE_DOC)
+		dprintf(2, "HERE_DOC");
+	if (token_type == IN_REDIR)
+		dprintf(2, "IN_REDIR");
+	if (token_type == AND)
+		dprintf(2, "AND");
+	if (token_type == STR)
+		dprintf(2, "STR");
+	if (token_type == HD_LIMITER)
+		dprintf(2, "HD_LIMITER");
+	if (token_type == FILENAME)
+		dprintf(2, "FILENAME");
+	if (token_type == PAR_STR)
+		dprintf(2, "PAR_STR");
+}
+
+static void print_tree(t_node *tree)
+{
+	if (!tree)
+		return ;
+	print_tree(tree->left);
+	if (tree->value) {
+		print_token(tree->value->type);
+		dprintf(2, " %s\n", tree->value->full_string);
+	}
+	else
+		dprintf(2, "NULL\n");
+	print_tree(tree->right);
+}
+
 static void	handle_line(char *line, t_skibidi *skibidishell)
 {
-	(void)skibidishell;
-	(void)line;
-	//main_lexer(line);
+	t_node	*tree;
+
+	skibidishell->tokens = ft_lexer(line);
+	check_syntax(skibidishell->tokens);
+	assemble_tstring(skibidishell->tokens);
+	merge_tokens(skibidishell, &(skibidishell->tokens), NULL);
+	tree = create_tree(skibidishell->tokens);
+	print_tree(tree);
+	//exec
 }
 
 static int	check_line(char *line)

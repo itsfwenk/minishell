@@ -6,13 +6,13 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:08:07 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/13 15:24:55 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/13 18:25:50 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	merge_redirection(t_token *current, t_token *cmd)
+static void	merge_redirection(t_skibidi *skibidishell, t_token *current, t_token *cmd)
 {
 	t_token	*new_start;
 
@@ -23,7 +23,7 @@ static void	merge_redirection(t_token *current, t_token *cmd)
 		if (new_start == cmd)
 			new_start = cmd->next;
 		current->next->next = NULL;
-		merge_tokens(new_start, cmd);
+		merge_tokens(skibidishell, &new_start, cmd);
 	}
 	if (current && (current->type == OUT_REDIR
 			|| current->type == APD_OUT_REDIR))
@@ -33,11 +33,11 @@ static void	merge_redirection(t_token *current, t_token *cmd)
 		if (new_start == cmd)
 			new_start = cmd->next;
 		current->next->next = NULL;
-		merge_tokens(new_start, cmd);
+		merge_tokens(skibidishell, &new_start, cmd);
 	}
 }
 
-static void	merge_arguments(t_token *current, t_token *cmd)
+static void	merge_arguments(t_skibidi *skibidishell, t_token *current, t_token *cmd)
 {
 	t_token	*new_start;
 
@@ -46,7 +46,10 @@ static void	merge_arguments(t_token *current, t_token *cmd)
 		lx_addback(&(cmd->arguments), current);
 		new_start = current->next;
 		current->next = NULL;
-		merge_tokens(new_start, cmd);
+		cmd->next = NULL;
+		if (new_start)
+			cmd->next = new_start;
+		merge_tokens(skibidishell, &new_start, cmd);
 	}
 }
 
@@ -90,26 +93,28 @@ t_token	*ft_lexer(char *input)
 	return (tokens);
 }
 
-void	merge_tokens(t_token **token, t_token *cmd)
+void	merge_tokens(t_skibidi *skibidishell, t_token **token, t_token *cmd)
 {
 	t_token	*current;
 
-	if (*token == NULL)
+	current = NULL;
+	if (!token || *token == NULL)
 		return ;
 	if (*token && (*token)->type == PAR_STR)
 	{
-		merge_tokens((*token)->sub_shell, NULL);
-		merge_tokens((*token)->next, NULL);
+		merge_tokens(skibidishell, &(*token)->next, NULL);
+		merge_tokens(skibidishell, &(*token)->sub_shell, NULL);
 	}
-	if (token && ((*token)->type == PIPE || (*token)->type == OR
-			|| (*token)->type == AND))
-		merge_tokens(current->next, NULL);
-	current = token;
+	current = *token;
 	if (cmd == NULL)
 		cmd = get_cmd(*token);
 	if (current == cmd)
 		current = current->next;
-	merge_redirection(current, cmd);
-	merge_arguments(current, cmd);
-	*token = cmd;
+	if (token && ((*token)->type == PIPE || (*token)->type == OR
+			|| (*token)->type == AND))
+		merge_tokens(skibidishell, &current->next, NULL);
+	merge_redirection(skibidishell, current, cmd);
+	merge_arguments(skibidishell, current, cmd);
+	if (skibidishell->tokens->type != PAR_STR)
+		skibidishell->tokens = cmd;
 }

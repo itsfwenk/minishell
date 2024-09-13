@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:10:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/13 15:28:18 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/13 19:25:29 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct	s_node {
 // utils
 int			is_word_delimiter(t_token **tokens, char *str, int i);
 int			lx_createadd(t_token **tokens, char *str, int *i);
+char		*lx_strictstrdup(char *str, int *i);
 char		*lx_strdup(char *str, int *i);
 t_token		*lx_meta_token(char *str, int *i, int token_type);
 t_token		*lx_str_token(t_token **tokens, char *str, int *i, int token_type);
@@ -76,7 +77,6 @@ void		tstring_del(t_string **tstring);
 void		sq_tstr(char *str, int *i, t_string **tstring);
 void		other_tstr(char *str, int *i, int token_type, t_string **tstring);
 t_string	*create_tstring(char *str, int *i, int token_type);
-void		merge_tokens(t_token **token, t_token *cmd);
 int			tstring_size(t_string **tstring);
 
 t_node		*create_tree(t_token *token);
