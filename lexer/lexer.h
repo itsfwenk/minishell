@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:10:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/28 16:02:09 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/13 15:28:18 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,14 @@ typedef struct s_string
 typedef struct s_token
 {
 	t_string		*tstring;
+	t_string		*expanded_list; //	expanded + wildcarded	as a linked list
+	char			*full_string; //	initial input
+	char			*assembled; //		t_strings assembled			after expand (needed for wildcard)
 	int				type;
+	struct s_token	*arguments; //		arguments as tokens
+	char			**argv; //			all arguments as an array	after expand and wildcards
+	struct s_token	*infile; //
+	struct s_token	*outfile; //
 	struct s_token	*sub_shell;
 	struct s_token	*next;
 }	t_token;
@@ -43,6 +50,12 @@ typedef enum e_types
 	FILENAME,
 	HD_LIMITER,
 }	t_types;
+
+typedef struct	s_node {
+	t_token	*value;
+	struct s_node	*left;
+	struct s_node	*right;
+}	t_node;
 
 // utils
 int			is_word_delimiter(t_token **tokens, char *str, int i);
@@ -63,7 +76,16 @@ void		tstring_del(t_string **tstring);
 void		sq_tstr(char *str, int *i, t_string **tstring);
 void		other_tstr(char *str, int *i, int token_type, t_string **tstring);
 t_string	*create_tstring(char *str, int *i, int token_type);
+void		merge_tokens(t_token **token, t_token *cmd);
+int			tstring_size(t_string **tstring);
 
+t_node		*create_tree(t_token *token);
 t_token		*ft_lexer(char *input);
+int			check_syntax(t_token *tokens);
+
+void		assemble_tstring(t_token *tokens);
+void		exp_pos_param(t_string *current);
+int			check_filename(t_token *tokens, char *filename, int i, int j);
+void		create_argv(t_token *tokens);
 
 #endif
