@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lx_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:57:01 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/28 16:00:53 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/13 13:02:04 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../minishell.h"
 
 int	is_sep(char *c)
 {

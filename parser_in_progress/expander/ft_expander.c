@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 17:09:48 by fli               #+#    #+#             */
-/*   Updated: 2024/09/11 19:09:37 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/13 13:27:01 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,26 @@
 // 	}
 // }
 
-void	ft_expander(t_skibidi *skibidishell) // should expand only one token
+void	ft_expander(t_skibidi *skibidishell, t_token *token)
 {
-	t_token		*tokens;
 	t_string	*current_tstr;
 
-	tokens = skibidishell->tokens;
-	while (tokens != NULL)
+	if (token == NULL)
+		return ;
+	current_tstr = token->tstring;
+	while (current_tstr != NULL)
 	{
-		current_tstr = tokens->tstring;
-		while (current_tstr != NULL)
+		if (current_tstr->to_be_expanded == TRUE)
 		{
-			if (current_tstr->to_be_expanded == TRUE)
-			{
-				exp_special_char(current_tstr);
-				exp_pos_param(current_tstr);
-				if (exp_env_var(current_tstr, skibidishell) == FALSE)
-					return (FALSE); // ft_clean token etc..
-			}
-			current_tstr = current_tstr->next;
+			exp_special_char(current_tstr);
+			exp_pos_param(current_tstr);
+			if (exp_env_var(current_tstr, skibidishell) == FALSE)
+				return (FALSE); // ft_clean token etc..
 		}
-		tokens = tokens->next;
+		current_tstr = current_tstr->next;
 	}
+	ft_expander(skibidishell, token->arguments);
+	ft_expander(skibidishell, token->infile);
+	ft_expander(skibidishell, token->outfile);
+	ft_expander(skibidishell, token->sub_shell);
 }

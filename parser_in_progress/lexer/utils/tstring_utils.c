@@ -6,11 +6,11 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:59:35 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/11 17:51:18 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/13 13:01:48 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../minishell.h"
 
 t_string	*tstring_getlast(t_string *tstring)
 {

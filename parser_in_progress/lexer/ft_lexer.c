@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:08:07 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/12 18:36:00 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/13 12:55:29 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,21 +96,39 @@ void	merge_redirection(t_token *current, t_token *cmd)
 		merge_tokens(new_start, cmd);
 	}
 }
+
+void	merge_arguments(t_token *current, t_token *cmd)
+{
+	t_token	*new_start;
+
+	if (current && cmd && current->type == STR)
+	{
+		lx_addback(&(cmd->arguments), current);
+		new_start = current->next;
+		current->next = NULL;
+		merge_tokens(new_start, cmd);
+	}
+}
+
 void	merge_tokens(t_token **token, t_token *cmd)
 {
 	t_token	*current;
 
 	if (*token == NULL)
 		return ;
-	if ((*token)->type == PAR_STR)
+	if (*token && (*token)->type == PAR_STR)
+	{
 		merge_tokens((*token)->sub_shell, NULL);
+		merge_tokens((*token)->next, NULL);
+	}
+	if (token && is_operator)
+		merge_tokens(current->next, NULL);
 	current = token;
 	if (cmd == NULL)
 		cmd = get_cmd(*token);
 	if (current == cmd)
 		current = current->next;
-	if (current && is_operator)
-		merge_tokens(current->next, NULL);
 	merge_redirection(current, cmd);
+	merge_arguments(current, cmd);
 	*token = cmd;
 }

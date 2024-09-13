@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lx_lst_add.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:28:57 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/28 14:35:01 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/13 12:56:43 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	is_word_delimiter(t_token **tokens, char *str, int i)
 {

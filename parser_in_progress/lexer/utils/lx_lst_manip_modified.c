@@ -6,11 +6,11 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:36:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/11 11:43:04 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/13 12:59:34 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 static void	define_subshell(int token_type, char *str, int *i, t_token *ntoken)
 {
@@ -32,29 +32,29 @@ t_token	*lx_meta_token(char *str, int *i, int token_type)
 {
 	t_token	*ntoken;
 
-	ntoken = malloc(sizeof(t_token));
+	ntoken = ft_calloc(1, sizeof(t_token));
 	if (ntoken == NULL)
 		return (NULL); // ft_exit_clean
 	if (token_type >= PIPE && token_type <= OUT_REDIR)
 		i[1] = i[0];
 	if (token_type >= OR && token_type <= HERE_DOC)
 		i[1] = i[0] + 1;
-	ntoken->tstring = malloc(sizeof(t_string));
+	ntoken->tstring = ft_calloc(1, sizeof(t_string));
 	if (ntoken->tstring == NULL)
 		return (NULL); // ft_exit_clean
 	ntoken->tstring->str = lx_strdup(str, i);
 	if (ntoken->tstring->str == NULL)
 		return (NULL); // ft_exit_clean
-	ntoken->tstring->to_be_expanded = FALSE;
-	ntoken->tstring->between_quote = FALSE;
-	ntoken->tstring->next = NULL;
+	// ntoken->tstring->to_be_expanded = FALSE;
+	// ntoken->tstring->between_quote = FALSE;
+	// ntoken->tstring->next = NULL;
 	ntoken->full_string = lx_strictstrdup(str, i);
 	if (ntoken->full_string == NULL)
 		return (NULL); // ft_exit_clean
 	ntoken->type = token_type;
-	ntoken->sub_shell = NULL;
-	ntoken->assembled = NULL; //
-	ntoken->next = NULL;
+	// ntoken->sub_shell = NULL;
+	// ntoken->assembled = NULL; //
+	// ntoken->next = NULL;
 	return (ntoken);
 }
 
@@ -62,7 +62,7 @@ t_token	*lx_str_token(t_token **tokens, char *str, int *i, int token_type)
 {
 	t_token	*ntoken;
 
-	ntoken = malloc(sizeof(t_token));
+	ntoken = ft_calloc(1, sizeof(t_token));
 	if (ntoken == NULL)
 		return (NULL); // ft_exit_clean
 	if (token_type == PAR_STR)
@@ -81,7 +81,7 @@ t_token	*lx_str_token(t_token **tokens, char *str, int *i, int token_type)
 		return (NULL); // ft_exit_clean
 	ntoken->type = token_type;
 	define_subshell(token_type, str, i, ntoken);
-	ntoken->next = NULL;
+	// ntoken->next = NULL;
 	i[0] = i[1] + 1;
 	return (ntoken);
 }

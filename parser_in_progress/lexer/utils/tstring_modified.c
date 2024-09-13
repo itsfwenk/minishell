@@ -6,18 +6,18 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:58:42 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/11 17:43:23 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/13 13:01:13 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../minishell.h"
 
 void	sq_tstr(char *str, int *i, t_string **tstring)
 {
 	int			limits[2];
 	t_string	*new_tstring;
 
-	new_tstring = malloc(sizeof(t_string));
+	new_tstring = ft_calloc(1, sizeof(t_string));
 	if (new_tstring == NULL)
 		return ; // ft_exit_clean
 	limits[0] = i[0];
@@ -29,7 +29,7 @@ void	sq_tstr(char *str, int *i, t_string **tstring)
 	new_tstring->str = lx_strdup(str, limits);
 	new_tstring->to_be_expanded = FALSE;
 	new_tstring->between_quote = TRUE;
-	new_tstring->next = NULL;
+	// new_tstring->next = NULL;
 	i[0] = limits[1] + 1;
 	tstring_addback(tstring, new_tstring);
 }
@@ -63,7 +63,7 @@ void	other_tstr(char *str, int *i, int token_type, t_string **tstring)
 	int			limits[2];
 	t_string	*new_tstring;
 
-	new_tstring = malloc(sizeof(t_string));
+	new_tstring = ft_calloc(1, sizeof(t_string));
 	if (new_tstring == NULL)
 		return ; //ft_exit_clean
 	set_limits(str, limits, i);
@@ -74,7 +74,7 @@ void	other_tstr(char *str, int *i, int token_type, t_string **tstring)
 	new_tstring->between_quote = FALSE;
 	if (str[i[0]] == '"')
 		new_tstring->between_quote = TRUE;
-	new_tstring->next = NULL;
+	// new_tstring->next = NULL;
 	i[0] = limits[1] + 1;
 	tstring_addback(tstring, new_tstring);
 }

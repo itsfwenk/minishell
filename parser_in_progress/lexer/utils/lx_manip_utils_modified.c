@@ -6,11 +6,11 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:52:32 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/31 14:35:39 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/13 13:02:37 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../minishell.h"
 
 char	*lx_strictstrdup(char *str, int *i)
 {
