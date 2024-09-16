@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:10:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/16 18:12:10 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:46:18 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,8 @@ typedef enum e_types
 
 // utils
 int			is_word_delimiter(t_token **tokens, char *str, int i);
-int			lx_createadd(t_token **tokens, char *str, int *i);
 char		*lx_strictstrdup(char *str, int *i);
 char		*lx_strdup(char *str, int *i);
-t_token		*lx_meta_token(char *str, int *i, int token_type);
-t_token		*lx_str_token(t_token **tokens, char *str, int *i, int token_type);
 t_token		*lx_getlast(t_token *tokens);
 void		lx_addback(t_token **tokens, t_token *ntoken);
 void		lx_deltokens(t_token **tokens);
@@ -75,13 +72,9 @@ t_string	*create_tstring(char *str, int *i, int token_type);
 int			tstring_size(t_string **tstring);
 
 t_token		*create_tree(t_token *token);
-t_token		*ft_lexer(char *input);
 int			check_syntax(t_token *tokens);
 
-void		assemble_tstring(t_token *tokens);
-void		exp_pos_param(t_string *current);
 int			check_filename(t_token *tokens, char *filename, int i, int j);
-void		create_argv(t_token *tokens);
 
 t_token		*get_next_token(t_token *token);
 #endif

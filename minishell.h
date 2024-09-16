@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:51:25 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/16 18:12:18 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 19:00:05 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,16 @@ void		merge_arguments(t_skibidi *skibidishell,
 				t_token *current, t_token *cmd);
 t_token		*get_cmd(t_token *token);
 void		merge_operators(t_skibidi *skibidishell, t_token *current);
+int			ft_export(t_skibidi *skibidishell, char **args);
+void		assemble_tstring(t_skibidi *skibidishell);
+void		exp_pos_param(t_string *current, t_skibidi *skibidishell);
+void		create_argv(t_token *tokens, t_skibidi *skibidishell);
+t_token		*lx_meta_token(char *str, int *i, int token_type,
+				t_skibidi *skibidishell);
+t_token		*lx_str_token(t_skibidi *skibidishell, char *str, int *i,
+				int token_type);
+int			lx_createadd(t_token **tokens, t_skibidi *skibidishell,
+				char *input, int *i);
+t_token		*ft_lexer(char *input, t_skibidi *skibidishell);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:28:57 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/16 18:02:20 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:56:36 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,18 @@ int	is_word_delimiter(t_token **tokens, char *str, int i)
 		return (FALSE);
 }
 
-int	lx_createadd(t_token **tokens, char *input, int *i)
+int	lx_createadd(t_token **tokens, t_skibidi *skibidishell, char *input, int *i)
 {
 	t_token	*ntoken;
 	int		token_type;
 
 	token_type = which_token(tokens, &input[i[0]]);
 	if (token_type >= PIPE && token_type <= HERE_DOC)
-		ntoken = lx_meta_token(input, i, token_type);
+		ntoken = lx_meta_token(input, i, token_type, skibidishell);
 	else
-		ntoken = lx_str_token(tokens, input, i, token_type);
+		ntoken = lx_str_token(skibidishell, input, i, token_type);
 	if (ntoken == NULL)
-	{
-		lx_deltokens(tokens);
-		return (FALSE);
-	}
+		ft_free_clean(skibidishell);
 	lx_addback(tokens, ntoken);
 	return (TRUE);
 }

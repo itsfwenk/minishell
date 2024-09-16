@@ -6,13 +6,13 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:08:07 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/16 18:02:12 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:57:46 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*ft_lexer(char *input)
+t_token	*ft_lexer(char *input, t_skibidi *skibidishell)
 {
 	int		i[2];
 	t_token	*tokens;
@@ -31,7 +31,7 @@ t_token	*ft_lexer(char *input)
 		if (i[0] >= (int)ft_strlen(input))
 			break ;
 		i[1] = i[0] + 1;
-		if (lx_createadd(&tokens, input, i) == FALSE)
+		if (lx_createadd(&tokens, skibidishell, input, i) == FALSE)
 			return (NULL);
 		i[0] = i[1] + 1;
 	}

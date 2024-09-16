@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:52:32 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/16 18:02:43 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:18:16 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,15 @@ void	lx_deltokens(t_token **tokens)
 	while (current != NULL)
 	{
 		tstring_del(&current->tstring);
-		if (current->sub_shell != NULL)
-			lx_deltokens(&current->sub_shell);
+		tstring_del(&current->expanded_list);
+		if (current->full_string)
+			free(current->full_string);
+		if (current->assembled)
+			free(current->assembled);
+		if (current->argv)
+			free_all(current->argv);
+		lx_deltokens(&current->redir);
+		lx_deltokens(&current->sub_shell);
 		prev = current;
 		current = current->next;
 		free(prev);

@@ -6,75 +6,74 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:36:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/16 18:02:37 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:59:12 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	define_subshell(int token_type, char *str, int *i, t_token *ntoken)
+static void	define_subshell(char *str, int *i, t_token *ntoken,
+	t_skibidi *skibidishell)
 {
 	char	*trimmed_par;
 
-	if (token_type == PAR_STR)
-	{
-		trimmed_par = trim_parentheses(str, i);
-		if (trimmed_par == NULL)
-			return ;
-		ntoken->sub_shell = ft_lexer(trimmed_par);
-		free(trimmed_par);
-	}
-	else
-		ntoken->sub_shell = NULL;
+	trimmed_par = trim_parentheses(str, i);
+	if (trimmed_par == NULL)
+		ft_free_clean(skibidishell);
+	ntoken->sub_shell = ft_lexer(trimmed_par, skibidishell);
+	free(trimmed_par);
 }
 
-t_token	*lx_meta_token(char *str, int *i, int token_type)
+t_token	*lx_meta_token(char *str, int *i, int token_type,
+	t_skibidi *skibidishell)
 {
 	t_token	*ntoken;
 
 	ntoken = ft_calloc(1, sizeof(t_token));
 	if (ntoken == NULL)
-		return (NULL);
+		ft_free_clean(skibidishell);
 	if (token_type >= PIPE && token_type <= OUT_REDIR)
 		i[1] = i[0];
 	if (token_type >= OR && token_type <= HERE_DOC)
 		i[1] = i[0] + 1;
 	ntoken->tstring = ft_calloc(1, sizeof(t_string));
 	if (ntoken->tstring == NULL)
-		return (NULL);
+		ft_free_clean(skibidishell);
 	ntoken->tstring->str = lx_strdup(str, i);
 	if (ntoken->tstring->str == NULL)
-		return (NULL);
+		ft_free_clean(skibidishell);
 	ntoken->full_string = lx_strictstrdup(str, i);
 	if (ntoken->full_string == NULL)
-		return (NULL);
+		ft_free_clean(skibidishell);
 	ntoken->type = token_type;
 	return (ntoken);
 }
 
-t_token	*lx_str_token(t_token **tokens, char *str, int *i, int token_type)
+t_token	*lx_str_token(t_skibidi *skibidishell, char *str, int *i,
+	int token_type)
 {
 	t_token	*ntoken;
 
 	ntoken = ft_calloc(1, sizeof(t_token));
 	if (ntoken == NULL)
-		return (NULL);
+		ft_free_clean(skibidishell);
 	if (token_type == PAR_STR)
 		to_close_parenthesis(str, i);
 	else
 	{
-		while (is_word_delimiter(tokens, str, i[1]) == FALSE)
+		while (is_word_delimiter(&skibidishell->tokens, str, i[1]) == FALSE)
 			i[1] = i[1] + 1;
 		i[1] = i[1] - 1;
 	}
 	ntoken->tstring = create_tstring(str, i, token_type);
 	if (ntoken->tstring == NULL)
-		return (NULL);
+		ft_free_clean(skibidishell);
 	ntoken->full_string = lx_strictstrdup(str, i);
 	if (ntoken->full_string == NULL)
-		return (NULL);
+		ft_free_clean(skibidishell);
 	ntoken->type = token_type;
-	define_subshell(token_type, str, i, ntoken);
+	if (token_type == PAR_STR)
+		define_subshell(str, i, ntoken, skibidishell);
 	i[0] = i[1] + 1;
 	return (ntoken);
 }

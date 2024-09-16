@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:17:55 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/28 16:18:54 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:38:24 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int		ft_cd(char **dir_path);
 int		ft_echo(char **echo_arg);
 int		ft_env(t_env *env);
 int		ft_exit(char **ex_arg);
-int		ft_export(t_env **env, char **args);
 int		ft_pwd(void);
 int		ft_unset(t_env *env, char **keys);
 t_env	*reset_utils_env(t_env **env);

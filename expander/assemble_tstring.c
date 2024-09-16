@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:42:41 by fli               #+#    #+#             */
-/*   Updated: 2024/09/16 17:56:52 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:29:10 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,19 @@ static void	cat_tstring(t_token *current, char *assembled, int	*i)
 	assembled[*i] = '\0';
 }
 
-void	assemble_tstring(t_token *tokens)
+void	assemble_tstring(t_skibidi *skibidishell)
 {
 	int		i;
 	char	*assembled;
 	t_token	*current;
 
-	current = tokens;
+	current = skibidishell->tokens;
 	while (current != NULL)
 	{
 		i = 0;
 		assembled = malloc((get_full_len(current) + 1) * sizeof(char));
 		if (assembled == NULL)
-		{
-			return ;
-		}
+			ft_free_clean(skibidishell);
 		cat_tstring(current, assembled, &i);
 		current->assembled = assembled;
 		current = current->next;

@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/16 17:33:28 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:58:46 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ static void	handle_line(char *line, t_skibidi *skibidishell)
 {
 	t_token	*tree;
 
-	skibidishell->tokens = ft_lexer(line);
+	skibidishell->tokens = ft_lexer(line, skibidishell);
 	check_syntax(skibidishell->tokens);
-	assemble_tstring(skibidishell->tokens);
+	assemble_tstring(skibidishell);
 	if (!only_redirs(skibidishell->tokens))
 	{
 		merge_tokens(skibidishell, &(skibidishell->tokens), NULL);
@@ -100,7 +100,7 @@ static void	handle_line(char *line, t_skibidi *skibidishell)
 }
 
 static int	check_line(char *line)
-{
+{0
 	int	well_formated;
 
 	well_formated = is_well_formated(line);
@@ -130,7 +130,7 @@ int	main(int argc, char **argv, char **envp)
 	skibidishell = ft_calloc(1, sizeof(t_skibidi));
 	if (!skibidishell)
 		return (2);
-	if (!ft_export(&skibidishell->env, envp) && reset_utils_env(&skibidishell->env))
+	if (!ft_export(skibidishell, envp) && reset_utils_env(&skibidishell->env))
 	{
 		line = free_and_trim(readline(ft_get_prompt(g_signal)));
 		while (line)
