@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/16 18:58:46 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 19:02:56 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static void	handle_line(char *line, t_skibidi *skibidishell)
 }
 
 static int	check_line(char *line)
-{0
+{
 	int	well_formated;
 
 	well_formated = is_well_formated(line);
