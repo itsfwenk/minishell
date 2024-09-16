@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 17:09:48 by fli               #+#    #+#             */
-/*   Updated: 2024/09/13 15:37:06 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:05:29 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	ft_expander(t_skibidi *skibidishell, t_token *token)
 		current_tstr = current_tstr->next;
 	}
 	ft_expander(skibidishell, token->arguments);
-	ft_expander(skibidishell, token->infile);
-	ft_expander(skibidishell, token->outfile);
+	ft_expander(skibidishell, token->redir);
 	ft_expander(skibidishell, token->sub_shell);
 }

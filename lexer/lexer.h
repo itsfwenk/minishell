@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:10:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/13 19:25:29 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:16:12 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ typedef struct s_token
 	int				type;
 	struct s_token	*arguments; //		arguments as tokens
 	char			**argv; //			all arguments as an array	after expand and wildcards
-	struct s_token	*infile; //
-	struct s_token	*outfile; //
+	struct s_token	*redir; //
 	struct s_token	*sub_shell;
 	struct s_token	*next;
+	struct s_token	*left;
+	struct s_token	*right;
 }	t_token;
 
 typedef enum e_types
@@ -50,12 +51,6 @@ typedef enum e_types
 	FILENAME,
 	HD_LIMITER,
 }	t_types;
-
-typedef struct	s_node {
-	t_token	*value;
-	struct s_node	*left;
-	struct s_node	*right;
-}	t_node;
 
 // utils
 int			is_word_delimiter(t_token **tokens, char *str, int i);
@@ -79,7 +74,7 @@ void		other_tstr(char *str, int *i, int token_type, t_string **tstring);
 t_string	*create_tstring(char *str, int *i, int token_type);
 int			tstring_size(t_string **tstring);
 
-t_node		*create_tree(t_token *token);
+t_token		*create_tree(t_token *token);
 t_token		*ft_lexer(char *input);
 int			check_syntax(t_token *tokens);
 

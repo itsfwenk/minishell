@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/13 19:26:53 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:33:28 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,30 +52,50 @@ static void	print_token(int token_type)
 		dprintf(2, "PAR_STR");
 }
 
-static void print_tree(t_node *tree)
+static void print_tree(t_token *tree)
 {
 	if (!tree)
 		return ;
 	print_tree(tree->left);
-	if (tree->value) {
-		print_token(tree->value->type);
-		dprintf(2, " %s\n", tree->value->full_string);
+	print_token(tree->type);
+	dprintf(2, " %s\n", tree->full_string);
+	if (tree->arguments)
+	{
+		dprintf(2, "ARGS: ");
+		while (tree->arguments)
+		{
+			dprintf(2, "%s, ", tree->arguments->full_string);
+			tree->arguments = tree->arguments->next;
+		}
+		dprintf(2, "\n");
 	}
-	else
-		dprintf(2, "NULL\n");
 	print_tree(tree->right);
+}
+
+static int 	only_redirs(t_token *token)
+{
+	while (token)
+	{
+		if (token->type == STR || token->type == PAR_STR)
+			return (FALSE);
+		token = token->next;
+	}
+	return (TRUE);
 }
 
 static void	handle_line(char *line, t_skibidi *skibidishell)
 {
-	t_node	*tree;
+	t_token	*tree;
 
 	skibidishell->tokens = ft_lexer(line);
 	check_syntax(skibidishell->tokens);
 	assemble_tstring(skibidishell->tokens);
-	merge_tokens(skibidishell, &(skibidishell->tokens), NULL);
-	tree = create_tree(skibidishell->tokens);
-	print_tree(tree);
+	if (!only_redirs(skibidishell->tokens))
+	{
+		merge_tokens(skibidishell, &(skibidishell->tokens), NULL);
+		tree = create_tree(skibidishell->tokens);
+		print_tree(tree);
+	}
 	//exec
 }
 
