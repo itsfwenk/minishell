@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 11:22:26 by fli               #+#    #+#             */
-/*   Updated: 2024/09/13 15:32:56 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:00:44 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 static int	is_var_limiter(t_string *current, int *key_limits)
 {
 	if ((current->str[key_limits[0]] == '#'
-		|| current->str[key_limits[0]] == '!'
-		|| current->str[key_limits[0]] == '$'
-		|| current->str[key_limits[0]] == '-'))
+			|| current->str[key_limits[0]] == '!'
+			|| current->str[key_limits[0]] == '$'
+			|| current->str[key_limits[0]] == '-'))
 	{
 		key_limits[1] = key_limits[1] + 1;
 		return (TRUE);
 	}
-
 	if ((key_limits[1] == key_limits[0]
 			&& !ft_isalpha(current->str[key_limits[1]])
 			&& current->str[key_limits[1]] != '_')
@@ -52,7 +51,7 @@ t_env	*key_exists(t_string *current, t_skibidi *skibidishell, int *limits)
 				tstring_i++;
 				key_i++;
 				if (current->str[tstring_i] != env_var->key[key_i])
-					break;
+					break ;
 			}
 			if (tstring_i == limits[1] + 1 && env_var->key[key_i] == '\0')
 				return (env_var);
@@ -74,7 +73,7 @@ void	exp_no_brackets(t_string *current,
 	while (current->str[key_limits[1]] != '\0')
 	{
 		if (is_var_limiter(current, key_limits) == TRUE)
-			break;
+			break ;
 		key_limits[1]++;
 	}
 	key_limits[1]--;

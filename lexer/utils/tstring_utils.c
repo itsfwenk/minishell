@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:59:35 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/13 14:49:39 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:03:44 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	tstring_del(t_string **tstring)
 
 int	tstring_size(t_string **tstring)
 {
-	int	i;
+	int			i;
 	t_string	*current;
 
 	i = 0;

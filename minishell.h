@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:51:25 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/13 17:26:53 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:12:18 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,19 @@ extern int	g_signal;
 
 int			exp_check_keys(t_string *current,
 				t_skibidi *skibidishell, int *i, int *delta_char);
-t_env		*key_exists(t_string *current, t_skibidi *skibidishell, int *limits);
+t_env		*key_exists(t_string *current, t_skibidi *skibidishell,
+				int *limits);
 void		exp_no_brackets(t_string *current,
 				t_skibidi *skibidishell, int *i, int *delta_char);
 int			exp_env_var(t_string *current, t_skibidi *skibidishell);
 void		ft_expander(t_skibidi *skibidishell, t_token *token);
-void		merge_tokens(t_skibidi *skibidishell, t_token **token, t_token *cmd);
+void		merge_tokens(t_skibidi *skibidishell, t_token **token,
+				t_token *cmd);
+void		merge_redirection(t_skibidi *skibidishell,
+				t_token *current, t_token *cmd);
+void		merge_arguments(t_skibidi *skibidishell,
+				t_token *current, t_token *cmd);
+t_token		*get_cmd(t_token *token);
+void		merge_operators(t_skibidi *skibidishell, t_token *current);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 11:18:39 by fli               #+#    #+#             */
-/*   Updated: 2024/09/13 15:33:38 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:01:47 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ static int	check_key_in_brackets(t_string *current, int *limits)
 {
 	int	i;
 
-	i = limits[0] + 1; // i = char after  {
+	i = limits[0] + 1;
 	while (i <= limits[1])
 	{
 		if (limits[1] == limits[0] + 2 && (current->str[i] == '#'
-			|| current->str[i] == '!'
-			|| current->str[i] == '$'
-			|| current->str[i] == '-'))
+				|| current->str[i] == '!'
+				|| current->str[i] == '$'
+				|| current->str[i] == '-'))
 			break ;
 		if ((i == limits[0] + 1 && !ft_isalpha(current->str[i])
-			&& current->str[i] != '_')
+				&& current->str[i] != '_')
 			|| (i > limits[0] + 1 && !ft_isalnum(current->str[i])
 				&& current->str[i] != '_'))
 		{
@@ -52,7 +52,7 @@ static int	exp_in_brackets(t_string *current,
 	while (current->str[key_limits[1]] != '\0')
 	{
 		if (current->str[key_limits[1]] == '}')
-			break;
+			break ;
 		key_limits[1]++;
 	}
 	if (check_key_in_brackets(current, key_limits) == FALSE)

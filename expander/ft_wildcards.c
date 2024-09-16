@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 14:27:45 by fli               #+#    #+#             */
-/*   Updated: 2024/09/13 15:40:50 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:58:15 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static void	add_to_expanded_list(t_token *tokens, char *filename)
 
 	new_tstring = malloc(sizeof(t_string));
 	if (new_tstring == NULL)
-		return ; //ft_exit_clean
+		return ;
 	new_tstring->str = ft_strdup(filename);
 	if (new_tstring->str == NULL)
-		return ; //ft_exit_clean
+		return ;
 	new_tstring->to_be_expanded = -1;
 	new_tstring->between_quote = -1;
 	new_tstring->next = NULL;
@@ -64,12 +64,12 @@ void	create_argv(t_token *tokens)
 {
 	int			i;
 	char		**array;
-	t_token 	*arguments;
+	t_token		*arguments;
 	t_string	*expanded_list;
 
 	array = ft_calloc(get_arg_nb(tokens) + 1, sizeof(char *));
 	if (array == NULL)
-		return ; //ft_exit_clean
+		return ;
 	i = 0;
 	arguments = tokens->arguments;
 	while (arguments != NULL)
@@ -79,7 +79,7 @@ void	create_argv(t_token *tokens)
 		{
 			array[i] = ft_strdup(expanded_list->str);
 			if (array[i] == NULL)
-				return ; //ft_exit_clean
+				return ;
 			expanded_list = expanded_list->next;
 			i++;
 		}

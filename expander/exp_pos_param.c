@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:13:33 by fli               #+#    #+#             */
-/*   Updated: 2024/09/13 15:07:21 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:58:47 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	exp_dup_pos_param(t_string *current, char *expanded_str)
 			&& ft_isdigit(current->str[i + 1]) != FALSE)
 		{
 			i = i + 2;
-			continue;
+			continue ;
 		}
 		expanded_str[j] = current->str[i];
 		j++;
@@ -52,7 +52,7 @@ void	exp_pos_param(t_string *current)
 		{
 			nb_pos_param++;
 			i = i + 2;
-			continue;
+			continue ;
 		}
 		i++;
 	}
@@ -61,7 +61,7 @@ void	exp_pos_param(t_string *current)
 	expanded_str = malloc(1 + (ft_strlen(current->str) - (2 * nb_pos_param)));
 	if (expanded_str == NULL)
 	{
-		return ; // ft_exit
+		return ;
 	}
 	exp_dup_pos_param(current, expanded_str);
 }

@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:28:57 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/28 14:35:01 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:02:20 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	lx_createadd(t_token **tokens, char *input, int *i)
 	if (ntoken == NULL)
 	{
 		lx_deltokens(tokens);
-		return (FALSE); // exit ?
+		return (FALSE);
 	}
 	lx_addback(tokens, ntoken);
 	return (TRUE);

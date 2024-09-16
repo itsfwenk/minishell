@@ -6,13 +6,13 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:05:41 by fli               #+#    #+#             */
-/*   Updated: 2024/09/13 15:52:07 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:06:51 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_token *check_syntax2(t_token *current)
+static t_token	*check_syntax2(t_token *current)
 {
 	if (current->type == HERE_DOC)
 	{
@@ -24,7 +24,7 @@ static t_token *check_syntax2(t_token *current)
 	if (current->type == FILENAME || current->type == HD_LIMITER)
 	{
 		if (current->next->type == PAR_STR)
-			return(current->next);
+			return (current->next);
 	}
 	if (current->type == STR)
 	{
@@ -39,14 +39,14 @@ static t_token *check_syntax2(t_token *current)
 	return (NULL);
 }
 
-static t_token *check_syntax1(t_token *current)
+static t_token	*check_syntax1(t_token *current)
 {
 	if (current->type == PIPE || current->type == OR || current->type == AND)
 	{
 		if (current->next == NULL
 			|| (current->next->type == PIPE
-			|| current->next->type == OR
-			|| current->next->type == AND))
+				|| current->next->type == OR
+				|| current->next->type == AND))
 			return (current->next);
 	}
 	if (current->type == IN_REDIR || current->type == OUT_REDIR
@@ -55,10 +55,10 @@ static t_token *check_syntax1(t_token *current)
 		if (current->next == NULL || current->next->type != FILENAME)
 			return (current->next);
 	}
-	return(check_syntax2(current));
+	return (check_syntax2(current));
 }
 
-static int	check_first(t_token *first_token) //
+static int	check_first(t_token *first_token)
 {
 	if (first_token->type == PIPE
 		|| first_token->type == OR
@@ -66,28 +66,24 @@ static int	check_first(t_token *first_token) //
 	{
 		ft_print_error(NULL, first_token->full_string, \
 				"syntax error near unexpected token", "`'");
-		// ft_clear
 		return (2);
 	}
 	return (TRUE);
 }
 
-static int print_syntax_error(t_token *error_token)
+static int	print_syntax_error(t_token *error_token)
 {
 	if (error_token->type != PAR_STR)
 	{
 		ft_print_error(NULL, error_token->full_string, \
 		"syntax error near unexpected token", "`'");
-		// ft_clear
-		return (2);
 	}
 	else
 	{
 		ft_print_error(NULL, "(", \
 		"syntax error near unexpected token", "`'");
-		// ft_clear
-		return (2);
 	}
+	return (2);
 }
 
 int	check_syntax(t_token *tokens)

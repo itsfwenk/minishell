@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:56:29 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/08/28 14:56:39 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:02:51 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*trim_parentheses(char *str, int *i)
 
 	trimmed = malloc((i[1] - i[0]) * sizeof(char));
 	if (trimmed == NULL)
-		return (NULL); // ft_exit_clean
+		return (NULL);
 	ft_strlcpy(trimmed, &str[i[0] + 1], (i[1] - i[0]));
 	printf("trim parentheses : %s\n", trimmed);
 	return (trimmed);

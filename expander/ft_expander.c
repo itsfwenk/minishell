@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 17:09:48 by fli               #+#    #+#             */
-/*   Updated: 2024/09/16 16:05:29 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:58:23 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_expander(t_skibidi *skibidishell, t_token *token)
 		{
 			exp_pos_param(current_tstr);
 			if (exp_env_var(current_tstr, skibidishell) == FALSE)
-				return ; // ft_clean token etc..
+				return ;
 		}
 		current_tstr = current_tstr->next;
 	}

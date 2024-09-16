@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:10:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/16 17:16:12 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:12:10 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ typedef struct s_string
 typedef struct s_token
 {
 	t_string		*tstring;
-	t_string		*expanded_list; //	expanded + wildcarded	as a linked list
-	char			*full_string; //	initial input
-	char			*assembled; //		t_strings assembled			after expand (needed for wildcard)
+	t_string		*expanded_list;
+	char			*full_string;
+	char			*assembled;
 	int				type;
-	struct s_token	*arguments; //		arguments as tokens
-	char			**argv; //			all arguments as an array	after expand and wildcards
-	struct s_token	*redir; //
+	struct s_token	*arguments;
+	char			**argv;
+	struct s_token	*redir;
 	struct s_token	*sub_shell;
 	struct s_token	*next;
 	struct s_token	*left;
@@ -83,4 +83,5 @@ void		exp_pos_param(t_string *current);
 int			check_filename(t_token *tokens, char *filename, int i, int j);
 void		create_argv(t_token *tokens);
 
+t_token		*get_next_token(t_token *token);
 #endif

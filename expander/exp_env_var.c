@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:31:32 by fli               #+#    #+#             */
-/*   Updated: 2024/09/13 15:34:33 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:59:25 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@ static void	exp_find_key_limits(t_string *current, int i, int *key_limits)
 	if (current->str[i + 1] == '{')
 		key_limits[0] = i + 2;
 	key_limits[1] = key_limits[0];
-
 	while (current->str[key_limits[1]] != '\0')
 	{
 		if (current->str[i + 1] == '{'
 			&& current->str[key_limits[1]] == '}')
-			break;
+			break ;
 		if (current->str[i + 1] != '{'
 			&& ((key_limits[1] == key_limits[0]
 					&& !ft_isalpha(current->str[key_limits[1]])
@@ -31,7 +30,7 @@ static void	exp_find_key_limits(t_string *current, int i, int *key_limits)
 				|| (key_limits[1] > key_limits[0]
 					&& !ft_isalnum(current->str[key_limits[1]])
 					&& current->str[key_limits[1]] != '_')))
-			break;
+			break ;
 		key_limits[1]++;
 	}
 	key_limits[1]--;
@@ -72,7 +71,7 @@ static void	exp_dup_env_var(t_string *current,
 		if (current->str[i[0]] == '$' && current->str[i[0] + 1] != '\0')
 		{
 			exp_cp_env_var(current, skibidishell, expanded_str, i);
-			continue;
+			continue ;
 		}
 		expanded_str[i[1]] = current->str[i[0]];
 		i[0]++;
@@ -107,7 +106,7 @@ int	exp_env_var(t_string *current, t_skibidi *skibidishell)
 		return (TRUE);
 	expanded_str = malloc(1 + (ft_strlen(current->str) + delta_char));
 	if (expanded_str == NULL)
-		return (0); // ft_exit
+		return (0);
 	exp_dup_env_var(current, skibidishell, expanded_str);
 	return (TRUE);
 }

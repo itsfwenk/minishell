@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:42:41 by fli               #+#    #+#             */
-/*   Updated: 2024/09/13 16:49:46 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:56:52 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	assemble_tstring(t_token *tokens)
 		assembled = malloc((get_full_len(current) + 1) * sizeof(char));
 		if (assembled == NULL)
 		{
-			return ; //ft_clean exit
+			return ;
 		}
 		cat_tstring(current, assembled, &i);
 		current->assembled = assembled;

@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:52:32 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/13 14:47:52 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:02:43 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*lx_strictstrdup(char *str, int *i)
 	truelen = i[1] - i[0] + 1;
 	dup = malloc((truelen + 1) * sizeof(char));
 	if (dup == NULL)
-		return (NULL); //ft_exit
+		return (NULL);
 	start = i[0];
 	end = start + truelen;
 	j = 0;
@@ -50,7 +50,7 @@ char	*lx_strdup(char *str, int *i)
 		truelen = i[1] - i[0] - 1;
 	dup = malloc((truelen + 1) * sizeof(char));
 	if (dup == NULL)
-		return (NULL); //ft_exit
+		return (NULL);
 	start = i[0];
 	if (str[i[0]] == '\'' || str[i[0]] == '"')
 		start = i[0] + 1;

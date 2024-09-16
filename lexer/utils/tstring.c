@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:58:42 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/16 17:09:58 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:03:10 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	sq_tstr(char *str, int *i, t_string **tstring)
 
 	new_tstring = ft_calloc(1, sizeof(t_string));
 	if (new_tstring == NULL)
-		return ; // ft_exit_clean
+		return ;
 	limits[0] = i[0];
 	limits[1] = limits[0] + 1;
 	while (str[limits[1]] != '\'')
@@ -29,7 +29,6 @@ void	sq_tstr(char *str, int *i, t_string **tstring)
 	new_tstring->str = lx_strdup(str, limits);
 	new_tstring->to_be_expanded = FALSE;
 	new_tstring->between_quote = TRUE;
-	// new_tstring->next = NULL;
 	i[0] = limits[1] + 1;
 	tstring_addback(tstring, new_tstring);
 }
@@ -51,7 +50,7 @@ static void	set_limits(char *str, int *limits, int *i)
 	{
 		if (str[limits[1]] == '\'' || str[limits[1]] == '"')
 		{
-			limits[1]--;//modif
+			limits[1]--;
 			break ;
 		}
 		limits[1]++;
@@ -65,16 +64,15 @@ void	other_tstr(char *str, int *i, int token_type, t_string **tstring)
 
 	new_tstring = ft_calloc(1, sizeof(t_string));
 	if (new_tstring == NULL)
-		return ; //ft_exit_clean
+		return ;
 	set_limits(str, limits, i);
-	new_tstring->str = lx_strdup(str, limits); // no need to secure cause exit inside function
+	new_tstring->str = lx_strdup(str, limits);
 	new_tstring->to_be_expanded = TRUE;
 	if (token_type == HD_LIMITER)
 		new_tstring->to_be_expanded = FALSE;
 	new_tstring->between_quote = FALSE;
 	if (str[i[0]] == '"')
 		new_tstring->between_quote = TRUE;
-	// new_tstring->next = NULL;
 	i[0] = limits[1] + 1;
 	tstring_addback(tstring, new_tstring);
 }
@@ -86,7 +84,7 @@ t_string	*create_tstring(char *str, int *i, int token_type)
 
 	start = i[0];
 	tstring = NULL;
-	while (i[0] <= i[1]) // to change on main
+	while (i[0] <= i[1])
 	{
 		if (str[i[0]] == '\'')
 			sq_tstr(str, i, &tstring);
