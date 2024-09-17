@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/17 16:00:10 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/17 17:19:01 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,51 +26,51 @@ static char	*free_and_trim(char *str)
 	return (str);
 }
 
-static void	print_token(int token_type)
-{
-	if (token_type == PIPE)
-		dprintf(2, "PIPE");
-	if (token_type == OR)
-		dprintf(2, "OR");
-	if (token_type == APD_OUT_REDIR)
-		dprintf(2, "APD_OUT_REDIR");
-	if (token_type == OUT_REDIR)
-		dprintf(2, "OUT_REDIR");
-	if (token_type == HERE_DOC)
-		dprintf(2, "HERE_DOC");
-	if (token_type == IN_REDIR)
-		dprintf(2, "IN_REDIR");
-	if (token_type == AND)
-		dprintf(2, "AND");
-	if (token_type == STR)
-		dprintf(2, "STR");
-	if (token_type == HD_LIMITER)
-		dprintf(2, "HD_LIMITER");
-	if (token_type == FILENAME)
-		dprintf(2, "FILENAME");
-	if (token_type == PAR_STR)
-		dprintf(2, "PAR_STR");
-}
+// static void	print_token(int token_type)
+// {
+// 	if (token_type == PIPE)
+// 		dprintf(2, "PIPE");
+// 	if (token_type == OR)
+// 		dprintf(2, "OR");
+// 	if (token_type == APD_OUT_REDIR)
+// 		dprintf(2, "APD_OUT_REDIR");
+// 	if (token_type == OUT_REDIR)
+// 		dprintf(2, "OUT_REDIR");
+// 	if (token_type == HERE_DOC)
+// 		dprintf(2, "HERE_DOC");
+// 	if (token_type == IN_REDIR)
+// 		dprintf(2, "IN_REDIR");
+// 	if (token_type == AND)
+// 		dprintf(2, "AND");
+// 	if (token_type == STR)
+// 		dprintf(2, "STR");
+// 	if (token_type == HD_LIMITER)
+// 		dprintf(2, "HD_LIMITER");
+// 	if (token_type == FILENAME)
+// 		dprintf(2, "FILENAME");
+// 	if (token_type == PAR_STR)
+// 		dprintf(2, "PAR_STR");
+// }
 
-static void print_tree(t_token *tree)
-{
-	if (!tree)
-		return ;
-	print_tree(tree->left);
-	print_token(tree->type);
-	dprintf(2, " %s\n", tree->full_string);
-	if (tree->arguments)
-	{
-		dprintf(2, "ARGS: ");
-		while (tree->arguments)
-		{
-			dprintf(2, "%s, ", tree->arguments->full_string);
-			tree->arguments = tree->arguments->next;
-		}
-		dprintf(2, "\n");
-	}
-	print_tree(tree->right);
-}
+// static void print_tree(t_token *tree)
+// {
+// 	if (!tree)
+// 		return ;
+// 	print_tree(tree->left);
+// 	print_token(tree->type);
+// 	dprintf(2, " %s\n", tree->full_string);
+// 	if (tree->arguments)
+// 	{
+// 		dprintf(2, "ARGS: ");
+// 		while (tree->arguments)
+// 		{
+// 			dprintf(2, "%s, ", tree->arguments->full_string);
+// 			tree->arguments = tree->arguments->next;
+// 		}
+// 		dprintf(2, "\n");
+// 	}
+// 	print_tree(tree->right);
+// }
 
 static int 	only_redirs(t_token *token)
 {
@@ -83,18 +83,45 @@ static int 	only_redirs(t_token *token)
 	return (TRUE);
 }
 
+// void	exec_tree(t_token *tree)
+// {
+// 	if (!tree || !tree->left || !tree->right)
+// 		return ;
+// 	exec_tree(tree->left);
+// 	if (tree->left->type == PAR_STR)
+// 		exec_tree(create_tree(tree->left));
+// 	else
+// 		ft_dprintf(2, "%s ", tree->left->full_string);
+// 	ft_dprintf(2, "%s ", tree->full_string);
+// 	if (tree->right->type == PAR_STR)
+// 		exec_tree(create_tree(tree->right));
+// 	else
+// 		ft_dprintf(2, "%s ", tree->right->full_string);
+// 	ft_dprintf(2, "\n");
+// 	exec_tree(tree->right);
+// }
+
+int	exec_tree(t_token *tree)
+{
+	int	exit_code;
+
+	if (tree == NULL)
+		return ;
+	exit_code = exec_tree(tree->left);
+	if ((tree->type == AND && exit_code == TRUE) || tree->type == PIPE)
+		exit_code = exec_tree(tree->right);
+}
+
 static void	handle_line(char *line, t_skibidi *skibidishell)
 {
-	t_token	*tree;
-
 	skibidishell->tokens = ft_lexer(line, skibidishell);
 	check_syntax(skibidishell->tokens);
 	assemble_tstring(skibidishell);
 	if (!only_redirs(skibidishell->tokens))
 	{
 		merge_tokens(skibidishell, &(skibidishell->tokens), NULL);
-		tree = create_tree(skibidishell->tokens);
-		print_tree(tree);
+		skibidishell->tree = create_tree(skibidishell->tokens);
+		exec_tree(skibidishell->tree);
 	}
 	//exec
 }

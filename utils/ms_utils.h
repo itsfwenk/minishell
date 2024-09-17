@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 15:39:54 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/03 13:26:21 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/17 16:47:23 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@
 typedef struct s_kibidi
 {
 	t_env	*env;
-	t_token	*tokens;	
+	t_token	*tokens;
+	t_token	*tree;
 }	t_skibidi;
 
 void	ft_print_color(char *msg, char *color);
