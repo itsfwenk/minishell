@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/16 19:02:56 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/17 14:33:15 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,14 +108,14 @@ static int	check_line(char *line)
 	{
 		ft_print_error(NULL, ")", \
 				"syntax error near unexpected token", "`'");
-		return (2);	
+		return (2);
 	}
 	else if (finished_by_meta(line) || !is_brace_well_formated(line)
 		|| has_semicolon(line) || !well_formated)
 	{
 		ft_print_error("check_line", NULL, \
 				"unexpected line", NULL);
-		return (2);	
+		return (2);
 	}
 	return (0);
 }
@@ -132,7 +132,7 @@ int	main(int argc, char **argv, char **envp)
 		return (2);
 	if (!ft_export(skibidishell, envp) && reset_utils_env(&skibidishell->env))
 	{
-		line = free_and_trim(readline(ft_get_prompt(g_signal)));
+		line = ft_strdup("< infile1 cmd1 << heredoc1 >outfile1 >>apdfile1");
 		while (line)
 		{
 			if (line[0])

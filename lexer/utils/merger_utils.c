@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merger_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:51:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/16 18:03:33 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/17 15:01:15 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	merge_redirection(t_skibidi *skibidishell,
 	{
 		lx_addback(&(cmd->redir), current);
 		new_start = current->next->next;
+		current->next->next = NULL;
 		if (new_start == cmd)
 		{
 			if (new_start->next->type == IN_REDIR
@@ -53,7 +54,6 @@ void	merge_redirection(t_skibidi *skibidishell,
 		}
 		if (new_start == NULL)
 			cmd->next = NULL;
-		current->next->next = NULL;
 		merge_tokens(skibidishell, &new_start, cmd);
 	}
 }
