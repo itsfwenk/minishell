@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:51:25 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/16 19:00:05 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/17 17:31:21 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
+# include <sys/wait.h>
 
 # include "libft/libft.h"
 
@@ -32,6 +33,16 @@
 # define FALSE 0
 # define TRUE 1
 # define METAS "|&<>"
+
+typedef struct s_pids
+{
+	int				cmd_i;
+	int				status;
+	int				pipefd[2];
+	int				here_doc;
+	pid_t			p_id;
+	struct s_pids	*next;
+}	t_pids;
 
 extern int	g_signal;
 

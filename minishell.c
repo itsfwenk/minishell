@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/17 17:19:01 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/17 17:31:44 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,10 @@ int	exec_tree(t_token *tree)
 	exit_code = exec_tree(tree->left);
 	if ((tree->type == AND && exit_code == TRUE) || tree->type == PIPE)
 		exit_code = exec_tree(tree->right);
+	if (tree->type == PAR_STR)
+	{
+
+	}
 }
 
 static void	handle_line(char *line, t_skibidi *skibidishell)
