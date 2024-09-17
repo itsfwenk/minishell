@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/17 17:31:44 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/17 18:07:57 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,21 +100,6 @@ static int 	only_redirs(t_token *token)
 // 	ft_dprintf(2, "\n");
 // 	exec_tree(tree->right);
 // }
-
-int	exec_tree(t_token *tree)
-{
-	int	exit_code;
-
-	if (tree == NULL)
-		return ;
-	exit_code = exec_tree(tree->left);
-	if ((tree->type == AND && exit_code == TRUE) || tree->type == PIPE)
-		exit_code = exec_tree(tree->right);
-	if (tree->type == PAR_STR)
-	{
-
-	}
-}
 
 static void	handle_line(char *line, t_skibidi *skibidishell)
 {

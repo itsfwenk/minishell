@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:51:25 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/17 17:31:21 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/17 18:44:09 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,12 @@
 # define TRUE 1
 # define METAS "|&<>"
 
+# define LEFT 0
+# define RIGHT 1
+
 typedef struct s_pids
 {
-	int				cmd_i;
+	t_token			*token;
 	int				status;
 	int				pipefd[2];
 	int				here_doc;
