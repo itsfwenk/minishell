@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/17 14:33:15 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/17 16:00:10 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int	main(int argc, char **argv, char **envp)
 		return (2);
 	if (!ft_export(skibidishell, envp) && reset_utils_env(&skibidishell->env))
 	{
-		line = ft_strdup("< infile1 cmd1 << heredoc1 >outfile1 >>apdfile1");
+		line = ft_strdup("apd cmd1 arg1 | cmd2 arg2 << heredoc2");
 		while (line)
 		{
 			if (line[0])

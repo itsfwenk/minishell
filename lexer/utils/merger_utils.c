@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:51:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/17 15:01:15 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/17 15:58:25 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	merge_redirection(t_skibidi *skibidishell,
 				|| new_start->next->type == APD_OUT_REDIR)
 			{
 				next_token = get_next_token(new_start->next);
-				merge_redirection(skibidishell, new_start->next, cmd);
 				cmd->next = next_token;
+				merge_redirection(skibidishell, new_start->next, cmd);
 			}
 		}
 		if (new_start == NULL)
@@ -68,7 +68,7 @@ void	merge_arguments(t_skibidi *skibidishell,
 		lx_addback(&(cmd->arguments), current);
 		new_start = current->next;
 		current->next = NULL;
-		cmd->next = NULL;
+		cmd->next = new_start;
 		if (new_start)
 			cmd->next = new_start;
 		merge_tokens(skibidishell, &new_start, cmd);
