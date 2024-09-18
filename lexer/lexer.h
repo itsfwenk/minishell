@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:10:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/17 17:36:38 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/18 14:14:15 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_token
 	struct s_token	*left;
 	struct s_token	*right;
 	t_pids			*pid;
+	int				fd;
 }	t_token;
 
 typedef enum e_types

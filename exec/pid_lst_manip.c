@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:41:57 by fli               #+#    #+#             */
-/*   Updated: 2024/09/17 19:12:06 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/18 18:06:17 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_pids	*ft_lstnew_pipex(t_token *token, t_skibidi *skibidishell)
 	n = ft_calloc(1, sizeof(t_pids));
 	if (n == NULL)
 		ft_free_clean(skibidishell);
-	n->token = token;
+	// n->token = token;
 	n->p_id = -1;
 	return (n);
 }

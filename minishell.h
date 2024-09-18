@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:51:25 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/17 18:44:09 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/18 17:17:22 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <sys/wait.h>
+# include <unistd.h>
+# include <fcntl.h>
 
 # include "libft/libft.h"
 
@@ -39,7 +41,7 @@
 
 typedef struct s_pids
 {
-	t_token			*token;
+	// t_token			*token;
 	int				status;
 	int				pipefd[2];
 	int				here_doc;
@@ -77,4 +79,7 @@ int			lx_createadd(t_token **tokens, t_skibidi *skibidishell,
 				char *input, int *i);
 t_token		*ft_lexer(char *input, t_skibidi *skibidishell);
 
+int			get_here_doc_content(t_token *tree, t_skibidi *skibidishell);
+
+char		**build_envp(t_env *env);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_wildcards.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 14:27:45 by fli               #+#    #+#             */
-/*   Updated: 2024/09/16 18:41:06 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:52:17 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,30 +61,45 @@ static int	get_arg_nb(t_token *tokens)
 	return (i);
 }
 
-void	create_argv(t_token *tokens, t_skibidi *skibidishell)
-{
-	int			i;
-	char		**array;
-	t_token		*arguments;
-	t_string	*expanded_list;
+// static void	add_args(char **array, t_token *arguments, t_skibidi *skibidishell)
+// {
+// 	int			i;
+// 	t_string	*expanded_list;
 
-	array = ft_calloc(get_arg_nb(tokens) + 1, sizeof(char *));
-	if (array == NULL)
-		ft_free_clean(skibidishell);
-	i = 0;
-	arguments = tokens->arguments;
-	while (arguments != NULL)
-	{
-		expanded_list = arguments->expanded_list;
-		while (expanded_list != NULL)
-		{
-			array[i] = ft_strdup(expanded_list->str);
-			if (array[i] == NULL)
-				ft_free_clean(skibidishell);
-			expanded_list = expanded_list->next;
-			i++;
-		}
-		arguments = arguments->next;
-	}
-	tokens->argv = array;
-}
+// 	i = 1;
+// 	while (arguments != NULL)
+// 	{
+// 		expanded_list = arguments->expanded_list;
+// 		while (expanded_list != NULL)
+// 		{
+// 			array[i] = ft_strdup(expanded_list->str);
+// 			if (array[i] == NULL)
+// 			{
+// 				free_all(array);
+// 				ft_free_clean(skibidishell);
+// 			}
+// 			expanded_list = expanded_list->next;
+// 			i++;
+// 		}
+// 		arguments = arguments->next;
+// 	}
+// }
+
+// void	create_argv(t_token *tokens, t_skibidi *skibidishell)
+// {
+// 	char		**array;
+// 	t_token		*arguments;
+
+// 	array = ft_calloc(get_arg_nb(tokens) + 2, sizeof(char *));
+// 	if (array == NULL)
+// 		ft_free_clean(skibidishell);
+// 	arguments = tokens->arguments;
+// 	array[0] = ft_strdup(tokens->assembled);
+// 	if (array[0] == NULL)
+// 	{
+// 		free_all(array);
+// 		ft_free_clean(skibidishell);
+// 	}
+// 	add_args(array, arguments, skibidishell);
+// 	tokens->argv = array;
+// }
