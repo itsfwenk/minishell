@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+         #
+#    By: fli <fli@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/20 14:56:45 by mel-habi          #+#    #+#              #
-#    Updated: 2024/09/16 17:54:42 by mel-habi         ###   ########.fr        #
+#    Updated: 2024/09/19 10:44:44 by fli              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ LIBFT		= libft
 SOURCES		= minishell.c \
 			  builtins/utils/bi_checkers.c builtins/utils/bi_env.c builtins/utils/bi_free.c \
 			  builtins/ft_cd.c builtins/ft_echo.c builtins/ft_env.c builtins/ft_exit.c builtins/ft_export.c builtins/ft_pwd.c builtins/ft_unset.c \
+			  exec/exec_utils.c exec/ft_exec.c exec/get_path.c exec/here_doc.c exec/pid_lst_manip.c \
 			  expander/assemble_tstring.c expander/check_filename.c expander/exp_delta_in_brackets.c expander/exp_delta_no_brackets.c expander/exp_env_var.c expander/exp_pos_param.c expander/ft_expander.c expander/ft_wildcards.c \
 			  lexer/utils/lx_lst_add.c lexer/utils/lx_lst_manip.c lexer/utils/lx_manip_utils.c lexer/utils/lx_parentheses.c lexer/utils/lx_utils.c lexer/utils/merger_utils.c lexer/utils/tstring_utils.c lexer/utils/tstring.c \
 			  lexer/ft_lexer.c \
@@ -68,7 +69,7 @@ fclean: clean
 
 re: fclean all
 
-$(LIBFT)/$(LIBFT).a: 
+$(LIBFT)/$(LIBFT).a:
 	@make -C $(LIBFT)
 	@echo $(PURPLE)✅ $@ compiled! $(NC)
 

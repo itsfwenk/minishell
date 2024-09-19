@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.utils.c                                       :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 16:37:42 by fli               #+#    #+#             */
-/*   Updated: 2024/09/18 17:16:51 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/19 10:45:41 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ static size_t	env_size(t_env *env)
 char	**build_envp(t_env *env)
 {
 	size_t	size;
-	size_t	len;
+	// size_t	len;
 	size_t	i;
 	char	**envp;
 
-	size = env_size(envp);
+	size = env_size(env);
 	if (!size)
 		return (NULL);
 	envp = ft_calloc(size + 1, sizeof(char *));

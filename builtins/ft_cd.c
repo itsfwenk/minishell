@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 14:31:17 by fli               #+#    #+#             */
-/*   Updated: 2024/09/16 17:41:21 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/19 15:53:13 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_cd(char **dir_path)
+int	ft_cd(t_env	*env, char **dir_path)
 {
 	char	cwd[PATH_MAX];
 	char	nwd[PATH_MAX];
@@ -36,5 +36,7 @@ int	ft_cd(char **dir_path)
 		perror("getcwd() error");
 		return (errno);
 	}
+	add_env(&env, "OLDPWD", cwd);
+	add_env(&env, "PWD", nwd);
 	return (errno);
 }

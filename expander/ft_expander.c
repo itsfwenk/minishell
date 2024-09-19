@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expander.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 17:09:48 by fli               #+#    #+#             */
-/*   Updated: 2024/09/16 18:40:25 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/19 10:26:13 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	ft_expander(t_skibidi *skibidishell, t_token *token)
 	}
 	ft_expander(skibidishell, token->arguments);
 	ft_expander(skibidishell, token->redir);
-	ft_expander(skibidishell, token->sub_shell);
+	// ft_expander(skibidishell, token->sub_shell);
 }

@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/17 18:07:57 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/19 19:28:37 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ static void	handle_line(char *line, t_skibidi *skibidishell)
 	{
 		merge_tokens(skibidishell, &(skibidishell->tokens), NULL);
 		skibidishell->tree = create_tree(skibidishell->tokens);
-		exec_tree(skibidishell->tree);
+		exec_tree(skibidishell, skibidishell->tree, NULL, -1);
 	}
 	//exec
 }
@@ -148,7 +148,7 @@ int	main(int argc, char **argv, char **envp)
 		return (2);
 	if (!ft_export(skibidishell, envp) && reset_utils_env(&skibidishell->env))
 	{
-		line = ft_strdup("apd cmd1 arg1 | cmd2 arg2 << heredoc2");
+		line = free_and_trim(readline(ft_get_prompt(g_signal)));
 		while (line)
 		{
 			if (line[0])
@@ -158,14 +158,22 @@ int	main(int argc, char **argv, char **envp)
 				{
 					add_history(line);
 					handle_line(line, skibidishell);
+					while (TRUE)
+					{
+						if (wait(NULL) == -1)
+							break ;
+					}
 				}
 			}
 			free(line);
 			reset_utils_env(&skibidishell->env);
 			line = free_and_trim(readline(ft_get_prompt(g_signal)));
+			dprintf(2, "%s\n", line);
 		}
+		dprintf(2, "LINE IS NULL :c\n");
 	}
 	rl_clear_history();
+	dprintf(2, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
 	ft_free_clean(skibidishell);
 	return (0);
 }

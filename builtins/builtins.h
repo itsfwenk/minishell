@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:17:55 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/16 18:38:24 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/19 15:42:38 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ t_env	*get_env(t_env *env, char *key);
 t_env	*add_env(t_env **env, char *key, char *value);
 void	unset_env(t_env *env, char *key);
 void	free_env(t_env *env);
+int		is_builtin(char	*cmd);
 
-int		ft_cd(char **dir_path);
+int		ft_cd(t_env	*env, char **dir_path);
 int		ft_echo(char **echo_arg);
 int		ft_env(t_env *env);
 int		ft_exit(char **ex_arg);

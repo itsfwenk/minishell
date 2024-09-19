@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tstring.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:58:42 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/16 18:03:10 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/19 17:32:09 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	set_limits(char *str, int *limits, int *i)
 	{
 		limits[1]++;
 	}
-	while (str[limits[0]] != '"' && limits[1] <= i[1])
+	while (str[limits[0]] != '"' && limits[1] <= i[1] + 1)
 	{
 		if (str[limits[1]] == '\'' || str[limits[1]] == '"')
 		{
@@ -55,6 +55,10 @@ static void	set_limits(char *str, int *limits, int *i)
 		}
 		limits[1]++;
 	}
+	limits[1] = limits[1] - 2;
+	// dprintf(2, "start : '%c'\n", str[limits[0]]);
+	// dprintf(2, "end i : '%c'\n", str[i[1]]);
+	// dprintf(2, "end limit : '%c'\n", str[limits[1]]);
 }
 
 void	other_tstr(char *str, int *i, int token_type, t_string **tstring)

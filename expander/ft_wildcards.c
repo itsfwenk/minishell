@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 14:27:45 by fli               #+#    #+#             */
-/*   Updated: 2024/09/18 17:52:17 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/19 15:31:51 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,28 @@ void	get_filenames(t_token *tokens, t_skibidi *skibidishell)
 			add_to_expanded_list(tokens, read_return->d_name, skibidishell);
 		else
 			add_to_expanded_list(tokens, tokens->assembled, skibidishell);
+		read_return = readdir(directory);
 	}
 	closedir(directory);
 }
 
-static int	get_arg_nb(t_token *tokens)
-{
-	int		i;
-	t_token	*arguments;
+// static int	get_arg_nb(t_token *tokens)
+// {
+// 	int		i;
+// 	t_token	*arguments;
 
-	i = 0;
-	arguments = tokens->arguments;
-	while (arguments != NULL)
-	{
-		i = i + tstring_size(&arguments->expanded_list);
-		arguments = arguments->next;
-	}
-	return (i);
-}
+// 	i = 0;
+// 	arguments = tokens->arguments;
+// 	while (arguments != NULL)
+// 	{
+// 		i = i + tstring_size(&arguments->expanded_list);
+// 		arguments = arguments->next;
+// 	}
+// 	return (i);
+// }
 
-// static void	add_args(char **array, t_token *arguments, t_skibidi *skibidishell)
+// static void	add_args(char **array, t_token *arguments,
+// t_skibidi *skibidishell)
 // {
 // 	int			i;
 // 	t_string	*expanded_list;

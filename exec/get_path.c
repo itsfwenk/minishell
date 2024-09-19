@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:55:56 by fli               #+#    #+#             */
-/*   Updated: 2024/09/18 18:52:28 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/19 15:31:51 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,13 @@ static char	*ft_strjoin_pipex(char const *s1, char const *s2)
 
 static char	**get_path_tab(t_skibidi *skibidishell)
 {
-	int			first_len;
 	t_env		*path_var;
 	char		**path_tab;
 
 	path_var = get_env(skibidishell->env, "PATH");
 	if (path_var == NULL)
 		return (NULL);
-	path_tab = ft_split(path_var->value, ':');
+	path_tab = ft_split(path_var->value, ":");
 	if (path_tab == NULL)
 		return (NULL);
 	return (path_tab);
