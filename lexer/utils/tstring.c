@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tstring.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:58:42 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/19 17:32:09 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/20 18:26:17 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	sq_tstr(char *str, int *i, t_string **tstring)
+void	q_tstr(char *str, int *i, t_string **tstring)
 {
 	int			limits[2];
 	t_string	*new_tstring;
@@ -22,12 +22,12 @@ void	sq_tstr(char *str, int *i, t_string **tstring)
 		return ;
 	limits[0] = i[0];
 	limits[1] = limits[0] + 1;
-	while (str[limits[1]] != '\'')
+	while (str[limits[1]] != str[i[0]])
 	{
 		limits[1]++;
 	}
 	new_tstring->str = lx_strdup(str, limits);
-	new_tstring->to_be_expanded = FALSE;
+	new_tstring->to_be_expanded = str[i[0]] == '"';
 	new_tstring->between_quote = TRUE;
 	i[0] = limits[1] + 1;
 	tstring_addback(tstring, new_tstring);
@@ -56,9 +56,6 @@ static void	set_limits(char *str, int *limits, int *i)
 		limits[1]++;
 	}
 	limits[1] = limits[1] - 2;
-	// dprintf(2, "start : '%c'\n", str[limits[0]]);
-	// dprintf(2, "end i : '%c'\n", str[i[1]]);
-	// dprintf(2, "end limit : '%c'\n", str[limits[1]]);
 }
 
 void	other_tstr(char *str, int *i, int token_type, t_string **tstring)
@@ -90,8 +87,8 @@ t_string	*create_tstring(char *str, int *i, int token_type)
 	tstring = NULL;
 	while (i[0] <= i[1])
 	{
-		if (str[i[0]] == '\'')
-			sq_tstr(str, i, &tstring);
+		if (str[i[0]] == '\'' || str[i[0]] == '"')
+			q_tstr(str, i, &tstring);
 		else
 			other_tstr(str, i, token_type, &tstring);
 	}

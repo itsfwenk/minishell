@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 16:41:07 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/20 11:57:26 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/20 18:40:58 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,15 +144,15 @@ static int	get_arg_nb(t_token *tokens)
 static void	add_args(char **array, t_token *arguments, t_skibidi *skibidishell)
 {
 	int			i;
-	t_string	*expanded_list;
+	t_token	*expanded_list;
 
 	i = 1;
 	while (arguments != NULL)
 	{
-		expanded_list = arguments->tstring;
+		expanded_list = arguments;
 		while (expanded_list != NULL)
 		{
-			array[i] = ft_strdup(expanded_list->str);
+			array[i] = ft_strdup(expanded_list->assembled);
 			if (array[i] == NULL)
 			{
 				free_all(array);

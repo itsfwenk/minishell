@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assemble_tstring.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:42:41 by fli               #+#    #+#             */
-/*   Updated: 2024/09/19 15:31:39 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/20 18:41:23 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static void	cat_tstring(t_token *current, char *assembled, int	*i)
 	while (current_tstring != NULL)
 	{
 		j = 0;
-		while (current->tstring->str[j] != '\0')
+		while (current_tstring->str[j] != '\0')
 		{
-			assembled[*i] = current->tstring->str[j];
+			assembled[*i] = current_tstring->str[j];
 			(*i)++;
 			j++;
 		}

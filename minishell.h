@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:51:25 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/19 14:40:38 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/20 18:24:16 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ int			which_token(t_token **tokens, char *c);
 t_string	*tstring_getlast(t_string *tstring);
 void		tstring_addback(t_string **tstring, t_string *new_tstring);
 void		tstring_del(t_string **tstring);
-void		sq_tstr(char *str, int *i, t_string **tstring);
+void		q_tstr(char *str, int *i, t_string **tstring);
 void		other_tstr(char *str, int *i, int token_type, t_string **tstring);
 t_string	*create_tstring(char *str, int *i, int token_type);
 int			tstring_size(t_string **tstring);
