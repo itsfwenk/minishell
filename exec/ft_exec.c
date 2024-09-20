@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 16:41:07 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/19 19:44:08 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/20 11:57:26 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	close_pipe(int pipefd[2])
 {
 	if (pipefd == NULL)
 		return ;
-	dprintf(2, "IN CLOSE PIPE PIPE[0] = %d PIPE[1] = %d\n", pipefd[0], pipefd[1]);
 	close(pipefd[0]);
 	close(pipefd[1]);
 }
@@ -109,6 +108,15 @@ int	fd_manager(t_token *tree, int *pipetab, int side, t_skibidi *skibidishell)
 	if (pipetab != NULL && side == LEFT)
 	{
 		if (dup2(pipetab[1], STDOUT_FILENO) == -1)
+		{
+			close_pipe(pipetab);
+			return (FALSE);
+		}
+		close_pipe(pipetab);
+	}
+	if (pipetab != NULL && side == RIGHT)
+	{
+		if (dup2(pipetab[0], STDIN_FILENO) == -1)
 		{
 			close_pipe(pipetab);
 			return (FALSE);
@@ -221,12 +229,10 @@ static void	cmd_exec(t_skibidi *skibidishell, t_token *tree)
 		envp = build_envp(skibidishell->env);
 		if (envp == NULL)
 			ft_free_clean(skibidishell);
-		dprintf(2, "execve %s\n", tree->full_string);
 		if (execve(cmd_path, tree->argv, envp) == -1)
 		{
 			free(cmd_path);
 			ft_free_clean(skibidishell);
-			dprintf(2, "execve failed %s\n", tree->full_string);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -265,16 +271,17 @@ static int	exec_cmd(t_skibidi *skibidishell, t_token *tree, int *pipetab, int si
 				fd_manager(tree, pipetab, side, skibidishell);
 				cmd_exec(skibidishell, tree);
 			}
-			if (pipetab != NULL && side == LEFT)
-			{
-				if (dup2(pipetab[0], STDIN_FILENO) == -1)
-				{
-					close_pipe(pipetab);
-					return (FALSE);
-				}
-				close_pipe(pipetab);
-				return (TRUE);
-			}
+			// if (pipetab != NULL && side == LEFT)
+			// {
+			// 	if (dup2(pipetab[0], STDIN_FILENO) == -1)
+			// 	{
+			// 		close_pipe(pipetab);
+			// 		return (FALSE);
+			// 	}
+			// 	dprintf(2, "pid = %d\n", tree->pid->p_id);
+			// 	close_pipe(pipetab);
+			// 	return (TRUE);
+			// }
 		}
 	}
 	return (TRUE);
@@ -310,5 +317,9 @@ int	exec_tree(t_skibidi *skibidishell, t_token *tree, int *pipetab, int side)
 	}
 	exec_parentheses(skibidishell, tree);
 	exec_cmd(skibidishell, tree, pipetab, side);
+	if (tree->type == PIPE)
+	{
+		close_pipe(tree->pid->pipefd);
+	}
 	return (TRUE);
 }

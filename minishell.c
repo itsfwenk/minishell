@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/19 19:28:37 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/20 11:58:24 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,12 +168,10 @@ int	main(int argc, char **argv, char **envp)
 			free(line);
 			reset_utils_env(&skibidishell->env);
 			line = free_and_trim(readline(ft_get_prompt(g_signal)));
-			dprintf(2, "%s\n", line);
 		}
-		dprintf(2, "LINE IS NULL :c\n");
+		perror(strerror(errno));
 	}
 	rl_clear_history();
-	dprintf(2, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
 	ft_free_clean(skibidishell);
 	return (0);
 }
