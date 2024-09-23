@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assemble_tstring.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:42:41 by fli               #+#    #+#             */
-/*   Updated: 2024/09/20 18:41:23 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:51:48 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,19 @@ static void	cat_tstring(t_token *current, char *assembled, int	*i)
 	assembled[*i] = '\0';
 }
 
-void	assemble_tstring(t_skibidi *skibidishell)
+void	assemble_tstring(t_skibidi *skibidishell, t_token *token)
 {
 	int		i;
 	char	*assembled;
-	t_token	*current;
 
-	current = skibidishell->tokens;
-	while (current != NULL)
-	{
-		i = 0;
-		assembled = malloc((get_full_len(current) + 1) * sizeof(char));
-		if (assembled == NULL)
-			ft_free_clean(skibidishell);
-		cat_tstring(current, assembled, &i);
-		current->assembled = assembled;
-		current = current->next;
-	}
+	if (token == NULL)
+		return ;
+	i = 0;
+	assembled = malloc((get_full_len(token) + 1) * sizeof(char));
+	if (assembled == NULL)
+		ft_free_clean(skibidishell);
+	cat_tstring(token, assembled, &i);
+	token->assembled = assembled;
+	assemble_tstring(skibidishell, token->arguments);
+	assemble_tstring(skibidishell, token->redir);
 }

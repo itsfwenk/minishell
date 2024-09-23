@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_filename.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:21:31 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/13 15:25:58 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:54:22 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static int	is_literal(t_token *tokens, int i)
 
 int	check_filename(t_token *tokens, char *filename, int i, int j)
 {
+	dprintf(2, "i = %d j = %d\n", i , j);
 	if (tokens->assembled[i] == '\0' && filename[j] == '\0')
 		return (TRUE);
 	if (tokens->assembled[i] == '*' && !is_literal(tokens, i))

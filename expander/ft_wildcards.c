@@ -6,13 +6,13 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 14:27:45 by fli               #+#    #+#             */
-/*   Updated: 2024/09/19 15:31:51 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/23 19:48:27 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	add_to_expanded_list(t_token *tokens, char *filename,
+static void	add_to_wildcard_list(t_token *tokens, char *filename,
 	t_skibidi *skibidishell)
 {
 	t_string		*new_tstring;
@@ -26,7 +26,7 @@ static void	add_to_expanded_list(t_token *tokens, char *filename,
 	new_tstring->to_be_expanded = -1;
 	new_tstring->between_quote = -1;
 	new_tstring->next = NULL;
-	tstring_addback(&tokens->expanded_list, new_tstring);
+	tstring_addback(&tokens->wildcard_list, new_tstring);
 }
 
 void	get_filenames(t_token *tokens, t_skibidi *skibidishell)
@@ -34,17 +34,26 @@ void	get_filenames(t_token *tokens, t_skibidi *skibidishell)
 	DIR				*directory;
 	struct dirent	*read_return;
 
+	if (tokens == NULL)
+		return ;
 	directory = opendir(".");
 	read_return = readdir(directory);
 	while (read_return != NULL)
 	{
+		if (read_return->d_name[0] == '.')
+		{
+			read_return = readdir(directory);
+			continue ;
+		}
 		if (check_filename(tokens, read_return->d_name, 0, 0))
-			add_to_expanded_list(tokens, read_return->d_name, skibidishell);
-		else
-			add_to_expanded_list(tokens, tokens->assembled, skibidishell);
+			add_to_wildcard_list(tokens, read_return->d_name, skibidishell);
 		read_return = readdir(directory);
 	}
+	if (tokens->wildcard_list == NULL)
+		add_to_wildcard_list(tokens, tokens->assembled, skibidishell);
 	closedir(directory);
+	get_filenames(tokens->arguments, skibidishell);
+	// get_filenames(tokens->arguments, skibidishell); // cas particulier
 }
 
 // static int	get_arg_nb(t_token *tokens)

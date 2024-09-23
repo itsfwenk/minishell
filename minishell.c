@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/23 14:51:24 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/23 19:48:40 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ static void	handle_line(char *line, t_skibidi *skibidishell)
 {
 	skibidishell->tokens = ft_lexer(line, skibidishell);
 	check_syntax(skibidishell->tokens);
-	assemble_tstring(skibidishell);
+	// assemble_tstring(skibidishell);
 	if (!only_redirs(skibidishell->tokens))
 	{
 		merge_tokens(skibidishell, &(skibidishell->tokens), NULL);
@@ -148,7 +148,7 @@ int	main(int argc, char **argv, char **envp)
 		return (2);
 	if (!ft_export(skibidishell, envp) && reset_utils_env(&skibidishell->env))
 	{
-		line = ft_strdup("echo \" ok\"\' ok\'ok | cat -e");
+		line = ft_strdup("echo R*m");
 		while (line)
 		{
 			if (line[0])

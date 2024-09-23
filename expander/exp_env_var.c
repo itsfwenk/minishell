@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:31:32 by fli               #+#    #+#             */
-/*   Updated: 2024/09/19 14:41:07 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/23 18:49:29 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ int	exp_env_var(t_string *current, t_skibidi *skibidishell)
 			if (exp_check_keys(current, skibidishell, &i, &delta_char) == FALSE)
 				return (FALSE);
 		}
-		i++;
+		if (current->str[i] != '\0')
+			i++;
 	}
 	if (nb_exp_var == 0)
 		return (TRUE);

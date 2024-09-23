@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 16:41:07 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/23 11:10:11 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/23 19:33:45 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,56 +137,75 @@ int	fd_manager(t_token *tree, int *pipetab, int side, t_skibidi *skibidishell)
 
 static int	get_arg_nb(t_token *tokens)
 {
-	int		i;
-	t_token	*arguments;
+	int			i;
+	t_string	*token_wildcarded;
+	t_token		*arguments;
 
 	i = 0;
+	token_wildcarded = tokens->wildcard_list;
+	while (token_wildcarded)
+	{
+		i++;
+		token_wildcarded = token_wildcarded->next;
+	}
 	arguments = tokens->arguments;
 	while (arguments != NULL)
 	{
-		i = i + tstring_size(&arguments->expanded_list);
+		token_wildcarded = arguments->wildcard_list;
+		while (token_wildcarded)
+		{
+			i++;
+			token_wildcarded = token_wildcarded->next;
+		}
+		i++;
 		arguments = arguments->next;
 	}
 	return (i);
 }
 
-static void	add_args(char **array, t_token *arguments, t_skibidi *skibidishell)
+static void	add_every_wc(char **array, t_token *token, t_skibidi *skibidishell, int *i)
 {
-	int			i;
-	t_token	*expanded_list;
+	t_string	*cmd;
 
-	i = 1;
-
-	expanded_list = arguments;
-	while (expanded_list != NULL)
+	cmd = token->wildcard_list;
+	while (cmd != NULL)
 	{
-		array[i] = ft_strdup(expanded_list->assembled);
-		if (array[i] == NULL)
+		array[*i] = ft_strdup(cmd->str);
+		if (array[*i] == NULL)
 		{
 			free_all(array);
 			ft_free_clean(skibidishell);
 		}
-		expanded_list = expanded_list->next;
-		i++;
+		cmd = cmd->next;
+		*i = *i + 1;
+	}
+}
+
+static void	add_args(char **array, t_token *arguments, t_skibidi *skibidishell, int *i)
+{
+	t_token	*arg_token;
+
+	arg_token = arguments;
+	while (arg_token != NULL)
+	{
+		add_every_wc(array, arg_token, skibidishell, i);
+		arg_token = arg_token->next;
 	}
 }
 
 static void	create_argv(t_token *tokens, t_skibidi *skibidishell)
 {
+	int			i;
 	char		**array;
 	t_token		*arguments;
 
-	array = ft_calloc(get_arg_nb(tokens) + 2, sizeof(char *));
+	array = ft_calloc(get_arg_nb(tokens) + 1, sizeof(char *));
 	if (array == NULL)
 		ft_free_clean(skibidishell);
 	arguments = tokens->arguments;
-	array[0] = ft_strdup(tokens->assembled);
-	if (array[0] == NULL)
-	{
-		free_all(array);
-		ft_free_clean(skibidishell);
-	}
-	add_args(array, arguments, skibidishell);
+	i = 0;
+	add_every_wc(array, tokens, skibidishell, &i);
+	add_args(array, arguments, skibidishell, &i);
 	tokens->argv = array;
 }
 
@@ -262,8 +281,8 @@ static int	exec_cmd(t_skibidi *skibidishell, t_token *tree, int *pipetab, int si
 	if (tree->type == STR)
 	{
 		ft_expander(skibidishell, tree);
-		if (tree->arguments)
-			get_filenames(tree->arguments, skibidishell);
+		assemble_tstring(skibidishell, tree);
+		get_filenames(tree, skibidishell);
 		create_argv(tree, skibidishell);
 		if (skibidishell->tokens->next == NULL && only_builtins(skibidishell->tokens))
 			builtin_exec(skibidishell, tree->assembled, tree->argv);

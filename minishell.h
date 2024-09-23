@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:51:25 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/23 13:39:49 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/23 19:20:50 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_string
 typedef struct s_token
 {
 	t_string		*tstring;
-	t_string		*expanded_list;//
+	t_string		*wildcard_list;//
 	char			*full_string;
 	char			*assembled;
 	int				type;
@@ -103,7 +103,7 @@ void		merge_arguments(t_skibidi *skibidishell,
 t_token		*get_cmd(t_token *token);
 void		merge_operators(t_skibidi *skibidishell, t_token *current);
 int			ft_export(t_skibidi *skibidishell, char **args);
-void		assemble_tstring(t_skibidi *skibidishell);
+void		assemble_tstring(t_skibidi *skibidishell, t_token *token);
 void		exp_pos_param(t_string *current, t_skibidi *skibidishell);
 // void		create_argv(t_token *tokens, t_skibidi *skibidishell);
 t_token		*lx_meta_token(char *str, int *i, int token_type,

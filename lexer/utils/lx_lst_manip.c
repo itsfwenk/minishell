@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:36:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/23 17:03:00 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/23 19:35:59 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,10 @@ t_token	*lx_str_token(t_skibidi *skibidishell, char *str, int *i,
 		to_close_parenthesis(str, i);
 	else
 	{
-		dprintf(2, "i[0] entree lx_str_token %d\n", i[0]);
-		dprintf(2, "i[1] entree lx_str_token %d\n", i[1]);
 		set_end_index(str, i[0], i[1], i);
 		while (is_word_delimiter(&skibidishell->tokens, str, i) == FALSE)
 			i[1] = i[1] + 1;
 		i[1] = i[1] - 1;
-		dprintf(2, "i[1] en sortie de is_word_delimiter = %d\n", i[1]);
 	}
 	ntoken->tstring = create_tstring(str, i, token_type);
 	if (ntoken->tstring == NULL)
@@ -98,7 +95,6 @@ t_token	*lx_str_token(t_skibidi *skibidishell, char *str, int *i,
 	if (token_type == PAR_STR)
 		define_subshell(str, i, ntoken, skibidishell);
 	i[0] = i[1] + 1;
-	dprintf(2, "i[0] en sortie de lx_str_token = %d\n", i[0]);
 	dprintf(2, "TOKEN CREATED IS <%s>\n", ntoken->full_string);
 	return (ntoken);
 }

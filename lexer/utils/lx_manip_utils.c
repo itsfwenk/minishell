@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lx_manip_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:52:32 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/16 18:18:16 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:12:47 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	lx_deltokens(t_token **tokens)
 	while (current != NULL)
 	{
 		tstring_del(&current->tstring);
-		tstring_del(&current->expanded_list);
+		tstring_del(&current->wildcard_list);
 		if (current->full_string)
 			free(current->full_string);
 		if (current->assembled)
