@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:36:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/19 15:59:09 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/23 17:03:00 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,26 @@ t_token	*lx_meta_token(char *str, int *i, int token_type,
 	if (ntoken->full_string == NULL)
 		ft_free_clean(skibidishell);
 	ntoken->type = token_type;
+	i[0] = i[1] + 1;
 	return (ntoken);
+}
+
+static void	set_end_index(char *str, int start, int end, int *i)
+{
+	if (str[start] == '\"' || str[start] == '\'')
+	{
+		while (str[end] != str[start])
+		{
+			end++;
+		}
+		dprintf(2, "start = %d\n", start);
+		dprintf(2, "end = %d = %c\n", end, str[end]);
+		i[1] = end + 1;
+		dprintf(2, "i[1]= %d\n", i[1]);
+		set_end_index(str, end + 1, end + 2, i);
+		// dprintf(2, "start = %d\n", start);
+		// dprintf(2, "end = %d = %c\n", end, str[end]);
+	}
 }
 
 t_token	*lx_str_token(t_skibidi *skibidishell, char *str, int *i,
@@ -61,9 +80,13 @@ t_token	*lx_str_token(t_skibidi *skibidishell, char *str, int *i,
 		to_close_parenthesis(str, i);
 	else
 	{
-		while (is_word_delimiter(&skibidishell->tokens, str, i[1]) == FALSE)
+		dprintf(2, "i[0] entree lx_str_token %d\n", i[0]);
+		dprintf(2, "i[1] entree lx_str_token %d\n", i[1]);
+		set_end_index(str, i[0], i[1], i);
+		while (is_word_delimiter(&skibidishell->tokens, str, i) == FALSE)
 			i[1] = i[1] + 1;
 		i[1] = i[1] - 1;
+		dprintf(2, "i[1] en sortie de is_word_delimiter = %d\n", i[1]);
 	}
 	ntoken->tstring = create_tstring(str, i, token_type);
 	if (ntoken->tstring == NULL)
@@ -75,5 +98,7 @@ t_token	*lx_str_token(t_skibidi *skibidishell, char *str, int *i,
 	if (token_type == PAR_STR)
 		define_subshell(str, i, ntoken, skibidishell);
 	i[0] = i[1] + 1;
+	dprintf(2, "i[0] en sortie de lx_str_token = %d\n", i[0]);
+	dprintf(2, "TOKEN CREATED IS <%s>\n", ntoken->full_string);
 	return (ntoken);
 }

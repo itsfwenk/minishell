@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:51:25 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/23 10:29:13 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/23 13:39:49 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ typedef enum e_types
 }	t_types;
 
 // utils
-int			is_word_delimiter(t_token **tokens, char *str, int i);
+int			is_word_delimiter(t_token **tokens, char *str, int *i);
 char		*lx_strictstrdup(char *str, int *i);
 char		*lx_strdup(char *str, int *i);
 t_token		*lx_getlast(t_token *tokens);

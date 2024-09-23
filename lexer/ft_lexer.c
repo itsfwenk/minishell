@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:08:07 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/23 12:03:18 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/23 17:00:10 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,13 @@ t_token	*ft_lexer(char *input, t_skibidi *skibidishell)
 		if (i[0] >= (int)ft_strlen(input))
 			break ;
 		i[1] = i[0] + 1;
+		dprintf(2, "UNO i[0] in  ft_lexer %d\n", i[0]);
+		dprintf(2, "UNO i[1] in  ft_lexer %d\n", i[1]);
 		if (lx_createadd(&tokens, skibidishell, input, i) == FALSE)
 			return (NULL);
-		i[0] = i[1] + 1;
-		dprintf(2, "i[0] in  ft_lexer %d\n", i[0]);
-		dprintf(2, "i[1] in  ft_lexer %d\n", i[1]);
+		// i[0] = i[1];
+		dprintf(2, "DOS i[0] in  ft_lexer %d\n", i[0]);
+		dprintf(2, "DOS i[1] in  ft_lexer %d\n", i[1]);
 	}
 	return (tokens);
 }
