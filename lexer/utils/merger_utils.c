@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 17:51:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/19 15:31:31 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/23 10:25:06 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	merge_redirection(t_skibidi *skibidishell,
 		current->next->next = NULL;
 		if (new_start == cmd)
 		{
-			if (new_start->next->type == IN_REDIR
+			if (new_start->next && (new_start->next->type == IN_REDIR
 				|| new_start->next->type == HERE_DOC
 				|| new_start->next->type == OUT_REDIR
-				|| new_start->next->type == APD_OUT_REDIR)
+				|| new_start->next->type == APD_OUT_REDIR))
 			{
 				next_token = get_next_token(new_start->next);
 				cmd->next = next_token;

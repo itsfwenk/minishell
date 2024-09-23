@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 16:41:07 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/20 18:40:58 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/23 10:28:46 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,13 @@ int	fd_manager(t_token *tree, int *pipetab, int side, t_skibidi *skibidishell)
 	redirection = tree->redir;
 	while (redirection != NULL)
 	{
-		// dprintf(2, "ON NE RENTRE PAS ICI EN FAIT\n");
 		fd_redir = get_fd(redirection, skibidishell);
 		if (fd_redir == -1)
 			return (FALSE);
 		if (dup_fd(fd_redir, redirection) == FALSE)
 			return (FALSE);
 		close(fd_redir);
+		redirection = redirection->next->next;
 	}
 	if (pipetab != NULL && side == LEFT)
 	{
@@ -122,6 +122,16 @@ int	fd_manager(t_token *tree, int *pipetab, int side, t_skibidi *skibidishell)
 			return (FALSE);
 		}
 		close_pipe(pipetab);
+	}
+	if (tree->previous_pipe != NULL && side == RIGHT)
+	{
+		if (dup2(tree->previous_pipe[1], STDOUT_FILENO) == -1)
+		{
+			close_pipe(tree->previous_pipe);
+			return (FALSE);
+		}
+		close_pipe(tree->previous_pipe);
+		return (TRUE);
 	}
 	return (TRUE);
 }
@@ -271,17 +281,6 @@ static int	exec_cmd(t_skibidi *skibidishell, t_token *tree, int *pipetab, int si
 				fd_manager(tree, pipetab, side, skibidishell);
 				cmd_exec(skibidishell, tree);
 			}
-			// if (pipetab != NULL && side == LEFT)
-			// {
-			// 	if (dup2(pipetab[0], STDIN_FILENO) == -1)
-			// 	{
-			// 		close_pipe(pipetab);
-			// 		return (FALSE);
-			// 	}
-			// 	dprintf(2, "pid = %d\n", tree->pid->p_id);
-			// 	close_pipe(pipetab);
-			// 	return (TRUE);
-			// }
 		}
 	}
 	return (TRUE);
@@ -294,6 +293,7 @@ int	exec_tree(t_skibidi *skibidishell, t_token *tree, int *pipetab, int side)
 	tree->pid = ft_lstnew_pipex(skibidishell);
 	if (tree->type == PIPE)
 	{
+		tree->right->previous_pipe = pipetab;
 		if (pipe(tree->pid->pipefd) == -1)
 			ft_free_clean(skibidishell);
 		pipetab = tree->pid->pipefd;
@@ -318,8 +318,6 @@ int	exec_tree(t_skibidi *skibidishell, t_token *tree, int *pipetab, int side)
 	exec_parentheses(skibidishell, tree);
 	exec_cmd(skibidishell, tree, pipetab, side);
 	if (tree->type == PIPE)
-	{
 		close_pipe(tree->pid->pipefd);
-	}
 	return (TRUE);
 }

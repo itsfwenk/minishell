@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:51:25 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/20 18:24:16 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/23 10:29:13 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_token
 	struct s_token	*left;
 	struct s_token	*right;
 	t_pids			*pid;
+	int				*previous_pipe;
 	int				fd;
 }	t_token;
 
