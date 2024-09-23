@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lx_parentheses.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:56:29 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/16 18:02:51 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/23 10:37:13 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,5 @@ char	*trim_parentheses(char *str, int *i)
 	if (trimmed == NULL)
 		return (NULL);
 	ft_strlcpy(trimmed, &str[i[0] + 1], (i[1] - i[0]));
-	printf("trim parentheses : %s\n", trimmed);
 	return (trimmed);
 }

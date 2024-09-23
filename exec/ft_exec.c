@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 16:41:07 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/23 10:28:46 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/23 11:10:11 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ static int	dup_fd(int fd_redir, t_token *redirection)
 {
 	int		dup_return;
 
-	// dprintf(2, "DUP FD\n");
 	if (redirection->type == IN_REDIR || redirection->type == HERE_DOC)
 		dup_return = dup2(fd_redir, STDIN_FILENO);
 	if (redirection->type == OUT_REDIR || redirection->type == APD_OUT_REDIR)
@@ -157,21 +156,18 @@ static void	add_args(char **array, t_token *arguments, t_skibidi *skibidishell)
 	t_token	*expanded_list;
 
 	i = 1;
-	while (arguments != NULL)
+
+	expanded_list = arguments;
+	while (expanded_list != NULL)
 	{
-		expanded_list = arguments;
-		while (expanded_list != NULL)
+		array[i] = ft_strdup(expanded_list->assembled);
+		if (array[i] == NULL)
 		{
-			array[i] = ft_strdup(expanded_list->assembled);
-			if (array[i] == NULL)
-			{
-				free_all(array);
-				ft_free_clean(skibidishell);
-			}
-			expanded_list = expanded_list->next;
-			i++;
+			free_all(array);
+			ft_free_clean(skibidishell);
 		}
-		arguments = arguments->next;
+		expanded_list = expanded_list->next;
+		i++;
 	}
 }
 
