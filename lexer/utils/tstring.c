@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:58:42 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/23 10:51:23 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/23 12:15:07 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ t_string	*create_tstring(char *str, int *i, int token_type)
 		else
 			other_tstr(str, i, token_type, &tstring);
 	}
+	i[1] = i[0];
 	i[0] = start;
 	return (tstring);
 }

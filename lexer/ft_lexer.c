@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:08:07 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/17 15:37:08 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/23 12:03:18 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ t_token	*ft_lexer(char *input, t_skibidi *skibidishell)
 		if (lx_createadd(&tokens, skibidishell, input, i) == FALSE)
 			return (NULL);
 		i[0] = i[1] + 1;
+		dprintf(2, "i[0] in  ft_lexer %d\n", i[0]);
+		dprintf(2, "i[1] in  ft_lexer %d\n", i[1]);
 	}
 	return (tokens);
 }
