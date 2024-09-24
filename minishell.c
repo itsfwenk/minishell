@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/24 10:57:27 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/24 13:13:21 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ int	main(int argc, char **argv, char **envp)
 		return (2);
 	if (!ft_export(skibidishell, envp) && reset_utils_env(&skibidishell->env))
 	{
-		line = ft_strdup("<infile cat -e");
+		line = free_and_trim(readline(ft_get_prompt(g_signal)));
 		while (line)
 		{
 			if (line[0])

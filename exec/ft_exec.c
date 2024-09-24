@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 16:41:07 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/24 10:39:20 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/24 13:22:35 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,18 @@
 // 	tree = skibidishell->tree;
 // }
 
-void	exec_parentheses(t_skibidi *skibidishell, t_token *tree)
+void	exec_parentheses(t_skibidi *skibidishell, t_token *tree, int *pipetab, int side)
 {
 	if (tree->type == PAR_STR)
 	{
 		tree->pid = ft_lstnew_pipex(skibidishell);
-		if (tree->pid == NULL || pipe(tree->pid->pipefd) == -1)
+		if (tree->pid == NULL)
 			ft_free_clean(skibidishell);
 		tree->pid->p_id = fork();
 		if (tree->pid->p_id == -1)
 			ft_free_clean(skibidishell);
 		if (tree->pid->p_id == 0)
-			exec_tree(skibidishell, create_tree(tree->sub_shell), NULL, -1);
+			exec_tree(skibidishell, create_tree(tree->sub_shell), pipetab, side);
 	}
 }
 
@@ -334,7 +334,7 @@ int	exec_tree(t_skibidi *skibidishell, t_token *tree, int *pipetab, int side)
 		}
 		exec_tree(skibidishell, tree->right, pipetab, RIGHT);
 	}
-	exec_parentheses(skibidishell, tree);
+	exec_parentheses(skibidishell, tree, pipetab, side);
 	exec_cmd(skibidishell, tree, pipetab, side);
 	if (tree->type == PIPE)
 		close_pipe(tree->pid->pipefd);
