@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 13:42:41 by fli               #+#    #+#             */
-/*   Updated: 2024/09/23 18:51:48 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/24 11:25:38 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	assemble_tstring(t_skibidi *skibidishell, t_token *token)
 {
 	int		i;
 	char	*assembled;
+	t_token	*current;
 
 	if (token == NULL)
 		return ;
@@ -60,6 +61,16 @@ void	assemble_tstring(t_skibidi *skibidishell, t_token *token)
 		ft_free_clean(skibidishell);
 	cat_tstring(token, assembled, &i);
 	token->assembled = assembled;
-	assemble_tstring(skibidishell, token->arguments);
-	assemble_tstring(skibidishell, token->redir);
+	current = token->arguments;
+	while (current)
+	{
+		assemble_tstring(skibidishell, current);
+		current = current->next;
+	}
+	current = token->redir;
+	while (current)
+	{
+		assemble_tstring(skibidishell, current);
+		current = current->next;
+	}
 }

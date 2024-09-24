@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 14:27:45 by fli               #+#    #+#             */
-/*   Updated: 2024/09/23 19:48:27 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/24 11:26:19 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	get_filenames(t_token *tokens, t_skibidi *skibidishell)
 {
 	DIR				*directory;
 	struct dirent	*read_return;
+	t_token			*current;
 
 	if (tokens == NULL)
 		return ;
@@ -52,8 +53,22 @@ void	get_filenames(t_token *tokens, t_skibidi *skibidishell)
 	if (tokens->wildcard_list == NULL)
 		add_to_wildcard_list(tokens, tokens->assembled, skibidishell);
 	closedir(directory);
-	get_filenames(tokens->arguments, skibidishell);
-	// get_filenames(tokens->arguments, skibidishell); // cas particulier
+	if (tokens->type == FILENAME && tokens->wildcard_list->next != NULL)
+	{
+		dprintf(2, "ambigous\n");
+	}
+	current = tokens->arguments;
+	while (current)
+	{
+		get_filenames(current, skibidishell);
+		current = current->next;
+	}
+	current = tokens->redir;
+	while (current)
+	{
+		get_filenames(current, skibidishell);
+		current = current->next;
+	}
 }
 
 // static int	get_arg_nb(t_token *tokens)

@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:21:31 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/23 19:54:22 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/24 10:56:34 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ static int	is_literal(t_token *tokens, int i)
 
 int	check_filename(t_token *tokens, char *filename, int i, int j)
 {
-	dprintf(2, "i = %d j = %d\n", i , j);
+	// dprintf(2, "i = %d = %c ; j = %d = %c\n", i , tokens->assembled[i] , j, filename[j]);
 	if (tokens->assembled[i] == '\0' && filename[j] == '\0')
 		return (TRUE);
 	if (tokens->assembled[i] == '*' && !is_literal(tokens, i))
 	{
-		if (check_filename(tokens, filename, i + 1, j) == TRUE)
+		if (check_filename(tokens, filename, i + 1, j + 1) == TRUE)
 			return (TRUE);
 		return (check_filename(tokens, filename, i, j + 1));
 	}

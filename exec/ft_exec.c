@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 16:41:07 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/23 19:33:45 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/24 10:39:20 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,7 +293,11 @@ static int	exec_cmd(t_skibidi *skibidishell, t_token *tree, int *pipetab, int si
 				ft_free_clean(skibidishell);
 			if (tree->pid->p_id == 0)
 			{
-				fd_manager(tree, pipetab, side, skibidishell);
+				if (fd_manager(tree, pipetab, side, skibidishell) == FALSE)
+				{
+					dprintf(2, "fd failed\n");
+					ft_free_clean(skibidishell);
+				}
 				cmd_exec(skibidishell, tree);
 			}
 		}

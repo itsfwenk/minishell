@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 17:09:48 by fli               #+#    #+#             */
-/*   Updated: 2024/09/19 10:26:13 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/24 11:26:01 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_expander(t_skibidi *skibidishell, t_token *token)
 {
 	t_string	*current_tstr;
+	t_token		*current;
 
 	if (token == NULL)
 		return ;
@@ -29,7 +30,17 @@ void	ft_expander(t_skibidi *skibidishell, t_token *token)
 		}
 		current_tstr = current_tstr->next;
 	}
-	ft_expander(skibidishell, token->arguments);
-	ft_expander(skibidishell, token->redir);
+		current = token->arguments;
+	while (current)
+	{
+		ft_expander(skibidishell, current);
+		current = current->next;
+	}
+	current = token->redir;
+	while (current)
+	{
+		ft_expander(skibidishell, current);
+		current = current->next;
+	}
 	// ft_expander(skibidishell, token->sub_shell);
 }

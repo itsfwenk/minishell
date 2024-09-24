@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:36:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/23 19:35:59 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/24 10:24:32 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,6 @@ t_token	*lx_str_token(t_skibidi *skibidishell, char *str, int *i,
 	if (token_type == PAR_STR)
 		define_subshell(str, i, ntoken, skibidishell);
 	i[0] = i[1] + 1;
-	dprintf(2, "TOKEN CREATED IS <%s>\n", ntoken->full_string);
+	// dprintf(2, "TOKEN CREATED IS <%s>\n", ntoken->full_string);
 	return (ntoken);
 }
