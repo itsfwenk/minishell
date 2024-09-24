@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:08:07 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/23 19:35:29 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/24 15:09:57 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ void	merge_tokens(t_skibidi *skibidishell, t_token **token, t_token *cmd)
 	merge_operators(skibidishell, current);
 	merge_redirection(skibidishell, current, cmd);
 	merge_arguments(skibidishell, current, cmd);
-	if (skibidishell->tokens->type != PAR_STR && cmd != NULL)
+	if (skibidishell->tokens->type != PAR_STR && cmd != NULL && cmd->type != PAR_STR)
 		skibidishell->tokens = cmd;
 }

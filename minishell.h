@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:51:25 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/23 19:20:50 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/24 17:02:50 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ int			check_filename(t_token *tokens, char *filename, int i, int j);
 t_token		*get_next_token(t_token *token);
 
 
-
+void		close_pipe(int pipefd[2]);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/24 13:13:21 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/24 16:33:07 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ static int	check_line(char *line)
 int	main(int argc, char **argv, char **envp)
 {
 	t_skibidi	*skibidishell;
+	t_token		*token;
 	char		*line;
 
 	(void)argv;
@@ -148,6 +149,7 @@ int	main(int argc, char **argv, char **envp)
 		return (2);
 	if (!ft_export(skibidishell, envp) && reset_utils_env(&skibidishell->env))
 	{
+		// line = ft_strdup("ls | cat -e | (cat -e | cat -e)");
 		line = free_and_trim(readline(ft_get_prompt(g_signal)));
 		while (line)
 		{
@@ -158,10 +160,12 @@ int	main(int argc, char **argv, char **envp)
 				{
 					add_history(line);
 					handle_line(line, skibidishell);
-					while (TRUE)
+					token = skibidishell->tokens;
+					while (token)
 					{
-						if (wait(NULL) == -1)
-							break ;
+						if (token->type == STR)
+							waitpid(token->pid->p_id, &token->pid->status, 0);
+						token = token->next;
 					}
 				}
 			}

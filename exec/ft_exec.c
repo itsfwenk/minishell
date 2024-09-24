@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 16:41:07 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/24 13:22:35 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/24 19:02:08 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 
 void	exec_parentheses(t_skibidi *skibidishell, t_token *tree, int *pipetab, int side)
 {
+	t_token	*par_tree;
+	t_token	*sub_token;
+
 	if (tree->type == PAR_STR)
 	{
 		tree->pid = ft_lstnew_pipex(skibidishell);
@@ -39,7 +42,26 @@ void	exec_parentheses(t_skibidi *skibidishell, t_token *tree, int *pipetab, int 
 		if (tree->pid->p_id == -1)
 			ft_free_clean(skibidishell);
 		if (tree->pid->p_id == 0)
-			exec_tree(skibidishell, create_tree(tree->sub_shell), pipetab, side);
+		{
+			par_tree = create_tree(tree->sub_shell);
+			par_tree->left->previous_pipe = pipetab;
+			if (exec_tree(skibidishell, par_tree, pipetab, side) == TRUE)
+			{
+				sub_token = tree->sub_shell;
+				while (sub_token)
+				{
+					dprintf(2, "pid = %d\n", (int)sub_token->pid->p_id);
+					if (sub_token->type == STR)
+						waitpid(sub_token->pid->p_id, &sub_token->pid->status, 0);
+					sub_token = sub_token->next;
+				}
+				exit(EXIT_SUCCESS);
+			}
+		}
+		waitpid(tree->pid->p_id, &tree->pid->status, 0);
+		// while (wait(NULL) != -1)
+		// 		;
+		dprintf(2, "PAR CHILD IS DEAD\n");
 	}
 }
 
@@ -83,8 +105,12 @@ void	close_pipe(int pipefd[2])
 {
 	if (pipefd == NULL)
 		return ;
-	close(pipefd[0]);
-	close(pipefd[1]);
+	if (pipefd[0] != -1)
+		close(pipefd[0]);
+	if (pipefd[1] != -1)
+		close(pipefd[1]);
+	pipefd[0] = -1;
+	pipefd[1] = -1;
 }
 
 int	fd_manager(t_token *tree, int *pipetab, int side, t_skibidi *skibidishell)
@@ -111,6 +137,7 @@ int	fd_manager(t_token *tree, int *pipetab, int side, t_skibidi *skibidishell)
 			close_pipe(pipetab);
 			return (FALSE);
 		}
+		dprintf(2, "pipetab closed in LEFT %s\n", tree->full_string);
 		close_pipe(pipetab);
 	}
 	if (pipetab != NULL && side == RIGHT)
@@ -120,6 +147,7 @@ int	fd_manager(t_token *tree, int *pipetab, int side, t_skibidi *skibidishell)
 			close_pipe(pipetab);
 			return (FALSE);
 		}
+		dprintf(2, "pipetab closed in RIGHT %s\n", tree->full_string);
 		close_pipe(pipetab);
 	}
 	if (tree->previous_pipe != NULL && side == RIGHT)
@@ -129,8 +157,18 @@ int	fd_manager(t_token *tree, int *pipetab, int side, t_skibidi *skibidishell)
 			close_pipe(tree->previous_pipe);
 			return (FALSE);
 		}
+		dprintf(2, "previous_pipe closed in RIGHT %s\n", tree->full_string);
 		close_pipe(tree->previous_pipe);
-		return (TRUE);
+	}
+	if (tree->previous_pipe != NULL && side == LEFT)
+	{
+		if (dup2(tree->previous_pipe[0], STDIN_FILENO) == -1)
+		{
+			close_pipe(tree->previous_pipe);
+			return (FALSE);
+		}
+		close_pipe(tree->previous_pipe);
+		dprintf(2, "previous_pipe closed in LEFT %s\n", tree->full_string);
 	}
 	return (TRUE);
 }
@@ -295,11 +333,18 @@ static int	exec_cmd(t_skibidi *skibidishell, t_token *tree, int *pipetab, int si
 			{
 				if (fd_manager(tree, pipetab, side, skibidishell) == FALSE)
 				{
-					dprintf(2, "fd failed\n");
+					dprintf(2, "fd failed for %s\n", tree->full_string);
+					if (side == LEFT)
+						dprintf(2, "LEFT\n");
+					else
+						dprintf(2, "RIGHT\n");
 					ft_free_clean(skibidishell);
 				}
+				close_pipe(pipetab);
+				close_pipe(tree->previous_pipe);
 				cmd_exec(skibidishell, tree);
 			}
+			dprintf(2, "token = %s pid = %d\n", tree->full_string, (int)tree->pid->p_id);
 		}
 	}
 	return (TRUE);
@@ -307,15 +352,20 @@ static int	exec_cmd(t_skibidi *skibidishell, t_token *tree, int *pipetab, int si
 
 int	exec_tree(t_skibidi *skibidishell, t_token *tree, int *pipetab, int side)
 {
+	int	*tmp_pipe;
+
+	tmp_pipe = pipetab;
 	if (tree == NULL)
 		return (FALSE);
 	tree->pid = ft_lstnew_pipex(skibidishell);
 	if (tree->type == PIPE)
 	{
-		tree->right->previous_pipe = pipetab;
+		if (tree->left->previous_pipe == NULL)
+			tree->right->previous_pipe = pipetab;
 		if (pipe(tree->pid->pipefd) == -1)
 			ft_free_clean(skibidishell);
 		pipetab = tree->pid->pipefd;
+		// tree->left->previous_pipe = pipetab;
 	}
 	exec_tree(skibidishell, tree->left, pipetab, LEFT);
 	if (tree->type == PIPE || tree->type == AND || tree->type == OR)
@@ -332,6 +382,8 @@ int	exec_tree(t_skibidi *skibidishell, t_token *tree, int *pipetab, int side)
 			if (WEXITSTATUS(tree->left->pid->status) == EXIT_SUCCESS)
 				return (FALSE);
 		}
+		dprintf(2, "tmp pipe closed\n");
+		close_pipe(tmp_pipe);
 		exec_tree(skibidishell, tree->right, pipetab, RIGHT);
 	}
 	exec_parentheses(skibidishell, tree, pipetab, side);
