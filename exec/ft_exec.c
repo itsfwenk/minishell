@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 16:41:07 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/25 12:04:48 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/25 16:47:53 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,12 @@ void	exec_parentheses(t_skibidi *skibidishell, t_token *tree, int *pipetab, int 
 			ft_free_clean(skibidishell);
 		if (tree->pid->p_id == 0)
 		{
+			dup2(pipetab[0], STDIN_FILENO);
+			close_pipe(pipetab);
 			par_tree = create_tree(tree->sub_shell);
-			par_tree->left->previous_pipe = pipetab;
-			if (exec_tree(skibidishell, par_tree, pipetab, side) == TRUE)
+			// if (par_tree->left)
+			// 	par_tree->left->previous_pipe = pipetab;
+			if (exec_tree(skibidishell, par_tree, NULL, side) == TRUE)
 			{
 				sub_token = tree->sub_shell;
 				while (sub_token)
@@ -58,6 +61,7 @@ void	exec_parentheses(t_skibidi *skibidishell, t_token *tree, int *pipetab, int 
 				exit(EXIT_SUCCESS);
 			}
 		}
+		close_pipe(pipetab);
 		waitpid(tree->pid->p_id, &tree->pid->status, 0);
 		// while (wait(NULL) != -1)
 		// 		;
