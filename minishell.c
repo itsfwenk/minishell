@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/24 16:33:07 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/25 17:41:11 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ int	main(int argc, char **argv, char **envp)
 	skibidishell = ft_calloc(1, sizeof(t_skibidi));
 	if (!skibidishell)
 		return (2);
+	init_signals();
 	if (!ft_export(skibidishell, envp) && reset_utils_env(&skibidishell->env))
 	{
 		// line = ft_strdup("ls | cat -e | (cat -e | cat -e)");

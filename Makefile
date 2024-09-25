@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fli <fli@student.42.fr>                    +#+  +:+       +#+         #
+#    By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/20 14:56:45 by mel-habi          #+#    #+#              #
-#    Updated: 2024/09/19 10:44:44 by fli              ###   ########.fr        #
+#    Updated: 2024/09/25 17:39:46 by mel-habi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SOURCES		= minishell.c \
 			  lexer/utils/lx_lst_add.c lexer/utils/lx_lst_manip.c lexer/utils/lx_manip_utils.c lexer/utils/lx_parentheses.c lexer/utils/lx_utils.c lexer/utils/merger_utils.c lexer/utils/tstring_utils.c lexer/utils/tstring.c \
 			  lexer/ft_lexer.c \
 			  parser/check_syntax.c parser/tree.c \
+			  signals/ft_signals.c \
 			  utils/ms_checkers.c utils/ms_free.c utils/ms_print.c
 OBJECTS		= $(SOURCES:.c=.o)
 
