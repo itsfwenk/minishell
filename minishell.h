@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:51:25 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/25 17:42:22 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:28:11 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_token
 	t_pids			*pid;
 	int				*previous_pipe;
 	int				fd;
+	int				here_doc;
 }	t_token;
 
 typedef struct s_kibidi
@@ -86,13 +87,13 @@ typedef struct s_kibidi
 
 extern int	g_signal;
 
-int			exp_check_keys(t_string *current,
+int			exp_check_keys(char *str,
 				t_skibidi *skibidishell, int *i, int *delta_char);
-t_env		*key_exists(t_string *current, t_skibidi *skibidishell,
+t_env		*key_exists(char *str, t_skibidi *skibidishell,
 				int *limits);
-void		exp_no_brackets(t_string *current,
+void		exp_no_brackets(char *str,
 				t_skibidi *skibidishell, int *i, int *delta_char);
-int			exp_env_var(t_string *current, t_skibidi *skibidishell);
+int			exp_env_var(char *str, t_skibidi *skibidishell);
 void		ft_expander(t_skibidi *skibidishell, t_token *token);
 void		merge_tokens(t_skibidi *skibidishell, t_token **token,
 				t_token *cmd);
@@ -104,7 +105,7 @@ t_token		*get_cmd(t_token *token);
 void		merge_operators(t_skibidi *skibidishell, t_token *current);
 int			ft_export(t_skibidi *skibidishell, char **args);
 void		assemble_tstring(t_skibidi *skibidishell, t_token *token);
-void		exp_pos_param(t_string *current, t_skibidi *skibidishell);
+void		exp_pos_param(char *str, t_skibidi *skibidishell);
 // void		create_argv(t_token *tokens, t_skibidi *skibidishell);
 t_token		*lx_meta_token(char *str, int *i, int token_type,
 				t_skibidi *skibidishell);
@@ -115,6 +116,8 @@ int			lx_createadd(t_token **tokens, t_skibidi *skibidishell,
 t_token		*ft_lexer(char *input, t_skibidi *skibidishell);
 
 int			get_here_doc_content(t_token *tree, t_skibidi *skibidishell);
+void	check_for_heredoc(t_token *token, t_skibidi *skibidishell);
+
 
 char		**build_envp(t_env *env);
 

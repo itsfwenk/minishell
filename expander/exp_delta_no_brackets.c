@@ -3,36 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   exp_delta_no_brackets.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 11:22:26 by fli               #+#    #+#             */
-/*   Updated: 2024/09/16 18:00:44 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:49:32 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	is_var_limiter(t_string *current, int *key_limits)
+static int	is_var_limiter(char *str, int *key_limits)
 {
-	if ((current->str[key_limits[0]] == '#'
-			|| current->str[key_limits[0]] == '!'
-			|| current->str[key_limits[0]] == '$'
-			|| current->str[key_limits[0]] == '-'))
+	if ((str[key_limits[0]] == '#'
+			|| str[key_limits[0]] == '!'
+			|| str[key_limits[0]] == '$'
+			|| str[key_limits[0]] == '-'))
 	{
 		key_limits[1] = key_limits[1] + 1;
 		return (TRUE);
 	}
 	if ((key_limits[1] == key_limits[0]
-			&& !ft_isalpha(current->str[key_limits[1]])
-			&& current->str[key_limits[1]] != '_')
+			&& !ft_isalpha(str[key_limits[1]])
+			&& str[key_limits[1]] != '_')
 		|| (key_limits[1] > key_limits[0]
-			&& !ft_isalnum(current->str[key_limits[1]])
-			&& current->str[key_limits[1]] != '_'))
+			&& !ft_isalnum(str[key_limits[1]])
+			&& str[key_limits[1]] != '_'))
 		return (TRUE);
 	return (FALSE);
 }
 
-t_env	*key_exists(t_string *current, t_skibidi *skibidishell, int *limits)
+t_env	*key_exists(char *str, t_skibidi *skibidishell, int *limits)
 {
 	int		tstring_i;
 	int		key_i;
@@ -43,14 +43,14 @@ t_env	*key_exists(t_string *current, t_skibidi *skibidishell, int *limits)
 	{
 		tstring_i = limits[0];
 		key_i = 0;
-		if (current->str[tstring_i] == env_var->key[key_i]
+		if (str[tstring_i] == env_var->key[key_i]
 			&& env_var->is_unset == FALSE)
 		{
 			while (tstring_i <= limits[1] && env_var->key[key_i] != '\0')
 			{
 				tstring_i++;
 				key_i++;
-				if (current->str[tstring_i] != env_var->key[key_i])
+				if (str[tstring_i] != env_var->key[key_i])
 					break ;
 			}
 			if (tstring_i == limits[1] + 1 && env_var->key[key_i] == '\0')
@@ -61,7 +61,7 @@ t_env	*key_exists(t_string *current, t_skibidi *skibidishell, int *limits)
 	return (NULL);
 }
 
-void	exp_no_brackets(t_string *current,
+void	exp_no_brackets(char *str,
 	t_skibidi *skibidishell, int *i, int *delta_char)
 {
 	int		key_limits[2];
@@ -70,14 +70,14 @@ void	exp_no_brackets(t_string *current,
 
 	key_limits[0] = *i + 1;
 	key_limits[1] = key_limits[0];
-	while (current->str[key_limits[1]] != '\0')
+	while (str[key_limits[1]] != '\0')
 	{
-		if (is_var_limiter(current, key_limits) == TRUE)
+		if (is_var_limiter(str, key_limits) == TRUE)
 			break ;
 		key_limits[1]++;
 	}
 	key_limits[1]--;
-	env_var = key_exists(current, skibidishell, key_limits);
+	env_var = key_exists(str, skibidishell, key_limits);
 	key_len = key_limits[1] - key_limits[0] + 2;
 	*i = key_limits[1] + 1;
 	if (env_var != NULL)

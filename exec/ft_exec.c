@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 16:41:07 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/25 16:47:53 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/26 14:19:32 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	exec_parentheses(t_skibidi *skibidishell, t_token *tree, int *pipetab, int 
 	}
 }
 
-static int	get_fd(t_token	*redirection, t_skibidi *skibidishell)
+static int	get_fd(t_token	*redirection)
 {
 	int		fd_redir;
 
@@ -77,7 +77,11 @@ static int	get_fd(t_token	*redirection, t_skibidi *skibidishell)
 	if (redirection->type == IN_REDIR)
 		fd_redir = open(redirection->next->assembled, O_RDONLY);
 	if (redirection->type == HERE_DOC)
-		fd_redir = get_here_doc_content(redirection, skibidishell);
+	{
+		char *heredocname = ft_strjoin("here_doc", ft_itoa(redirection->here_doc));
+		// dprintf(2, "hd name = %s\n", heredocname);
+		fd_redir = open(heredocname, O_RDONLY);
+	}
 	if (redirection->type == OUT_REDIR)
 		fd_redir = open(redirection->next->assembled, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (redirection->type == APD_OUT_REDIR)
@@ -93,6 +97,9 @@ static int	dup_fd(int fd_redir, t_token *redirection)
 {
 	int		dup_return;
 
+	// char	buffer[1000];
+	// read(fd_redir, buffer, 30);
+	// dprintf(2, "heredoc content : %s\n", buffer);
 	if (redirection->type == IN_REDIR || redirection->type == HERE_DOC)
 		dup_return = dup2(fd_redir, STDIN_FILENO);
 	if (redirection->type == OUT_REDIR || redirection->type == APD_OUT_REDIR)
@@ -102,6 +109,7 @@ static int	dup_fd(int fd_redir, t_token *redirection)
 		close(fd_redir);
 		return (FALSE);
 	}
+	close(fd_redir);
 	return (TRUE);
 }
 
@@ -126,7 +134,7 @@ int	fd_manager(t_token *tree, int *pipetab, int side, t_skibidi *skibidishell)
 	redirection = tree->redir;
 	while (redirection != NULL)
 	{
-		fd_redir = get_fd(redirection, skibidishell);
+		fd_redir = get_fd(redirection);
 		if (fd_redir == -1)
 			return (FALSE);
 		if (dup_fd(fd_redir, redirection) == FALSE)
@@ -139,6 +147,7 @@ int	fd_manager(t_token *tree, int *pipetab, int side, t_skibidi *skibidishell)
 		if (dup2(pipetab[1], STDOUT_FILENO) == -1)
 		{
 			close_pipe(pipetab);
+			ft_free_clean(skibidishell);
 			return (FALSE);
 		}
 		dprintf(2, "pipetab closed in LEFT %s\n", tree->full_string);
@@ -149,6 +158,7 @@ int	fd_manager(t_token *tree, int *pipetab, int side, t_skibidi *skibidishell)
 		if (dup2(pipetab[0], STDIN_FILENO) == -1)
 		{
 			close_pipe(pipetab);
+			ft_free_clean(skibidishell);
 			return (FALSE);
 		}
 		dprintf(2, "pipetab closed in RIGHT %s\n", tree->full_string);
@@ -324,6 +334,7 @@ static int	exec_cmd(t_skibidi *skibidishell, t_token *tree, int *pipetab, int si
 	{
 		ft_expander(skibidishell, tree);
 		assemble_tstring(skibidishell, tree);
+		check_for_heredoc(tree, skibidishell);
 		get_filenames(tree, skibidishell);
 		create_argv(tree, skibidishell);
 		if (skibidishell->tokens->next == NULL && only_builtins(skibidishell->tokens))

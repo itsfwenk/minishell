@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:58:42 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/25 10:23:13 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/26 10:53:22 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	set_limits(char *str, int *limits, int *i)
 	// {
 	// 	limits[1]++;
 	// }
-	while (limits[1] <= i[1] + 1)
+	while (limits[1] <= i[1])
 	{
 		if (str[limits[1]] == '\'' || str[limits[1]] == '"')
 		{
@@ -55,7 +55,8 @@ static void	set_limits(char *str, int *limits, int *i)
 		}
 		limits[1]++;
 	}
-	limits[1] = limits[1] - 2;
+	if (str[limits[1]] == ' ')
+		limits[1] = limits[1] - 1;
 }
 
 void	other_tstr(char *str, int *i, int token_type, t_string **tstring)

@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 11:50:16 by fli               #+#    #+#             */
-/*   Updated: 2024/09/19 19:38:27 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/26 14:24:42 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	heredoc_creator(t_token *tree, t_skibidi *skibidishell)
 	char	*hd_name;
 
 	i = 0;
-	fd_hd = open("here_doc0", O_CREAT | O_EXCL, 0644);
+	fd_hd = open("here_doc0", O_WRONLY | O_CREAT | O_EXCL, 0644);
 	while (fd_hd == -1)
 	{
 		i++;
@@ -49,11 +49,11 @@ static int	heredoc_creator(t_token *tree, t_skibidi *skibidishell)
 			free(i_to_a);
 			ft_free_clean(skibidishell);
 		}
-		fd_hd = open(hd_name, O_CREAT | O_EXCL, 0644);
+		fd_hd = open(hd_name, O_WRONLY | O_CREAT | O_EXCL, 0644);
 		free(i_to_a);
 		free(hd_name);
 	}
-	tree->pid->here_doc = i;
+	tree->here_doc = i; //
 	return (fd_hd);
 }
 
@@ -62,8 +62,10 @@ int	get_here_doc_content(t_token *tree, t_skibidi *skibidishell)
 	int		fd_hd;
 	char	*next_line;
 	char	*limiter;
+	char	*tmp;
 
-	limiter = ft_strjoin(tree->next->assembled, "\n");
+	// limiter = ft_strjoin(tree->next->assembled, "\n");
+	limiter = tree->next->assembled;
 	if (limiter == NULL)
 		return (-1);
 	fd_hd = heredoc_creator(tree, skibidishell);
@@ -71,8 +73,14 @@ int	get_here_doc_content(t_token *tree, t_skibidi *skibidishell)
 	while (next_line != NULL
 		&& ft_strncmp_pipex(next_line, limiter, ft_strlen(limiter) + 1) != 0)
 	{
-		if (next_line == NULL)
-			break ;
+		// if (next_line == NULL)
+		// 	break ;
+		exp_pos_param(next_line, skibidishell);
+		if (exp_env_var(next_line, skibidishell) == FALSE)
+				dprintf(2, "expand error in here doc\n");
+		tmp = next_line;
+		next_line = ft_strjoin(tmp, "\n");
+		free(tmp);
 		write(fd_hd, next_line, ft_strlen(next_line));
 		free(next_line);
 		next_line = readline("> ");

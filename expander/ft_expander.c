@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 17:09:48 by fli               #+#    #+#             */
-/*   Updated: 2024/09/24 11:26:01 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/26 13:03:23 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	ft_expander(t_skibidi *skibidishell, t_token *token)
 	{
 		if (current_tstr->to_be_expanded == TRUE)
 		{
-			exp_pos_param(current_tstr, skibidishell);
-			if (exp_env_var(current_tstr, skibidishell) == FALSE)
+			exp_pos_param(current_tstr->str, skibidishell);
+			if (exp_env_var(current_tstr->str, skibidishell) == FALSE)
 				return ;
 		}
 		current_tstr = current_tstr->next;

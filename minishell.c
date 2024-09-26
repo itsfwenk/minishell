@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/25 17:41:11 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:26:59 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,8 @@ int	main(int argc, char **argv, char **envp)
 	init_signals();
 	if (!ft_export(skibidishell, envp) && reset_utils_env(&skibidishell->env))
 	{
-		// line = ft_strdup("ls | cat -e | (cat -e | cat -e)");
-		line = free_and_trim(readline(ft_get_prompt(g_signal)));
+		line = ft_strdup("<< stop cat");
+		// line = free_and_trim(readline(ft_get_prompt(g_signal)));
 		while (line)
 		{
 			if (line[0])
@@ -171,6 +171,25 @@ int	main(int argc, char **argv, char **envp)
 				}
 			}
 			free(line);
+			///
+			token = skibidishell->tokens;
+			while (token)
+			{
+				t_token *redir = token->redir;
+				while (redir)
+				{
+					dprintf(2, "AAAAAAAAA\n");
+					if (redir->type == HERE_DOC)
+					{
+						char *heredocname = ft_strjoin("here_doc", ft_itoa(redir->here_doc));
+						dprintf(2, "hd name = %s\n", heredocname);
+						dprintf(2, "unlink return = %d\n", unlink(heredocname));
+					}
+					redir = redir->next;
+				}
+				token = token->next;
+			}
+			///
 			reset_utils_env(&skibidishell->env);
 			line = free_and_trim(readline(ft_get_prompt(g_signal)));
 		}

@@ -6,11 +6,24 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:08:07 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/24 15:09:57 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/26 13:39:08 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	check_for_heredoc(t_token *token, t_skibidi *skibidishell)
+{
+	t_token	*redir;
+
+	redir = token->redir;
+	while (redir)
+	{
+		if (redir->type == HERE_DOC)
+			redir->fd = get_here_doc_content(redir, skibidishell);
+		redir = redir->next;
+	}
+}
 
 t_token	*ft_lexer(char *input, t_skibidi *skibidishell)
 {
