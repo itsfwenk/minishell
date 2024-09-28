@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/29 01:39:37 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 01:43:33 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	fstat(STDOUT_FILENO, &prog_stat);
 	if (S_ISFIFO(prog_stat.st_mode))
-		return (EXIT_SUCCESS);
+		return (EXIT_FAILURE);
 	shell = init_shell(envp);
 	if (shell)
 	{
