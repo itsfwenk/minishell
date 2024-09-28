@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:24:02 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 18:26:54 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 18:32:51 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,6 @@ static bool	dup_fd(int fd_redir, t_token *redirection)
 	}
 	close(fd_redir);
 	return (true);
-}
-
-void	close_pipe(int pipefd[2])
-{
-	if (pipefd == NULL)
-		return ;
-	if (pipefd[0] != -1)
-		close(pipefd[0]);
-	if (pipefd[1] != -1)
-		close(pipefd[1]);
-	pipefd[0] = -1;
-	pipefd[1] = -1;
 }
 
 static bool	side_fd_manager(t_skibidi *shell, int *pipetab, t_side side)
@@ -71,6 +59,18 @@ static bool	previous_pipe_manager(t_skibidi *shell, t_token *tree, t_side side)
 			return (close_pipe(tree->previous_pipe), false);
 		close_pipe(tree->previous_pipe);
 	}
+}
+
+void	close_pipe(int pipefd[2])
+{
+	if (pipefd == NULL)
+		return ;
+	if (pipefd[0] != -1)
+		close(pipefd[0]);
+	if (pipefd[1] != -1)
+		close(pipefd[1]);
+	pipefd[0] = -1;
+	pipefd[1] = -1;
 }
 
 int	fd_manager(t_skibidi *shell, t_token *tree,

@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:28:31 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 17:52:01 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 19:00:00 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 
 extern int					g_signal;
 
+// Enums
 typedef enum e_side
 {
 	LEFT,

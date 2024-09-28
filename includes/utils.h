@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:32:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 16:01:28 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 19:00:59 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,16 @@
 # define WARNING_EMOJI "🙀"
 # define ERROR_EMOJI "😿"
 
+// Enums
+typedef enum e_side			t_side;
+typedef enum e_type			t_type;
+
 // Structures
-typedef struct s_kibidi	t_skibidi;
-typedef struct s_env	t_env;
+typedef struct s_pid		t_pid;
+typedef struct s_env		t_env;
+typedef struct s_string		t_string;
+typedef struct s_token		t_token;
+typedef struct s_kibidi		t_skibidi;
 
 // char_utils.c
 bool		in_charset(char c, char *charset);
@@ -39,7 +46,7 @@ bool		is_meta(char c);
 char		is_quote(char c);
 
 // free_utils.c
-void		free_str_tab(char	**tab);
+char		**free_str_tab(char	**tab);
 int			exit_shell(t_skibidi *shell);
 void		free_env(t_env	*env);
 

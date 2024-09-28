@@ -6,13 +6,13 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 00:06:48 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 15:33:52 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 18:30:35 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "skibidishell.h"
 
-void	free_str_tab(char	**tab)
+char	**free_str_tab(char	**tab)
 {
 	size_t	i;
 
@@ -25,7 +25,7 @@ void	free_str_tab(char	**tab)
 		i++;
 	}
 	free(tab);
-	return ;
+	return (NULL);
 }
 
 void	free_env(t_env	*env)

@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:21:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 18:23:37 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 18:36:39 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,13 @@ static void	cmd_exec(t_skibidi *shell, t_token *tree)
 	if (builtin)
 		exit(builtin_exec(shell, cmd_path, tree->argv));
 	if (cmd_path == NULL)
-	{
 		exit_shell(shell);
-		exit(127);
-	}
 	envp = build_envp(shell->env);
 	if (envp == NULL)
 		exit_shell(shell);
 	if (execve(cmd_path, tree->argv, envp) == -1)
 	{
+		free_str_tab(envp);
 		free(cmd_path);
 		exit_shell(shell);
 		exit(EXIT_FAILURE);

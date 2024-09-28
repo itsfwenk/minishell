@@ -6,7 +6,7 @@
 #    By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 23:15:10 by mel-habi          #+#    #+#              #
-#    Updated: 2024/09/28 16:02:18 by mel-habi         ###   ########.fr        #
+#    Updated: 2024/09/28 18:58:15 by mel-habi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,10 @@ NAME 			= minishell
 LIBFT			= libft
 
 BUILTINS_SRCS	=
-EXEC_SRCS		=
-EXPANDER_SRCS	=
-LEXER_SRCS		=
-PARSER_SRCS		=
+EXEC_SRCS		= exec_subshell.c exec_utils.c execution.c fd_manager.c ft_exec.c get_fd.c get_path.c here_doc.c pid_list_manip.c
+EXPANDER_SRCS	= assemble_tstring.c check_filename.c exp_delta_in_brackets.c exp_delta_no_brackets.c exp_env_var.c exp_pos_param.c ft_expander.c ft_wildcards.c
+LEXER_SRCS		= ft_lexer.c lx_lst_add.c lx_lst_manip.c lx_manip_utils.c lx_parentheses.c lx_utils.c merger_utils.c tstring_utils.c tstring.c
+PARSER_SRCS		= check_syntax.c tree.c
 SIGNALS_SRCS	=
 UTILS_SRCS		= char_utils.c free_utils.c init_utils.c line_utils.c only_redirs_utils.c print_utils.c str_utils.c syntax_checker_utils.c
 MAIN_SRCS		= skibidishell.c
