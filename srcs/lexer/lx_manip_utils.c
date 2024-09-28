@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:17:30 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 16:20:36 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 18:04:12 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	lx_deltokens(t_token **tokens)
 		if (current->assembled)
 			free(current->assembled);
 		if (current->argv)
-			free_all(current->argv);
+			free_str_tab(current->argv);
 		lx_deltokens(&current->redir);
 		lx_deltokens(&current->sub_shell);
 		prev = current;
