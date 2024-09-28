@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:04:18 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 18:04:12 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 19:31:16 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static void	expand_arg_redir(t_skibidi *shell, t_token *token)
 void	ft_expander(t_skibidi *shell, t_token *token)
 {
 	t_string	*current_tstr;
-	t_token		*current;
 
 	if (token == NULL)
 		return ;

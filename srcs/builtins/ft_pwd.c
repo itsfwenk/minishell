@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_utils.c                                       :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/27 17:29:52 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 19:46:20 by mel-habi         ###   ########.fr       */
+/*   Created: 2024/09/28 19:08:00 by mel-habi          #+#    #+#             */
+/*   Updated: 2024/09/28 19:08:08 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "skibidishell.h"
 
-t_skibidi	*init_shell(char **envp)
+int	ft_pwd(void)
 {
-	t_skibidi	*shell;
+	char	pwd[PATH_MAX];
 
-	shell = ft_calloc(1, sizeof(t_skibidi));
-	if (!shell || ft_export(shell, envp))
-		return (NULL);
-	return (shell);
+	if (!(getcwd(pwd, sizeof(pwd))))
+	{
+		ft_print_error("pwd", NULL, "Cannot get current \
+working directory path", NULL);
+		return (2);
+	}
+	printf("%s\n", pwd);
+	return (0);
 }

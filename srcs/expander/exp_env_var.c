@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:57:51 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 18:04:12 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 19:31:06 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	exp_cp_env_var(t_skibidi *shell, char *str,
 	t_env	*env_var;
 
 	exp_find_key_limits(str, i[0], key_limits);
-	env_var = key_exists(str, shell, key_limits);
+	env_var = key_exists(shell, str, key_limits);
 	j = 0;
 	while (env_var != NULL && env_var->is_unset == false
 		&& env_var->value[j] != '\0')
@@ -97,7 +97,7 @@ int	exp_env_var(t_skibidi *shell, char *str)
 		if (str[i] == '$' && str[i + 1] != '\0')
 		{
 			nb_exp_var++;
-			if (exp_check_keys(str, shell, &i, &delta_char) == false)
+			if (exp_check_keys(shell, str, &i, &delta_char) == false)
 				return (false);
 		}
 		i = i + (str[i] != '\0');

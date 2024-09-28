@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_utils.c                                       :+:      :+:    :+:   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/27 17:29:52 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 19:46:20 by mel-habi         ###   ########.fr       */
+/*   Created: 2024/09/28 19:08:19 by mel-habi          #+#    #+#             */
+/*   Updated: 2024/09/28 19:08:26 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "skibidishell.h"
 
-t_skibidi	*init_shell(char **envp)
+int	ft_unset(t_env *env, char **keys)
 {
-	t_skibidi	*shell;
+	size_t	i;
 
-	shell = ft_calloc(1, sizeof(t_skibidi));
-	if (!shell || ft_export(shell, envp))
-		return (NULL);
-	return (shell);
+	i = 0;
+	while (keys[i])
+	{
+		if (check_key(keys[i]))
+			unset_env(env, keys[i]);
+		i++;
+	}
+	return (0);
 }

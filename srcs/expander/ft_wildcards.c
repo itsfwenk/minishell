@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:11:25 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 17:23:47 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 19:31:23 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	get_filenames(t_skibidi *shell, t_token *tokens)
 {
 	DIR				*directory;
 	struct dirent	*read_return;
-	t_token			*current;
 
 	if (tokens == NULL)
 		return ;

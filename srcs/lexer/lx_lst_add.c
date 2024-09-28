@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:10:09 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 18:04:12 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 19:31:39 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ bool	lx_createadd(t_skibidi *shell, t_token **tokens, char *input, int *i)
 
 	token_type = which_token(tokens, &input[i[0]]);
 	if (token_type >= PIPE && token_type <= HERE_DOC)
-		ntoken = lx_meta_token(input, i, token_type, shell);
+		ntoken = lx_meta_token(shell, input, i, token_type);
 	else
 		ntoken = lx_str_token(shell, input, i, token_type);
 	if (ntoken == NULL)

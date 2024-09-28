@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:34:50 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 19:00:38 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 19:14:46 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,36 @@ typedef struct s_env		t_env;
 typedef struct s_string		t_string;
 typedef struct s_token		t_token;
 typedef struct s_kibidi		t_skibidi;
+
+// bi_checkers.c
+bool	check_key(char *key);
+bool	is_builtin(char	*cmd);
+
+// bi_env.c
+t_env	*get_env(t_env *env, char *key);
+t_env	*add_env(t_env **env, char *key, char *value);
+void	unset_env(t_env *env, char *key);
+
+// ft_cd.c
+int		ft_cd(t_env	*env, char **dir_path);
+
+// ft_echo.c
+int		ft_echo(char **echo_arg);
+
+// ft_env.c
+t_env	*reset_utils_env(t_env **env);
+int		ft_env(t_env *env);
+
+// ft_exit.c
+int		ft_exit(char **ex_arg);
+
+// ft_export.c
+int		ft_export(t_skibidi *shell, char **args);
+
+// ft_pwd.c
+int		ft_pwd(void);
+
+// ft_unset.c
+int		ft_unset(t_env *env, char **keys);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:36:33 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 19:02:50 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 19:31:55 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int			is_sep(char *c);
 int			which_token(t_token **tokens, char *c);
 
 // merger_utils.c
-t_token		get_next_token(t_token *token);
+t_token		*get_next_token(t_token *token);
 void		merge_redirection(t_skibidi *shell, t_token *current, t_token *cmd);
 void		merge_arguments(t_skibidi *shell,
 				t_token *current, t_token *cmd);

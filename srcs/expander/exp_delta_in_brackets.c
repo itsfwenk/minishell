@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:50:15 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 18:04:12 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 19:30:36 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static bool	exp_in_brackets(t_skibidi *shell, char *str,
 	}
 	if (check_key_in_brackets(str, key_limits) == false)
 		return (false);
-	env_var = key_exists(str, shell, key_limits);
+	env_var = key_exists(shell, str, key_limits);
 	var_len = key_limits[1] - key_limits[0] + 3;
 	*i = key_limits[1] + 2;
 	if (env_var != NULL)

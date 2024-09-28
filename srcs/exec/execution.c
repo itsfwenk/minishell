@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:21:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 18:36:39 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 19:25:58 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,9 @@ int	exec_cmd(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
 	{
 		ft_expander(shell, tree);
 		assemble_tstring(shell, tree);
-		check_for_heredoc(tree, shell);
-		get_filenames(tree, shell);
-		create_argv(tree, shell);
+		check_for_heredoc(shell, tree);
+		get_filenames(shell, tree);
+		create_argv(shell, tree);
 		if (shell->tokens->next == NULL && only_builtins(shell->tokens))
 			builtin_exec(shell, tree->assembled, tree->argv);
 		else
@@ -108,7 +108,7 @@ int	exec_cmd(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
 				exit_shell(shell);
 			if (tree->pid->p_id == 0)
 			{
-				if (fd_manager(tree, pipetab, side, shell) == false)
+				if (fd_manager(shell, tree, pipetab, side) == false)
 					exit_shell(shell);
 				close_pipe(pipetab);
 				close_pipe(tree->previous_pipe);

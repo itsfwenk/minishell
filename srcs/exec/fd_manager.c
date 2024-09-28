@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:24:02 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 18:32:51 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 19:29:09 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ static bool	side_fd_manager(t_skibidi *shell, int *pipetab, t_side side)
 			return (close_pipe(pipetab), exit_shell(shell), false);
 		close_pipe(pipetab);
 	}
+	return (true);
 }
 
-static bool	previous_pipe_manager(t_skibidi *shell, t_token *tree, t_side side)
+static bool	previous_pipe_manager(t_token *tree, t_side side)
 {
 	if (tree->previous_pipe != NULL && side == LEFT)
 	{
@@ -59,6 +60,7 @@ static bool	previous_pipe_manager(t_skibidi *shell, t_token *tree, t_side side)
 			return (close_pipe(tree->previous_pipe), false);
 		close_pipe(tree->previous_pipe);
 	}
+	return (true);
 }
 
 void	close_pipe(int pipefd[2])
@@ -83,7 +85,7 @@ int	fd_manager(t_skibidi *shell, t_token *tree,
 	redirection = tree->redir;
 	while (redirection != NULL)
 	{
-		fd_redir = get_fd(redirection, shell);
+		fd_redir = get_fd(shell, redirection);
 		if (fd_redir == -1)
 			return (false);
 		if (dup_fd(fd_redir, redirection) == false)
@@ -92,6 +94,6 @@ int	fd_manager(t_skibidi *shell, t_token *tree,
 		redirection = redirection->next->next;
 	}
 	side_fd_manager(shell, pipetab, side);
-	previous_pipe_manager(shell, tree, side);
+	previous_pipe_manager(tree, side);
 	return (true);
 }

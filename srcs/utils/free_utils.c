@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 00:06:48 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 18:30:35 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 19:48:25 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	**free_str_tab(char	**tab)
 
 	i = 0;
 	if (!tab || !(*tab))
-		return ;
+		return (NULL);
 	while (tab[i])
 	{
 		free(tab[i]);
@@ -52,6 +52,7 @@ int	exit_shell(t_skibidi *shell)
 		return (EXIT_FAILURE);
 	exit_code = shell->exit_code;
 	free_env(shell->env);
+	lx_deltokens(&shell->tokens);
 	free(shell);
 	rl_clear_history();
 	exit(exit_code);

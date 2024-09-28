@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:32:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 19:00:59 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 19:45:32 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int			exit_shell(t_skibidi *shell);
 void		free_env(t_env	*env);
 
 // init_utils.c
-t_skibidi	*init_shell(void);
+t_skibidi	*init_shell(char **envp);
 
 // line_utils.c
 bool		check_line(char *line);
@@ -73,5 +73,8 @@ bool		finished_by_meta(char *str);
 bool		is_brace_well_formatted(char *str);
 bool		has_semicolon(char *str);
 int			is_well_formatted(char *str);
+
+// unlink_hd.c
+void		unlink_heredoc(t_skibidi *shell);
 
 #endif

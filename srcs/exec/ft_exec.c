@@ -6,13 +6,13 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:45:11 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 18:26:36 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 19:30:05 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "skibidishell.h"
 
-static int	get_arg_nb(t_token *tokens)
+int	get_arg_nb(t_token *tokens)
 {
 	int			i;
 	t_string	*token_wildcarded;
@@ -40,7 +40,7 @@ static int	get_arg_nb(t_token *tokens)
 	return (i);
 }
 
-static void	add_every_wc(t_skibidi *shell, char **array,
+void	add_every_wc(t_skibidi *shell, char **array,
 	t_token *token, int *i)
 {
 	t_string	*cmd;
@@ -59,7 +59,7 @@ static void	add_every_wc(t_skibidi *shell, char **array,
 	}
 }
 
-static void	add_args(t_skibidi *shell, char **array,
+void	add_args(t_skibidi *shell, char **array,
 	t_token *arguments, int *i)
 {
 	t_token	*arg_token;
@@ -86,7 +86,7 @@ static bool	special_exec(t_skibidi *shell, t_token *tree, int *pipetab)
 		if (WEXITSTATUS(tree->left->pid->status) == EXIT_SUCCESS)
 			return (false);
 	}
-	exec_tree(shell, tree->right, pipetab, RIGHT);
+	return (exec_tree(shell, tree->right, pipetab, RIGHT));
 }
 
 bool	exec_tree(t_skibidi *shell, t_token *tree, int *pipetab, int side)

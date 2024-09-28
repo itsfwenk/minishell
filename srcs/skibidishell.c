@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 16:33:43 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 19:44:09 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,19 @@ static void	handle_line(t_skibidi *shell, char *line)
 	return ;
 }
 
+static void	wait_children(t_skibidi *shell)
+{
+	t_token		*token;
+
+	token = shell->tokens;
+	while (token)
+	{
+		if (token->type == STR)
+			waitpid(token->pid->p_id, &token->pid->status, 0);
+		token = token->next;
+	}
+}
+
 static void	skibidi_loop(t_skibidi *shell)
 {
 	char	*line;
@@ -51,6 +64,8 @@ static void	skibidi_loop(t_skibidi *shell)
 			shell->exit_code = 0;
 			add_history(line);
 			handle_line(shell, line);
+			wait_children(shell);
+			unlink_heredoc(shell);
 			line = NULL;
 		}
 		if (line)
@@ -65,8 +80,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	(void)envp;
-	shell = init_shell();
+	shell = init_shell(envp);
 	if (shell)
 	{
 		ft_print_logo();
