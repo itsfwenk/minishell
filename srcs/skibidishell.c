@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 20:40:02 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 20:42:02 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static void	skibidi_loop(t_skibidi *shell)
 	while (1)
 	{
 		line = readline(ft_get_prompt(!!shell->exit_code));
-		// line = ft_strdup("echo A && echo B");
 		if (!line)
 			break ;
 		else if (!check_line(line))
