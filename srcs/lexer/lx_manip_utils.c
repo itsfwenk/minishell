@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:17:30 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 23:24:01 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 23:55:41 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,4 @@ void	lx_deltokens(t_token **tokens)
 		current = current->next;
 		free(prev);
 	}
-	*tokens = NULL;
 }
