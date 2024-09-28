@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:57:51 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 19:31:06 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 00:26:27 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,9 @@ static void	exp_dup_env_var(t_skibidi *shell,
 	}
 	expanded_str[i[1]] = '\0';
 	free(str);
-	str = expanded_str;
 }
 
-int	exp_env_var(t_skibidi *shell, char *str)
+char	*exp_env_var(t_skibidi *shell, char *str)
 {
 	int		i;
 	int		delta_char;
@@ -98,15 +97,15 @@ int	exp_env_var(t_skibidi *shell, char *str)
 		{
 			nb_exp_var++;
 			if (exp_check_keys(shell, str, &i, &delta_char) == false)
-				return (false);
+				return (NULL);
 		}
 		i = i + (str[i] != '\0');
 	}
 	if (nb_exp_var == 0)
-		return (true);
+		return (str);
 	expanded_str = malloc(1 + (ft_strlen(str) + delta_char));
 	if (expanded_str == NULL)
 		exit_shell(shell);
 	exp_dup_env_var(shell, str, expanded_str);
-	return (true);
+	return (expanded_str);
 }

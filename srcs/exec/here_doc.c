@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:29:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 18:04:05 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 00:32:03 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,9 @@ int	get_here_doc_content(t_skibidi *shell, t_token *tree)
 	while (next_line != NULL
 		&& ft_strncmp_pipex(next_line, limiter, ft_strlen(limiter) + 1) != 0)
 	{
-		exp_pos_param(shell, next_line);
-		if (exp_env_var(shell, next_line) == false)
+		next_line = exp_pos_param(shell, next_line);
+		next_line = exp_env_var(shell, next_line);
+		if (next_line == NULL)
 			break ;
 		tmp = next_line;
 		next_line = ft_strjoin(tmp, "\n");

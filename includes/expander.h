@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:35:35 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 19:02:27 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 00:31:08 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void	exp_no_brackets(t_skibidi *shell, char *str,
 			int *i, int *delta_char);
 
 // exp_env_var.c
-int		exp_env_var(t_skibidi *shell, char *str);
+char	*exp_env_var(t_skibidi *shell, char *str);
 
 // exp_pos_param.c
-void	exp_pos_param(t_skibidi *shell, char *str);
+char	*exp_pos_param(t_skibidi *shell, char *str);
 
 // ft_expander.c
 void	ft_expander(t_skibidi *shell, t_token *token);
