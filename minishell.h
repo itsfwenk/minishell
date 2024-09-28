@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:51:25 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/26 13:28:11 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/28 12:05:30 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,5 +185,10 @@ int		is_well_formated(char *str);
 int		finished_by_meta(char *str);
 int		is_brace_well_formated(char *str);
 int		has_semicolon(char *str);
+
+
+
+int	get_fd(t_token	*redirection, t_skibidi *skibidishell);
+int	get_hd_fd(t_token *redirection, t_skibidi *skibidishell);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 16:41:07 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 11:35:59 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/28 12:06:35 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	exec_parentheses(t_skibidi *skibidishell, t_token *tree, int *pipetab, int 
 	}
 }
 
-static int	get_hd_fd(t_token *redirection, t_skibidi *skibidishell)
+int	get_hd_fd(t_token *redirection, t_skibidi *skibidishell)
 {
 	int		fd_redir;
 	char	*heredoc_num;
@@ -88,7 +88,7 @@ static int	get_hd_fd(t_token *redirection, t_skibidi *skibidishell)
 	return (fd_redir);
 }
 
-static int	get_fd(t_token	*redirection, t_skibidi *skibidishell)
+int	get_fd(t_token	*redirection, t_skibidi *skibidishell)
 {
 	int		fd_redir;
 

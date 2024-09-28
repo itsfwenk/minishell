@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 11:33:40 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/28 14:25:27 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,40 @@ static int 	only_redirs(t_token *token)
 // 	exec_tree(tree->right);
 // }
 
+static void	check_for_here_doc(t_skibidi *skibidishell)
+{
+	int		hd_return;
+	t_token	*current;
+
+	current = skibidishell->tokens;
+
+	while (current)
+	{
+		if (current->type == HERE_DOC)
+		{
+			hd_return = get_here_doc_content(current, skibidishell);
+			if (hd_return == -1)
+				ft_free_clean(skibidishell);
+		}
+		current = current->next;
+	}
+}
+
+static void	expd_wc_only_redir(t_skibidi *skibidishell)
+{
+	t_token	*token;
+
+	token = skibidishell->tokens;
+	while (token)
+	{
+		if (token->type != HD_LIMITER)
+			ft_expander(skibidishell, token);
+		assemble_tstring(skibidishell, token);
+		get_filenames(token, skibidishell);
+		token = token->next;
+	}
+}
+
 static void	handle_line(char *line, t_skibidi *skibidishell)
 {
 	skibidishell->tokens = ft_lexer(line, skibidishell);
@@ -112,6 +146,13 @@ static void	handle_line(char *line, t_skibidi *skibidishell)
 		skibidishell->tree = create_tree(skibidishell->tokens);
 		exec_tree(skibidishell, skibidishell->tree, NULL, -1);
 	}
+	else
+	{
+		expd_wc_only_redir(skibidishell);
+		check_for_here_doc(skibidishell);
+		get_fd(skibidishell->tokens, skibidishell);
+	}
+
 	//exec
 }
 
@@ -161,6 +202,8 @@ static void	unlink_heredoc(t_skibidi *skibidishell)
 	token = skibidishell->tokens;
 	while (token)
 	{
+		if (token->type == HERE_DOC)
+			unlink_file(token, skibidishell);
 		redir = token->redir;
 		while (redir)
 		{
@@ -186,7 +229,7 @@ int	main(int argc, char **argv, char **envp)
 	init_signals();
 	if (!ft_export(skibidishell, envp) && reset_utils_env(&skibidishell->env))
 	{
-		line = ft_strdup("<< stop cat");
+		line = ft_strdup("<< stop");
 		// line = free_and_trim(readline(ft_get_prompt(g_signal)));
 		while (line)
 		{
