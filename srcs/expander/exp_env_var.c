@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:57:51 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/29 00:26:27 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 00:36:34 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	*exp_env_var(t_skibidi *shell, char *str)
 	i = 0;
 	delta_char = 0;
 	nb_exp_var = 0;
-	while (str[i] != '\0')
+	while (str && str[i] != '\0')
 	{
 		if (str[i] == '$' && str[i + 1] != '\0')
 		{

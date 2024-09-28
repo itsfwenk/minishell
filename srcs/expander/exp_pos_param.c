@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:02:43 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/29 00:30:00 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 00:36:22 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*exp_pos_param(t_skibidi *shell, char *str)
 
 	i = 0;
 	nb_pos_param = 0;
-	while (str[i] != '\0')
+	while (str && str[i] != '\0')
 	{
 		if (str[i] == '$' && (ft_isdigit(str[i + 1]) != false
 				|| str[i + 1] == '*' || str[i + 1] == '@'))
