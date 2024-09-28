@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 14:25:27 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/28 15:10:19 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,20 @@ static void	expd_wc_only_redir(t_skibidi *skibidishell)
 	}
 }
 
+static void	open_only_redir(t_skibidi *skibidishell)
+{
+	int		fd;
+	t_token	*token;
+
+	token = skibidishell->tokens;
+	while (token)
+	{
+		fd = get_fd(token, skibidishell);
+		close(fd);
+		token = token->next;
+	}
+}
+
 static void	handle_line(char *line, t_skibidi *skibidishell)
 {
 	skibidishell->tokens = ft_lexer(line, skibidishell);
@@ -150,7 +164,7 @@ static void	handle_line(char *line, t_skibidi *skibidishell)
 	{
 		expd_wc_only_redir(skibidishell);
 		check_for_here_doc(skibidishell);
-		get_fd(skibidishell->tokens, skibidishell);
+		open_only_redir(skibidishell);
 	}
 
 	//exec
