@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:35:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 19:28:02 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 22:37:44 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		fd_manager(t_skibidi *shell, t_token *tree,
 			int *pipetab, t_side side);
 
 // ft_exec.c
-bool	exec_tree(t_skibidi *shell, t_token *tree, int *pipetab, int side);
+bool	exec_tree(t_skibidi *shell, t_token *tree, int *pipetab, t_side side);
 int		get_arg_nb(t_token *tokens);
 void	add_every_wc(t_skibidi *shell, char **array,
 			t_token *token, int *i);

@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:11:25 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 19:31:23 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 23:25:06 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static void	add_to_wildcard_list(t_skibidi *shell,
 	new_tstring->str = ft_strdup(filename);
 	if (new_tstring->str == NULL)
 		exit_shell(shell);
-	new_tstring->to_be_expanded = -1;
-	new_tstring->between_quote = -1;
+	new_tstring->to_be_expanded = false;
+	new_tstring->between_quote = false;
 	new_tstring->next = NULL;
 	tstring_addback(&tokens->wildcard_list, new_tstring);
 }
@@ -35,7 +35,8 @@ static void	get_arg_redir_filenames(t_skibidi *shell, t_token *tokens)
 
 	if (tokens->type == FILENAME && tokens->wildcard_list->next != NULL)
 	{
-		ft_print_error(NULL, tokens->full_string, "ambiguous redirect ඞ", NULL);
+		ft_print_error(NULL, tokens->full_string, "ambiguous redirect ඞ",
+			"\"\"");
 		return ;
 	}
 	current = tokens->arguments;

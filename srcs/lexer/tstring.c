@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:29:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 18:04:12 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 21:34:24 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,9 @@ void	other_tstr(char *str, int *i, int token_type, t_string **tstring)
 t_string	*create_tstring(char *str, int *i, int token_type)
 {
 	int			start;
-	int			end;
 	t_string	*tstring;
 
 	start = i[0];
-	end = i[1];
 	tstring = NULL;
 	while (i[0] <= i[1])
 	{

@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:04:57 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 19:18:06 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 21:34:01 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,8 @@ t_env	*get_env(t_env *env, char *key)
 
 t_env	*add_env(t_env **env, char *key, char *value)
 {
-	t_env	*cur_env;
 	t_env	*new_val;
 
-	cur_env = *env;
 	new_val = get_env(*env, key);
 	if (new_val)
 	{

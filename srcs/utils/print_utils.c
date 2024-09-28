@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 00:12:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/27 18:47:56 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 21:46:40 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_print_error(char *cmd, char *arg, char *error, char *seps)
 	if (!cmd)
 		ft_dprintf(2, "%s skibidi bop no no no: %s %c%s%c%s",
 			WARNING_EMOJI BOLD YELLOW, error, seps[0], \
-			arg, seps[1], ERROR_EMOJI END_COLOR);
+			arg, seps[1], END_COLOR);
 	else if (!arg)
 		ft_dprintf(2, "%s skibidi bop no no no: %s: %s%s",
 			WARNING_EMOJI BOLD YELLOW, cmd, error, \

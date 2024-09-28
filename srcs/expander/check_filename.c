@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:48:53 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 18:04:12 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 22:55:28 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,16 @@ bool	check_filename(t_token *tokens, char *filename, int i, int j)
 {
 	if (tokens->assembled[i] == '\0' && filename[j] == '\0')
 		return (true);
+	else if (filename[j] == '\0')
+	{
+		while (tokens->assembled[i])
+		{
+			if (tokens->assembled[i] != '*')
+				return (false);
+			i++;
+		}
+		return (true);
+	}
 	if (tokens->assembled[i] == '*' && !is_literal(tokens, i))
 	{
 		if (check_filename(tokens, filename, i + 1, j + 1) == true)

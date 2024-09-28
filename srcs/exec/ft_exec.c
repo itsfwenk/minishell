@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:45:11 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 20:07:41 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/28 22:33:23 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static bool	special_exec(t_skibidi *shell, t_token *tree, int *pipetab)
 	return (true);
 }
 
-bool	exec_tree(t_skibidi *shell, t_token *tree, int *pipetab, int side)
+bool	exec_tree(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
 {
 	if (tree == NULL)
 		return (false);
