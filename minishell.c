@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:50:41 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/26 14:26:59 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/28 11:33:40 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,42 @@ static int	check_line(char *line)
 	return (0);
 }
 
+static void	unlink_file(t_token *redir, t_skibidi *skibidishell)
+{
+	char	*heredoc_num;
+	char	*heredoc_name;
+
+	heredoc_num = ft_itoa(redir->here_doc);
+	if (heredoc_num == NULL)
+		ft_free_clean(skibidishell);
+	heredoc_name = ft_strjoin("here_doc", heredoc_num);
+	if (heredoc_name == NULL)
+	{
+		free(heredoc_num);
+		ft_free_clean(skibidishell);
+	}
+	unlink(heredoc_name);
+}
+
+static void	unlink_heredoc(t_skibidi *skibidishell)
+{
+	t_token	*token;
+	t_token	*redir;
+
+	token = skibidishell->tokens;
+	while (token)
+	{
+		redir = token->redir;
+		while (redir)
+		{
+			if (redir->type == HERE_DOC)
+				unlink_file(redir, skibidishell);
+			redir = redir->next;
+		}
+		token = token->next;
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_skibidi	*skibidishell;
@@ -172,24 +208,7 @@ int	main(int argc, char **argv, char **envp)
 			}
 			free(line);
 			///
-			token = skibidishell->tokens;
-			while (token)
-			{
-				t_token *redir = token->redir;
-				while (redir)
-				{
-					dprintf(2, "AAAAAAAAA\n");
-					if (redir->type == HERE_DOC)
-					{
-						char *heredocname = ft_strjoin("here_doc", ft_itoa(redir->here_doc));
-						dprintf(2, "hd name = %s\n", heredocname);
-						dprintf(2, "unlink return = %d\n", unlink(heredocname));
-					}
-					redir = redir->next;
-				}
-				token = token->next;
-			}
-			///
+			unlink_heredoc(skibidishell);
 			reset_utils_env(&skibidishell->env);
 			line = free_and_trim(readline(ft_get_prompt(g_signal)));
 		}

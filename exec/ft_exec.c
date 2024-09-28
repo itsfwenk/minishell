@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 16:41:07 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/26 14:19:32 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/28 11:35:59 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,26 @@ void	exec_parentheses(t_skibidi *skibidishell, t_token *tree, int *pipetab, int 
 	}
 }
 
-static int	get_fd(t_token	*redirection)
+static int	get_hd_fd(t_token *redirection, t_skibidi *skibidishell)
+{
+	int		fd_redir;
+	char	*heredoc_num;
+	char	*heredoc_name;
+
+	heredoc_num = ft_itoa(redirection->here_doc);
+	if (heredoc_num == NULL)
+		ft_free_clean(skibidishell);
+	heredoc_name = ft_strjoin("here_doc", heredoc_num);
+	if (heredoc_name == NULL)
+	{
+		free(heredoc_num);
+		ft_free_clean(skibidishell);
+	}
+	fd_redir = open(heredoc_name, O_RDONLY);
+	return (fd_redir);
+}
+
+static int	get_fd(t_token	*redirection, t_skibidi *skibidishell)
 {
 	int		fd_redir;
 
@@ -77,11 +96,7 @@ static int	get_fd(t_token	*redirection)
 	if (redirection->type == IN_REDIR)
 		fd_redir = open(redirection->next->assembled, O_RDONLY);
 	if (redirection->type == HERE_DOC)
-	{
-		char *heredocname = ft_strjoin("here_doc", ft_itoa(redirection->here_doc));
-		// dprintf(2, "hd name = %s\n", heredocname);
-		fd_redir = open(heredocname, O_RDONLY);
-	}
+		fd_redir = get_hd_fd(redirection, skibidishell);
 	if (redirection->type == OUT_REDIR)
 		fd_redir = open(redirection->next->assembled, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (redirection->type == APD_OUT_REDIR)
@@ -134,7 +149,7 @@ int	fd_manager(t_token *tree, int *pipetab, int side, t_skibidi *skibidishell)
 	redirection = tree->redir;
 	while (redirection != NULL)
 	{
-		fd_redir = get_fd(redirection);
+		fd_redir = get_fd(redirection, skibidishell);
 		if (fd_redir == -1)
 			return (FALSE);
 		if (dup_fd(fd_redir, redirection) == FALSE)
