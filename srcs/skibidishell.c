@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/29 11:18:36 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 11:40:03 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	wait_children(t_skibidi *shell)
 	t_token		*token;
 
 	token = shell->tokens;
+	signal(SIGQUIT, SIG_IGN);
 	while (token)
 	{
 		if (token->type == STR && token->pid)
