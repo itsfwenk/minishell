@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/29 12:11:23 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 12:39:28 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ static void	skibidi_loop(t_skibidi *shell)
 		line = readline(ft_get_prompt(!!(g_signal + shell->exit_code)));
 		if (!line)
 			break ;
+		else if (!line[0])
+			shell->exit_code = shell->exit_code;
 		else if (!check_line(line))
 			shell->exit_code = 2;
 		else
