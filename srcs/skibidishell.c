@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/29 12:39:28 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 12:58:40 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,9 @@ static void	skibidi_loop(t_skibidi *shell)
 int	main(int argc, char **argv, char **envp)
 {
 	t_skibidi	*shell;
-	t_stat		prog_stat;
 
 	(void)argc;
 	(void)argv;
-	fstat(STDOUT_FILENO, &prog_stat);
-	if (S_ISFIFO(prog_stat.st_mode))
-		return (EXIT_FAILURE);
 	shell = init_shell(envp);
 	if (shell)
 	{
