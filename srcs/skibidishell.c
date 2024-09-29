@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/29 10:18:53 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 11:10:16 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,22 @@ static void	wait_children(t_skibidi *shell)
 	while (token)
 	{
 		if (token->type == STR && token->pid)
-			waitpid(token->pid->p_id, &token->pid->status, 0);
+		{
+			if (waitpid(token->pid->p_id, &token->pid->status, 0))
+			{
+				if (WIFEXITED(token->pid->status))
+				{
+					g_signal = 0;
+					shell->exit_code = WEXITSTATUS(token->pid->status);
+				}
+				else if (WIFSIGNALED(token->pid->status))
+				{
+					if (WTERMSIG(token->pid->status) == SIGQUIT)
+						dprintf(2, "Quit (core dumped)\n");
+					g_signal = 128 + WTERMSIG(token->pid->status);
+				}
+			}
+		}
 		token = token->next;
 	}
 }
@@ -55,7 +70,7 @@ static void	skibidi_loop(t_skibidi *shell)
 	while (1)
 	{
 		init_signals();
-		line = readline(ft_get_prompt(!!shell->exit_code));
+		line = readline(ft_get_prompt(!!(g_signal + shell->exit_code)));
 		if (!line)
 			break ;
 		else if (!check_line(line))
