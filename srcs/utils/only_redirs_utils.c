@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 15:53:26 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 18:04:12 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 10:18:39 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	check_for_here_doc(t_skibidi *shell)
 	{
 		if (current->type == HERE_DOC)
 		{
+			signal(SIGINT, heredoc_sig);
 			hd_return = get_here_doc_content(shell, current);
 			if (hd_return == -1)
 				exit_shell(shell);

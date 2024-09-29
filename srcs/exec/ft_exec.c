@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:45:11 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 22:33:23 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 10:33:15 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,16 @@ bool	exec_tree(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
 		pipetab = tree->pid->pipefd;
 	}
 	exec_tree(shell, tree->left, pipetab, LEFT);
+	signal(SIGINT, exec_sig);
+	signal(SIGQUIT, SIG_DFL);
 	if ((tree->type == PIPE || tree->type == AND || tree->type == OR)
 		&& !special_exec(shell, tree, pipetab))
 		return (false);
-	exec_parentheses(shell, tree, pipetab, side);
-	exec_cmd(shell, tree, pipetab, side);
-	if (tree->type == PIPE)
+	else if (tree->type == PAR_STR)
+		exec_parentheses(shell, tree, pipetab, side);
+	else if (tree->type == STR)
+		exec_cmd(shell, tree, pipetab, side);
+	else if (tree->type == PIPE)
 		close_pipe(tree->pid->pipefd);
 	return (true);
 }

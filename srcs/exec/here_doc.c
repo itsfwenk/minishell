@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:29:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/29 00:32:03 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 10:53:45 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,19 @@ static int	heredoc_creator(t_skibidi *shell, t_token *tree)
 	return (fd_hd);
 }
 
-static int	ghdc_end(t_skibidi *shell, char *limiter, int fd_hd,
+static int	ghdc_end(char *limiter, int fd_hd,
 	char *next_line)
 {
-	free(limiter);
 	close(fd_hd);
 	if (next_line == NULL)
-		exit_shell(shell);
+	{
+		ft_print_error(NULL, limiter,
+			"the following heredoc limiter has been replaced by ctrl-d (EOF):",
+			"\"\"");
+		free(limiter);
+		return (1);
+	}
+	free(limiter);
 	free(next_line);
 	return (0);
 }
@@ -94,5 +100,5 @@ int	get_here_doc_content(t_skibidi *shell, t_token *tree)
 		free(next_line);
 		next_line = readline("> ");
 	}
-	return (ghdc_end(shell, limiter, fd_hd, next_line));
+	return (ghdc_end(limiter, fd_hd, next_line));
 }

@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/29 01:43:33 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 10:18:53 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static void	skibidi_loop(t_skibidi *shell)
 
 	while (1)
 	{
+		init_signals();
 		line = readline(ft_get_prompt(!!shell->exit_code));
 		if (!line)
 			break ;

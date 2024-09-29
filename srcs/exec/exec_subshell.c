@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:26:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 18:26:10 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 10:32:50 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,14 @@ static void	subshell_child_exec(t_skibidi *shell, t_token *tree,
 void	exec_parentheses(t_skibidi *shell, t_token *tree, int *pipetab,
 	t_side side)
 {
-	if (tree->type == PAR_STR)
-	{
-		tree->pid = ft_lstnew_pipex(shell);
-		if (tree->pid == NULL)
-			exit_shell(shell);
-		tree->pid->p_id = fork();
-		if (tree->pid->p_id == -1)
-			exit_shell(shell);
-		if (tree->pid->p_id == 0)
-			subshell_child_exec(shell, tree, pipetab, side);
-		close_pipe(pipetab);
-		waitpid(tree->pid->p_id, &tree->pid->status, 0);
-	}
+	tree->pid = ft_lstnew_pipex(shell);
+	if (tree->pid == NULL)
+		exit_shell(shell);
+	tree->pid->p_id = fork();
+	if (tree->pid->p_id == -1)
+		exit_shell(shell);
+	if (tree->pid->p_id == 0)
+		subshell_child_exec(shell, tree, pipetab, side);
+	close_pipe(pipetab);
+	waitpid(tree->pid->p_id, &tree->pid->status, 0);
 }

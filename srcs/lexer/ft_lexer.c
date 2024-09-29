@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:03:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 18:04:05 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 10:20:37 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	check_for_heredoc(t_skibidi *shell, t_token *token)
 	while (redir)
 	{
 		if (redir->type == HERE_DOC)
+		{
+			signal(SIGINT, heredoc_sig);
 			redir->fd = get_here_doc_content(shell, redir);
+		}
 		redir = redir->next;
 	}
 }
