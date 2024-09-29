@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:25:21 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 18:27:35 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 12:05:49 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	get_hd_fd(t_skibidi *shell, t_token *redirection)
 		exit_shell(shell);
 	}
 	fd_redir = open(heredoc_name, O_RDONLY);
+	free(heredoc_num);
+	free(heredoc_name);
 	return (fd_redir);
 }
 

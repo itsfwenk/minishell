@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:11:25 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 23:25:06 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 12:25:56 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	add_to_wildcard_list(t_skibidi *shell,
 {
 	t_string		*new_tstring;
 
-	new_tstring = malloc(sizeof(t_string));
+	new_tstring = ft_calloc(1, sizeof(t_string));
 	if (new_tstring == NULL)
 		exit_shell(shell);
 	new_tstring->str = ft_strdup(filename);

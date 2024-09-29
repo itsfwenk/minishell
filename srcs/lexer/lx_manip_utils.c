@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:17:30 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 23:56:28 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 12:28:53 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*lx_strictstrdup(char *str, int *i)
 	char	*dup;
 
 	truelen = i[1] - i[0] + 1;
-	dup = malloc((truelen + 1) * sizeof(char));
+	dup = ft_calloc(truelen + 1, sizeof(char));
 	if (dup == NULL)
 		return (NULL);
 	start = i[0];
@@ -48,7 +48,7 @@ char	*lx_strdup(char *str, int *i)
 	truelen = i[1] - i[0] + 1;
 	if (str[i[0]] == '\'' || str[i[0]] == '"')
 		truelen = i[1] - i[0] - 1;
-	dup = malloc((truelen + 1) * sizeof(char));
+	dup = ft_calloc(truelen + 1, sizeof(char));
 	if (dup == NULL)
 		return (NULL);
 	start = i[0];
@@ -116,5 +116,4 @@ void	lx_deltokens(t_token **tokens)
 		current = current->next;
 		free(prev);
 	}
-	*tokens = NULL;
 }

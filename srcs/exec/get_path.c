@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:42:48 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 19:30:22 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 12:23:53 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*ft_strjoin_pipex(char const *s1, char const *s2)
 	char	*joined;
 
 	tot = ft_strlen(s1) + ft_strlen(s2) + 2;
-	joined = malloc((tot) * sizeof(char));
+	joined = ft_calloc(tot, sizeof(char));
 	if (joined == NULL)
 		return (NULL);
 	ft_strlcpy(joined, s1, ft_strlen(s1) + 1);

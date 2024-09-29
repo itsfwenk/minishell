@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:02:43 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/29 00:36:22 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 12:32:19 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ char	*exp_pos_param(t_skibidi *shell, char *str)
 	}
 	if (nb_pos_param == 0)
 		return (str);
-	expanded_str = malloc(1 + (ft_strlen(str) - (2 * nb_pos_param)));
+	expanded_str = ft_calloc(1 + ft_strlen(str) - 2 * nb_pos_param,
+			sizeof(char));
 	if (expanded_str == NULL)
 		exit_shell(shell);
 	exp_dup_pos_param(str, expanded_str);

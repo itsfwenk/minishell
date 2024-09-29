@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:46:38 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 16:48:25 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 12:24:14 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	assemble_tstring(t_skibidi *shell, t_token *token)
 	if (token == NULL)
 		return ;
 	i = 0;
-	assembled = malloc((get_full_len(token) + 1) * sizeof(char));
+	assembled = ft_calloc(get_full_len(token) + 1, sizeof(char));
 	if (assembled == NULL)
 		exit_shell(shell);
 	cat_tstring(token, assembled, &i);
