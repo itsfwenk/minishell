@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/29 11:10:16 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/29 11:18:36 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	wait_children(t_skibidi *shell)
 				else if (WIFSIGNALED(token->pid->status))
 				{
 					if (WTERMSIG(token->pid->status) == SIGQUIT)
-						dprintf(2, "Quit (core dumped)\n");
+						ft_dprintf(2, "Quit (core dumped)\n");
 					g_signal = 128 + WTERMSIG(token->pid->status);
 				}
 			}
