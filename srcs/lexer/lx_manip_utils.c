@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lx_manip_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:17:30 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 16:19:44 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/30 17:53:24 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,4 +116,5 @@ void	lx_deltokens(t_token **tokens)
 		current = current->next;
 		free(prev);
 	}
+	*tokens = NULL;
 }

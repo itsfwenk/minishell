@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   skibidishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 16:20:20 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/30 17:53:16 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	g_signal = 0;
 
 static void	handle_line(t_skibidi *shell, char *line)
 {
+	if (shell->tokens)
+		lx_deltokens(&shell->tokens);
 	shell->tokens = ft_lexer(shell, line);
 	free(line);
 	if (!shell->tokens || !check_syntax(shell, shell->tokens))

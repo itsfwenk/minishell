@@ -3,16 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:21:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 16:18:18 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/30 17:47:23 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "skibidishell.h"
 
-static int	builtin_exec(t_skibidi	*shell, char	*cmd, char	**argv)
+static bool	only_builtins(t_token *tokens)
+{
+	while (tokens)
+	{
+		if (tokens->type == PAR_STR && !only_builtins(tokens->sub_shell))
+			return (false);
+		else if (tokens->type == STR && !is_builtin(tokens->assembled))
+			return (false);
+		tokens = tokens->next;
+	}
+	return (true);
+}
+
+static int	builtin_exec(t_skibidi	*shell, char	*cmd, char	**argv,
+	bool in_child)
 {
 	int	exit_code;
 
@@ -31,20 +45,12 @@ static int	builtin_exec(t_skibidi	*shell, char	*cmd, char	**argv)
 		exit_code = ft_pwd();
 	else if (!ft_strcmp(cmd, "unset"))
 		exit_code = ft_unset(shell->env, &argv[1]);
+	if (!in_child)
+		return (exit_code);
+	lx_deltokens(&shell->tokens);
+	free_env(shell->env);
+	free(shell);
 	return (exit_code);
-}
-
-static bool	only_builtins(t_token *tokens)
-{
-	while (tokens)
-	{
-		if (tokens->type == PAR_STR && !only_builtins(tokens->sub_shell))
-			return (false);
-		else if (tokens->type == STR && !is_builtin(tokens->assembled))
-			return (false);
-		tokens = tokens->next;
-	}
-	return (true);
 }
 
 static void	create_argv(t_skibidi *shell, t_token *tokens)
@@ -75,7 +81,7 @@ static void	cmd_exec(t_skibidi *shell, t_token *tree)
 	else
 		cmd_path = get_pathname(shell, tree->assembled);
 	if (builtin)
-		exit(builtin_exec(shell, cmd_path, tree->argv));
+		exit(builtin_exec(shell, cmd_path, tree->argv, true));
 	if (cmd_path == NULL)
 		exit_shell(shell);
 	envp = build_envp(shell->env);
@@ -102,7 +108,7 @@ int	exec_cmd(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
 	if (g_signal)
 		return (true);
 	else if (shell->tokens->next == NULL && only_builtins(shell->tokens))
-		return (!builtin_exec(shell, tree->assembled, tree->argv));
+		return (!builtin_exec(shell, tree->assembled, tree->argv, false));
 	tree->pid->p_id = fork();
 	if (tree->pid->p_id == -1)
 		exit_shell(shell);
