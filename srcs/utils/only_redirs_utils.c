@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 15:53:26 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 11:06:57 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 11:30:29 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	open_only_redir(t_skibidi *shell)
 	t_token	*token;
 
 	token = shell->tokens;
+	if (g_signal)
+		return ;
 	while (token)
 	{
 		fd = get_fd(shell, token);
