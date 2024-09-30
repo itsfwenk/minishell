@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:26:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 18:11:03 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 18:26:32 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ static void	subshell_child_exec(t_skibidi *shell, t_token *tree,
 		while (sub_token)
 		{
 			if (sub_token->type == STR)
-			{
 				waitpid(sub_token->pid->p_id, &sub_token->pid->status, 0);
-				update_error_code(shell, sub_token->pid->status);
-			}
 			sub_token = sub_token->next;
 		}
 		lx_deltokens(&shell->tokens);
@@ -50,5 +47,6 @@ void	exec_parentheses(t_skibidi *shell, t_token *tree, int *pipetab,
 	if (tree->pid->p_id == 0)
 		subshell_child_exec(shell, tree, pipetab, side);
 	close_pipe(pipetab);
-	waitpid(tree->pid->p_id, &tree->pid->status, 0);
+	if (waitpid(tree->pid->p_id, &tree->pid->status, 0) != -1)
+		update_error_code(shell, tree->pid->status);
 }

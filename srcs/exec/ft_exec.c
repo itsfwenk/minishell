@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:45:11 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 13:09:56 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 18:58:46 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,21 @@ static bool	special_exec(t_skibidi *shell, t_token *tree, int *pipetab)
 {	
 	if (tree->type == AND)
 	{
-		waitpid(tree->left->pid->p_id, &tree->left->pid->status, 0);
-		update_error_code(shell, tree->left->pid->status);
-		if (WEXITSTATUS(tree->left->pid->status) == EXIT_FAILURE)
-			return (false);
+		if (waitpid(tree->left->pid->p_id, &tree->left->pid->status, 0) != -1)
+		{
+			update_error_code(shell, tree->left->pid->status);
+			if (WEXITSTATUS(tree->left->pid->status) == EXIT_FAILURE)
+				return (false);
+		}
 	}
 	if (tree->type == OR)
 	{
-		waitpid(tree->left->pid->p_id, &tree->left->pid->status, 0);
-		update_error_code(shell, tree->left->pid->status);
-		if (WEXITSTATUS(tree->left->pid->status) == EXIT_SUCCESS)
-			return (false);
+		if (waitpid(tree->left->pid->p_id, &tree->left->pid->status, 0) != -1)
+		{
+			update_error_code(shell, tree->left->pid->status);
+			if (WEXITSTATUS(tree->left->pid->status) == EXIT_SUCCESS)
+				return (false);
+		}
 	}
 	exec_tree(shell, tree->right, pipetab, RIGHT);
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 00:06:48 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/29 12:20:38 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 18:55:14 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ int	exit_shell(t_skibidi *shell)
 	free_env(shell->env);
 	free(shell);
 	rl_clear_history();
-	exit(g_signal + exit_code);
-	return (g_signal + exit_code);
+	exit(exit_code);
+	return (exit_code);
 }

@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:21:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 17:47:23 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 18:51:45 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static int	builtin_exec(t_skibidi	*shell, char	*cmd, char	**argv,
 		exit_code = ft_pwd();
 	else if (!ft_strcmp(cmd, "unset"))
 		exit_code = ft_unset(shell->env, &argv[1]);
+	shell->exit_code = exit_code;
+	update_error_code(shell, exit_code);
 	if (!in_child)
 		return (exit_code);
 	lx_deltokens(&shell->tokens);
