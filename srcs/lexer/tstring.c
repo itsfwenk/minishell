@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tstring.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:29:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 21:34:24 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 14:57:18 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	set_limits(char *str, int *limits, int *i)
 		}
 		limits[1]++;
 	}
-	if (str[limits[1]] == ' ')
+	if (str[limits[1]] == ' ' || limits[1] == i[1] + 1)
 		limits[1] = limits[1] - 1;
 }
 
