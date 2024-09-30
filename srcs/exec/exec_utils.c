@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:26:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 17:44:21 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:08:29 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,28 @@ static size_t	env_size(t_env *env)
 		env = env->next;
 	}
 	return (size);
+}
+
+void	update_error_code(t_skibidi *shell, int status)
+{
+	char	*itoa_return;
+
+	if (WIFEXITED(status))
+	{
+		g_signal = 0;
+		shell->exit_code = WEXITSTATUS(status);
+	}
+	else if (WIFSIGNALED(status))
+	{
+		if (WTERMSIG(status) == SIGQUIT)
+			ft_dprintf(2, "Quit (core dumped)\n");
+		g_signal = 128 + WTERMSIG(status);
+	}
+	itoa_return = ft_itoa(g_signal + shell->exit_code);
+	if (!itoa_return)
+		exit_shell(shell);
+	add_env(&shell->env, "?", itoa_return);
+	free(itoa_return);
 }
 
 char	**build_envp(t_env *env)

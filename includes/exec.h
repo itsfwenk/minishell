@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:35:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 22:37:44 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:09:02 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	exec_parentheses(t_skibidi *shell, t_token *tree, int *pipetab,
 			t_side side);
 
 // exec_utils.c
+void	update_error_code(t_skibidi *shell, int status);
 char	**build_envp(t_env *env);
 
 // execution.c

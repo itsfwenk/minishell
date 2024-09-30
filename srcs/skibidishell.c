@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 12:10:47 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:09:22 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,8 @@ static void	handle_line(t_skibidi *shell, char *line)
 	return ;
 }
 
-static void	wait_children2(t_skibidi *shell, t_token *token)
-{
-	if (WIFEXITED(token->pid->status))
-	{
-		g_signal = 0;
-		shell->exit_code = WEXITSTATUS(token->pid->status);
-	}
-	else if (WIFSIGNALED(token->pid->status))
-	{
-		if (WTERMSIG(token->pid->status) == SIGQUIT)
-			ft_dprintf(2, "Quit (core dumped)\n");
-		g_signal = 128 + WTERMSIG(token->pid->status);
-	}
-}
-
 static void	wait_children(t_skibidi *shell)
 {
-	char	*itoa_return;
 	t_token	*token;
 
 	token = shell->tokens;
@@ -67,12 +51,7 @@ static void	wait_children(t_skibidi *shell)
 		if (token->type == STR && token->pid)
 		{
 			if (waitpid(token->pid->p_id, &token->pid->status, 0))
-				wait_children2(shell, token);
-			itoa_return = ft_itoa(g_signal + shell->exit_code);
-			if (!itoa_return)
-				exit_shell(shell);
-			add_env(&shell->env, "?", itoa_return);
-			free(itoa_return);
+				update_error_code(shell, token->pid->status);
 		}
 		token = token->next;
 	}
