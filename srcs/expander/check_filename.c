@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_filename.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:48:53 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 22:55:28 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 16:12:40 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ bool	check_filename(t_token *tokens, char *filename, int i, int j)
 	}
 	if (tokens->assembled[i] == '*' && !is_literal(tokens, i))
 	{
-		if (check_filename(tokens, filename, i + 1, j + 1) == true)
+		if (check_filename(tokens, filename, i + 1, j) == true)
 			return (true);
 		return (check_filename(tokens, filename, i, j + 1));
 	}

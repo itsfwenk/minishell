@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:21:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 14:33:12 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/30 16:18:18 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	exec_cmd(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
 	check_for_heredoc(shell, tree);
 	get_filenames(shell, tree);
 	create_argv(shell, tree);
-	add_env(&shell->env, "_", tree->argv[0]);
+	add_env(&shell->env, "_", tree->assembled);
 	if (g_signal)
 		return (true);
 	else if (shell->tokens->next == NULL && only_builtins(shell->tokens))

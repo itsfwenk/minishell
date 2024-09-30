@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_wildcards.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:11:25 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/29 12:25:56 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:59:29 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	get_filenames(t_skibidi *shell, t_token *tokens)
 			read_return = readdir(directory);
 			continue ;
 		}
-		if (check_filename(tokens, read_return->d_name, 0, 0))
+		if (check_filename(tokens, read_return->d_name, 0, 0) == true)
 			add_to_wildcard_list(shell, tokens, read_return->d_name);
 		read_return = readdir(directory);
 	}
