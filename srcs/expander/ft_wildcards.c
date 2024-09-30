@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_wildcards.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:11:25 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 16:30:14 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/30 16:45:26 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	get_arg_redir_filenames(t_skibidi *shell, t_token *tokens)
 		if (current->type == HD_LIMITER)
 		{
 			current = current->next;
-			continue;
+			continue ;
 		}
 		get_filenames(shell, current);
 		current = current->next;
