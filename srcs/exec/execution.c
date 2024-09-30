@@ -6,24 +6,11 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:21:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 19:38:42 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 20:30:31 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "skibidishell.h"
-
-static bool	only_builtins(t_token *tokens)
-{
-	while (tokens)
-	{
-		if (tokens->type == PAR_STR && !only_builtins(tokens->sub_shell))
-			return (false);
-		else if (tokens->type == STR && !is_builtin(tokens->assembled))
-			return (false);
-		tokens = tokens->next;
-	}
-	return (true);
-}
 
 static int	builtin_exec(t_skibidi	*shell, char	*cmd, char	**argv,
 	bool in_child)
@@ -109,7 +96,7 @@ int	exec_cmd(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
 	add_env(&shell->env, "_", tree->assembled);
 	if (g_signal)
 		return (true);
-	else if (shell->tokens->next == NULL && only_builtins(shell->tokens))
+	else if (is_builtin(tree->assembled))
 		return (!builtin_exec(shell, tree->assembled, tree->argv, false));
 	tree->pid->p_id = fork();
 	if (tree->pid->p_id == -1)
