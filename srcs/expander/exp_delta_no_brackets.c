@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exp_delta_no_brackets.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:55:40 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 18:04:12 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 11:48:43 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 static bool	is_var_limiter(char *str, int *key_limits)
 {
-	if ((str[key_limits[0]] == '#'
-			|| str[key_limits[0]] == '!'
-			|| str[key_limits[0]] == '$'
-			|| str[key_limits[0]] == '-'))
+	if (in_charset(str[key_limits[0]], "#!$-?"))
 	{
 		key_limits[1] = key_limits[1] + 1;
 		return (true);
