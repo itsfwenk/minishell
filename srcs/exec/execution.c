@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:21:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 14:12:53 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/30 14:33:12 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,20 +102,17 @@ int	exec_cmd(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
 	if (g_signal)
 		return (true);
 	else if (shell->tokens->next == NULL && only_builtins(shell->tokens))
-		builtin_exec(shell, tree->assembled, tree->argv);
-	else
+		return (!builtin_exec(shell, tree->assembled, tree->argv));
+	tree->pid->p_id = fork();
+	if (tree->pid->p_id == -1)
+		exit_shell(shell);
+	if (tree->pid->p_id == 0)
 	{
-		tree->pid->p_id = fork();
-		if (tree->pid->p_id == -1)
+		if (fd_manager(shell, tree, pipetab, side) == false)
 			exit_shell(shell);
-		if (tree->pid->p_id == 0)
-		{
-			if (fd_manager(shell, tree, pipetab, side) == false)
-				exit_shell(shell);
-			close_pipe(pipetab);
-			close_pipe(tree->previous_pipe);
-			cmd_exec(shell, tree);
-		}
+		close_pipe(pipetab);
+		close_pipe(tree->previous_pipe);
+		cmd_exec(shell, tree);
 	}
 	return (true);
 }

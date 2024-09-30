@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:04:18 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 14:25:10 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/30 14:34:44 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,9 @@ bool	ft_expander(t_skibidi *shell, t_token *token)
 			current_tstr->str = exp_pos_param(shell, current_tstr->str);
 			current_tstr->str = exp_env_var(shell, current_tstr->str);
 			if (current_tstr->str == NULL)
-				return (false) ;
+				return (false);
 		}
 		current_tstr = current_tstr->next;
 	}
 	return (expand_arg_redir(shell, token));
-	// return (true);
 }

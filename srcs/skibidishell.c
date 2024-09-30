@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 14:16:24 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/30 14:28:28 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ static void	skibidi_loop(t_skibidi *shell)
 	{
 		init_signals();
 		line = readline(ft_get_prompt(!!(g_signal + shell->exit_code)));
-		// line = ft_strdup("${USER#}");
 		if (!line)
 			break ;
 		else if (!line[0])
