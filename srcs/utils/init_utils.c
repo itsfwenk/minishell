@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 17:29:52 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 11:51:01 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/30 12:09:28 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ t_skibidi	*init_shell(char **envp)
 	t_skibidi	*shell;
 
 	shell = ft_calloc(1, sizeof(t_skibidi));
-	if (!shell || ft_export(shell, envp))
+	if (!shell)
 		return (NULL);
+	if (ft_export(shell, envp))
+		exit_shell(shell);
 	if (add_env(&shell->env, "#", "0") == NULL)
 		exit_shell(shell);
 	if (add_env(&shell->env, "?", "0") == NULL)
