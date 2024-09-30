@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:29:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 11:24:50 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 16:43:37 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,8 @@ static int	ghdc_end(char *limiter, int fd_hd,
 		ft_print_error(NULL, limiter,
 			"the following heredoc limiter has been replaced by ctrl-d (EOF):",
 			"\"\"");
-		free(limiter);
 		return (1);
 	}
-	free(limiter);
 	free(next_line);
 	return (0);
 }
