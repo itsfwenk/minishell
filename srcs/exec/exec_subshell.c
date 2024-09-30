@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:26:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 18:26:32 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 19:38:34 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ void	exec_parentheses(t_skibidi *shell, t_token *tree, int *pipetab,
 		subshell_child_exec(shell, tree, pipetab, side);
 	close_pipe(pipetab);
 	if (waitpid(tree->pid->p_id, &tree->pid->status, 0) != -1)
-		update_error_code(shell, tree->pid->status);
+		update_error_code(shell, tree->pid->status, false);
 }

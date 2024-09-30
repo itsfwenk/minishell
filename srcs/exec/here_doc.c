@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:29:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 16:43:37 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/30 19:44:34 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,10 @@ static int	heredoc_creator(t_skibidi *shell, t_token *tree)
 	return (fd_hd);
 }
 
-static int	ghdc_end(char *limiter, int fd_hd,
+static int	ghdc_end(t_skibidi *shell, char *limiter, int fd_hd,
 	char *next_line)
 {
+	update_error_code(shell, g_signal, false);
 	close(fd_hd);
 	if (next_line == NULL)
 	{
@@ -98,5 +99,5 @@ int	get_here_doc_content(t_skibidi *shell, t_token *tree)
 		free(next_line);
 		next_line = readline("> ");
 	}
-	return (ghdc_end(limiter, fd_hd, next_line));
+	return (ghdc_end(shell, limiter, fd_hd, next_line));
 }
