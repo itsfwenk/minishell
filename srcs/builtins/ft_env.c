@@ -6,22 +6,11 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:06:14 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 19:10:39 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 10:43:39 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "skibidishell.h"
-
-t_env	*reset_utils_env(t_env **env)
-{
-	char	*itoa;
-	t_env	*new_node;
-
-	itoa = ft_itoa(g_signal);
-	new_node = add_env(env, "?", itoa);
-	free(itoa);
-	return (new_node);
-}
 
 int	ft_env(t_env *env)
 {

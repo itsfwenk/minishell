@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:21:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/29 10:33:03 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 11:15:06 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,9 @@ int	exec_cmd(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
 	check_for_heredoc(shell, tree);
 	get_filenames(shell, tree);
 	create_argv(shell, tree);
-	if (shell->tokens->next == NULL && only_builtins(shell->tokens))
+	if (g_signal)
+		return (true);
+	else if (shell->tokens->next == NULL && only_builtins(shell->tokens))
 		builtin_exec(shell, tree->assembled, tree->argv);
 	else
 	{

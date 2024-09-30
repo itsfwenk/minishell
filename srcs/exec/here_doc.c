@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:29:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/29 10:53:45 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 11:00:35 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	get_here_doc_content(t_skibidi *shell, t_token *tree)
 		return (-1);
 	fd_hd = heredoc_creator(shell, tree);
 	next_line = readline("> ");
-	while (next_line != NULL
+	while (!g_signal && next_line != NULL
 		&& ft_strncmp_pipex(next_line, limiter, ft_strlen(limiter) + 1) != 0)
 	{
 		next_line = exp_pos_param(shell, next_line);
