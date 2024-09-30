@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exp_env_var.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:57:51 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/29 12:25:09 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 11:54:25 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ static void	exp_find_key_limits(char *str, int i, int *key_limits)
 		if (str[i + 1] == '{'
 			&& str[key_limits[1]] == '}')
 			break ;
+		if (str[i + 1] != '{'
+			&& (in_charset(str[i + 1], "#!?$-")))
+			return ;
 		if (str[i + 1] != '{'
 			&& ((key_limits[1] == key_limits[0]
 					&& !ft_isalpha(str[key_limits[1]])
