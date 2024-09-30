@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:50:15 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 13:44:30 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/30 13:52:24 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static bool	check_key_in_brackets(char *str, int *limits)
 			|| (i > limits[0] + 1 && !ft_isalnum(str[i])
 				&& str[i] != '_'))
 		{
-			ft_print_error(NULL, str, "bad substitution", NULL);
+			ft_print_error(NULL, str, "bad substitution", "\0\0");
 			return (false);
 		}
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   skibidishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 13:09:22 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 14:16:24 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static void	handle_line(t_skibidi *shell, char *line)
 	}
 	else
 	{
-		expd_wc_only_redir(shell);
+		if (expd_wc_only_redir(shell) == false)
+			return ;
 		check_for_here_doc(shell);
 		open_only_redir(shell);
 	}
@@ -65,6 +66,7 @@ static void	skibidi_loop(t_skibidi *shell)
 	{
 		init_signals();
 		line = readline(ft_get_prompt(!!(g_signal + shell->exit_code)));
+		// line = ft_strdup("${USER#}");
 		if (!line)
 			break ;
 		else if (!line[0])

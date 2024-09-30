@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:21:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 11:47:18 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/30 14:12:53 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ static void	cmd_exec(t_skibidi *shell, t_token *tree)
 
 int	exec_cmd(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
 {
-	ft_expander(shell, tree);
+	if (ft_expander(shell, tree) == false)
+		return (false);
 	assemble_tstring(shell, tree);
 	check_for_heredoc(shell, tree);
 	get_filenames(shell, tree);

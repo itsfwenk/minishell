@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assemble_tstring.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:46:38 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/29 12:24:14 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 14:04:53 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static size_t	get_full_len(t_token *current)
 
 	full_len = 0;
 	tstring = current->tstring;
-	while (tstring != NULL)
+	while (tstring != NULL && tstring->str != NULL)
 	{
 		full_len = full_len + ft_strlen(tstring->str);
 		tstring = tstring->next;

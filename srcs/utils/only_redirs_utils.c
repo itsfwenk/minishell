@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   only_redirs_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 15:53:26 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 11:30:29 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 14:15:24 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	check_for_here_doc(t_skibidi *shell)
 	}
 }
 
-void	expd_wc_only_redir(t_skibidi *shell)
+bool	expd_wc_only_redir(t_skibidi *shell)
 {
 	t_token	*token;
 
@@ -50,11 +50,15 @@ void	expd_wc_only_redir(t_skibidi *shell)
 	while (token)
 	{
 		if (token->type != HD_LIMITER)
-			ft_expander(shell, token);
+		{
+			if (ft_expander(shell, token) == false)
+				return (false);
+		}
 		assemble_tstring(shell, token);
 		get_filenames(shell, token);
 		token = token->next;
 	}
+	return (true);
 }
 
 void	open_only_redir(t_skibidi *shell)

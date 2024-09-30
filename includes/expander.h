@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:35:35 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/29 00:31:08 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/09/30 14:13:05 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*exp_env_var(t_skibidi *shell, char *str);
 char	*exp_pos_param(t_skibidi *shell, char *str);
 
 // ft_expander.c
-void	ft_expander(t_skibidi *shell, t_token *token);
+bool	ft_expander(t_skibidi *shell, t_token *token);
 
 // ft_wildcards.c
 void	get_filenames(t_skibidi *shell, t_token *tokens);
