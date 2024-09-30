@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   skibidishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 12:06:37 by fli              ###   ########.fr       */
+/*   Updated: 2024/09/30 12:10:47 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	handle_line(t_skibidi *shell, char *line)
 	return ;
 }
 
-static void wait_children2(t_skibidi *shell, t_token *token)
+static void	wait_children2(t_skibidi *shell, t_token *token)
 {
 	if (WIFEXITED(token->pid->status))
 	{
@@ -54,6 +54,7 @@ static void wait_children2(t_skibidi *shell, t_token *token)
 		g_signal = 128 + WTERMSIG(token->pid->status);
 	}
 }
+
 static void	wait_children(t_skibidi *shell)
 {
 	char	*itoa_return;
