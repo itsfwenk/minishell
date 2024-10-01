@@ -6,13 +6,13 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:26:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/01 15:22:19 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:28:00 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "skibidishell.h"
 
-static void	subshell_fd_manager(t_token *tree, int *pipetab, t_side side)
+static void	subshell_pipe_manager(t_token *tree, int *pipetab, t_side side)
 {
 	if (pipetab && side == LEFT)
 		dup2(pipetab[1], STDOUT_FILENO);
@@ -30,7 +30,7 @@ static void	subshell_child_exec(t_skibidi *shell, t_token *tree,
 	t_token	*par_tree;
 	t_token	*sub_token;
 
-	subshell_fd_manager(tree, pipetab, side);
+	subshell_pipe_manager(tree, pipetab, side);
 	par_tree = create_tree(tree->sub_shell);
 	if (exec_tree(shell, par_tree, NULL, side) == true)
 	{
