@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:21:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 20:30:31 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/01 11:53:53 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	exec_cmd(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
 	add_env(&shell->env, "_", tree->assembled);
 	if (g_signal)
 		return (true);
-	else if (is_builtin(tree->assembled))
+	else if (!pipetab && is_builtin(tree->assembled))
 		return (!builtin_exec(shell, tree->assembled, tree->argv, false));
 	tree->pid->p_id = fork();
 	if (tree->pid->p_id == -1)
