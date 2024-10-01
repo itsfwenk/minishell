@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:45:11 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 19:46:20 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/01 12:33:43 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ static bool	special_exec(t_skibidi *shell, t_token *tree, int *pipetab)
 			if (WEXITSTATUS(tree->left->pid->status) == EXIT_FAILURE)
 				return (false);
 		}
+		if (shell->exit_code)
+			return (false);
 	}
 	if (tree->type == OR)
 	{
@@ -91,6 +93,8 @@ static bool	special_exec(t_skibidi *shell, t_token *tree, int *pipetab)
 			if (WEXITSTATUS(tree->left->pid->status) == EXIT_SUCCESS)
 				return (false);
 		}
+		if (!shell->exit_code)
+			return (false);
 	}
 	exec_tree(shell, tree->right, pipetab, RIGHT);
 	return (true);
