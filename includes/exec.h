@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:35:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 19:38:23 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/01 17:10:30 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ void	exec_parentheses(t_skibidi *shell, t_token *tree, int *pipetab,
 // exec_utils.c
 void	update_error_code(t_skibidi *shell, int status, bool is_builtin);
 char	**build_envp(t_env *env);
+void	close_pipe(int pipefd[2]);
 
 // execution.c
 int		exec_cmd(t_skibidi *shell, t_token *tree, int *pipetab, t_side side);
 
 // fd_manager.c
-void	close_pipe(int pipefd[2]);
 int		fd_manager(t_skibidi *shell, t_token *tree,
 			int *pipetab, t_side side);
 

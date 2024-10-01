@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:21:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/01 11:53:53 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:19:48 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,13 @@ static void	create_argv(t_skibidi *shell, t_token *tokens)
 	tokens->argv = array;
 }
 
+static void	cmd_not_found(t_skibidi *shell, t_token *tree)
+{
+	shell->exit_code = 127;
+	ft_print_error(tree->assembled, NULL, "command not found", NULL);
+	exit_shell(shell);
+}
+
 static void	cmd_exec(t_skibidi *shell, t_token *tree)
 {
 	char	**envp;
@@ -69,6 +76,8 @@ static void	cmd_exec(t_skibidi *shell, t_token *tree)
 		cmd_path = tree->assembled;
 	else
 		cmd_path = get_pathname(shell, tree->assembled);
+	if (cmd_path == NULL)
+		cmd_not_found(shell, tree);
 	if (builtin)
 		exit(builtin_exec(shell, cmd_path, tree->argv, true));
 	if (cmd_path == NULL)

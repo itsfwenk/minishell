@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fd_manager.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:24:02 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/01 14:54:25 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:29:30 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,28 @@ static bool	previous_pipe_manager(t_token *tree, t_side side)
 	return (true);
 }
 
-void	close_pipe(int pipefd[2])
+// void	close_pipe(int pipefd[2])
+// {
+// 	if (pipefd == NULL)
+// 		return ;
+// 	if (pipefd[0] != -1)
+// 		close(pipefd[0]);
+// 	if (pipefd[1] != -1)
+// 		close(pipefd[1]);
+// 	pipefd[0] = -1;
+// 	pipefd[1] = -1;
+// }
+
+static bool	file_access_fail(t_skibidi *shell, t_token *redirection)
 {
-	if (pipefd == NULL)
-		return ;
-	if (pipefd[0] != -1)
-		close(pipefd[0]);
-	if (pipefd[1] != -1)
-		close(pipefd[1]);
-	pipefd[0] = -1;
-	pipefd[1] = -1;
+	shell->exit_code = EXIT_FAILURE;
+	if (errno == EACCES)
+		ft_print_error(redirection->next->assembled, NULL,
+			"Permission denied", NULL);
+	if (errno == ENOENT)
+		ft_print_error(redirection->next->assembled,
+			NULL, "No such file or directory", NULL);
+	return (false);
 }
 
 int	fd_manager(t_skibidi *shell, t_token *tree,
@@ -87,7 +99,7 @@ int	fd_manager(t_skibidi *shell, t_token *tree,
 	{
 		fd_redir = get_fd(shell, redirection);
 		if (fd_redir == -1)
-			return (false);
+			return (file_access_fail(shell, redirection));
 		if (dup_fd(fd_redir, redirection) == false)
 			return (false);
 		close(fd_redir);

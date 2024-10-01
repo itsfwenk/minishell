@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:26:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 19:45:12 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:28:33 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,16 @@ char	**build_envp(t_env *env)
 		env = env->next;
 	}
 	return (envp);
+}
+
+void	close_pipe(int pipefd[2])
+{
+	if (pipefd == NULL)
+		return ;
+	if (pipefd[0] != -1)
+		close(pipefd[0]);
+	if (pipefd[1] != -1)
+		close(pipefd[1]);
+	pipefd[0] = -1;
+	pipefd[1] = -1;
 }
