@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:45:11 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/01 12:35:35 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:19:57 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ bool	exec_tree(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
 	{
 		if (tree->left->previous_pipe == NULL)
 			tree->right->previous_pipe = pipetab;
+		tree->left->previous_pipe = pipetab;
 		if (pipe(tree->pid->pipefd) == -1)
 			exit_shell(shell);
 		pipetab = tree->pid->pipefd;
