@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:06:39 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 19:50:24 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/01 18:20:10 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,35 +74,31 @@ static bool	ex_isnumeric(const char *nptr)
 	return (true);
 }
 
-static void	one_valid_arg(char **exit_arg)
+static int	one_valid_arg(char **exit_arg)
 {
 	printf("exit\n");
 	if (exit_arg[0][0] == '-')
-		exit(ex_atoull(++exit_arg[0]) * -1);
-	else
-		exit(ex_atoull(exit_arg[0]));
+		return (ex_atoull(++exit_arg[0]) * -1);
+	return (ex_atoull(exit_arg[0]));
 }
 
 int	ft_exit(char **ex_arg)
 {
 	if (ex_arg[0] == NULL)
-		exit(0);
+		return (0);
 	if (ex_isnumeric(ex_arg[0]) == true)
 	{
 		if (ex_arg[1] == NULL)
-			one_valid_arg(ex_arg);
-		else
-		{
-			ft_dprintf(2, "%sexit\n%s", RED, END_COLOR);
-			ft_print_error("exit", NULL, "too many arguments", "\0");
-			return (1);
-		}
+			return (one_valid_arg(ex_arg));
+		ft_dprintf(2, "%sexit\n%s", RED, END_COLOR);
+		ft_print_error("exit", NULL, "too many arguments", "\0");
+		return (1);
 	}
 	else
 	{
 		ft_dprintf(2, "%sexit\n%s", RED, END_COLOR);
 		ft_print_error("exit", ex_arg[0], "numeric argument required", "\0");
-		exit(2);
+		return (2);
 	}
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:35:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/01 17:10:30 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/01 18:20:44 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ typedef struct s_string		t_string;
 typedef struct s_token		t_token;
 typedef struct s_kibidi		t_skibidi;
 
+// check_exit.c
+bool	check_exit(t_skibidi *shell, t_token *tree);
+
 // exec_subshell.c
 void	exec_parentheses(t_skibidi *shell, t_token *tree, int *pipetab,
 			t_side side);
@@ -34,6 +37,8 @@ char	**build_envp(t_env *env);
 void	close_pipe(int pipefd[2]);
 
 // execution.c
+int		builtin_exec(t_skibidi	*shell, char	*cmd, char	**argv,
+			bool in_child);
 int		exec_cmd(t_skibidi *shell, t_token *tree, int *pipetab, t_side side);
 
 // fd_manager.c

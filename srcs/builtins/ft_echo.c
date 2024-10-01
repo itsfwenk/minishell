@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:05:47 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 20:35:47 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/01 18:52:43 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,5 @@ int	ft_echo(char **echo_arg)
 	}
 	if (newline == true)
 		printf("\n");
-	return (false);
+	return (0);
 }

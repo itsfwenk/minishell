@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:21:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/01 16:19:48 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/01 18:48:06 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "skibidishell.h"
 
-static int	builtin_exec(t_skibidi	*shell, char	*cmd, char	**argv,
+int	builtin_exec(t_skibidi	*shell, char	*cmd, char	**argv,
 	bool in_child)
 {
 	int	exit_code;
@@ -23,13 +23,13 @@ static int	builtin_exec(t_skibidi	*shell, char	*cmd, char	**argv,
 	else if (!ft_strcmp(cmd, "echo"))
 		exit_code = ft_echo(&argv[1]);
 	else if (!ft_strcmp(cmd, "env"))
-		exit_code = ft_env(shell->env);
+		exit_code = ft_env(shell->env, &argv[1]);
 	else if (!ft_strcmp(cmd, "exit"))
 		exit_code = ft_exit(&argv[1]);
 	else if (!ft_strcmp(cmd, "export"))
 		exit_code = ft_export(shell, &argv[1]);
 	else if (!ft_strcmp(cmd, "pwd"))
-		exit_code = ft_pwd();
+		exit_code = ft_pwd(&argv[1]);
 	else if (!ft_strcmp(cmd, "unset"))
 		exit_code = ft_unset(shell->env, &argv[1]);
 	shell->exit_code = exit_code;
@@ -106,7 +106,7 @@ int	exec_cmd(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
 	if (g_signal)
 		return (true);
 	else if (!pipetab && is_builtin(tree->assembled))
-		return (!builtin_exec(shell, tree->assembled, tree->argv, false));
+		return (check_exit(shell, tree));
 	tree->pid->p_id = fork();
 	if (tree->pid->p_id == -1)
 		exit_shell(shell);

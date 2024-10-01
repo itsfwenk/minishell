@@ -1,13 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_utils.c                                        :+:      :+:    :+:   */
+/*   check_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/27 16:55:21 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 14:32:02 by mel-habi         ###   ########.fr       */
+/*   Created: 2024/10/01 18:15:58 by mel-habi          #+#    #+#             */
+/*   Updated: 2024/10/01 18:21:23 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "skibidishell.h"
+
+bool	check_exit(t_skibidi *shell, t_token *tree)
+{
+	builtin_exec(shell, tree->assembled, tree->argv, false);
+	if (!ft_strcmp(tree->assembled, "exit"))
+	{
+		g_signal = 0;
+		exit_shell(shell);
+	}
+	return (!shell->exit_code);
+}

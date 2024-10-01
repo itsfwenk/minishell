@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:34:50 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 10:43:43 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/01 18:47:53 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		ft_cd(t_env	*env, char **dir_path);
 int		ft_echo(char **echo_arg);
 
 // ft_env.c
-int		ft_env(t_env *env);
+int		ft_env(t_env *env, char **args);
 
 // ft_exit.c
 int		ft_exit(char **ex_arg);
@@ -50,7 +50,7 @@ int		ft_exit(char **ex_arg);
 int		ft_export(t_skibidi *shell, char **args);
 
 // ft_pwd.c
-int		ft_pwd(void);
+int		ft_pwd(char **args);
 
 // ft_unset.c
 int		ft_unset(t_env *env, char **keys);
