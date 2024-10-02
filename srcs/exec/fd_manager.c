@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:24:02 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/01 16:29:30 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/02 10:00:04 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int	fd_manager(t_skibidi *shell, t_token *tree,
 		redirection = redirection->next->next;
 	}
 	side_fd_manager(shell, pipetab, side);
+	close_pipe(tree->garbage_pipe);
 	previous_pipe_manager(tree, side);
 	return (true);
 }

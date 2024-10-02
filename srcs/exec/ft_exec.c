@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:45:11 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/01 15:50:32 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/02 09:59:41 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,17 @@ bool	exec_tree(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
 	tree->pid = ft_lstnew_pipex(shell);
 	if (tree->type == PIPE)
 	{
-		if (tree->left->previous_pipe == NULL)
+		if (pipetab && side == LEFT)
+		{
 			tree->right->previous_pipe = pipetab;
-		tree->left->previous_pipe = pipetab;
+			tree->left->garbage_pipe = pipetab;
+
+		}
+		else if (pipetab && side == RIGHT)
+		{
+			tree->left->previous_pipe = pipetab;
+			tree->right->garbage_pipe = pipetab;
+		}
 		if (pipe(tree->pid->pipefd) == -1)
 			exit_shell(shell);
 		pipetab = tree->pid->pipefd;
