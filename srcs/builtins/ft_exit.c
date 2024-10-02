@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:06:39 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/01 18:20:10 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:13:38 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,13 @@ static int	one_valid_arg(char **exit_arg)
 	return (ex_atoull(exit_arg[0]));
 }
 
-int	ft_exit(char **ex_arg)
+int	ft_exit(t_skibidi *shell, char **ex_arg)
 {
 	if (ex_arg[0] == NULL)
-		return (0);
+	{
+		ft_dprintf(2, "exit\n");
+		exit_shell(shell);
+	}
 	if (ex_isnumeric(ex_arg[0]) == true)
 	{
 		if (ex_arg[1] == NULL)
