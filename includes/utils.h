@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:32:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 18:12:04 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/02 18:34:13 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ bool		has_semicolon(char *str);
 int			is_well_formatted(char *str);
 
 // unlink_hd.c
-void		unlink_heredoc(t_skibidi *shell);
+void		unlink_heredoc(t_skibidi *shell, t_token *token);
 
 #endif

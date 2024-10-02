@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:38:25 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/29 12:07:22 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/02 18:34:05 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ static void	unlink_file(t_skibidi *shell, t_token *redir)
 	free(heredoc_name);
 }
 
-void	unlink_heredoc(t_skibidi *shell)
+void	unlink_heredoc(t_skibidi *shell, t_token *token)
 {
-	t_token	*token;
 	t_token	*redir;
 
-	token = shell->tokens;
 	while (token)
 	{
-		if (token->type == HERE_DOC)
+		if (token->type == PAR_STR)
+			unlink_heredoc(shell, token->sub_shell);
+		else if (token->type == HERE_DOC)
 			unlink_file(shell, token);
 		redir = token->redir;
 		while (redir)

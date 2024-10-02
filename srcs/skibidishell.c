@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 18:10:46 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/02 18:33:31 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	skibidi_loop(t_skibidi *shell)
 			add_history(line);
 			handle_line(shell, line);
 			wait_children(shell);
-			unlink_heredoc(shell);
+			unlink_heredoc(shell, shell->tokens);
 			shell->sigint_here_doc = false;
 			line = NULL;
 		}
