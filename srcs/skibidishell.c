@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 11:51:35 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:39:51 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ static void	handle_line(t_skibidi *shell, char *line)
 	free(line);
 	if (!shell->tokens || !check_syntax(shell, shell->tokens))
 		return ;
-	else if (shell->sigint_here_doc)
-		shell->sigint_here_doc = false;
 	if (!only_redirs(shell->tokens))
 	{
 		merge_tokens(shell, &(shell->tokens), NULL);
@@ -77,6 +75,7 @@ static void	skibidi_loop(t_skibidi *shell)
 			handle_line(shell, line);
 			wait_children(shell);
 			unlink_heredoc(shell);
+			shell->sigint_here_doc = false;
 			line = NULL;
 		}
 		if (line)
