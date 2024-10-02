@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 00:46:38 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 10:43:06 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/02 12:11:04 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	sigint(int status)
 {
 	(void)status;
 	g_signal = 130;
+	rl_set_prompt(ft_get_prompt(true));
 	ft_putchar_fd('\n', STDIN_FILENO);
 	rl_replace_line("", 0);
 	rl_on_new_line();

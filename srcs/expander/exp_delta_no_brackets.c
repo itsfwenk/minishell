@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:55:40 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 11:39:02 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/02 12:05:17 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static t_env	*check_special_env(t_skibidi *shell, t_env *env_var)
 	if (!itoa_return)
 		exit_shell(shell);
 	add_env(&shell->env, "?", itoa_return);
+	free(itoa_return);
 	return (get_env(shell->env, "?"));
 }
 
