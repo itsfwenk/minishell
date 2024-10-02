@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 15:53:26 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 11:53:35 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/02 18:11:36 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,10 @@ bool	only_redirs(t_token *token)
 	return (true);
 }
 
-void	check_for_here_doc(t_skibidi *shell)
+void	check_for_here_doc(t_skibidi *shell, t_token *current)
 {
 	int		hd_return;
-	t_token	*current;
 
-	current = shell->tokens;
 	while (current)
 	{
 		if (current->type == HERE_DOC)
@@ -48,11 +46,8 @@ void	check_for_here_doc(t_skibidi *shell)
 	}
 }
 
-bool	expd_wc_only_redir(t_skibidi *shell)
+bool	expd_wc_only_redir(t_skibidi *shell, t_token *token)
 {
-	t_token	*token;
-
-	token = shell->tokens;
 	while (token)
 	{
 		if (token->type != HD_LIMITER)
@@ -67,12 +62,10 @@ bool	expd_wc_only_redir(t_skibidi *shell)
 	return (true);
 }
 
-void	open_only_redir(t_skibidi *shell)
+void	open_only_redir(t_skibidi *shell, t_token *token)
 {
 	int		fd;
-	t_token	*token;
 
-	token = shell->tokens;
 	if (shell->sigint_here_doc)
 		return ;
 	while (token)

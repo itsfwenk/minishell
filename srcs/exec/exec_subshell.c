@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_subshell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:26:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 16:24:51 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/02 18:30:47 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,17 @@ static void	subshell_pipe_manager(t_token *tree, int *pipetab, t_side side)
 	close_pipe(pipetab);
 }
 
+static void	subshell_only_redirs(t_skibidi *shell, t_token *tree)
+{	
+	expd_wc_only_redir(shell, tree->sub_shell);
+	check_for_here_doc(shell, tree->sub_shell);
+	open_only_redir(shell, tree->sub_shell);
+	lx_deltokens(&shell->tokens);
+	free_env(shell->env);
+	free(shell);
+	exit(EXIT_SUCCESS);
+}
+
 static void	subshell_child_exec(t_skibidi *shell, t_token *tree,
 	int *pipetab, t_side side)
 {
@@ -32,6 +43,8 @@ static void	subshell_child_exec(t_skibidi *shell, t_token *tree,
 	t_token	*sub_token;
 
 	subshell_pipe_manager(tree, pipetab, side);
+	if (only_redirs(tree->sub_shell))
+		return (subshell_only_redirs(shell, tree));
 	par_tree = create_tree(tree->sub_shell);
 	if (exec_tree(shell, par_tree, NULL, side) == true)
 	{

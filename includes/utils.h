@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:32:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 14:15:57 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/02 18:12:04 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ bool		check_line(char *line);
 
 // only_redirs_utils.c
 bool		only_redirs(t_token *token);
-void		check_for_here_doc(t_skibidi *shell);
-bool		expd_wc_only_redir(t_skibidi *shell);
-void		open_only_redir(t_skibidi *shell);
+void		check_for_here_doc(t_skibidi *shell, t_token *token);
+bool		expd_wc_only_redir(t_skibidi *shell, t_token *current);
+void		open_only_redir(t_skibidi *shell, t_token *token);
 
 // print_utils.c
 void		ft_print_color(char *msg, char *color);

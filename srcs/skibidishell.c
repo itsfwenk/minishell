@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   skibidishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 17:58:04 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/02 18:10:46 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static void	handle_line(t_skibidi *shell, char *line)
 	}
 	else
 	{
-		if (expd_wc_only_redir(shell) == false)
+		if (expd_wc_only_redir(shell, shell->tokens) == false)
 			return ;
-		check_for_here_doc(shell);
-		open_only_redir(shell);
+		check_for_here_doc(shell, shell->tokens);
+		open_only_redir(shell, shell->tokens);
 	}
 	return ;
 }

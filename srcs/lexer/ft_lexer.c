@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:03:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 11:52:24 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/02 18:16:45 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	merge_tokens(t_skibidi *shell, t_token **token, t_token *cmd)
 	t_token	*current;
 
 	current = NULL;
-	if (!token || *token == NULL)
+	if (!token || *token == NULL || only_redirs(*token))
 		return ;
 	if (*token && (*token)->type == PAR_STR)
 	{
