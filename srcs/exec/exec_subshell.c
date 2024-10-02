@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:26:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 18:30:47 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/02 18:52:37 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ static void	subshell_only_redirs(t_skibidi *shell, t_token *tree)
 	expd_wc_only_redir(shell, tree->sub_shell);
 	check_for_here_doc(shell, tree->sub_shell);
 	open_only_redir(shell, tree->sub_shell);
-	lx_deltokens(&shell->tokens);
-	free_env(shell->env);
-	free(shell);
-	exit(EXIT_SUCCESS);
+	exit_shell(shell);
 }
 
 static void	subshell_child_exec(t_skibidi *shell, t_token *tree,
@@ -52,13 +49,14 @@ static void	subshell_child_exec(t_skibidi *shell, t_token *tree,
 		while (sub_token)
 		{
 			if (sub_token->type == STR)
-				waitpid(sub_token->pid->p_id, &sub_token->pid->status, 0);
+			{
+				if (waitpid(sub_token->pid->p_id,
+						&sub_token->pid->status, 0) != -1)
+					update_error_code(shell, sub_token->pid->p_id);
+			}			
 			sub_token = sub_token->next;
 		}
-		lx_deltokens(&shell->tokens);
-		free_env(shell->env);
-		free(shell);
-		exit(EXIT_SUCCESS);
+		exit_shell(shell);
 	}
 }
 
