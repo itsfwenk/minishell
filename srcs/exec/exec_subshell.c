@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:26:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 18:52:37 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/02 19:31:47 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	subshell_child_exec(t_skibidi *shell, t_token *tree,
 			{
 				if (waitpid(sub_token->pid->p_id,
 						&sub_token->pid->status, 0) != -1)
-					update_error_code(shell, sub_token->pid->p_id);
+					update_error_code(shell, sub_token->pid->status);
 			}			
 			sub_token = sub_token->next;
 		}
