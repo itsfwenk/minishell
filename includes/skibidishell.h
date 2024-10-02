@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   skibidishell.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:28:31 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 09:58:20 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/02 11:50:29 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ typedef struct s_token
 typedef struct s_kibidi
 {
 	int		exit_code;
+	bool	sigint_here_doc;
 	t_env	*env;
 	t_token	*tokens;
 	t_token	*tree;

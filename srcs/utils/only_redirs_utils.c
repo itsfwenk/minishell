@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   only_redirs_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 15:53:26 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 14:15:24 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/02 11:53:35 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,15 @@ void	check_for_here_doc(t_skibidi *shell)
 		if (current->type == HERE_DOC)
 		{
 			signal(SIGINT, heredoc_sig);
+			g_signal = 0;
 			hd_return = get_here_doc_content(shell, current);
 			if (hd_return == -1)
 				exit_shell(shell);
+			else if (g_signal)
+			{
+				shell->sigint_here_doc = true;
+				return ;
+			}
 		}
 		current = current->next;
 	}
@@ -67,7 +73,7 @@ void	open_only_redir(t_skibidi *shell)
 	t_token	*token;
 
 	token = shell->tokens;
-	if (g_signal)
+	if (shell->sigint_here_doc)
 		return ;
 	while (token)
 	{

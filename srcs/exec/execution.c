@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:21:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 09:54:24 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/02 11:50:18 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	builtin_exec(t_skibidi	*shell, char	*cmd, char	**argv,
 	else if (!ft_strcmp(cmd, "unset"))
 		exit_code = ft_unset(shell->env, &argv[1]);
 	shell->exit_code = exit_code;
-	update_error_code(shell, exit_code, true);
+	update_error_code(shell, exit_code);
 	if (!in_child)
 		return (exit_code);
 	lx_deltokens(&shell->tokens);
@@ -103,7 +103,7 @@ int	exec_cmd(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
 	get_filenames(shell, tree);
 	create_argv(shell, tree);
 	add_env(&shell->env, "_", tree->assembled);
-	if (g_signal)
+	if (shell->sigint_here_doc)
 		return (true);
 	else if (!pipetab && is_builtin(tree->assembled))
 		return (check_exit(shell, tree));

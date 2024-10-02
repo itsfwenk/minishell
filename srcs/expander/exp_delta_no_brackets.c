@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exp_delta_no_brackets.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:55:40 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 11:48:43 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/02 11:39:02 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,22 @@ static bool	is_var_limiter(char *str, int *key_limits)
 			&& str[key_limits[1]] != '_'))
 		return (true);
 	return (false);
+}
+
+static t_env	*check_special_env(t_skibidi *shell, t_env *env_var)
+{
+	char	*itoa_return;
+
+	if (ft_strcmp(env_var->key, "?"))
+		return (env_var);
+	if (g_signal)
+		itoa_return = ft_itoa(g_signal);
+	else
+		itoa_return = ft_itoa(shell->exit_code);
+	if (!itoa_return)
+		exit_shell(shell);
+	add_env(&shell->env, "?", itoa_return);
+	return (get_env(shell->env, "?"));
 }
 
 t_env	*key_exists(t_skibidi *shell, char *str, int *limits)
@@ -51,7 +67,7 @@ t_env	*key_exists(t_skibidi *shell, char *str, int *limits)
 					break ;
 			}
 			if (tstring_i == limits[1] + 1 && env_var->key[key_i] == '\0')
-				return (env_var);
+				return (check_special_env(shell, env_var));
 		}
 		env_var = env_var->next;
 	}

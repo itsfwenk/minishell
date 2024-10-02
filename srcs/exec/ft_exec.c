@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:45:11 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 09:59:41 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/02 11:57:40 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static bool	special_exec(t_skibidi *shell, t_token *tree, int *pipetab)
 	{
 		if (waitpid(tree->left->pid->p_id, &tree->left->pid->status, 0) != -1)
 		{
-			update_error_code(shell, tree->left->pid->status, false);
+			update_error_code(shell, tree->left->pid->status);
 			if (WEXITSTATUS(tree->left->pid->status) != EXIT_SUCCESS)
 				return (false);
 		}
@@ -89,7 +89,7 @@ static bool	special_exec(t_skibidi *shell, t_token *tree, int *pipetab)
 	{
 		if (waitpid(tree->left->pid->p_id, &tree->left->pid->status, 0) != -1)
 		{
-			update_error_code(shell, tree->left->pid->status, false);
+			update_error_code(shell, tree->left->pid->status);
 			if (WEXITSTATUS(tree->left->pid->status) == EXIT_SUCCESS)
 				return (false);
 		}
@@ -106,22 +106,7 @@ bool	exec_tree(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
 		return (false);
 	tree->pid = ft_lstnew_pipex(shell);
 	if (tree->type == PIPE)
-	{
-		if (pipetab && side == LEFT)
-		{
-			tree->right->previous_pipe = pipetab;
-			tree->left->garbage_pipe = pipetab;
-
-		}
-		else if (pipetab && side == RIGHT)
-		{
-			tree->left->previous_pipe = pipetab;
-			tree->right->garbage_pipe = pipetab;
-		}
-		if (pipe(tree->pid->pipefd) == -1)
-			exit_shell(shell);
-		pipetab = tree->pid->pipefd;
-	}
+		pipe_manager(shell, tree, pipetab, side);
 	exec_tree(shell, tree->left, pipetab, LEFT);
 	signal(SIGINT, exec_sig);
 	signal(SIGQUIT, SIG_DFL);

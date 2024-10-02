@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:35:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/01 18:20:44 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/02 11:58:06 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	exec_parentheses(t_skibidi *shell, t_token *tree, int *pipetab,
 			t_side side);
 
 // exec_utils.c
-void	update_error_code(t_skibidi *shell, int status, bool is_builtin);
+void	update_error_code(t_skibidi *shell, int status);
 char	**build_envp(t_env *env);
 void	close_pipe(int pipefd[2]);
 
@@ -65,5 +65,9 @@ int		get_here_doc_content(t_skibidi *shell, t_token *tree);
 
 // pid_list_manip.c
 t_pid	*ft_lstnew_pipex(t_skibidi *shell);
+
+// pipe_utils.c
+void	pipe_manager(t_skibidi *shell, t_token *tree,
+			int *pipetab, t_side side);
 
 #endif

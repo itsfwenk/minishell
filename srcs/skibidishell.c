@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/01 19:03:36 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/02 11:51:35 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static void	handle_line(t_skibidi *shell, char *line)
 	free(line);
 	if (!shell->tokens || !check_syntax(shell, shell->tokens))
 		return ;
-	if (g_signal)
-		g_signal = 0;
+	else if (shell->sigint_here_doc)
+		shell->sigint_here_doc = false;
 	if (!only_redirs(shell->tokens))
 	{
 		merge_tokens(shell, &(shell->tokens), NULL);
@@ -51,7 +51,7 @@ static void	wait_children(t_skibidi *shell)
 		if (token->type == STR && token->pid)
 		{
 			if (waitpid(token->pid->p_id, &token->pid->status, 0) != -1)
-				update_error_code(shell, token->pid->status, false);
+				update_error_code(shell, token->pid->status);
 		}
 		token = token->next;
 	}
@@ -73,7 +73,6 @@ static void	skibidi_loop(t_skibidi *shell)
 			shell->exit_code = 2;
 		else
 		{
-			shell->exit_code = 0;
 			add_history(line);
 			handle_line(shell, line);
 			wait_children(shell);
