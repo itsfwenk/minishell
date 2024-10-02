@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:35:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 11:58:06 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/02 17:53:07 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_env		t_env;
 typedef struct s_string		t_string;
 typedef struct s_token		t_token;
 typedef struct s_kibidi		t_skibidi;
+typedef struct s_pipe		t_pipe;
 
 // check_exit.c
 bool	check_exit(t_skibidi *shell, t_token *tree);
@@ -69,5 +70,7 @@ t_pid	*ft_lstnew_pipex(t_skibidi *shell);
 // pipe_utils.c
 void	pipe_manager(t_skibidi *shell, t_token *tree,
 			int *pipetab, t_side side);
+void	close_garbage(t_pipe *garbage);
+void	free_tpipe(t_pipe *to_free);
 
 #endif

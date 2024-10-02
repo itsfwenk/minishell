@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_subshell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:26:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 11:35:31 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/02 16:24:51 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	subshell_pipe_manager(t_token *tree, int *pipetab, t_side side)
 	if (tree->previous_pipe && side == RIGHT)
 		dup2(tree->previous_pipe[1], STDOUT_FILENO);
 	close_pipe(tree->previous_pipe);
-	close_pipe(tree->garbage_pipe);
+	close_garbage(tree->garbage_pipe);
 	close_pipe(pipetab);
 }
 

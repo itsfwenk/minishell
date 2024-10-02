@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:24:02 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 10:00:04 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/02 17:58:59 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,6 @@ static bool	previous_pipe_manager(t_token *tree, t_side side)
 	return (true);
 }
 
-// void	close_pipe(int pipefd[2])
-// {
-// 	if (pipefd == NULL)
-// 		return ;
-// 	if (pipefd[0] != -1)
-// 		close(pipefd[0]);
-// 	if (pipefd[1] != -1)
-// 		close(pipefd[1]);
-// 	pipefd[0] = -1;
-// 	pipefd[1] = -1;
-// }
-
 static bool	file_access_fail(t_skibidi *shell, t_token *redirection)
 {
 	shell->exit_code = EXIT_FAILURE;
@@ -106,7 +94,7 @@ int	fd_manager(t_skibidi *shell, t_token *tree,
 		redirection = redirection->next->next;
 	}
 	side_fd_manager(shell, pipetab, side);
-	close_pipe(tree->garbage_pipe);
+	close_garbage(tree->garbage_pipe);
 	previous_pipe_manager(tree, side);
 	return (true);
 }

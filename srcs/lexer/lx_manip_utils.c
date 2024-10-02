@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lx_manip_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:17:30 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 17:53:24 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/02 17:53:39 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	lx_deltokens(t_token **tokens)
 		lx_deltokens(&current->arguments);
 		lx_deltokens(&current->redir);
 		lx_deltokens(&current->sub_shell);
+		free_tpipe(current->garbage_pipe);
 		prev = current;
 		current = current->next;
 		free(prev);

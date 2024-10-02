@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   skibidishell.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:28:31 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 11:50:29 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/02 17:57:46 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,17 @@ typedef struct s_string
 	t_string	*next;
 }	t_string;
 
+typedef struct s_pipe
+{
+	int		*pipefd;
+	t_pipe	*next;
+}	t_pipe;
+
 typedef struct s_token
 {
 	int			fd;
 	int			here_doc;
 	int			*previous_pipe;
-	int			*garbage_pipe;
 	char		*assembled;
 	char		*full_string;
 	char		**argv;
@@ -106,6 +111,7 @@ typedef struct s_token
 	t_string	*tstring;
 	t_string	*wildcard_list;
 	t_pid		*pid;
+	t_pipe		*garbage_pipe;
 	t_token		*arguments;
 	t_token		*redir;
 	t_token		*sub_shell;
