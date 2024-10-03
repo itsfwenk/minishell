@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:06:39 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 00:34:06 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 00:37:28 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ int	ft_exit(t_skibidi *shell, char **args)
 		exit_shell(shell);
 	else if (!is_nan(args[0]) && !has_overflow(args[0]))
 	{
-		if (args[1] && !shell->in_par)
+		if (args[1])
 			ft_print_error("exit", NULL, "too many arguments", "\0");
-		else if (!args[1])
+		else
 		{
 			exit_code = ft_atoi(args[0]);
 			shell->to_exit = true;
@@ -86,8 +86,7 @@ int	ft_exit(t_skibidi *shell, char **args)
 	}
 	else
 	{
-		if (!shell->in_par)
-			ft_print_error("exit", args[0], "numeric argument required", "\0");
+		ft_print_error("exit", args[0], "numeric argument required", "\0");
 		exit_code = 2;
 	}
 	return (exit_code);
