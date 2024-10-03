@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_subshell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:26:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 14:15:17 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/03 14:37:37 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ static void	subshell_child_exec(t_skibidi *shell, t_token *tree,
 			}
 			sub_token = sub_token->next;
 		}
-		exit_shell(shell);
 	}
+	exit_shell(shell);
 }
 
 void	exec_parentheses(t_skibidi *shell, t_token *tree, int *pipetab,
