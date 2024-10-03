@@ -6,47 +6,47 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:05:47 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/01 18:52:43 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/03 23:59:05 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "skibidishell.h"
 
-static bool	only_n(char **echo_arg, int arg_i)
+static bool	only_n(char **args, int arg_i)
 {
 	int	i;
 
 	i = 1;
-	while (echo_arg[arg_i][i] != '\0')
+	while (args[arg_i][i] != '\0')
 	{
-		if (echo_arg[arg_i][i] != 'n')
+		if (args[arg_i][i] != 'n')
 			return (false);
 		i++;
 	}
 	return (true);
 }
 
-int	ft_echo(char **echo_arg)
+int	ft_echo(char **args)
 {
 	int	arg_i;
 	int	newline;
 
 	arg_i = 0;
 	newline = true;
-	if (echo_arg[arg_i] != NULL && echo_arg[arg_i][0] == '-')
+	if (args[arg_i] != NULL && args[arg_i][0] == '-')
 	{
-		if (only_n(echo_arg, arg_i) == true)
+		if (only_n(args, arg_i) == true)
 			newline = false;
 	}
-	while (echo_arg[arg_i] != NULL && echo_arg[arg_i][0] == '-'
-			&& only_n(echo_arg, arg_i) == true)
+	while (args[arg_i] != NULL && args[arg_i][0] == '-'
+			&& only_n(args, arg_i) == true)
 	{
 		arg_i++;
 	}
-	while (echo_arg[arg_i] != NULL)
+	while (args[arg_i] != NULL)
 	{
-		printf("%s", echo_arg[arg_i]);
-		if (echo_arg[arg_i + 1] != NULL)
+		printf("%s", args[arg_i]);
+		if (args[arg_i + 1] != NULL)
 			printf(" ");
 		arg_i++;
 	}

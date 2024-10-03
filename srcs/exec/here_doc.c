@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:29:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 21:51:48 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/04 00:25:12 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	heredoc_creator(t_skibidi *shell, t_token *tree)
 static int	ghdc_end(t_skibidi *shell, char *limiter, int fd_hd,
 	char *next_line)
 {
-	update_error_code(shell, g_signal.code);
+	update_error_code(shell, g_signal.code, false);
 	close(fd_hd);
 	if (next_line == NULL)
 	{

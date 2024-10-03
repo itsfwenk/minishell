@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:21:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 22:32:54 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/04 00:24:43 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	builtin_exec(t_skibidi	*shell, char	*cmd, char	**argv,
 	else if (!ft_strcmp(cmd, "unset"))
 		exit_code = ft_unset(shell->env, &argv[1]);
 	shell->exit_code = exit_code;
-	update_error_code(shell, exit_code);
+	update_error_code(shell, exit_code, true);
 	if (!in_pipe)
 		return (exit_code);
 	lx_deltokens(&shell->tokens);
@@ -66,16 +66,16 @@ static void	cmd_exec(t_skibidi *shell, t_token *tree)
 
 	builtin = is_builtin(tree->assembled);
 	if (builtin)
-		cmd_path = tree->assembled;
-	else
-		cmd_path = get_pathname(shell, tree->assembled);
+		exit(builtin_exec(shell, tree->assembled, tree->argv, true));
+	cmd_path = get_pathname(shell, tree->assembled);
 	if (cmd_path == NULL)
 		cmd_not_found(shell, tree);
-	if (builtin)
-		exit(builtin_exec(shell, cmd_path, tree->argv, true));
 	envp = build_envp(shell->env);
 	if (envp == NULL)
+	{
+		free(cmd_path);
 		exit_shell(shell);
+	}
 	if (execve(cmd_path, tree->argv, envp) == -1)
 	{
 		free_str_tab(envp);

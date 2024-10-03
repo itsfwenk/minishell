@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_subshell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:26:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 22:31:58 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/04 00:24:31 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	subshell_child_exec(t_skibidi *shell, t_token *tree,
 			{
 				if (waitpid(sub_token->pid->p_id,
 						&sub_token->pid->status, 0) != -1)
-					update_error_code(shell, sub_token->pid->status);
+					update_error_code(shell, sub_token->pid->status, false);
 			}
 			sub_token = sub_token->next;
 		}
