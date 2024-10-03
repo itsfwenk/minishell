@@ -6,102 +6,87 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:06:39 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 13:13:38 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/03 18:43:02 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "skibidishell.h"
 
-static unsigned long long	ex_atoull(const char *nptr)
+static bool	is_nan(char *str)
 {
-	int					i;
-	unsigned long long	nbr;
+	size_t	i;
 
-	if (nptr[0] == '\0')
-		return (0);
-	if (ft_strlen(nptr) >= 20)
-		return (9223372036854775809ULL);
 	i = 0;
-	nbr = 0;
-	while (nptr [i] != '\0' && nptr[i] >= '0' && nptr[i] <= '9')
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	while (str[i])
 	{
-		nbr = nbr * 10;
-		nbr = nbr + (nptr[i++] - '0');
-	}
-	if (nbr > 9223372036854775808ULL)
-		return (9223372036854775809ULL);
-	return (nbr);
-}
-
-static void	init_ex_isnumeric(const char *nptr, int *i, int *sign, int *start)
-{
-	*sign = 1;
-	*start = 0;
-	if (nptr[*start] == '-')
-	{
-		*start = 1;
-		*sign = -1;
-	}
-	while (nptr[*start] == '0')
-	{
-		(*start)++;
-	}
-	*i = *start;
-}
-
-static bool	ex_isnumeric(const char *nptr)
-{
-	int	i;
-	int	sign;
-	int	start;
-
-	init_ex_isnumeric(nptr, &i, &sign, &start);
-	while (nptr[i] != '\0')
-	{
-		if (ft_isdigit(nptr[i]) == 0)
-			return (false);
+		if (!ft_isdigit(str[i]))
+			return (true);
 		i++;
 	}
-	if (ex_atoull(&nptr[start]) == 9223372036854775809ULL)
-		return (false);
-	if (ex_atoull(&nptr[start]) == 9223372036854775808ULL)
+	return (false);
+}
+
+static bool	check_overflow(int sign, unsigned long long r)
+{
+	if ((sign == 1 && r > (unsigned long long)LONG_MAX)
+		|| (sign == -1 && r > (unsigned long long)LONG_MAX + 1))
+		return (true);
+	return (false);
+}
+
+static bool	has_overflow(char *str)
+{
+	size_t				i;
+	int					s;
+	unsigned long long	r;
+
+	i = 0;
+	s = 1;
+	r = 0;
+	while ((9 <= str[i] && str[i] <= 13) || str[i] == 32)
+		i++;
+	while (str[i] == '+' || str[i] == '-')
 	{
-		if (sign == -1)
+		if (i && (str[i - 1] == '+' || str[i - 1] == '-'))
+			return (0);
+		else if (str[i] == '-')
+			s *= -1;
+		i++;
+	}
+	while ('0' <= str[i] && str[i] <= '9')
+	{
+		r = r * 10 + str[i] - 48;
+		if (check_overflow(s, r))
 			return (true);
-		else
-			return (false);
+		i++;
 	}
-	return (true);
+	return (false);
 }
 
-static int	one_valid_arg(char **exit_arg)
+int	ft_exit(t_skibidi *shell, char **args)
 {
+	int	exit_code;
+
+	exit_code = 1;
 	printf("exit\n");
-	if (exit_arg[0][0] == '-')
-		return (ex_atoull(++exit_arg[0]) * -1);
-	return (ex_atoull(exit_arg[0]));
-}
-
-int	ft_exit(t_skibidi *shell, char **ex_arg)
-{
-	if (ex_arg[0] == NULL)
-	{
-		ft_dprintf(2, "exit\n");
+	if (!args[0])
 		exit_shell(shell);
-	}
-	if (ex_isnumeric(ex_arg[0]) == true)
+	else if (!is_nan(args[0]) && !has_overflow(args[0]))
 	{
-		if (ex_arg[1] == NULL)
-			return (one_valid_arg(ex_arg));
-		ft_dprintf(2, "%sexit\n%s", RED, END_COLOR);
-		ft_print_error("exit", NULL, "too many arguments", "\0");
-		return (1);
+		if (args[1])
+			ft_print_error("exit", NULL, "too many arguments", "\0");
+		else
+		{
+			exit_code = ft_atoi(args[0]);
+			shell->to_exit = true;
+		}
 	}
 	else
 	{
-		ft_dprintf(2, "%sexit\n%s", RED, END_COLOR);
-		ft_print_error("exit", ex_arg[0], "numeric argument required", "\0");
-		return (2);
+		ft_print_error("exit", args[0], "numeric argument required", "\0");
+		exit_code = 2;
 	}
-	return (0);
+	return (exit_code);
 }
