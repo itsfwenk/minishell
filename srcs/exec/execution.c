@@ -6,14 +6,14 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:21:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 11:34:48 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/03 19:25:27 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "skibidishell.h"
 
 int	builtin_exec(t_skibidi	*shell, char	*cmd, char	**argv,
-	bool in_child)
+	bool in_pipe)
 {
 	int	exit_code;
 
@@ -34,7 +34,7 @@ int	builtin_exec(t_skibidi	*shell, char	*cmd, char	**argv,
 		exit_code = ft_unset(shell->env, &argv[1]);
 	shell->exit_code = exit_code;
 	update_error_code(shell, exit_code);
-	if (!in_child)
+	if (!in_pipe)
 		return (exit_code);
 	lx_deltokens(&shell->tokens);
 	free_env(shell->env);

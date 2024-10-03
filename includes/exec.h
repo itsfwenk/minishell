@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:35:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 19:18:17 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/03 19:25:27 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	close_pipe(int pipefd[2]);
 
 // execution.c
 int		builtin_exec(t_skibidi	*shell, char	*cmd, char	**argv,
-			bool in_child);
+			bool in_pipe);
 int		exec_cmd(t_skibidi *shell, t_token *tree, int *pipetab, t_side side);
 
 // fd_manager.c
