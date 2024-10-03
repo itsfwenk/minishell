@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:36:33 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 19:31:55 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/03 10:40:43 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_kibidi		t_skibidi;
 // ft_lexer.c
 void		check_for_heredoc(t_skibidi *shell, t_token *token);
 t_token		*ft_lexer(t_skibidi *shell, char *input);
+void		merge_operators(t_skibidi *shell, t_token *current);
 void		merge_tokens(t_skibidi *shell, t_token **token, t_token *cmd);
 
 // lx_lst_add.c
@@ -60,7 +61,6 @@ void		merge_redirection(t_skibidi *shell, t_token *current, t_token *cmd);
 void		merge_arguments(t_skibidi *shell,
 				t_token *current, t_token *cmd);
 t_token		*get_cmd(t_token *token);
-void		merge_operators(t_skibidi *shell, t_token *current);
 
 // tstring_utils.c
 t_string	*tstring_getlast(t_string *tstring);

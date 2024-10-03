@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lexer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:03:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 18:16:45 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/03 10:34:41 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,19 @@ t_token	*ft_lexer(t_skibidi *shell, char *input)
 			return (NULL);
 	}
 	return (tokens);
+}
+
+void	merge_operators(t_skibidi *shell, t_token *current)
+{
+	t_token	*next_cmd;
+
+	if (current && (current->type == PIPE || current->type == OR
+			|| current->type == AND))
+	{
+		next_cmd = get_cmd(current);
+		merge_tokens(shell, &current->next, NULL);
+		current->next = next_cmd;
+	}
 }
 
 void	merge_tokens(t_skibidi *shell, t_token **token, t_token *cmd)
