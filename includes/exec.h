@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:35:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 17:53:07 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/03 19:18:17 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ int		get_fd(t_skibidi *shell, t_token *redirection);
 
 // get_path.c
 char	*get_pathname(t_skibidi *shell, char *cmd);
+
+// here_doc_utils.c
+char	*get_limiter(t_skibidi *shell, t_token *limiter_token);
 
 // here_doc.c
 int		get_here_doc_content(t_skibidi *shell, t_token *tree);

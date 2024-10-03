@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:29:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 15:08:44 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/03 19:17:35 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static int	ghdc_end(t_skibidi *shell, char *limiter, int fd_hd,
 		return (1);
 	}
 	free(next_line);
+	free(limiter);
 	return (0);
 }
 
@@ -92,7 +93,7 @@ int	get_here_doc_content(t_skibidi *shell, t_token *tree)
 	char	*limiter;
 	char	*tmp;
 
-	limiter = tree->next->assembled;
+	limiter = get_limiter(shell, tree->next);
 	if (limiter == NULL)
 		return (-1);
 	fd_hd = heredoc_creator(shell, tree);
