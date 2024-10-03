@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_subshell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:26:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 19:07:37 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/03 19:22:10 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	subshell_child_exec(t_skibidi *shell, t_token *tree,
 	if (exec_tree(shell, par_tree, NULL, side) == true)
 	{
 		sub_token = tree->sub_shell;
+		signal(SIGQUIT, SIG_IGN);
 		while (sub_token)
 		{
 			if (sub_token->type == STR)
