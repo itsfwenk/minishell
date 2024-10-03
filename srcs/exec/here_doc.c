@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:29:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 11:37:53 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/03 15:08:44 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,18 @@ static int	ghdc_end(t_skibidi *shell, char *limiter, int fd_hd,
 	return (0);
 }
 
+static char	*check_expand(t_skibidi *shell, t_token *tree, char *line)
+{
+	char	*next_line;
+
+	if (ft_strchr(tree->next->full_string, '\'')
+		|| ft_strchr(tree->next->full_string, '"'))
+		return (line);
+	next_line = exp_pos_param(shell, line);
+	next_line = exp_env_var(shell, line);
+	return (next_line);
+}
+
 int	get_here_doc_content(t_skibidi *shell, t_token *tree)
 {
 	int		fd_hd;
@@ -88,8 +100,7 @@ int	get_here_doc_content(t_skibidi *shell, t_token *tree)
 	while (!g_signal.code && next_line != NULL
 		&& ft_strncmp_pipex(next_line, limiter, ft_strlen(limiter) + 1) != 0)
 	{
-		next_line = exp_pos_param(shell, next_line);
-		next_line = exp_env_var(shell, next_line);
+		next_line = check_expand(shell, tree, next_line);
 		if (next_line == NULL)
 			break ;
 		tmp = next_line;

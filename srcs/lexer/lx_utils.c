@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:21:01 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 18:04:12 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/03 15:11:33 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,41 +35,8 @@ int	is_sep(char *c)
 	return (false);
 }
 
-static int	which_token3(t_token **tokens)
+static int	which_token2(char *c)
 {
-	t_token	*last_token;
-
-	last_token = lx_getlast(*tokens);
-	if (last_token == NULL)
-		return (STR);
-	if (last_token->type == HERE_DOC)
-		return (HD_LIMITER);
-	if (last_token->type == IN_REDIR || last_token->type == OUT_REDIR
-		|| last_token->type == APD_OUT_REDIR)
-		return (FILENAME);
-	return (STR);
-}
-
-static int	which_token2(t_token **tokens, char *c)
-{
-	if (c[0] == '"')
-		return (STR);
-	if (c[0] == '\'')
-		return (STR);
-	if (c[0] == '(')
-		return (PAR_STR);
-	return (which_token3(tokens));
-}
-
-int	which_token(t_token **tokens, char *c)
-{
-	if (c[0] == '|')
-	{
-		if (c[1] == '|')
-			return (OR);
-		else
-			return (PIPE);
-	}
 	if (c[0] == '>')
 	{
 		if (c[1] == '>')
@@ -86,5 +53,30 @@ int	which_token(t_token **tokens, char *c)
 	}
 	if (c[0] == '&' && c[1] == '&')
 		return (AND);
-	return (which_token2(tokens, c));
+	if (c[0] == '(')
+		return (PAR_STR);
+	return (STR);
+}
+
+int	which_token(t_token **tokens, char *c)
+{
+	t_token	*last_token;
+
+	last_token = lx_getlast(*tokens);
+	if (last_token != NULL)
+	{
+		if (last_token->type == HERE_DOC)
+			return (HD_LIMITER);
+		if (last_token->type == IN_REDIR || last_token->type == OUT_REDIR
+			|| last_token->type == APD_OUT_REDIR)
+			return (FILENAME);
+	}
+	if (c[0] == '|')
+	{
+		if (c[1] == '|')
+			return (OR);
+		else
+			return (PIPE);
+	}
+	return (which_token2(c));
 }
