@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   skibidishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 11:37:53 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/03 13:12:21 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	wait_children(t_skibidi *shell)
 	signal(SIGQUIT, SIG_IGN);
 	while (token)
 	{
-		if (token->type == STR && token->pid)
+		if ((token->type == STR || token->type == PAR_STR) && token->pid)
 		{
 			if (waitpid(token->pid->p_id, &token->pid->status, 0) != -1)
 				update_error_code(shell, token->pid->status);

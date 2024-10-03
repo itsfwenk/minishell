@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_subshell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:26:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 19:31:47 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/03 13:12:33 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	subshell_pipe_manager(t_token *tree, int *pipetab, t_side side)
 }
 
 static void	subshell_only_redirs(t_skibidi *shell, t_token *tree)
-{	
+{
 	expd_wc_only_redir(shell, tree->sub_shell);
 	check_for_here_doc(shell, tree->sub_shell);
 	open_only_redir(shell, tree->sub_shell);
@@ -53,7 +53,7 @@ static void	subshell_child_exec(t_skibidi *shell, t_token *tree,
 				if (waitpid(sub_token->pid->p_id,
 						&sub_token->pid->status, 0) != -1)
 					update_error_code(shell, sub_token->pid->status);
-			}			
+			}
 			sub_token = sub_token->next;
 		}
 		exit_shell(shell);
@@ -70,6 +70,4 @@ void	exec_parentheses(t_skibidi *shell, t_token *tree, int *pipetab,
 		subshell_child_exec(shell, tree, pipetab, side);
 	if (pipetab && side == RIGHT)
 		close_pipe(pipetab);
-	if (waitpid(tree->pid->p_id, &tree->pid->status, 0) != -1)
-		update_error_code(shell, tree->pid->status);
 }
