@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:21:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 19:25:27 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/03 19:44:20 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,6 @@ static void	create_argv(t_skibidi *shell, t_token *tokens)
 	tokens->argv = array;
 }
 
-static void	cmd_not_found(t_skibidi *shell, t_token *tree)
-{
-	shell->exit_code = 127;
-	ft_print_error(tree->assembled, NULL, "command not found", NULL);
-	exit_shell(shell);
-}
-
 static void	cmd_exec(t_skibidi *shell, t_token *tree)
 {
 	char	**envp;
@@ -88,8 +81,8 @@ static void	cmd_exec(t_skibidi *shell, t_token *tree)
 	if (execve(cmd_path, tree->argv, envp) == -1)
 	{
 		free_str_tab(envp);
+		cmd_no_perm(shell, tree, cmd_path);
 		free(cmd_path);
-		cmd_not_found(shell, tree);
 		exit_shell(shell);
 	}
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fli <fli@student.42.fr>                    +#+  +:+       +#+         #
+#    By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 23:15:10 by mel-habi          #+#    #+#              #
-#    Updated: 2024/10/03 19:19:04 by fli              ###   ########.fr        #
+#    Updated: 2024/10/03 19:37:53 by mel-habi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME 			= minishell
 LIBFT			= libft
 
 BUILTINS_SRCS	= bi_checkers.c bi_env.c ft_cd.c ft_echo.c ft_env.c ft_exit.c ft_export.c ft_pwd.c ft_unset.c
-EXEC_SRCS		= check_exit.c exec_subshell.c exec_utils.c execution.c fd_manager.c ft_exec.c get_fd.c get_path.c here_doc_utils.c here_doc.c pid_list_manip.c pipe_utils.c
+EXEC_SRCS		= check_exit.c cmd_err_utils.c exec_subshell.c exec_utils.c execution.c fd_manager.c ft_exec.c get_fd.c get_path.c here_doc_utils.c here_doc.c pid_list_manip.c pipe_utils.c
 EXPANDER_SRCS	= assemble_tstring.c check_filename.c exp_delta_in_brackets.c exp_delta_no_brackets.c exp_env_var.c exp_pos_param.c ft_expander.c ft_wildcards.c
 LEXER_SRCS		= ft_lexer.c lx_lst_add.c lx_lst_manip.c lx_manip_utils.c lx_parentheses.c lx_utils.c merger_utils.c tstring_utils.c tstring.c
 PARSER_SRCS		= check_syntax.c tree.c

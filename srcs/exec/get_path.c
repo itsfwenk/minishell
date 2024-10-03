@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:42:48 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 18:05:12 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/03 19:43:52 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*get_pathname(t_skibidi *shell, char *cmd)
 		if (path_cmd == NULL)
 			return (free_str_tab(path_tab), exit_shell(shell), NULL);
 		if (access(path_cmd, X_OK) == 0)
-			return (free_str_tab(path_tab), shell->exit_code = 127, path_cmd);
+			return (free_str_tab(path_tab), path_cmd);
 		i++;
 		free(path_cmd);
 	}
