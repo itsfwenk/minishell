@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:21:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 18:05:39 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/03 11:34:48 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	exec_cmd(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
 	get_filenames(shell, tree);
 	create_argv(shell, tree);
 	add_env(&shell->env, "_", tree->assembled);
-	if (shell->sigint_here_doc)
+	if (g_signal.heredoc_sigint)
 		return (true);
 	else if (!pipetab && is_builtin(tree->assembled))
 		return (check_exit(shell, tree));

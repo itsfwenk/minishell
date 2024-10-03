@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   skibidishell.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:28:31 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 17:57:46 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/03 11:38:00 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@
 # include "signals.h"
 # include "utils.h"
 
-extern int					g_signal;
-
 // Enums
 typedef enum e_side
 {
@@ -61,6 +59,15 @@ typedef enum e_type
 	FILENAME,
 	HD_LIMITER,
 }	t_type;
+
+// Globale
+typedef struct s_ignal
+{
+	int		code;
+	bool	heredoc_sigint;
+}	t_signal;
+
+extern t_signal				g_signal;
 
 // Structures
 typedef struct s_pid		t_pid;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 00:06:48 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 17:58:23 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/03 11:37:53 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ int	exit_shell(t_skibidi *shell)
 		exit(exit_code);
 		return (exit_code);
 	}
-	exit(g_signal);
-	return (g_signal);
+	exit(g_signal.code);
+	return (g_signal.code);
 }

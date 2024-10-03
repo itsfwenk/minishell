@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   skibidishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 10:28:40 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/03 11:37:53 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "skibidishell.h"
 
-int	g_signal = 0;
+t_signal	g_signal = {0};
 
 static void	handle_line(t_skibidi *shell, char *line)
 {
@@ -62,7 +62,7 @@ static void	skibidi_loop(t_skibidi *shell)
 	while (1)
 	{
 		init_signals();
-		line = readline(ft_get_prompt(g_signal || shell->exit_code));
+		line = readline(ft_get_prompt(g_signal.code || shell->exit_code));
 		if (!line)
 			break ;
 		else if (!line[0])
@@ -75,7 +75,7 @@ static void	skibidi_loop(t_skibidi *shell)
 			handle_line(shell, line);
 			wait_children(shell);
 			unlink_heredoc(shell, shell->tokens);
-			shell->sigint_here_doc = false;
+			g_signal.heredoc_sigint = false;
 			line = NULL;
 		}
 		if (line)

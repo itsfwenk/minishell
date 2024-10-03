@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:55:40 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 12:05:17 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/03 11:37:53 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static t_env	*check_special_env(t_skibidi *shell, t_env *env_var)
 
 	if (ft_strcmp(env_var->key, "?"))
 		return (env_var);
-	if (g_signal)
-		itoa_return = ft_itoa(g_signal);
+	if (g_signal.code)
+		itoa_return = ft_itoa(g_signal.code);
 	else
 		itoa_return = ft_itoa(shell->exit_code);
 	if (!itoa_return)

@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 00:46:38 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 18:03:31 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/03 11:37:53 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	sigint(int status)
 {
 	(void)status;
-	g_signal = 130;
+	g_signal.code = 130;
 	rl_set_prompt(ft_get_prompt(true));
 	ft_putchar_fd('\n', STDIN_FILENO);
 	rl_replace_line("", 0);
@@ -31,14 +31,14 @@ int	no_behaviour(void)
 void	exec_sig(int status)
 {
 	(void)status;
-	g_signal = 130;
+	g_signal.code = 130;
 	ft_putchar_fd('\n', STDERR_FILENO);
 }
 
 void	heredoc_sig(int status)
 {
 	(void)status;
-	g_signal = 130;
+	g_signal.code = 130;
 	rl_done = 1;
 	rl_replace_line("", 0);
 	rl_redisplay();

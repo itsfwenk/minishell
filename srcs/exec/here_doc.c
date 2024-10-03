@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:29:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 11:35:49 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/03 11:37:53 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	heredoc_creator(t_skibidi *shell, t_token *tree)
 static int	ghdc_end(t_skibidi *shell, char *limiter, int fd_hd,
 	char *next_line)
 {
-	update_error_code(shell, g_signal);
+	update_error_code(shell, g_signal.code);
 	close(fd_hd);
 	if (next_line == NULL)
 	{
@@ -85,7 +85,7 @@ int	get_here_doc_content(t_skibidi *shell, t_token *tree)
 		return (-1);
 	fd_hd = heredoc_creator(shell, tree);
 	next_line = readline("> ");
-	while (!g_signal && next_line != NULL
+	while (!g_signal.code && next_line != NULL
 		&& ft_strncmp_pipex(next_line, limiter, ft_strlen(limiter) + 1) != 0)
 	{
 		next_line = exp_pos_param(shell, next_line);

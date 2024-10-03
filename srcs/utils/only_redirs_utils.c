@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 15:53:26 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 18:11:36 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/03 11:37:53 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ void	check_for_here_doc(t_skibidi *shell, t_token *current)
 		if (current->type == HERE_DOC)
 		{
 			signal(SIGINT, heredoc_sig);
-			g_signal = 0;
+			g_signal.code = 0;
 			hd_return = get_here_doc_content(shell, current);
 			if (hd_return == -1)
 				exit_shell(shell);
-			else if (g_signal)
+			else if (g_signal.code)
 			{
-				shell->sigint_here_doc = true;
+				g_signal.heredoc_sigint = true;
 				return ;
 			}
 		}
@@ -66,7 +66,7 @@ void	open_only_redir(t_skibidi *shell, t_token *token)
 {
 	int		fd;
 
-	if (shell->sigint_here_doc)
+	if (g_signal.heredoc_sigint)
 		return ;
 	while (token)
 	{

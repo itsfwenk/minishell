@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:26:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 11:35:13 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/03 11:37:53 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,14 @@ void	update_error_code(t_skibidi *shell, int status)
 {
 	if (WIFEXITED(status))
 	{
-		g_signal = 0;
+		g_signal.code = 0;
 		shell->exit_code = WEXITSTATUS(status);
 	}
 	else if (WIFSIGNALED(status))
 	{
 		if (WTERMSIG(status) == SIGQUIT)
 			ft_dprintf(2, "Quit (core dumped)\n");
-		g_signal = 128 + WTERMSIG(status);
+		g_signal.code = 128 + WTERMSIG(status);
 	}
 }
 
