@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:29:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 19:17:35 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/03 21:51:48 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static int	heredoc_creator(t_skibidi *shell, t_token *tree)
 	char	*i_to_a;
 	char	*hd_name;
 
-	i = 0;
-	fd_hd = open(".here_doc0", O_WRONLY | O_CREAT | O_EXCL, 0644);
+	i = 1;
+	fd_hd = open(".here_doc1", O_WRONLY | O_CREAT | O_EXCL, 0644);
 	while (fd_hd == -1)
 	{
 		i++;

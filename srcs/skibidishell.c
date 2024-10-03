@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 13:12:21 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/03 22:29:09 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	handle_line(t_skibidi *shell, char *line)
 		return ;
 	if (!only_redirs(shell->tokens))
 	{
-		merge_tokens(shell, &(shell->tokens), NULL);
+		merge_tokens(shell, &(shell->tokens), NULL, false);
 		shell->tree = create_tree(shell->tokens);
 		exec_tree(shell, shell->tree, NULL, -1);
 	}

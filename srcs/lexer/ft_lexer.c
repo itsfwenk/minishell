@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lexer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:03:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 19:21:13 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/03 22:31:29 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	check_for_heredoc(t_skibidi *shell, t_token *token)
 	redir = token->redir;
 	while (redir)
 	{
-		if (redir->type == HERE_DOC)
+		if (redir->type == HERE_DOC && !redir->here_doc)
 		{
 			signal(SIGINT, heredoc_sig);
 			signal(SIGQUIT, SIG_IGN);
@@ -33,7 +33,7 @@ void	check_for_heredoc(t_skibidi *shell, t_token *token)
 				return ;
 			}
 		}
-		redir = redir->next;
+		redir = redir->next->next;
 	}
 }
 
@@ -60,7 +60,7 @@ t_token	*ft_lexer(t_skibidi *shell, char *input)
 	return (tokens);
 }
 
-void	merge_operators(t_skibidi *shell, t_token *current)
+void	merge_operators(t_skibidi *shell, t_token *current, bool in_sub)
 {
 	t_token	*next_cmd;
 
@@ -68,31 +68,35 @@ void	merge_operators(t_skibidi *shell, t_token *current)
 			|| current->type == AND))
 	{
 		next_cmd = get_cmd(current);
-		merge_tokens(shell, &current->next, NULL);
+		merge_tokens(shell, &current->next, NULL, in_sub);
 		current->next = next_cmd;
 	}
 }
 
-void	merge_tokens(t_skibidi *shell, t_token **token, t_token *cmd)
+void	merge_tokens(t_skibidi *shell, t_token **token,
+	t_token *cmd, bool in_sub)
 {
 	t_token	*current;
 
 	current = NULL;
-	if (!token || *token == NULL || only_redirs(*token))
+	if (!token || *token == NULL || (only_redirs(*token) && !cmd))
 		return ;
 	if (*token && (*token)->type == PAR_STR)
 	{
-		merge_tokens(shell, &(*token)->next, *token);
-		merge_tokens(shell, &(*token)->sub_shell, NULL);
+		merge_tokens(shell, &(*token)->next, *token, false);
+		merge_tokens(shell, &(*token)->sub_shell, NULL, true);
+		return ;
 	}
 	current = *token;
 	if (cmd == NULL)
 		cmd = get_cmd(*token);
 	if (current == cmd)
 		current = current->next;
-	merge_operators(shell, current);
-	merge_redirection(shell, current, cmd);
-	merge_arguments(shell, current, cmd);
+	merge_operators(shell, current, in_sub);
+	merge_redirection(shell, current, cmd, in_sub);
+	merge_arguments(shell, current, cmd, in_sub);
 	if (shell->tokens->type != PAR_STR && cmd != NULL && cmd->type != PAR_STR)
 		shell->tokens = cmd;
+	if (in_sub)
+		*token = cmd;
 }

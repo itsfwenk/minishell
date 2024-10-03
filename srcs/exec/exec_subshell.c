@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_subshell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:26:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 19:22:10 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/03 22:31:58 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static void	subshell_child_exec(t_skibidi *shell, t_token *tree,
 void	exec_parentheses(t_skibidi *shell, t_token *tree, int *pipetab,
 	t_side side)
 {
-	check_for_here_doc(shell, tree->sub_shell);
 	check_for_heredoc(shell, tree->sub_shell);
 	tree->pid->p_id = fork();
 	if (tree->pid->p_id == -1)
