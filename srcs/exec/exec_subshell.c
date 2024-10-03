@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:26:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 00:24:31 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 00:32:51 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static void	subshell_child_exec(t_skibidi *shell, t_token *tree,
 void	exec_parentheses(t_skibidi *shell, t_token *tree, int *pipetab,
 	t_side side)
 {
+	shell->in_par = true;
 	check_for_heredoc(shell, tree->sub_shell);
 	tree->pid->p_id = fork();
 	if (tree->pid->p_id == -1)
@@ -71,4 +72,5 @@ void	exec_parentheses(t_skibidi *shell, t_token *tree, int *pipetab,
 		subshell_child_exec(shell, tree, pipetab, side);
 	if (pipetab && side == RIGHT)
 		close_pipe(pipetab);
+	shell->in_par = false;
 }

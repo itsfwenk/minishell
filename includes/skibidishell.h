@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:28:31 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 19:34:36 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 00:31:58 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef struct s_kibidi
 {
 	int		exit_code;
 	bool	to_exit;
+	bool	in_par;
 	t_env	*env;
 	t_token	*tokens;
 	t_token	*tree;
