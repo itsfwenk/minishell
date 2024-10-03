@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:42:48 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 20:09:53 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 00:47:17 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	**get_path_tab(t_skibidi *shell)
 	char		**path_tab;
 
 	path_var = get_env(shell->env, "PATH");
-	if (path_var == NULL)
+	if (path_var == NULL || path_var->is_unset)
 		return (NULL);
 	path_tab = ft_split(path_var->value, ':');
 	if (path_tab == NULL)

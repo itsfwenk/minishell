@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:06:14 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/01 18:39:39 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 00:47:50 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 int	ft_env(t_env *env, char **args)
 {
-	if (!get_env(env, "PATH") || args[0])
+	t_env	*path;
+
+	path = get_env(env, "PATH");
+	if (!path || path->is_unset || args[0])
 	{
 		if (args[0])
 			ft_print_error("env", args[0], "No such file or directory", "''");
