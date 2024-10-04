@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:30:57 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 18:04:12 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 11:27:49 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ static t_token	*check_syntax2(t_token *current)
 		if (current->next == NULL || current->next->type != HD_LIMITER)
 			return (current->next);
 	}
-	if (current->next == NULL)
-		return (NULL);
 	if (current->type == FILENAME || current->type == HD_LIMITER)
 	{
 		if (current->next->type == PAR_STR)
@@ -33,6 +31,8 @@ static t_token	*check_syntax2(t_token *current)
 	}
 	if (current->type == PAR_STR)
 	{
+		if (!current->sub_shell)
+			return (current);
 		if (current->next->type >= STR)
 			return (current->next);
 	}

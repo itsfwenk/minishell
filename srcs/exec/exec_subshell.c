@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_subshell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:26:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 00:32:51 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 09:36:07 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	subshell_child_exec(t_skibidi *shell, t_token *tree,
 		signal(SIGQUIT, SIG_IGN);
 		while (sub_token)
 		{
-			if (sub_token->type == STR)
+			if (sub_token->type == STR || sub_token->type == PAR_STR)
 			{
 				if (waitpid(sub_token->pid->p_id,
 						&sub_token->pid->status, 0) != -1)
@@ -57,6 +57,7 @@ static void	subshell_child_exec(t_skibidi *shell, t_token *tree,
 			sub_token = sub_token->next;
 		}
 	}
+	unlink_heredoc(shell, tree->sub_shell);
 	exit_shell(shell);
 }
 
