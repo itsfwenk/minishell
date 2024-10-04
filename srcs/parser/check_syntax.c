@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:30:57 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 11:58:34 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 12:05:04 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static void	print_syntax_error(t_token *error_token)
 	}
 	else
 	{
-		ft_print_error(NULL, "(", \
+		ft_print_error(NULL, ")", \
 		"syntax error near unexpected token", "`'");
 	}
 	return ;
