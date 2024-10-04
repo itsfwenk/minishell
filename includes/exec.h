@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:35:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 00:25:32 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 16:01:32 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_pipe		t_pipe;
 bool	check_exit(t_skibidi *shell, t_token *tree);
 
 // cmd_err_utils.c
-void	cmd_not_found(t_skibidi *shell, t_token *tree);
+void	cmd_not_found(t_skibidi *shell, t_token *tree, char *cmd_path);
 void	cmd_no_perm(t_skibidi *shell, t_token *tree, char *cmd_path);
 
 // exec_subshell.c

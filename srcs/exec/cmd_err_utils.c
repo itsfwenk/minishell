@@ -3,19 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_err_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 19:27:54 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 14:10:13 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/04 16:01:14 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "skibidishell.h"
 
-void	cmd_not_found(t_skibidi *shell, t_token *tree)
+void	cmd_not_found(t_skibidi *shell, t_token *tree, char *cmd_path)
 {
+	(void)cmd_path;
 	shell->exit_code = 127;
 	ft_print_error(tree->argv[0], NULL, "command not found", NULL);
+	if (cmd_path)
+		free(cmd_path);
 	exit_shell(shell);
 }
 
@@ -29,4 +32,6 @@ void	cmd_no_perm(t_skibidi *shell, t_token *tree, char *cmd_path)
 		ft_print_error(tree->argv[0], NULL, "Is a directory", NULL);
 	else
 		ft_print_error(tree->argv[0], NULL, "Permission denied", NULL);
+	free(cmd_path);
+	exit_shell(shell);
 }

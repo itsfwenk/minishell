@@ -6,11 +6,20 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 00:50:14 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 18:04:12 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 15:53:16 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "skibidishell.h"
+
+char	*trim_line(char *line)
+{
+	char	*trmimmed;
+
+	trmimmed = ft_strtrim(line, " \t");
+	free(line);
+	return (trmimmed);
+}
 
 bool	check_line(char *line)
 {

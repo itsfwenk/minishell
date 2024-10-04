@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 15:43:12 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 15:53:53 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ t_signal	g_signal = {0};
 
 static void	handle_line(t_skibidi *shell, char *line)
 {
-	if (shell->tokens)
+	line = trim_line(line);
+	if (!line)
+		return ;
+	else if (shell->tokens)
 		lx_deltokens(&shell->tokens);
 	shell->tokens = ft_lexer(shell, line);
 	free(line);

@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:21:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 15:34:21 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 16:02:04 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	cmd_exec(t_skibidi *shell, t_token *tree)
 		exit(builtin_exec(shell, tree->wildcard_list->str, tree->argv, true));
 	cmd_path = get_pathname(shell, tree->wildcard_list->str);
 	if (cmd_path == NULL)
-		cmd_not_found(shell, tree);
+		cmd_not_found(shell, tree, cmd_path);
 	envp = build_envp(shell->env);
 	if (envp == NULL)
 	{
@@ -82,9 +82,8 @@ static void	cmd_exec(t_skibidi *shell, t_token *tree)
 		if (tree->argv[0][0])
 			cmd_no_perm(shell, tree, cmd_path);
 		else if (tree->tstring->between_quote)
-			cmd_not_found(shell, tree);
-		free(cmd_path);
-		exit_shell(shell);
+			cmd_not_found(shell, tree, cmd_path);
+		return (free(cmd_path), exit_shell(shell));
 	}
 }
 
