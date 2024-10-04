@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:45:11 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 00:24:51 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 23:03:21 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,32 +72,18 @@ void	add_args(t_skibidi *shell, char **array,
 	}
 }
 
-static bool	special_exec(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
+static bool	special_exec(t_skibidi *shell, t_token *tree,
+	int *pipetab, t_side side)
 {
-	if (tree->type == AND)
-	{
-		if (waitpid(tree->left->pid->p_id, &tree->left->pid->status, 0) != -1)
-		{
-			update_error_code(shell, tree->left->pid->status, false);
-			if (WEXITSTATUS(tree->left->pid->status) != EXIT_SUCCESS)
-				return (false);
-		}
-		else if (shell->exit_code)
-			return (false);
-	}
-	if (tree->type == OR)
-	{
-		if (waitpid(tree->left->pid->p_id, &tree->left->pid->status, 0) != -1)
-		{
-			update_error_code(shell, tree->left->pid->status, false);
-			if (WEXITSTATUS(tree->left->pid->status) == EXIT_SUCCESS)
-				return (false);
-		}
-		else if (!shell->exit_code)
-			return (false);
-	}
 	if (tree->type == AND || tree->type == OR)
+	{
+		if (waitpid(tree->left->pid->p_id, &tree->left->pid->status, 0) != -1)
+			update_error_code(shell, tree->left->pid->status, false);
+		if ((tree->type == AND && shell->exit_code)
+			|| (tree->type == OR && !shell->exit_code))
+			return (false);
 		exec_tree(shell, tree->right, pipetab, side);
+	}
 	else
 		exec_tree(shell, tree->right, pipetab, RIGHT);
 	return (true);

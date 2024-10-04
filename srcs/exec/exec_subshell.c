@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_subshell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:26:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 18:41:15 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/04 22:55:36 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,5 @@ void	exec_parentheses(t_skibidi *shell, t_token *tree, int *pipetab,
 		exit_shell(shell);
 	if (tree->pid->p_id == 0)
 		subshell_child_exec(shell, tree, pipetab, side);
-	// if (pipetab && side == RIGHT)
-	// 	close_pipe(pipetab);
 	shell->in_par = false;
 }
