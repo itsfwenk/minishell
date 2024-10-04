@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:32:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 15:53:47 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 16:24:10 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ t_skibidi	*init_shell(char **envp);
 
 // line_utils.c
 bool		check_line(char *line);
-char		*trim_line(char *line);
 
 // only_redirs_utils.c
 bool		only_redirs(t_token *token);
