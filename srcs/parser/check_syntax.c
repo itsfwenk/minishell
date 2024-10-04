@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:30:57 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 11:38:26 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/04 11:58:34 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ bool	check_syntax(t_skibidi *shell, t_token *tokens)
 	current = tokens;
 	if (check_first(current) == 2)
 	{
-		shell->exit_code = 2;
+		shell->exit_code = 1;
 		return (false);
 	}
 	while (current != NULL)
@@ -106,7 +106,7 @@ bool	check_syntax(t_skibidi *shell, t_token *tokens)
 		error_token = check_syntax1(current);
 		if (error_token != NULL)
 		{
-			shell->exit_code = 2;
+			shell->exit_code = 1;
 			print_syntax_error(error_token);
 			return (false);
 		}
