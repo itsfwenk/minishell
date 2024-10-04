@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:26:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 09:36:07 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/04 18:41:15 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static void	subshell_child_exec(t_skibidi *shell, t_token *tree,
 		signal(SIGQUIT, SIG_IGN);
 		while (sub_token)
 		{
-			if (sub_token->type == STR || sub_token->type == PAR_STR)
+			if ((sub_token->type == STR || sub_token->type == PAR_STR)
+				&& sub_token->pid)
 			{
 				if (waitpid(sub_token->pid->p_id,
 						&sub_token->pid->status, 0) != -1)
