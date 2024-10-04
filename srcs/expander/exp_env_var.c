@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:57:51 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 15:26:23 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/04 17:18:35 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char	*exp_env_var(t_skibidi *shell, char *str)
 	nb_exp_var = 0;
 	while (str && str[i] != '\0')
 	{
-		if (str[i] == '$' && str[i + 1] != '\0')
+		if (str[i] == '$' && str[i + 1] != '\0' && !is_space(str[i + 1]))
 		{
 			nb_exp_var++;
 			if (exp_check_keys(shell, str, &i, &delta_char) == false)
