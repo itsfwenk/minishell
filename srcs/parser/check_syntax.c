@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:30:57 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 11:27:49 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/04 11:38:26 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ static t_token	*check_syntax2(t_token *current)
 	}
 	if (current->type == FILENAME || current->type == HD_LIMITER)
 	{
-		if (current->next->type == PAR_STR)
+		if (current->next && current->next->type == PAR_STR)
 			return (current->next);
 	}
 	if (current->type == STR)
 	{
-		if (current->next->type >= PAR_STR)
+		if (current->next && current->next->type >= PAR_STR)
 			return (current->next);
 	}
 	if (current->type == PAR_STR)
 	{
 		if (!current->sub_shell)
 			return (current);
-		if (current->next->type >= STR)
+		if (current->next && current->next->type >= STR)
 			return (current->next);
 	}
 	return (NULL);
@@ -60,6 +60,8 @@ static t_token	*check_syntax1(t_token *current)
 
 static int	check_first(t_token *first_token)
 {
+	if (!first_token)
+		return (false);
 	if (first_token->type == PIPE
 		|| first_token->type == OR
 		|| first_token->type == AND)
@@ -73,6 +75,8 @@ static int	check_first(t_token *first_token)
 
 static void	print_syntax_error(t_token *error_token)
 {
+	if (!error_token)
+		return ;
 	if (error_token->type != PAR_STR)
 	{
 		ft_print_error(NULL, error_token->full_string, \

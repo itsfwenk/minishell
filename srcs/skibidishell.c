@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 11:28:09 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/04 11:29:30 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	skibidi_loop(t_skibidi *shell)
 		else if (!line[0])
 			shell->exit_code = shell->exit_code;
 		else if (!check_line(line))
-			shell->exit_code = 2;
+			shell->exit_code = 1;
 		else
 		{
 			add_history(line);
