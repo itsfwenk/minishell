@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exp_delta_no_brackets.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:55:40 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 01:46:05 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 17:06:03 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	exp_no_brackets(t_skibidi *shell, char *str,
 	key_limits[1]--;
 	env_var = key_exists(shell, str, key_limits);
 	key_len = key_limits[1] - key_limits[0] + 2;
-	*i = key_limits[1] + 1;
+	*i = key_limits[1];
 	if (env_var != NULL)
 	{
 		*delta_char = *delta_char + ft_strlen(env_var->value) - (key_len);
