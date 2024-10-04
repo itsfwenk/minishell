@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:21:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 14:11:06 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/04 15:25:18 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ static void	cmd_exec(t_skibidi *shell, t_token *tree)
 	if (execve(cmd_path, tree->argv, envp) == -1)
 	{
 		free_str_tab(envp);
-		cmd_no_perm(shell, tree, cmd_path);
+		if (tree->argv[0][0])
+			cmd_no_perm(shell, tree, cmd_path);
 		free(cmd_path);
 		exit_shell(shell);
 	}
