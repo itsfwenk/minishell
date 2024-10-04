@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:42:48 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 01:45:14 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 14:11:29 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*get_pathname(t_skibidi *shell, char *cmd)
 
 	if (cmd == NULL)
 		return (NULL);
-	if (access(cmd, F_OK) == 0)
+	if (access(cmd, X_OK) == 0)
 		return (ft_strdup(cmd));
 	path_tab = get_path_tab(shell);
 	if (path_tab == NULL)

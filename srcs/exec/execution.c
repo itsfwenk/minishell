@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:21:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 01:54:21 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 14:11:06 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ static void	cmd_exec(t_skibidi *shell, t_token *tree)
 	char	*cmd_path;
 	int		builtin;
 
-	builtin = is_builtin(tree->assembled);
+	builtin = is_builtin(tree->wildcard_list->str);
 	if (builtin)
-		exit(builtin_exec(shell, tree->assembled, tree->argv, true));
-	cmd_path = get_pathname(shell, tree->assembled);
+		exit(builtin_exec(shell, tree->wildcard_list->str, tree->argv, true));
+	cmd_path = get_pathname(shell, tree->wildcard_list->str);
 	if (cmd_path == NULL)
 		cmd_not_found(shell, tree);
 	envp = build_envp(shell->env);

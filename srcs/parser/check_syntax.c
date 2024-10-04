@@ -3,22 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:30:57 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 12:05:04 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 14:12:47 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "skibidishell.h"
 
-static t_token	*check_syntax2(t_token *current)
+static t_token	*check_syntax2(t_skibidi *shell, t_token *current, bool *in_sub)
 {
-	if (current->type == HERE_DOC)
-	{
-		if (current->next == NULL || current->next->type != HD_LIMITER)
-			return (current->next);
-	}
 	if (current->type == FILENAME || current->type == HD_LIMITER)
 	{
 		if (current->next && current->next->type == PAR_STR)
@@ -35,11 +30,15 @@ static t_token	*check_syntax2(t_token *current)
 			return (current);
 		if (current->next && current->next->type >= STR)
 			return (current->next);
+		if (!check_line(current->sub_shell->full_string))
+			return (*in_sub = true, current);
+		if (check_syntax(shell, current->sub_shell) == false)
+			return (*in_sub = true, current);
 	}
 	return (NULL);
 }
 
-static t_token	*check_syntax1(t_token *current)
+static t_token	*check_syntax1(t_skibidi *shell, t_token *current, bool *in_sub)
 {
 	if (current->type == PIPE || current->type == OR || current->type == AND)
 	{
@@ -55,7 +54,12 @@ static t_token	*check_syntax1(t_token *current)
 		if (current->next == NULL || current->next->type != FILENAME)
 			return (current->next);
 	}
-	return (check_syntax2(current));
+	if (current->type == HERE_DOC)
+	{
+		if (current->next == NULL || current->next->type != HD_LIMITER)
+			return (current->next);
+	}
+	return (check_syntax2(shell, current, in_sub));
 }
 
 static int	check_first(t_token *first_token)
@@ -94,7 +98,9 @@ bool	check_syntax(t_skibidi *shell, t_token *tokens)
 {
 	t_token	*current;
 	t_token	*error_token;
+	bool	in_sub;
 
+	in_sub = false;
 	current = tokens;
 	if (check_first(current) == 2)
 	{
@@ -103,11 +109,12 @@ bool	check_syntax(t_skibidi *shell, t_token *tokens)
 	}
 	while (current != NULL)
 	{
-		error_token = check_syntax1(current);
+		error_token = check_syntax1(shell, current, &in_sub);
 		if (error_token != NULL)
 		{
 			shell->exit_code = 1;
-			print_syntax_error(error_token);
+			if (in_sub == false)
+				print_syntax_error(error_token);
 			return (false);
 		}
 		current = current->next;
