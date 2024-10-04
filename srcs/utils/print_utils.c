@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 00:12:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 21:46:40 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 19:07:49 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	ft_print_error(char *cmd, char *arg, char *error, char *seps)
 char	*ft_get_prompt(bool err)
 {
 	if (err)
-		return (ERROR_EMOJI BOLD RED PROMPT END_COLOR);
-	return (SUCCESS_EMOJI BOLD GREEN PROMPT END_COLOR);
+		return (ESC_F ERROR_EMOJI BOLD RED PROMPT END_COLOR ESC_S);
+	return (ESC_F SUCCESS_EMOJI BOLD GREEN PROMPT END_COLOR ESC_S);
 }
 
 void	ft_print_logo(void)
