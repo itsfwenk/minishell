@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:07:29 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 02:52:09 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 13:19:00 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	print_export(t_env **env)
 		if (current->is_unset == false && check_key(current->key))
 		{
 			printf("export %s", current->key);
-			if (current->value)
+			if (current->value && current->is_exported)
 				printf("=\"%s\"", current->value);
 			printf("\n");
 		}
@@ -69,8 +69,13 @@ static bool	export_val(t_env **env, char *key, char *value)
 	end_value = ft_strchr(value, '=');
 	if (has_key && !has_key->is_unset && !end_value)
 		return (true);
-	new_env = add_env(env, key, end_value + !!end_value);
+	if (end_value)
+		new_env = add_env(env, key, end_value);
+	else
+		new_env = add_env(env, key, "");
 	if (!new_env)
+		return (false);
+	else if (!new_env->key || !new_env->value)
 		return (false);
 	new_env->is_exported = !!end_value;
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:04:57 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 03:08:37 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 13:19:20 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,12 @@ t_env	*add_env(t_env **env, char *key, char *value)
 	else
 	{
 		new_val = (t_env *)ft_calloc(1, sizeof(t_env));
-		if (new_val)
-		{
-			new_val->key = ft_strdup(key);
-			new_val->value = ft_strdup(value);
-			new_val->next = NULL;
-			env_add_back(env, new_val);
-		}
+		if (!new_val)
+			return (NULL);
+		new_val->key = ft_strdup(key);
+		new_val->value = ft_strdup(value);
+		new_val->next = NULL;
+		env_add_back(env, new_val);
 	}
 	if (new_val)
 		return (new_val->is_unset = false,
