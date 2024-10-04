@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:05:28 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 03:11:39 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 16:51:17 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	ft_cd(t_env	*env, char **args)
 		ft_print_error("cd", NULL, "too many arguments", "\0");
 		return (1);
 	}
+	else if (!args[0][0])
+		return (0);
 	if (!getcwd(cwd, sizeof(cwd))
 		|| chdir(args[0])
 		|| !getcwd(nwd, sizeof(nwd)))

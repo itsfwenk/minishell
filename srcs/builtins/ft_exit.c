@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:06:39 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 00:37:28 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 16:54:31 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ static bool	is_nan(char *str)
 	size_t	i;
 
 	i = 0;
-	if (str[i] == '+' || str[i] == '-')
+	if (!str[0])
+		return (true);
+	else if (str[i] == '+' || str[i] == '-')
 		i++;
 	while (str[i])
 	{
