@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:04:57 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 01:34:45 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 03:08:37 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ t_env	*add_env(t_env **env, char *key, char *value)
 		}
 	}
 	if (new_val)
-		new_val->is_unset = false;
+		return (new_val->is_unset = false,
+			new_val->is_exported = true, new_val);
 	return (new_val);
 }
 
