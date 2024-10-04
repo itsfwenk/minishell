@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:26:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 00:24:07 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 17:55:34 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static size_t	env_size(t_env *env)
 	size = 0;
 	while (env)
 	{
-		if (check_key(env->key) && !env->is_unset)
+		if (check_key(env->key) && !env->is_unset && env->is_exported)
 			size++;
 		env = env->next;
 	}
@@ -89,7 +89,7 @@ char	**build_envp(t_env *env)
 	i = 0;
 	while (env)
 	{
-		if (check_key(env->key) && !env->is_unset)
+		if (check_key(env->key) && !env->is_unset && env->is_exported)
 		{
 			envp[i] = env_to_line(env);
 			if (!envp[i])

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exp_env_var.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:57:51 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 17:18:35 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/04 17:55:59 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void	exp_cp_env_var(t_skibidi *shell, char *str,
 	env_var = key_exists(shell, str, key_limits);
 	j = 0;
 	while (env_var != NULL && env_var->is_unset == false
+		&& env_var->is_exported
 		&& env_var->value[j] != '\0')
 	{
 		expanded_str[i[1]] = env_var->value[j];
