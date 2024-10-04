@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lx_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:21:01 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 15:11:33 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 17:27:37 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,12 @@ int	is_sep(char *c)
 
 static int	which_token2(char *c)
 {
-	if (c[0] == '>')
+	if (c[0] == '|')
 	{
-		if (c[1] == '>')
-			return (APD_OUT_REDIR);
+		if (c[1] == '|')
+			return (OR);
 		else
-			return (OUT_REDIR);
-	}
-	if (c[0] == '<')
-	{
-		if (c[1] == '<')
-			return (HERE_DOC);
-		else
-			return (IN_REDIR);
+			return (PIPE);
 	}
 	if (c[0] == '&' && c[1] == '&')
 		return (AND);
@@ -62,6 +55,18 @@ int	which_token(t_token **tokens, char *c)
 {
 	t_token	*last_token;
 
+	if (c[0] == '>')
+	{
+		if (c[1] == '>')
+			return (APD_OUT_REDIR);
+		return (OUT_REDIR);
+	}
+	if (c[0] == '<')
+	{
+		if (c[1] == '<')
+			return (HERE_DOC);
+		return (IN_REDIR);
+	}
 	last_token = lx_getlast(*tokens);
 	if (last_token != NULL)
 	{
@@ -70,13 +75,6 @@ int	which_token(t_token **tokens, char *c)
 		if (last_token->type == IN_REDIR || last_token->type == OUT_REDIR
 			|| last_token->type == APD_OUT_REDIR)
 			return (FILENAME);
-	}
-	if (c[0] == '|')
-	{
-		if (c[1] == '|')
-			return (OR);
-		else
-			return (PIPE);
 	}
 	return (which_token2(c));
 }
