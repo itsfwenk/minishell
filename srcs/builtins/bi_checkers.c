@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:04:35 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/28 19:47:41 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 16:45:25 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ bool	check_key(char *key)
 	size_t	i;
 
 	i = 0;
+	if (!key)
+		return (false);
 	while (key[i])
 	{
 		if (!i && !ft_isalpha(key[i]) && key[i] != '_')

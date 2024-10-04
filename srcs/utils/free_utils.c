@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 00:06:48 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 11:37:53 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 16:48:46 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	**free_str_tab(char	**tab)
 	size_t	i;
 
 	i = 0;
-	if (!tab || !(*tab))
+	if (!tab)
 		return (NULL);
 	while (tab[i])
 	{
