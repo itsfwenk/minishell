@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:07:29 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 13:19:00 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 14:31:53 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static bool	export_val(t_env **env, char *key, char *value)
 	if (has_key && !has_key->is_unset && !end_value)
 		return (true);
 	if (end_value)
-		new_env = add_env(env, key, end_value);
+		new_env = add_env(env, key, end_value + 1);
 	else
 		new_env = add_env(env, key, "");
 	if (!new_env)
