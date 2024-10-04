@@ -72,7 +72,7 @@ void	exec_parentheses(t_skibidi *shell, t_token *tree, int *pipetab,
 		exit_shell(shell);
 	if (tree->pid->p_id == 0)
 		subshell_child_exec(shell, tree, pipetab, side);
-	if (pipetab && side == RIGHT)
-		close_pipe(pipetab);
+	// if (pipetab && side == RIGHT)
+	// 	close_pipe(pipetab);
 	shell->in_par = false;
 }

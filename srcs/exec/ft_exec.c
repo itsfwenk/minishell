@@ -72,7 +72,7 @@ void	add_args(t_skibidi *shell, char **array,
 	}
 }
 
-static bool	special_exec(t_skibidi *shell, t_token *tree, int *pipetab)
+static bool	special_exec(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
 {
 	if (tree->type == AND)
 	{
@@ -96,7 +96,10 @@ static bool	special_exec(t_skibidi *shell, t_token *tree, int *pipetab)
 		else if (!shell->exit_code)
 			return (false);
 	}
-	exec_tree(shell, tree->right, pipetab, RIGHT);
+	if (tree->type == AND || tree->type == OR)
+		exec_tree(shell, tree->right, pipetab, side);
+	else
+		exec_tree(shell, tree->right, pipetab, RIGHT);
 	return (true);
 }
 
@@ -110,11 +113,14 @@ bool	exec_tree(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
 		pipe_manager(shell, tree, pipetab, side);
 		pipetab = tree->pid->pipefd;
 	}
-	exec_tree(shell, tree->left, pipetab, LEFT);
+	if (tree->type == AND || tree->type == OR)
+		exec_tree(shell, tree->left, NULL, LEFT);
+	else
+		exec_tree(shell, tree->left, pipetab, LEFT);
 	signal(SIGINT, exec_sig);
 	signal(SIGQUIT, SIG_DFL);
 	if ((tree->type == PIPE || tree->type == AND || tree->type == OR)
-		&& !special_exec(shell, tree, pipetab))
+		&& !special_exec(shell, tree, pipetab, side))
 		return (false);
 	else if (tree->type == PAR_STR)
 		exec_parentheses(shell, tree, pipetab, side);
