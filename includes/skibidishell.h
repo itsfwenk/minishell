@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:28:31 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 00:31:58 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 01:22:47 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_env
 {
 	char	*key;
 	char	*value;
+	bool	is_exported;
 	bool	is_unset;
 	t_env	*next;
 }	t_env;

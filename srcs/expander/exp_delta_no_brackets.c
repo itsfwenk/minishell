@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:55:40 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 11:37:53 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 01:46:05 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_env	*key_exists(t_skibidi *shell, char *str, int *limits)
 		tstring_i = limits[0];
 		key_i = 0;
 		if (str[tstring_i] == env_var->key[key_i]
-			&& env_var->is_unset == false)
+			&& env_var->is_unset == false && env_var->is_exported)
 		{
 			while (tstring_i <= limits[1] && env_var->key[key_i] != '\0')
 			{

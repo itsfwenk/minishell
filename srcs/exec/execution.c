@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:21:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 00:24:43 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/04 01:54:21 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	builtin_exec(t_skibidi	*shell, char	*cmd, char	**argv,
 	else if (!ft_strcmp(cmd, "exit"))
 		exit_code = ft_exit(shell, &argv[1]);
 	else if (!ft_strcmp(cmd, "export"))
-		exit_code = ft_export(shell, &argv[1]);
+		exit_code = ft_export(shell, &argv[1], false);
 	else if (!ft_strcmp(cmd, "pwd"))
 		exit_code = ft_pwd(&argv[1]);
 	else if (!ft_strcmp(cmd, "unset"))
