@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 19:27:54 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/05 22:08:30 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/06 01:13:18 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	cmd_no_perm(t_skibidi *shell, t_token *tree, char *cmd_path)
 	{
 		shell->exit_code = 127;
 		ft_print_error(tree->argv[0], NULL, "No such file or directory", NULL);
-	}		
+	}
 	free(cmd_path);
 	exit_shell(shell);
 }
