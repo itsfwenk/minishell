@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:32:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/05 09:09:42 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/05 21:53:00 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@
 # define ESC_S "\002"
 
 # define PROMPT " skibidishell > "
-# define SUCCESS_EMOJI "\001😸\002"
-# define WARNING_EMOJI "\001🙀\002"
-# define ERROR_EMOJI "\001😿\002"
+# define SUCCESS_EMOJI "😸"
+# define WARNING_EMOJI "🙀"
+# define ERROR_EMOJI "😿"
 
 // Enums
 typedef enum e_side			t_side;
