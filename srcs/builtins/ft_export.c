@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:07:29 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 14:31:53 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/05 23:22:37 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	ft_export(t_skibidi *shell, char **args, bool is_startup)
 		splitted = ft_split(args[i], '=');
 		if (!splitted)
 			return_val = 1;
-		else if (!check_key(splitted[0]))
+		else if (args[i][0] == '=' || !check_key(splitted[0]))
 		{
 			ft_print_error("export", args[i], "not a valid identifier", "`'");
 			return_val = 1;
