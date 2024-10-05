@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:35:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/05 10:07:14 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/05 21:19:23 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	close_pipe(int pipefd[2]);
 // execution.c
 int		builtin_exec(t_skibidi	*shell, char	*cmd, char	**argv,
 			bool in_pipe);
+void	add_args(t_skibidi *shell, char **array,
+			t_token *arguments, int *i);
 int		exec_cmd(t_skibidi *shell, t_token *tree, int *pipetab, t_side side);
 
 // fd_manager.c
@@ -56,8 +58,6 @@ bool	exec_tree(t_skibidi *shell, t_token *tree, int *pipetab, t_side side);
 int		get_arg_nb(t_token *tokens);
 void	add_every_wc(t_skibidi *shell, char **array,
 			t_token *token, int *i);
-void	add_args(t_skibidi *shell, char **array,
-			t_token *arguments, int *i);
 
 // get_fd.c
 int		get_hd_fd(t_skibidi *shell, t_token *redirection);

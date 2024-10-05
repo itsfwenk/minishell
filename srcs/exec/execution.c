@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:21:27 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/05 14:10:48 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/05 21:18:39 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,19 @@ static void	cmd_exec(t_skibidi *shell, t_token *tree)
 		shell->exit_code = 0;
 		free(cmd_path);
 		exit_shell(shell);
+	}
+}
+
+void	add_args(t_skibidi *shell, char **array,
+	t_token *arguments, int *i)
+{
+	t_token	*arg_token;
+
+	arg_token = arguments;
+	while (arg_token != NULL)
+	{
+		add_every_wc(shell, array, arg_token, i);
+		arg_token = arg_token->next;
 	}
 }
 

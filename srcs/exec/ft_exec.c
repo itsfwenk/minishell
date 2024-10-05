@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:45:11 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/05 14:17:31 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/05 21:18:33 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,21 @@ void	add_every_wc(t_skibidi *shell, char **array,
 	}
 }
 
-void	add_args(t_skibidi *shell, char **array,
-	t_token *arguments, int *i)
+static void	and_or_wait(t_skibidi *shell, t_token *left)
 {
-	t_token	*arg_token;
-
-	arg_token = arguments;
-	while (arg_token != NULL)
+	if (left->type == STR || left->type == PAR_STR)
 	{
-		add_every_wc(shell, array, arg_token, i);
-		arg_token = arg_token->next;
+		if (!left->pid)
+			return ;
+		if (waitpid(left->pid->p_id, &left->pid->status, 0) != -1)
+			update_error_code(shell, left->pid->status, false);
+	}
+	else if (left->type == PIPE)
+		and_or_wait(shell, left->right);
+	else if (left->type == AND || left->type == OR)
+	{
+		and_or_wait(shell, left->left);
+		and_or_wait(shell, left->right);
 	}
 }
 
@@ -77,8 +82,7 @@ static bool	special_exec(t_skibidi *shell, t_token *tree,
 {
 	if (tree->type == AND || tree->type == OR)
 	{
-		if (waitpid(tree->left->pid->p_id, &tree->left->pid->status, 0) != -1)
-			update_error_code(shell, tree->left->pid->status, false);
+		and_or_wait(shell, tree->left);
 		if ((tree->type == AND && shell->exit_code)
 			|| (tree->type == OR && !shell->exit_code))
 			return (false);
