@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:06:14 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 14:42:51 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/05 21:29:30 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_env(t_env *env, char **args)
 	t_env	*path;
 
 	path = get_env(env, "PATH");
-	if (!path || path->is_unset || !path->is_exported || !only_env(args))
+	if ((path && path->is_unset) || !only_env(args))
 	{
 		if (args[0])
 			ft_print_error("env", get_wrong_env(args),

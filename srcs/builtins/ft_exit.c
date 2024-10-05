@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:06:39 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 16:54:31 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/05 21:23:51 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int	ft_exit(t_skibidi *shell, char **args)
 	else
 	{
 		ft_print_error("exit", args[0], "numeric argument required", "\0");
+		shell->to_exit = true;
 		exit_code = 2;
 	}
 	return (exit_code);

@@ -6,11 +6,23 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 17:29:52 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 01:54:29 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/05 21:41:04 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "skibidishell.h"
+
+static void	export_base_env(t_skibidi *shell)
+{
+	char	pwd[PATH_MAX];
+
+	if (!getcwd(pwd, sizeof(pwd)))
+		exit_shell(shell);
+	if (add_env(&shell->env, "SHLVL", "1") == NULL)
+		exit_shell(shell);
+	if (add_env(&shell->env, "PWD", pwd) == NULL)
+		exit_shell(shell);
+}
 
 t_skibidi	*init_shell(char **envp)
 {
@@ -33,5 +45,6 @@ t_skibidi	*init_shell(char **envp)
 		exit_shell(shell);
 	if (add_env(&shell->env, "-", "himBHs") == NULL)
 		exit_shell(shell);
+	export_base_env(shell);
 	return (shell);
 }

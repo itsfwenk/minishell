@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:29:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 00:25:12 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/05 21:23:26 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static int	ghdc_end(t_skibidi *shell, char *limiter, int fd_hd,
 		ft_print_error(NULL, limiter,
 			"the following heredoc limiter has been replaced by ctrl-d (EOF):",
 			"\"\"");
+		free(limiter);
 		return (1);
 	}
 	free(next_line);
