@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:05:28 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 16:51:17 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/06 01:20:39 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static int	try_cd_home(t_env *env)
 
 int	ft_cd(t_env	*env, char **args)
 {
-	char	cwd[PATH_MAX];
 	char	nwd[PATH_MAX];
+	t_env	*pwd;
 
 	if (!args[0] || (!ft_strcmp(args[0], "~") && !args[1]))
 		return (try_cd_home(env));
@@ -42,14 +42,15 @@ int	ft_cd(t_env	*env, char **args)
 	}
 	else if (!args[0][0])
 		return (0);
-	if (!getcwd(cwd, sizeof(cwd))
-		|| chdir(args[0])
+	if (chdir(args[0])
 		|| !getcwd(nwd, sizeof(nwd)))
 	{
 		ft_print_error("cd", args[0], strerror(errno), "\0");
 		return (1);
 	}
-	add_env(&env, "OLDPWD", cwd);
+	pwd = get_env(env, "PWD");
+	if (pwd && pwd->is_exported && !pwd->is_unset)
+		add_env(&env, "OLDPWD", pwd->value);
 	add_env(&env, "PWD", nwd);
 	return (0);
 }
