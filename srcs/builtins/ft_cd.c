@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:05:28 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/06 01:20:39 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/06 01:28:03 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	ft_cd(t_env	*env, char **args)
 	pwd = get_env(env, "PWD");
 	if (pwd && pwd->is_exported && !pwd->is_unset)
 		add_env(&env, "OLDPWD", pwd->value);
+	else
+		return (unset_env(env, "OLDPWD"), unset_env(env, "PWD"), 0);
 	add_env(&env, "PWD", nwd);
 	return (0);
 }
