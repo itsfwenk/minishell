@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   exec_subshell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:26:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 22:55:36 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/05 14:31:52 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "skibidishell.h"
 
-static void	subshell_pipe_manager(t_token *tree, int *pipetab, t_side side)
+static void	subshell_pipe_manager(t_skibidi *shell, t_token *tree,
+	int *pipetab, t_side side)
 {
 	if (pipetab && side == LEFT)
 		dup2(pipetab[1], STDOUT_FILENO);
@@ -22,6 +23,8 @@ static void	subshell_pipe_manager(t_token *tree, int *pipetab, t_side side)
 		dup2(tree->previous_pipe[1], STDOUT_FILENO);
 	close_pipe(tree->previous_pipe);
 	close_garbage(tree->garbage_pipe);
+	close(shell->stdin_save);
+	close(shell->stdout_save);
 	close_pipe(pipetab);
 }
 
@@ -38,7 +41,7 @@ static void	subshell_child_exec(t_skibidi *shell, t_token *tree,
 	t_token	*par_tree;
 	t_token	*sub_token;
 
-	subshell_pipe_manager(tree, pipetab, side);
+	subshell_pipe_manager(shell, tree, pipetab, side);
 	if (only_redirs(tree->sub_shell))
 		return (subshell_only_redirs(shell, tree));
 	par_tree = create_tree(tree->sub_shell);
