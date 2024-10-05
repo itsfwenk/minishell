@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:45:11 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 23:03:21 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/05 11:07:38 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ bool	exec_tree(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
 	else if (tree->type == PAR_STR)
 		exec_parentheses(shell, tree, pipetab, side);
 	else if (tree->type == STR)
-		exec_cmd(shell, tree, pipetab, side);
+		return (exec_cmd(shell, tree, pipetab, side));
 	else if (tree->type == PIPE)
 		close_pipe(tree->pid->pipefd);
 	return (true);

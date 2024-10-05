@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:10:09 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 21:51:30 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/05 11:00:31 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ bool	is_word_delimiter(t_token **tokens, char *str, int *i)
 {
 	int	char_type;
 
+	if (str[i[0] + 1] && str[i[1]] && str[i[0] + 1] == '{' && str[i[1]] != '}')
+		return (false);
 	if (str[i[1]] == ' ' || str[i[1]] == '\t' || str[i[1]] == '\0')
 		return (true);
 	char_type = which_token(tokens, &str[i[1]]);

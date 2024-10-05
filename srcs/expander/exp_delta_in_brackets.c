@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exp_delta_in_brackets.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:50:15 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 18:32:44 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/05 11:01:38 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static bool	check_key_in_brackets(char *str, int *limits)
 	{
 		if (limits[1] == limits[0] + 2 && in_charset(str[i], "#!$-?"))
 			break ;
-		if ((i == limits[0] + 1 && !ft_isalpha(str[i])
+		if (is_space(str[i])
+			|| (i == limits[0] + 1 && !ft_isalpha(str[i])
 				&& str[i] != '_')
 			|| (i > limits[0] + 1 && !ft_isalnum(str[i])
 				&& str[i] != '_'))
