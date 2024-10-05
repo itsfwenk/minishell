@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expander.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:04:18 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/09/30 18:19:36 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/05 11:54:15 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ bool	ft_expander(t_skibidi *shell, t_token *token)
 	{
 		if (current_tstr->to_be_expanded == true)
 		{
+			if (current_tstr->str[0] == '$' && current_tstr->str[1] == '\0'
+				&& current_tstr->next)
+				current_tstr->str[0] = '\0';
 			current_tstr->str = exp_pos_param(shell, current_tstr->str);
 			current_tstr->str = exp_env_var(shell, current_tstr->str);
 			if (current_tstr->str == NULL)
