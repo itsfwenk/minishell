@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:32:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/05 21:53:00 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/05 21:56:57 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@
 # define WHITE "\e[0m"
 # define END_COLOR "\e[0m"
 # define BOLD "\e[1m"
-
-# define ESC_F "\001"
-# define ESC_S "\002"
 
 # define PROMPT " skibidishell > "
 # define SUCCESS_EMOJI "😸"
