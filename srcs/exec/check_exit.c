@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 18:15:58 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 16:06:03 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/05 10:32:40 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ void	check_cmd_path(t_skibidi *shell, t_token *tree, char *cmd_path)
 		cmd_not_found(shell, tree, cmd_path);
 }
 
-bool	check_exit(t_skibidi *shell, t_token *tree)
+bool	check_exit(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
 {
 	shell->to_exit = false;
+	if (fd_manager(shell, tree, pipetab, side) == false)
+		exit_shell(shell);
 	builtin_exec(shell, tree->assembled, tree->argv, false);
 	if (!ft_strcmp(tree->assembled, "exit")
 		&& (shell->to_exit || !tree->argv[0]))

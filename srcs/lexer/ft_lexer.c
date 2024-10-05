@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:03:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 22:31:29 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/05 10:31:44 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,16 @@ t_token	*ft_lexer(t_skibidi *shell, char *input)
 	return (tokens);
 }
 
-void	merge_operators(t_skibidi *shell, t_token *current, bool in_sub)
+void	merge_operators(t_skibidi *shell, t_token *current, t_token *cmd,
+	bool in_sub)
 {
 	t_token	*next_cmd;
 
 	if (current && (current->type == PIPE || current->type == OR
 			|| current->type == AND))
 	{
+		if (cmd)
+			cmd->next = current;
 		next_cmd = get_cmd(current);
 		merge_tokens(shell, &current->next, NULL, in_sub);
 		current->next = next_cmd;
@@ -92,7 +95,7 @@ void	merge_tokens(t_skibidi *shell, t_token **token,
 		cmd = get_cmd(*token);
 	if (current == cmd)
 		current = current->next;
-	merge_operators(shell, current, in_sub);
+	merge_operators(shell, current, cmd, in_sub);
 	merge_redirection(shell, current, cmd, in_sub);
 	merge_arguments(shell, current, cmd, in_sub);
 	if (shell->tokens->type != PAR_STR && cmd != NULL && cmd->type != PAR_STR)

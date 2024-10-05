@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   skibidishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 16:24:31 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/05 10:31:18 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ t_signal	g_signal = {0};
 
 static void	handle_line(t_skibidi *shell, char *line)
 {
+	shell->stdin_save = dup(STDIN_FILENO);
+	shell->stdout_save = dup(STDOUT_FILENO);
 	if (shell->tokens)
 		lx_deltokens(&shell->tokens);
 	shell->tokens = ft_lexer(shell, line);
@@ -99,6 +101,8 @@ int	main(int argc, char **argv, char **envp)
 	{
 		ft_print_logo();
 		skibidi_loop(shell);
+		close(shell->stdin_save);
+		close(shell->stdout_save);
 	}
 	ft_putendl_fd("exit", 2);
 	return (exit_shell(shell));

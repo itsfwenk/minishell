@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:35:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 16:06:11 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/05 10:07:14 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_pipe		t_pipe;
 
 // check_exit.c
 void	check_cmd_path(t_skibidi *shell, t_token *tree, char *cmd_path);
-bool	check_exit(t_skibidi *shell, t_token *tree);
+bool	check_exit(t_skibidi *shell, t_token *tree, int *pipetab, t_side side);
 
 // cmd_err_utils.c
 void	cmd_not_found(t_skibidi *shell, t_token *tree, char *cmd_path);

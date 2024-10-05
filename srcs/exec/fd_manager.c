@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:24:02 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 17:58:59 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/05 10:31:52 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	fd_manager(t_skibidi *shell, t_token *tree,
 	int		fd_redir;
 	t_token	*redirection;
 
+	side_fd_manager(shell, pipetab, side);
 	fd_redir = -1;
 	redirection = tree->redir;
 	while (redirection != NULL)
@@ -93,7 +94,6 @@ int	fd_manager(t_skibidi *shell, t_token *tree,
 		close(fd_redir);
 		redirection = redirection->next->next;
 	}
-	side_fd_manager(shell, pipetab, side);
 	close_garbage(tree->garbage_pipe);
 	previous_pipe_manager(tree, side);
 	return (true);

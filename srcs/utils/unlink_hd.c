@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unlink_hd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:38:25 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 18:34:05 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/05 10:30:47 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,6 @@ void	unlink_heredoc(t_skibidi *shell, t_token *token)
 		}
 		token = token->next;
 	}
+	dup2(shell->stdin_save, STDIN_FILENO);
+	dup2(shell->stdout_save, STDOUT_FILENO);
 }
