@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/05 21:51:26 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/06 17:20:56 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	skibidi_loop(t_skibidi *shell)
 		else if (!line[0])
 			shell->exit_code = shell->exit_code;
 		else if (!check_line(line))
-			shell->exit_code = 2;
+			syntax_error_reset(shell);
 		else
 		{
 			add_history(line);

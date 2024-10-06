@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:32:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/05 21:56:57 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/06 17:22:07 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void		free_env(t_env	*env);
 
 // init_utils.c
 t_skibidi	*init_shell(char **envp);
+void		syntax_error_reset(t_skibidi *shell);
 
 // line_utils.c
 bool		check_line(char *line);

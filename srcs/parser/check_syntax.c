@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:30:57 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 15:42:42 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/06 17:21:44 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ bool	check_syntax(t_skibidi *shell, t_token *tokens)
 	current = tokens;
 	if (check_first(current) == 2)
 	{
-		shell->exit_code = 2;
+		syntax_error_reset(shell);
 		return (false);
 	}
 	while (current != NULL)
@@ -112,7 +112,7 @@ bool	check_syntax(t_skibidi *shell, t_token *tokens)
 		error_token = check_syntax1(shell, current, &in_sub);
 		if (error_token != NULL)
 		{
-			shell->exit_code = 2;
+			syntax_error_reset(shell);
 			if (in_sub == false)
 				print_syntax_error(error_token);
 			return (false);
