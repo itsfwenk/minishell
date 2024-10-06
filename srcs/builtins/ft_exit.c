@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:06:39 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/05 21:23:51 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/06 16:59:01 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,6 @@ static bool	has_overflow(char *str)
 
 int	ft_exit(t_skibidi *shell, char **args)
 {
-	int	exit_code;
-
-	exit_code = 1;
 	if (!shell->in_par)
 		printf("exit\n");
 	if (!args[0])
@@ -79,18 +76,19 @@ int	ft_exit(t_skibidi *shell, char **args)
 	else if (!is_nan(args[0]) && !has_overflow(args[0]))
 	{
 		if (args[1])
+		{
 			ft_print_error("exit", NULL, "too many arguments", "\0");
+			if (!shell->exit_code && !g_signal.code)
+				return (1);
+			return (shell->exit_code);
+		}
 		else
 		{
-			exit_code = ft_atoi(args[0]);
 			shell->to_exit = true;
+			return (ft_atoi(args[0]));
 		}
 	}
-	else
-	{
-		ft_print_error("exit", args[0], "numeric argument required", "\0");
-		shell->to_exit = true;
-		exit_code = 2;
-	}
-	return (exit_code);
+	ft_print_error("exit", args[0], "numeric argument required", "\0");
+	shell->to_exit = true;
+	return (2);
 }

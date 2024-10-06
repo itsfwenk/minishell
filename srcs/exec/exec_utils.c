@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 17:26:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/04 17:55:34 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/06 17:01:18 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,7 @@ static size_t	env_size(t_env *env)
 void	update_error_code(t_skibidi *shell, int status, bool is_builtin)
 {
 	if (is_builtin)
-	{
-		g_signal.code = 0;
 		shell->exit_code = status;
-	}
 	else if (WIFEXITED(status))
 	{
 		g_signal.code = 0;
