@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 18:15:58 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/05 10:32:40 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/06 17:28:14 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@ bool	check_exit(t_skibidi *shell, t_token *tree, int *pipetab, t_side side)
 	if (fd_manager(shell, tree, pipetab, side) == false)
 		exit_shell(shell);
 	builtin_exec(shell, tree->assembled, tree->argv, false);
-	if (!ft_strcmp(tree->assembled, "exit")
-		&& (shell->to_exit || !tree->argv[0]))
-		exit_shell(shell);
+	if (!ft_strcmp(tree->assembled, "exit"))
+	{
+		if ((shell->to_exit || !tree->argv[0]))
+			exit_shell(shell);
+	}
+	else
+		g_signal.code = 0;
 	return (!shell->exit_code);
 }
