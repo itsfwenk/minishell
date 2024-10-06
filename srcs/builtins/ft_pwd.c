@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:08:00 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/01 18:53:11 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/06 02:13:10 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_pwd(char **args)
 			&& ft_strcmp(args[i], "-LP"))
 		{
 			ft_print_error("pwd", args[i],
-				"invalid option\npwd: usage: pwd [-LP]", "\0\0");
+				"invalid option\npwd: usage: pwd [-LP]", "\0");
 			return (2);
 		}
 	}
