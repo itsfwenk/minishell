@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:05:28 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/06 02:07:08 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/06 02:08:33 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ static void	export_pwd(t_env *env, char *nwd)
 
 	pwd = get_env(env, "PWD");
 	if (!pwd || !pwd->is_exported || pwd->is_unset)
-	{
 		unset_env(env, "OLDPWD");
-		unset_env(env, "PWD");
-	}
 	else
 	{
 		add_env(&env, "OLDPWD", pwd->value);
