@@ -13,20 +13,20 @@
 #ifndef UTILS_H
 # define UTILS_H
 
-# define RED "\e[31m"
-# define GREEN "\e[32m"
-# define YELLOW "\e[33m"
-# define BLUE "\e[34m"
-# define PURPLE "\e[35m"
-# define CYAN "\e[36m"
-# define WHITE "\e[0m"
+# define RED "\001\e[31m\002"
+# define GREEN "\001\e[32m\002"
+# define YELLOW "\001\e[33m\002"
+# define BLUE "\001\e[34m\002"
+# define PURPLE "\001\e[35m\002"
+# define CYAN "\001\e[36m\002"
+# define WHITE "\001\e[0m\002"
 # define END_COLOR "\e[0m"
 # define BOLD "\e[1m"
 
 # define PROMPT " skibidishell > "
-# define SUCCESS_EMOJI "😸"
-# define WARNING_EMOJI "🙀"
-# define ERROR_EMOJI "😿"
+# define SUCCESS_EMOJI "\001😸\002"
+# define WARNING_EMOJI "\001🙀\002"
+# define ERROR_EMOJI "\001😿\002"
 
 // Enums
 typedef enum e_side			t_side;
