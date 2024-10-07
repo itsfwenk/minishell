@@ -102,13 +102,14 @@ static void	skibidi_loop(t_skibidi *shell)
 int	main(int argc, char **argv, char **envp)
 {
 	t_skibidi	*shell;
-	t_stat		prog_stat;
 
 	(void)argc;
-	(void)argv;
-	fstat(STDOUT_FILENO, &prog_stat);
-	if (S_ISFIFO(prog_stat.st_mode))
+	if (!isatty(STDIN_FILENO))
+	{
+		ft_print_error(argv[0], NULL, "Can\'t be executed on pipe \
+(Not supported).", NULL);
 		return (EXIT_FAILURE);
+	}
 	shell = init_shell(envp);
 	if (shell)
 	{
