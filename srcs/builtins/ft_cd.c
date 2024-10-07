@@ -6,7 +6,7 @@
 /*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:05:28 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/07 17:05:42 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/07 17:08:02 by mel-habi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static void	export_pwd(t_env *env, char *nwd)
 
 int	ft_cd(t_env	*env, char **args)
 {
-	char	pwd[PATH_MAX];
 	char	nwd[PATH_MAX];
 
 	if (!args[0] || (!ft_strcmp(args[0], "~") && !args[1]))
@@ -56,9 +55,6 @@ int	ft_cd(t_env	*env, char **args)
 	}
 	else if (!args[0][0])
 		return (0);
-	if (!getcwd(pwd, sizeof(pwd)))
-		ft_print_error("chdir", NULL, "error retrieving current directory: getcwd: \
-cannot access parent directories: No such file or directory", "\0");
 	if (chdir(args[0])
 		|| !getcwd(nwd, sizeof(nwd)))
 	{
