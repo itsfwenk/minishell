@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-habi <mel-habi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:26:01 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/05/22 14:42:46 by mel-habi         ###   ########.fr       */
+/*   Updated: 2024/10/07 11:33:25 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	while (i < n)
 	{
 		if (cast_s1[i] != cast_s2[i])
-			return ((int)(cast_s1[i] - cast_s2[i]));
+			return ((cast_s1[i] - cast_s2[i]));
 		i++;
 	}
 	return (0);

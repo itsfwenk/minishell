@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:17:30 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/02 17:53:39 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/07 10:41:20 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,10 @@ void	lx_addback(t_token **tokens, t_token *ntoken)
 	if (last == NULL)
 		*tokens = ntoken;
 	else
+	{
 		last->next = ntoken;
+		ntoken->prev = last;
+	}
 }
 
 void	lx_deltokens(t_token **tokens)

@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:36:33 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/05 10:32:50 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/07 11:16:02 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void		merge_tokens(t_skibidi *shell, t_token **token,
 bool		is_word_delimiter(t_token **tokens, char *str, int *i);
 bool		lx_createadd(t_skibidi *shell, t_token **tokens,
 				char *input, int *i);
+t_token		*empty_cmd(t_skibidi *shell, t_token *token);
 
 // lx_lst_manip.c
 t_token		*lx_meta_token(t_skibidi *shell, char *str, int *i, int token_type);
@@ -63,7 +64,7 @@ void		merge_redirection(t_skibidi *shell, t_token *current,
 				t_token *cmd, bool in_sub);
 void		merge_arguments(t_skibidi *shell,
 				t_token *current, t_token *cmd, bool in_sub);
-t_token		*get_cmd(t_token *token);
+t_token		*get_cmd(t_skibidi *shell, t_token *token);
 
 // tstring_utils.c
 t_string	*tstring_getlast(t_string *tstring);

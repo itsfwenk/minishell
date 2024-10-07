@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:03:23 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/05 10:57:22 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/07 13:09:32 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	merge_operators(t_skibidi *shell, t_token *current, t_token *cmd,
 	{
 		if (cmd)
 			cmd->next = current;
-		next_cmd = get_cmd(current);
+		next_cmd = get_cmd(shell, current->next);
 		merge_tokens(shell, &current->next, NULL, in_sub);
 		current->next = next_cmd;
 	}
@@ -92,7 +92,7 @@ void	merge_tokens(t_skibidi *shell, t_token **token,
 	}
 	current = *token;
 	if (cmd == NULL)
-		cmd = get_cmd(*token);
+		cmd = get_cmd(shell, *token);
 	if (current == cmd)
 		current = current->next;
 	merge_operators(shell, current, cmd, in_sub);

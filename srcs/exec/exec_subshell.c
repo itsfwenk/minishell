@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:26:03 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/05 14:31:52 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/07 13:49:59 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,27 @@ static void	subshell_only_redirs(t_skibidi *shell, t_token *tree)
 	expd_wc_only_redir(shell, tree->sub_shell);
 	open_only_redir(shell, tree->sub_shell);
 	exit_shell(shell);
+}
+
+static bool	subshell_fd_manager(t_skibidi *shell, t_token *tree)
+{
+	int		fd_redir;
+	t_token	*redirection;
+
+	fd_redir = -1;
+	redirection = tree->redir;
+	while (redirection != NULL)
+	{
+		fd_redir = get_fd(shell, redirection);
+		if (fd_redir == -1)
+			return (file_access_fail(shell, redirection));
+		if (dup_fd(fd_redir, redirection) == false)
+			return (false);
+		close(fd_redir);
+		redirection = redirection->next->next;
+	}
+	close_garbage(tree->garbage_pipe);
+	return (true);
 }
 
 static void	subshell_child_exec(t_skibidi *shell, t_token *tree,
@@ -69,11 +90,16 @@ void	exec_parentheses(t_skibidi *shell, t_token *tree, int *pipetab,
 	t_side side)
 {
 	shell->in_par = true;
+	check_for_heredoc(shell, tree);
 	check_for_heredoc(shell, tree->sub_shell);
 	tree->pid->p_id = fork();
 	if (tree->pid->p_id == -1)
 		exit_shell(shell);
 	if (tree->pid->p_id == 0)
+	{
+		if (subshell_fd_manager(shell, tree) == false)
+			exit_shell(shell);
 		subshell_child_exec(shell, tree, pipetab, side);
+	}
 	shell->in_par = false;
 }

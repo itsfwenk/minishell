@@ -6,13 +6,13 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 18:24:02 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/05 14:47:42 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/07 13:26:32 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "skibidishell.h"
 
-static bool	dup_fd(int fd_redir, t_token *redirection)
+bool	dup_fd(int fd_redir, t_token *redirection)
 {
 	int		dup_return;
 
@@ -63,7 +63,7 @@ static bool	previous_pipe_manager(t_token *tree, t_side side)
 	return (true);
 }
 
-static bool	file_access_fail(t_skibidi *shell, t_token *redirection)
+bool	file_access_fail(t_skibidi *shell, t_token *redirection)
 {
 	shell->exit_code = EXIT_FAILURE;
 	if (errno == EACCES)
@@ -96,5 +96,7 @@ int	fd_manager(t_skibidi *shell, t_token *tree,
 		redirection = redirection->next->next;
 	}
 	close_garbage(tree->garbage_pipe);
+	if (tree->full_string == NULL)
+		return (false);
 	return (true);
 }

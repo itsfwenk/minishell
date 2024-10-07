@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:35:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/05 21:19:23 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/07 13:27:08 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	add_args(t_skibidi *shell, char **array,
 int		exec_cmd(t_skibidi *shell, t_token *tree, int *pipetab, t_side side);
 
 // fd_manager.c
+bool	dup_fd(int fd_redir, t_token *redirection);
+bool	file_access_fail(t_skibidi *shell, t_token *redirection);
 int		fd_manager(t_skibidi *shell, t_token *tree,
 			int *pipetab, t_side side);
 

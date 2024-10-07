@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:28:31 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/05 10:15:51 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/07 10:39:55 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ typedef struct s_token
 	t_token		*sub_shell;
 	t_token		*left;
 	t_token		*right;
+	t_token		*prev;
 	t_token		*next;
 }	t_token;
 

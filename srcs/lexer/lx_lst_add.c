@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:10:09 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/05 11:00:31 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/07 11:50:54 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,21 @@ bool	lx_createadd(t_skibidi *shell, t_token **tokens, char *input, int *i)
 		exit_shell(shell);
 	lx_addback(tokens, ntoken);
 	return (true);
+}
+
+t_token	*empty_cmd(t_skibidi *shell, t_token *token)
+{
+	t_token	*empty;
+	t_token	*token_prev;
+
+	token_prev = token->prev;
+	empty = ft_calloc(1, sizeof(t_token));
+	if (empty == NULL)
+		exit_shell(shell);
+	empty->type = STR;
+	empty->prev = token_prev;
+	empty->next = token;
+	token->prev = empty;
+	token_prev->next = empty;
+	return (empty);
 }
