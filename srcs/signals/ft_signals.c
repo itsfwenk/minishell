@@ -32,7 +32,6 @@ void	exec_sig(int status)
 {
 	(void)status;
 	g_signal.code = 130;
-	ft_putchar_fd('\n', STDERR_FILENO);
 }
 
 void	heredoc_sig(int status)

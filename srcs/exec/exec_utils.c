@@ -67,6 +67,8 @@ void	update_error_code(t_skibidi *shell, int status, bool is_builtin)
 	{
 		if (WTERMSIG(status) == SIGQUIT)
 			ft_dprintf(2, "Quit (core dumped)\n");
+		else if (WTERMSIG(status) == SIGINT)
+			ft_dprintf(2, "\n");
 		g_signal.code = 128 + WTERMSIG(status);
 	}
 }
