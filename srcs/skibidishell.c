@@ -106,9 +106,9 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	if (!isatty(STDIN_FILENO))
 	{
-		ft_print_error(argv[0], NULL, "Can\'t be executed on pipe \
-(Not supported).", NULL);
-		return (EXIT_FAILURE);
+		ft_dprintf(2, "bash: %s: pipe operator can\'t be used between a program \
+and this program\n", argv[0]);
+		return (2);
 	}
 	shell = init_shell(envp);
 	if (shell)
