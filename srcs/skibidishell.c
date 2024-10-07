@@ -6,13 +6,25 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:27:12 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/07 13:50:26 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/07 15:29:45 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "skibidishell.h"
 
 t_signal	g_signal = {0};
+
+static void	create_all_hd(t_skibidi *shell, t_token *token)
+{
+	if (!token)
+		return ;
+	if (token->type == STR || token->type == PAR_STR)
+		check_for_heredoc(shell, token);
+	if (token->type == PAR_STR)
+		check_for_here_doc(shell, token->sub_shell);
+	create_all_hd(shell, token->left);
+	create_all_hd(shell, token->right);
+}
 
 static void	handle_line(t_skibidi *shell, char *line)
 {
@@ -28,6 +40,7 @@ static void	handle_line(t_skibidi *shell, char *line)
 	{
 		merge_tokens(shell, &(shell->tokens), NULL, false);
 		shell->tree = create_tree(shell->tokens);
+		create_all_hd(shell, shell->tree);
 		exec_tree(shell, shell->tree, NULL, -1);
 	}
 	else

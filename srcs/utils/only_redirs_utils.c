@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 15:53:26 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/03 21:01:52 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/07 15:26:01 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	check_for_here_doc(t_skibidi *shell, t_token *current)
 				return ;
 			}
 		}
+		check_for_heredoc(shell, current);
 		current = current->next;
 	}
 }

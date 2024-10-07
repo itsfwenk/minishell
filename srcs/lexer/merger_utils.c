@@ -6,7 +6,7 @@
 /*   By: fli <fli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 16:23:58 by mel-habi          #+#    #+#             */
-/*   Updated: 2024/10/07 13:07:59 by fli              ###   ########.fr       */
+/*   Updated: 2024/10/07 14:29:38 by fli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ t_token	*get_cmd(t_skibidi *shell, t_token *token)
 		if (current->type == STR || current->type == PAR_STR)
 			return (current);
 		if (current->type == PIPE || current->type == AND
-			|| current->type == OR)
+			|| current->type == OR || only_redirs(token) == true)
 		{
 			empty = empty_cmd(shell, current);
 			return (empty);
