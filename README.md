@@ -142,6 +142,7 @@ skibidishell$ (echo "In subshell" && pwd)
 - Wildcard expansion (`*`)
 - Subshell execution with parentheses `()`
 - Command history (via readline)
+- Logical operators (`&&`, `||`)
 
 ### ❌ Not Implemented
 - Background processes (`&`)
