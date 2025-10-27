@@ -144,7 +144,6 @@ skibidishell$ (echo "In subshell" && pwd)
 - Command history (via readline)
 
 ### ❌ Not Implemented
-- Logical operators (`&&`, `||`)
 - Background processes (`&`)
 - Job control
 - Advanced globbing patterns
